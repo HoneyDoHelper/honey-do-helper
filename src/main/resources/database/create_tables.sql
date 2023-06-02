@@ -1,11 +1,11 @@
 USE honeydo_helper_db;
 CREATE TABLE users (
    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-   first_name CHAR(20) NOT NULL,
-   last_name  CHAR(20) NOT NULL,
-   email CHAR(25) NOT NULL,
-   password CHAR(25) NOT NULL,
-   is_admin BOOL NOT NULL,
+   first_name VARCHAR(20) NOT NULL,
+   last_name  VARCHAR(20) NOT NULL,
+   email VARCHAR(25) NOT NULL,
+   password VARCHAR(25) NOT NULL,
+   is_admin BOOL NOT NULL DEFAULT 0,
    PRIMARY KEY (id),
    UNIQUE (email)
 );
