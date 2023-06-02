@@ -3,15 +3,17 @@ package com.codeup.honeydohelper.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "chats")
-public class Chats {
-
+@Table(name = "client_reviews")
+public class ClientReviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "comment", length = 255)
+    @Column(name = "stars", nullable = false)
+    private Enum stars;
+
+    @Column(name = "comment")
     private String comment;
 
     @Column(name = "task_id", nullable = false)
@@ -20,13 +22,20 @@ public class Chats {
     @Column(name = "user_id", nullable = false)
     private Integer user_id;
 
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Enum getStars() {
+        return stars;
+    }
+
+    public void setStars(Enum stars) {
+        this.stars = stars;
     }
 
     public String getComment() {
