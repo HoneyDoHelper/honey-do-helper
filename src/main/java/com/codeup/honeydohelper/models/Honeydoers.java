@@ -3,26 +3,28 @@ package com.codeup.honeydohelper.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "honeydoer")
-public class Honeydoer {
+@Table(name = "honeydoers")
+public class Honeydoers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "rating", nullable = false)
     private Float rating;
 
-    @Column(name = "about_self")
+    @Column(name = "about_self", length = 255)
     private String about_self;
 
+    @Column(name = "user_id", nullable = false)
+    private Integer user_id;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,5 +42,13 @@ public class Honeydoer {
 
     public void setAbout_self(String about_self) {
         this.about_self = about_self;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 }

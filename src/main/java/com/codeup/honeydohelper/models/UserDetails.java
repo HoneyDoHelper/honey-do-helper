@@ -10,18 +10,18 @@ public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address", nullable = false, length = 50)
     private String address;
 
-    @Column(name = "address2")
+    @Column(name = "address2", length = 50)
     private String address2;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city", nullable = false, length = 30)
     private String city;
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "state", nullable = false, length = 2)
     private String state;
 
     @Column(name = "zip", nullable = false)
@@ -33,17 +33,19 @@ public class UserDetails {
     @Column(name = "phone", nullable = false)
     private Long phone;
 
-    @Column(name = "img_file_path", nullable = false)
+    @Column(name = "img_file_path", nullable = false, length = 125)
     private String img_file_path;
 
+    @Column(name = "user_id", nullable = false)
+    private Integer user_id;
     
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -109,5 +111,13 @@ public class UserDetails {
 
     public void setImg_file_path(String img_file_path) {
         this.img_file_path = img_file_path;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 }

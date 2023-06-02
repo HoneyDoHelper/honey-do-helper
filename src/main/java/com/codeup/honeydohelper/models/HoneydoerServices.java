@@ -2,20 +2,25 @@ package com.codeup.honeydohelper.models;
 
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "honeydoer_images")
-public class HoneydoerImages {
+@Table(name = "honeydoer_services")
+public class HoneydoerServices {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "file_path", nullable = false, length = 100)
-    private String file_path;
+    @Column(name = "rate", nullable = false)
+    private Float rate;
+
+    @Column(name = "about_service", nullable = false, length = 255)
+    private String about_service;
 
     @Column(name = "hd_id", nullable = false)
     private Integer hd_id;
+
+
 
     public Integer getId() {
         return id;
@@ -25,12 +30,20 @@ public class HoneydoerImages {
         this.id = id;
     }
 
-    public String getFile_path() {
-        return file_path;
+    public Float getRate() {
+        return rate;
     }
 
-    public void setFile_path(String file_path) {
-        this.file_path = file_path;
+    public void setRate(Float rate) {
+        this.rate = rate;
+    }
+
+    public String getAbout_service() {
+        return about_service;
+    }
+
+    public void setAbout_service(String about_service) {
+        this.about_service = about_service;
     }
 
     public Integer getHd_id() {

@@ -3,22 +3,25 @@ package com.codeup.honeydohelper.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "categories")
-public class Categories {
+@Table(name = "services")
+public class Services {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 25)
+    @Column(name = "name", nullable = false, length = 30)
     private String name;
 
     @Column(name = "description", nullable = false, length = 125)
     private String description;
 
-    @Column(name = "img_file_path", nullable = false, length = 125)
+    @Column(name = "img_file_path",nullable = false, length = 125)
     private String img_file_path;
+
+    @Column(name = "category_id", nullable = false)
+    private Integer category_id;
 
     public Integer getId() {
         return id;
@@ -50,5 +53,13 @@ public class Categories {
 
     public void setImg_file_path(String img_file_path) {
         this.img_file_path = img_file_path;
+    }
+
+    public Integer getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Integer category_id) {
+        this.category_id = category_id;
     }
 }
