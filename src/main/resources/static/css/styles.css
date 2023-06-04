@@ -4,7 +4,7 @@
     --color-primary-dark: #BD8441;
 
     --color-neutral-light: #FEFAF1;
-    --color-neutral-main: #8B8B9C;
+    --color-neutral-main: #6b6b77;
     --color-neutral-dark: #32373B;
 }
 
@@ -28,6 +28,10 @@ UTILITIES
 .color-neutral-main {color: var(--color-neutral-main);}
 .color-neutral-dark {color: var(--color-neutral-dark);}
 
+
+/*//////////////////////////////
+VISUAL FRAMEWORK
+//////////////////////////////*/
 html, main, body {
     background: var(--color-neutral-light);
 }
@@ -36,8 +40,10 @@ main {
     margin-top: 8rem;
 }
 
+/* Headings */
 h1 {
     color: var(--color-primary-main);
+    margin-block-end: 4rem;
 }
 
 h2 {
@@ -50,21 +56,22 @@ h2 {
 
 h3 {
     color: var(--color-primary-main);
-
 }
 
+/* Containers */
 .container {
     background: var(--color-neutral-light);
     margin-block: 6rem;
 }
 
  main .container-fluid {
-    background: var(--color-primary-main);
+     background: var(--color-primary-main);
      margin-block: 6rem;
-    padding-block: 2rem;
-    padding-inline: 5rem;
+     padding-block: 4rem;
+     padding-inline: 5rem;
 }
 
+ /* Cards */
 .card {
     background: none;
     border: none;
