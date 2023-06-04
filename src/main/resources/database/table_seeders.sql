@@ -27,16 +27,37 @@ INSERT INTO users (first_name, last_name, email, password, is_admin) VALUES
        ('Xavier', 'Lewis', 'xavier41@gmail.com', 'Sh@dowM00n', 0),
        ('Yvonne', 'Walker', 'yvonne30@gmail.com', 'R1s1ngSun', 0),
        ('Zane', 'Hall', 'zane49@gmail.com', 'DuskT1llD4wn', 0);
-INSERT INTO user_details (address, address2, city, state, zipcode, phone, img_file_path, user_id) VALUES
-      ('456 Elm St', NULL, 'Dallas', 'TX', '75201', '2145551212', '/img/users/user2.jpg', 1),
-      ('789 Oak St', 'Suite 300', 'Houston', 'TX', '77002', '7135551212', '/img/users/user3.jpg', 2),
-      ('1011 Pine St', NULL, 'San Antonio', 'TX', '78204', '2105551212', '/img/users/user4.jpg', 3),
-      ('1819 Dogwood St', 'Apt 2B', 'Plano', 'TX', '75023', '9725551212', '/img/users/user8.jpg', 4),
-      ('2425 Hemlock St', 'Apt 3C', 'Garland', 'TX', '75040', '9725551313', '/img/users/user11.jpg', 5),
-      ('2627 Spruce St', 'Suite 500', 'Irving', 'TX', '75038', '9725551414', '/img/users/user12.jpg', 6),
-      ('3031 Fir St', 'Apt 4D', 'Grand Prairie', 'TX', '75050', '9725551616', '/img/users/user14.jpg', 7),
-      ('3435 Oak St', NULL, 'Pasadena', 'TX', '77502', '7135551818', '/img/users/user16.jpg', 8),
-      ('3637 Maple St', 'Apt 1E', 'McKinney', 'TX', '75069', '9725551919', '/img/users/user17.jpg', 9);
+
+INSERT INTO user_details (address, address2, city, state, zip, phone, img_file_path, user_id)
+VALUES
+    ('1234 Trout Rd', 'Apt 205', 'Dallas', 'TX', '75201', '2145551212', '/img/users/user1.jpg', 1),
+    ('5678 Bass Ave', NULL, 'Dallas', 'TX', '75202', '2145551313', '/img/users/user2.jpg', 2),
+    ('9101 Salmon Ln', NULL, 'Dallas', 'TX', '75203', '2145551414', '/img/users/user3.jpg', 3),
+    ('2468 Tuna Dr', 'Suite 101', 'Dallas', 'TX', '75204', '2145551515', '/img/users/user4.jpg', 4),
+    ('1357 Sardine St', NULL, 'Dallas', 'TX', '75205', '2145551616', '/img/users/user5.jpg', 5),
+    ('3690 Mackerel Rd', NULL, 'Dallas', 'TX', '75206', '2145551717', '/img/users/user6.jpg', 6),
+    ('8025 Halibut Ave', NULL, 'Dallas', 'TX', '75207', '2145551818', '/img/users/user7.jpg', 7),
+    ('4747 Grouper Ln', 'Apt 301', 'Dallas', 'TX', '75208', '2145551919', '/img/users/user8.jpg', 8),
+    ('6363 Catfish St', NULL, 'Dallas', 'TX', '75209', '2145552020', '/img/users/user9.jpg', 9),
+    ('9821 Flounder Rd', NULL, 'Dallas', 'TX', '75210', '2145552121', '/img/users/user10.jpg', 10),
+    ('7407 Perch Ave', NULL, 'Dallas', 'TX', '75211', '2145552222', '/img/users/user11.jpg', 11),
+    ('5935 Pike Dr', 'Suite 202', 'Dallas', 'TX', '75212', '2145552323', '/img/users/user12.jpg', 12),
+    ('2589 Marlin St', NULL, 'Dallas', 'TX', '75213', '2145552424', '/img/users/user13.jpg', 13),
+    ('7164 Swordfish Rd', NULL, 'Dallas', 'TX', '75214', '2145552525', '/img/users/user14.jpg', 14),
+    ('4982 Haddock Ave', NULL, 'Dallas', 'TX', '75215', '2145552626', '/img/users/user15.jpg', 15),
+    ('1746 Eel Ln', 'Apt 401', 'Dallas', 'TX', '75216', '2145552727', '/img/users/user16.jpg', 16),
+    ('3210 Shark St', NULL, 'Dallas', 'TX', '75217', '2145552828', '/img/users/user17.jpg', 17),
+    ('8653 Carp Rd', NULL, 'Dallas', 'TX', '75218', '2145552929', '/img/users/user18.jpg', 18),
+    ('6971 Lobster Ave', NULL, 'Dallas', 'TX', '75219', '2145553030', '/img/users/user19.jpg', 19),
+    ('9312 Snapper Dr', NULL, 'Dallas', 'TX', '75220', '2145553131', '/img/users/user20.jpg', 20),
+    ('5671 Fluke St', 'Apt 501', 'Dallas', 'TX', '75221', '2145553232', '/img/users/user21.jpg', 21),
+    ('8902 Whiting Rd', NULL, 'Dallas', 'TX', '75222', '2145553333', '/img/users/user22.jpg', 22),
+    ('4563 Anchovy Ave', NULL, 'Dallas', 'TX', '75223', '2145553434', '/img/users/user23.jpg', 23),
+    ('2357 Goby Dr', NULL, 'Dallas', 'TX', '75224', '2145553535', '/img/users/user24.jpg', 24),
+    ('6895 Minnow St', 'Suite 301', 'Dallas', 'TX', '75225', '2145553636', '/img/users/user25.jpg', 25),
+    ('4189 Pike Rd', NULL, 'Dallas', 'TX', '75226', '2145553737', '/img/users/user26.jpg', 26),
+    ('7831 Perch Ave', NULL, 'Dallas', 'TX', '75227', '2145553838', '/img/users/user27.jpg', 27);
+
 INSERT INTO honeydoers (rating, about_self, user_id) VALUES
      (4.5, 'I love helping people with their tasks. I am reliable and hardworking.', 1),
      (4.7, 'I am a taskmaster. No task is too big or small for me.', 2),
@@ -62,32 +83,37 @@ INSERT INTO honeydoers (rating, about_self, user_id) VALUES
      (4.5, 'I am a skilled worker who loves helping others. I always complete tasks to the best of my ability.', 22),
      (4.8, 'I am a motivated individual who is passionate about providing excellent service.', 23),
      (4.7, 'I am hardworking and committed to providing high-quality work. I love helping others.', 24),
-     (4.5, 'I am experienced and efficient. I enjoy taking on new tasks and always complete them to the highest standard.', 25);
+     (4.5, 'I am experienced and efficient. I enjoy taking on new tasks and always complete them to the highest standard.', 25),
+     (4.7, 'I am a taskmaster. No task is too big or small for me.', 26),
+     (4.6, 'I am experienced in many areas and can handle a variety of tasks.', 27);
+
+
 INSERT INTO categories (name, description, img_file_path) VALUES
-      ('Exterior', 'Lawn mowing and garden maintenance', '/img/categories/exterior1.jpg'),
-      ('Interior', 'Plumbing and fixture installation', '/img/categories/interior1.jpg'),
-      ('Miscellaneous', 'Moving heavy furniture and items', '/img/categories/miscellaneous1.jpg'),
-      ('Exterior', 'Deck and patio cleanup', '/img/categories/exterior2.jpg'),
-      ('Interior', 'Painting walls and ceilings', '/img/categories/interior2.jpg'),
-      ('Miscellaneous', 'Organizing garage or basement', '/img/categories/miscellaneous2.jpg'),
-      ('Exterior', 'Gutter cleaning and maintenance', '/img/categories/exterior3.jpg'),
-      ('Interior', 'Flooring installation and repair', '/img/categories/interior3.jpg'),
-      ('Miscellaneous', 'Cleaning high and hard-to-reach areas', '/img/categories/miscellaneous3.jpg'),
-      ('Exterior', 'Tree trimming and landscaping', '/img/categories/exterior4.jpg'),
-      ('Interior', 'Appliance installation and repair', '/img/categories/interior4.jpg'),
-      ('Miscellaneous', 'Assembling furniture or toys', '/img/categories/miscellaneous4.jpg'),
-      ('Exterior', 'Power washing siding and driveways', '/img/categories/exterior5.jpg'),
-      ('Interior', 'Wallpaper removal and installation', '/img/categories/interior5.jpg'),
-      ('Miscellaneous', 'Hanging pictures and shelving', '/img/categories/miscellaneous5.jpg'),
-      ('Exterior', 'Outdoor furniture assembly', '/img/categories/exterior6.jpg'),
-      ('Interior', 'Cabinetry installation and repair', '/img/categories/interior6.jpg'),
-      ('Miscellaneous', 'General home cleaning', '/img/categories/miscellaneous6.jpg'),
-      ('Exterior', 'Fence and gate repair', '/img/categories/exterior7.jpg'),
-      ('Interior', 'Tile installation and grouting', '/img/categories/interior7.jpg'),
-      ('Miscellaneous', 'Carpet cleaning and stain removal', '/img/categories/miscellaneous7.jpg'),
-      ('Exterior', 'Exterior painting and touch ups', '/img/categories/exterior8.jpg'),
-      ('Interior', 'Window and door installation', '/img/categories/interior8.jpg'),
-      ('Miscellaneous', 'Attic or crawl space cleanouts', '/img/categories/miscellaneous8.jpg');
+      ('Exterior', 'Lawn mowing and garden maintenance', '/img/categories/exterior.jpg'),
+      ('Interior', 'Plumbing and fixture installation', '/img/categories/interior.jpg'),
+      ('Miscellaneous', 'Moving heavy furniture and items', '/img/categories/miscellaneous.jpg');
+#       ('Exterior', 'Deck and patio cleanup', '/img/categories/exterior2.jpg'),
+#       ('Interior', 'Painting walls and ceilings', '/img/categories/interior2.jpg'),
+#       ('Miscellaneous', 'Organizing garage or basement', '/img/categories/miscellaneous2.jpg'),
+#       ('Exterior', 'Gutter cleaning and maintenance', '/img/categories/exterior3.jpg'),
+#       ('Interior', 'Flooring installation and repair', '/img/categories/interior3.jpg'),
+#       ('Miscellaneous', 'Cleaning high and hard-to-reach areas', '/img/categories/miscellaneous3.jpg'),
+#       ('Exterior', 'Tree trimming and landscaping', '/img/categories/exterior4.jpg'),
+#       ('Interior', 'Appliance installation and repair', '/img/categories/interior4.jpg'),
+#       ('Miscellaneous', 'Assembling furniture or toys', '/img/categories/miscellaneous4.jpg'),
+#       ('Exterior', 'Power washing siding and driveways', '/img/categories/exterior5.jpg'),
+#       ('Interior', 'Wallpaper removal and installation', '/img/categories/interior5.jpg'),
+#       ('Miscellaneous', 'Hanging pictures and shelving', '/img/categories/miscellaneous5.jpg'),
+#       ('Exterior', 'Outdoor furniture assembly', '/img/categories/exterior6.jpg'),
+#       ('Interior', 'Cabinetry installation and repair', '/img/categories/interior6.jpg'),
+#       ('Miscellaneous', 'General home cleaning', '/img/categories/miscellaneous6.jpg'),
+#       ('Exterior', 'Fence and gate repair', '/img/categories/exterior7.jpg'),
+#       ('Interior', 'Tile installation and grouting', '/img/categories/interior7.jpg'),
+#       ('Miscellaneous', 'Carpet cleaning and stain removal', '/img/categories/miscellaneous7.jpg'),
+#       ('Exterior', 'Exterior painting and touch ups', '/img/categories/exterior8.jpg'),
+#       ('Interior', 'Window and door installation', '/img/categories/interior8.jpg'),
+#       ('Miscellaneous', 'Attic or crawl space cleanouts', '/img/categories/miscellaneous8.jpg');
+
 INSERT INTO services (name, description, img_file_path, category_id) VALUES
      ('Exterior Painting', 'Application of weather-proof paint to exterior surfaces including walls, fences, and garages.', '/img/services/exterior_painting.jpg', 1),
      ('Interior Painting', 'Professional application of paint to interior walls, ceilings, and trim.', '/img/services/interior_painting.jpg', 2),
@@ -110,7 +136,8 @@ INSERT INTO services (name, description, img_file_path, category_id) VALUES
      ('Power Washing', 'Power washing services for driveways, siding, decks, and patios.', '/img/services/power_washing.jpg', 1),
      ('Tile Installation', 'Professional installation of wall and floor tiles in kitchens, bathrooms, and other spaces.', '/img/services/tile_installation.jpg', 2),
      ('Attic Cleanout', 'Cleaning and organization services for cluttered attics.', '/img/services/attic_cleanout.jpg', 2);
-INSERT INTO honeydoers_services (rate, about_service, service_id, honeydoer_id) VALUES
+
+INSERT INTO honeydoer_services (rate, about_service, service_id, honeydoer_id) VALUES
             (25.00, 'Experienced exterior painter using high quality, weather-resistant materials.', 1, 1),
             (30.00, 'Specializes in interior painting with clean lines and attention to detail.', 2, 2),
             (35.00, 'Proficient in installing a variety of electrical fixtures with safety in mind.', 3, 3),
@@ -135,4 +162,6 @@ INSERT INTO honeydoers_services (rate, about_service, service_id, honeydoer_id) 
             (30.00, 'Specializes in exterior painting, using long-lasting, weather-resistant materials.', 1, 22),
             (35.00, 'Interior painting with attention to detail and high-quality materials.', 2, 23),
             (30.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 24),
-            (40.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 25);
+            (40.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 25),
+            (35.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 26),
+            (35.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 27);
