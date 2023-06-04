@@ -21,13 +21,72 @@ UTILITIES
 .bg-color-neutral-dark {background-color: var(--color-neutral-dark);}
 
 /* Colors */
-.color-primary-light {background-color: var(--color-primary-light);}
-.color-primary-main {background-color: var(--color-primary-main);}
-.color-primary-dark {background-color: var(--color-primary-dark);}
-.color-neutral-light {background-color: var(--color-neutral-light);}
-.color-neutral-main {background-color: var(--color-neutral-main);}
-.color-neutral-dark {background-color: var(--color-neutral-dark);}
+.color-primary-light {color: var(--color-primary-light);}
+.color-primary-main {color: var(--color-primary-main);}
+.color-primary-dark {color: var(--color-primary-dark);}
+.color-neutral-light {color: var(--color-neutral-light);}
+.color-neutral-main {color: var(--color-neutral-main);}
+.color-neutral-dark {color: var(--color-neutral-dark);}
 
-html {
+html, main, body {
     background: var(--color-neutral-light);
+}
+
+main {
+    margin-top: 8rem;
+}
+
+h1 {
+    color: var(--color-primary-main);
+}
+
+h2 {
+    color: var(--color-primary-main);
+}
+
+.container-fluid h2 {
+    color: var(--color-neutral-light)
+}
+
+h3 {
+    color: var(--color-primary-main);
+
+}
+
+.container {
+    background: var(--color-neutral-light);
+    margin-block: 6rem;
+}
+
+ main .container-fluid {
+    background: var(--color-primary-main);
+     margin-block: 6rem;
+    padding-block: 2rem;
+    padding-inline: 5rem;
+}
+
+.card {
+    background: none;
+    border: none;
+}
+
+.card-header {
+    background: none;
+    border: none;
+}
+
+.card-body {
+    background: none;
+    border: none;
+}
+
+.card-footer {
+    background: none;
+    border: none;
+}
+
+.card-title {
+    color: var(--color-primary-main);
+    font-weight: bold;
+    font-size: 1.5rem;
 }
