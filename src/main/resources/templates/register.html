@@ -10,129 +10,89 @@
 
 <main>
     <section class="container">
-        <h1>About Honeydo Helpers</h1>
-        <div class="row">
+        <h1>Register - Honeydoer</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis. Alias
+            animi atque eos illum ipsa, magni natus nobis odit officiis praesentium quibusdam quidem ratione unde
+            voluptatum?</p>
+        <br>
+        <form action="registration_process.php" method="POST" enctype="multipart/form-data">
             <div class="col">
-                <p>
-                    Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
-                </p>
-                <p>
-                    At Honeydo Helper, we believe in the power of neighbors helping neighbors. Our platform is designed to foster a sense of community and provide a reliable solution for all your interior and exterior home maintenance needs. Whether it's a daunting yardwork project or a painting task you've been putting off, our network of skilled professionals is here to assist you.
-                </p>
-            </div>
-            <div class="col">
-                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
-            </div>
-        </div>
-    </section>
-    <section class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h2>Honeydo Helper-self to our site</h2>
-            </div>
-            <div class="col">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor dolore ducimus error eum fuga impedit labore, magnam magni necessitatibus nostrum officiis quibusdam recusandae sint sit vel voluptas. Adipisci, doloribus!</p>
-                <div>
-                    <button class="btn btn-light">Button</button>
-                    <button class="btn btn-light">Button</button>
+                <label for="email">Email:</label><br>
+                <div class="form-floating ">
+                    <input type="email" class="form-control" id="email" name="email" required><br><br>
+                </div>
+                <label for="password">Password:</label><br>
+                <div class="form-floating ">
+                    <input type="password" class="form-control" id="password" name="password" required><br><br>
+                </div>
+                <label for="confirm_password">Confirm Password:</label><br>
+                <div class="form-floating ">
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                           required><br><br>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="container">
-        <h2>Our team</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, obcaecati possimus praesentium recusandae reprehenderit tempore! Animi dolore ipsa soluta. Aliquam aliquid, asperiores distinctio dolorem error facere impedit qui veniam voluptas?</p>
-        <div class="row row-cols-3 g-3">
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/anthony.jpg}" class="img-fluid"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Anthony Chhor
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
+            <div class="col register-background">
+                <div class="m-3">
+                    <div class="col d-flex justify-content-between form-row">
+                        <div class="form-floating col-5">
+                        <div>
+                        <label for="first_name">First Name:</label><br>
+                        </div>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required><br><br>
+                        </div>
+                        <div class="form-floating col-5">
 
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/david.png}" class="img-fluid" />
+                        <div>
+                        <label for="last_name">Last Name:</label><br>
+                        </div>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required><br><br>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            David Renteria
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    <label for="phone_number">Phone Number:</label><br>
+                    <div class="form-floating ">
+                        <input type="tel" class="form-control" id="phone_number" name="phone_number" required><br><br>
                     </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
+                    <label for="profile_picture">Profile Picture:</label><br>
+                    <div class=" mb-4">
+                        <input type="file" class="form-control form-control-lg" id="profile_picture" name="profile_picture"><br><br>
                     </div>
                 </div>
-            </article>
+            </div>
+            <label for="address">Address:</label><br>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="address" name="address" required><br><br>
+            </div>
+            <label for="address">Address2:</label><br>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="address2" name="address2" required><br><br>
+            </div>
+            <div class="col d-flex  justify-content-between form-row">
+                <div class="form-floating col-5">
+                    <div>
+                        <label for="city">City:</label><br>
+                    </div>
+                    <input type="text" class="form-control" id="city" name="city" required><br><br>
+                </div>
+                <div class="form-floating col-1">
+                    <div>
+                        <label for="state">State:</label><br>
+                    </div>
+                    <input type="text" class="form-control" id="state" name="state" required><br><br>
+                </div>
+                <div class="mb-4 form-floating col-3">
+                    <div>
+                        <label for="zip">ZIP:</label><br>
+                    </div>
+                    <input type="text" class="form-control" id="zip" name="zip" required><br><br>
+                </div>
+            </div>
+            <div>
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I accept the Terms</label><br><br>
 
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/gage.jpg}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Gage Jackson
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/tamica.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Tamica Simon
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/travis.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Travis Gomez
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-        </div>
+                <input type="submit" class="register-next" value="Next">
+            </div>
+        </form>
     </section>
 </main>
 
