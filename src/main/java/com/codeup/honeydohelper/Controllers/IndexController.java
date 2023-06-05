@@ -99,6 +99,11 @@ public class IndexController {
         return "/register";
     }
 
+    @GetMapping("/register/honeydoer")
+    public String gotoRegisterHoneydoer(){
+        return "/users/registerHoneydoer";
+    }
+
     @GetMapping("/support")
     public String gotoSupport(){
 

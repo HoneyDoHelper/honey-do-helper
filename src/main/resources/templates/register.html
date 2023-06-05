@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{partials/head.html :: head('About')}">
+<head th:replace="~{partials/head.html :: head('Register')}">
 
 </head>
 <body>
@@ -34,17 +34,16 @@
             <div class="col register-background">
                 <div class="m-3">
                     <div class="col d-flex justify-content-between form-row">
-                        <div class="form-floating col-5">
-                        <div>
-                        <label for="first_name">First Name:</label><br>
-                        </div>
+                        <div class="form-floating col-5 mt-2">
+                            <div>
+                                <label for="first_name">First Name:</label><br>
+                            </div>
                             <input type="text" class="form-control" id="first_name" name="first_name" required><br><br>
                         </div>
-                        <div class="form-floating col-5">
-
-                        <div>
-                        <label for="last_name">Last Name:</label><br>
-                        </div>
+                        <div class="form-floating col-5 mt-2">
+                            <div>
+                                <label for="last_name">Last Name:</label><br>
+                            </div>
                             <input type="text" class="form-control" id="last_name" name="last_name" required><br><br>
                         </div>
                     </div>
@@ -54,7 +53,8 @@
                     </div>
                     <label for="profile_picture">Profile Picture:</label><br>
                     <div class=" mb-4">
-                        <input type="file" class="form-control form-control-lg" id="profile_picture" name="profile_picture"><br><br>
+                        <input type="file" class="form-control form-control-lg" id="profile_picture"
+                               name="profile_picture"><br><br>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">I accept the Terms</label><br><br>
 
-                <input type="submit" class="register-next" value="Next">
+                <input type="submit" class="register-btn" value="Next">
             </div>
         </form>
     </section>

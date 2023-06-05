@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Honeydoer Register')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <h1>Show us what you got, Honeydoer</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis. Alias
+        </p>
+        <br>
+        <div class="row">
+            <div class="col-lg-3 col">
+                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+            </div>
+            <div class="col-lg-9" col>
+                <p class="mt-3"><Strong>
+                    Exterior Service
+                </Strong>
+                </p>
+                <h3>
+                    Lawn Care
+                </h3>
+                <p>
+                    At Honeydo Helper, we believe in the power of neighbors helping neighbors. Our platform is designed
+                    to foster a sense of community and provide a reliable solution for all your interior and exterior
+                    home maintenance needs. Whether it's a daunting yardwork project or a painting task you've been
+                    putting off, our network of skilled professionals is here to assist you.
+                </p>
+                <h2>
+                    Rate: $55.55/hr
+                </h2>
+            </div>
+
+        </div>
+    </section>
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-3 col">
+                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+            </div>
+            <div class="col-lg-9" col>
+
+                <form action="/submit" method="post">
+                    <div class="form-group mb-2 mt-3">
+                            <label for="category">Category:</label>
+                        <select id="category" name="category" class="form-select form-control ">
+                            <option value="" disabled selected>Select One</option>
+                            <option value="category1">Category 1</option>
+                            <option value="category2">Category 2</option>
+                            <option value="category3">Category 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="service">Service:</label>
+                        <select id="service" name="service" class="form-select form-control">
+                            <option value="" disabled selected>Select One</option>
+                            <option value="service1">Service 1</option>
+                            <option value="service2">Service 2</option>
+                            <option value="service3">Service 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="experience">Your Experience:</label>
+                        <textarea id="experience" name="experience" rows="4" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="hourly-rate">Your hourly rate:</label>
+                        <input type="number" id="hourly-rate" name="hourly-rate" class="form-control">
+                    </div>
+
+                    <button type="submit" class="honeydoer-submit mt-2">Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+    <section class="container">
+        <input type="submit" class="register-btn" value="Done">
+    </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>
