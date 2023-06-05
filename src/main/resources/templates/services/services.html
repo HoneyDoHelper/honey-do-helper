@@ -1,18 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{partials/head.html :: head('post index')}">
+<head th:replace="~{partials/head.html :: head('About')}">
 
 </head>
 <body>
 
-<nav th:replace="~{partials/header.html :: header}"></nav>
+<header th:replace="~{partials/header.html :: header}"></header>
 
-<div class="container">
+<main>
+    <section class="container">
+        <h1>Lawn Services</h1>
+        <div class="row">
+            <img th:src="@{/img/heroes/about.png}" class="img-fluid mb-4"/>
+            <h2>They see me mowin' they hatin'</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque earum laboriosam provident quisquam veniam! Earum inventore neque provident quaerat vel. Ab adipisci fuga, libero nam nisi officiis porro quibusdam reprehenderit. Aliquid debitis deleniti dolore excepturi nihil praesentium provident quod vitae! A aspernatur autem dicta doloremque explicabo fugiat magnam, minima natus!</p>
+        </div>
+    </section>
+    <section class="container-fluid">
+        <div class="row">
+            <h2>Featured Elite Honeydoers</h2>
+            <div class="row row-cols-3 g-3">
+                <article class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <img  th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                        </div>
+                        <div class="card-body">
+                            <p>category</p>
+                            <p class="card-title">
+                                Richard Richardson
+                            </p>
+                            <p> Stars</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                            <a href="#">Read more</a>
+                        </div>
+                        <div class="card-footer">
+                            <a type="button" class="btn btn-warning" href="#">Book Richard</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <h2>Available workers in your area</h2>
+        <div class="row row-cols-3 g-3">
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                    </div>
+                    <div class="card-body">
+                        <p>category</p>
+                        <p class="card-title">
+                            Richard Richardson
+                        </p>
+                        <p> Stars</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <a href="#">Read more</a>
+                    </div>
+                    <div class="card-footer">
+                        <a type="button" class="btn btn-warning" href="#">Read more</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
 
-    <h1>Hello</h1>
-
-</div>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 </body>
 </html>

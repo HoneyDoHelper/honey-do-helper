@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{partials/head.html :: head('post index')}">
+<head th:replace="~{partials/head.html :: head('Service Categories')}">
 
 </head>
 <body>
 
-<nav th:replace="~{partials/header.html :: header}"></nav>
+<header th:replace="~{partials/header.html :: header}"></header>
 
-<div class="container">
+<main>
+    <section class="container">
+        <h1>Service Categories</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur eos ipsum libero magni neque nesciunt provident qui quo ratione temporibus?</p>
+    </section>
+    <section class="container">
+        <div class="row row-cols-3 g-3">
+            <!--Thyme logic goes here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Lawn Services
+                        </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <a type="button" class="btn btn-warning">Book service</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
 
-    <h1>Hello</h1>
-
-</div>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 </body>
 </html>

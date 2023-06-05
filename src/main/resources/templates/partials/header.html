@@ -2,16 +2,20 @@
     <nav class="navbar fixed-top navbar-expand-lg px-3 bg-color-neutral-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Honeydo Helper</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-flex">
+                <a class="btn btn-warning mx-3 d-lg-none" href="/register">Become a Honeydoer!</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
+                <div class="offcanvas-header bg-color-neutral-light">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Honeydo Helper</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                <div class="offcanvas-body bg-color-neutral-light">
+                    <ul class="navbar-nav justify-content-start justify-content-lg-end flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
                         </li>
@@ -25,13 +29,13 @@
                             <a class="nav-link dropdown-toggle" href="/services" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Services
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu bg-color-neutral-light">
                                 <li><a class="dropdown-item" href="/services/exterior">Exterior Services</a></li>
                                 <li><a class="dropdown-item" href="/services/interior">Interior Services</a></li>
                                 <li><a class="dropdown-item" href="/services/miscellaneous">Miscellaneous Services</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item mx-3">
+                        <li class="nav-item my-3 my-lg-0 mx-lg-3">
                             <a class="btn btn-outline-secondary" href="/login">Log in/Sign up</a>
                         </li>
                         <li class="nav-item">

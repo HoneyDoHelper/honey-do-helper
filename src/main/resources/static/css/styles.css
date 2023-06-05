@@ -48,6 +48,7 @@ h1 {
 
 h2 {
     color: var(--color-primary-main);
+    margin-block-end: 3rem;
 }
 
 .container-fluid h2 {
@@ -58,10 +59,19 @@ h3 {
     color: var(--color-primary-main);
 }
 
+.container-fluid .card-title {
+    color: var(--color-neutral-light)
+}
+
 /* Containers */
 .container {
     background: var(--color-neutral-light);
     margin-block: 6rem;
+}
+
+.footy {
+    position: relative;
+    bottom: 0;
 }
 
  main .container-fluid {

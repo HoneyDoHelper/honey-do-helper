@@ -132,9 +132,15 @@ public class IndexController {
         return "/services/serviceCategory";
     }
 
-    @GetMapping("/services/Categories")
+    @GetMapping("/services/categories")
     public String gotoCategories(){
 
         return "/services/serviceCategories";
+    }
+
+    @GetMapping("/services/honeydoer/profile")
+    public String gotoHoneydoerProfile(){
+
+        return "/services/honeydoerProfile";
     }
 }
