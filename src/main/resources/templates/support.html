@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('Support')}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.4/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -15,12 +16,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header  bg-color-neutral-light">
                     <button class="accordion-button collapsed  bg-color-neutral-light" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1">
-                        Question 1
+                        Why can't I find a Honeydoer in my area?
                     </button>
                 </h2>
                 <div id="faq-1" class="accordion-collapse collapse bg-color-neutral-light" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Placeholder content
+                        There may not be any Honeydoers in your area because there aren't many support requests from your area.  Inform your friends about this awesome service and I am sure that they will also recommend it to service providers in your area.  As the demand comes, Honeydo Helpers will come with the support.
                     </div>
                 </div>
             </div>
@@ -28,12 +29,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header  bg-color-neutral-light">
                     <button class="accordion-button collapsed  bg-color-neutral-light" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2">
-                        Question 1
+                        Are Honeydoers certified/licensed?
                     </button>
                 </h2>
                 <div id="faq-2" class="accordion-collapse collapse bg-color-neutral-light" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Placeholder content
+                        Honeydoers can very well be licensed but it is not a requirement.  Many of your Honeydoers are bringing years of personal experience at a fraction of the cost.  We are merely linking those needing help with those both willing and able to provide it.  As such, if your job requires a professional or a specific license, be sure to reach out to someone who meets your needs and even suggest that they register and become a HONEYDOER!
                     </div>
                 </div>
             </div>
@@ -41,12 +42,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header  bg-color-neutral-light">
                     <button class="accordion-button collapsed  bg-color-neutral-light" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3">
-                        Question 1
+                        Can I ask for help and be a Honeydoer?
                     </button>
                 </h2>
                 <div id="faq-3" class="accordion-collapse collapse bg-color-neutral-light" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Placeholder content
+                        Of course you can.  An HVAC professional is not a plumber, so he may need help in that area and a plumber oftentimes has no idea about masonry.  We all have a role to play and can lean on one another.  Allow your neighbors to help you trim down that Honey-Do List so there is more free time to spend with family.
                     </div>
                 </div>
             </div>
@@ -57,25 +58,25 @@
             <div class="col"></div>
             <div class="col-10">
                 <h2 class="text-center">Still have a question?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor dolore ducimus error eum fuga impedit labore, magnam magni necessitatibus nostrum officiis quibusdam recusandae sint sit vel voluptas. Adipisci, doloribus!</p>
+                <p>There is no way that this list includes every possible question.  If you still need help, please do not hesitate to reach out. </p>
             </div>
             <div class="col"></div>
         </div>
     </section>
     <section class="container">
         <h2>Contact us</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, obcaecati possimus praesentium recusandae reprehenderit tempore! Animi dolore ipsa soluta. Aliquam aliquid, asperiores distinctio dolorem error facere impedit qui veniam voluptas?</p>
+        <p>One size does not fit all, so the HoneyDo Helper gives you several contact options.  Please ensure that you provide us with any information necessary to help solve your problems.</p>
         <div class="row row-cols-3 g-3 mt-5">
             <article class="col">
                 <div class="card">
                     <div class="card-header">
-                        icon goes here
+                        <img src="/img/support/envelope-at-fill.svg" alt="Email Icon">
                     </div>
                     <div class="card-body">
                         <p class="card-title">
                             Email
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p>Email us 24 hours per day and expect a response within 48 hours.  For more pressing issues, feel free to give us a call.</p>
                     </div>
                     <div class="card-footer">
                         <p>email goes here</p>
@@ -86,13 +87,13 @@
             <article class="col">
                 <div class="card">
                     <div class="card-header">
-                        icon goes here
+                        <img src="/img/support/telephone-fill.svg" alt="Telephone Icon">
                     </div>
                     <div class="card-body">
                         <p class="card-title">
                             Phone
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p>Call 7 days a week between the hours of 8 am - 8 pm CST</p>
                     </div>
                     <div class="card-footer">
                         <p>phone goes here</p>
@@ -103,13 +104,13 @@
             <article class="col">
                 <div class="card">
                     <div class="card-header">
-                        icon goes here
+                        <img src="/img/support/building-fill.svg" alt="Building Icon">
                     </div>
                     <div class="card-body">
                         <p class="card-title">
                             Office
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p>Are you a business owner? If interested in advertising or registering your service staff as Honeydoers, visit our offices from 9 am - 5 pm CST.</p>
                     </div>
                     <div class="card-footer">
                         <p>office goes here</p>
