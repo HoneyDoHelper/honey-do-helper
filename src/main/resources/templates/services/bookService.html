@@ -1,18 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{partials/head.html :: head('post index')}">
+<head th:replace="~{partials/head.html :: head('Profile')}">
 
 </head>
 <body>
 
-<nav th:replace="~{partials/header.html :: header}"></nav>
+<header th:replace="~{partials/header.html :: header}"></header>
 
-<div class="container">
+<main>
+    <section class="container">
+        <div class="row">
+            <div class="col me-3">
+                <h1>Richard Richardson</h1>
+                <div class="row mb-5">
+                    <div class="col">
+                        <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
+                    </div>
+                    <div class="col-8 align-self-center">
+                        <p class="card-title">$55.55/hr</p>
+                        <p>Stars</p>
+                        <p>Avg 4.9 (102 reviews)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>Lawn Service Experience</p>
+                    <p>
+                        Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
+                    </p>
+                    <a class="btn btn-warning" type="button">Book Richard</a>
+                </div>
+            </div>
+            <div class="col">
+                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Current Month</h2>
+                <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                <label for="time-select">Select start time</label>
+                <select id="time-select">
+                    <option>
+                        6:00am
+                    </option>
+                </select>
+            </div>
+            <div class="col me-3">
+                <select id="duration-select">
+                    <option>1 hour</option>
+                </select>
+                <textarea>
 
-    <h1>Hello</h1>
+                </textarea>
+            </div>
 
-</div>
+        </div>
+    </section>
+
+    <section class="container-fluid">
+        <div>
+            <h2 class="text-center">Upload images for your project</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci amet autem dolore exercitationem hic illum impedit, ipsa laudantium magni, maxime modi molestiae mollitia natus nisi nulla reiciendis saepe suscipit totam vel voluptate voluptates voluptatibus!</p>
+            <p>INSERT FILE UPLOAD LOGIC HERE</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Your LAWN service proposal to RICHARD</h2>
+        <div class="row row-cols-3 g-3">
+            <article class="col border border-light border-1">
+                <div class="card">
+                    <div class="card-header">
+                        <p>Stars</p>
+                    </div>
+                    <div class="card-body">
+                        <p>MONEY LOGIC GOES HERE</p>
+                    </div>
+                    <div class="card-footer">
+                        <button>Submit Proposal</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 </body>
 </html>
