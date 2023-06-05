@@ -143,4 +143,37 @@ public class IndexController {
 
         return "/services/honeydoerProfile";
     }
+
+    @GetMapping("/user/honeydoer/dashboard/{honeydoerId}")
+    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId){
+        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+
+        List<HoneydoerServices> allServices = new ArrayList<>();
+        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoerId);
+        model.addAttribute("services", allServices);
+
+
+        List<Tasks> allTasks = new ArrayList<>();
+        for (HoneydoerServices service: allServices) {
+            List<Tasks> objects = new ArrayList<>();
+            System.out.println("service = " + service.getId());
+            objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
+
+            allTasks.addAll(objects);
+        }
+        //allTasks = tasksDao.findAllByHoneydoerService(honeydoerId);
+        model.addAttribute("tasks", allTasks);
+
+
+        if(honeydoersDao.findById(honeydoerId).isPresent()){
+            Honeydoers honeydoerObject = honeydoer.get();
+            model.addAttribute("honeydoer", honeydoerObject);
+        }
+
+        List<HoneydoerReviews> allReviews = new ArrayList<>();
+        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
+        model.addAttribute("reviews", allReviews);
+
+        return "/users/honeydoerDashboard";
+    }
 }
