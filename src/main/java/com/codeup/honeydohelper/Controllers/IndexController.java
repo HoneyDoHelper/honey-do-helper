@@ -1,13 +1,9 @@
 package com.codeup.honeydohelper.Controllers;
 
-import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.*;
 
 @Controller
 public class IndexController {
@@ -97,6 +93,11 @@ public class IndexController {
     public String gotoRegister(){
 
         return "/register";
+    }
+
+    @GetMapping("/register/honeydoer")
+    public String gotoRegisterHoneydoer(){
+        return "/registerHoneydoer";
     }
 
     @GetMapping("/support")

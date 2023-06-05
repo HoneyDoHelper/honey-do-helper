@@ -107,3 +107,36 @@ h3 {
     font-weight: bold;
     font-size: 1.5rem;
 }
+
+/*REGISTER CSS*/
+
+.register-background {
+    background-color: var(--color-primary-main);
+    border-radius: 15px;
+    margin: 5px 2px 1px 2px;
+}
+
+.register-btn {
+    background-color: var(--color-primary-main);
+    color: var(--color-neutral-dark);
+    border: none;
+    height: 35px;
+    width: 70px;
+    border-radius: 5px;
+}
+
+.honeydoer-img {
+    height: 220px;
+    width: 220px
+}
+
+.honeydoer-submit {
+    background-color: var(--color-primary-main);
+    color: var(--color-neutral-dark);
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+
+
+}

@@ -12,7 +12,7 @@
     <section class="container">
       <div class="row">
         <div class="col me-3">
-          <h1>Richard Richardson</h1>
+          <h1><span th:text="${name}"></span></h1>
           <div class="row mb-5">
             <div class="col">
               <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
@@ -28,7 +28,7 @@
             <p>
               Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
             </p>
-            <a class="btn btn-warning" type="button">Book Richard</a>
+            <a class="btn btn-warning" type="button">Book <span th:text="${name}"></span></a>
           </div>
         </div>
         <div class="col">
