@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('About')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <h1>About Honeydo Helpers</h1>
+        <div class="row">
+            <div class="col">
+                <p>
+                    Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
+                </p>
+                <p>
+                    At Honeydo Helper, we believe in the power of neighbors helping neighbors. Our platform is designed to foster a sense of community and provide a reliable solution for all your interior and exterior home maintenance needs. Whether it's a daunting yardwork project or a painting task you've been putting off, our network of skilled professionals is here to assist you.
+                </p>
+            </div>
+            <div class="col">
+                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h2>Honeydo Helper-self to our site</h2>
+            </div>
+            <div class="col">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor dolore ducimus error eum fuga impedit labore, magnam magni necessitatibus nostrum officiis quibusdam recusandae sint sit vel voluptas. Adipisci, doloribus!</p>
+                <div>
+                    <button class="btn btn-light">Button</button>
+                    <button class="btn btn-light">Button</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <h2>Our team</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, obcaecati possimus praesentium recusandae reprehenderit tempore! Animi dolore ipsa soluta. Aliquam aliquid, asperiores distinctio dolorem error facere impedit qui veniam voluptas?</p>
+        <div class="row row-cols-3 g-3">
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/anthony.jpg}" class="img-fluid"/>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Anthony Chhor
+                        </p>
+                        <p> Title?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>icons go here</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/david.png}" class="img-fluid" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            David Renteria
+                        </p>
+                        <p> Title?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>icons go here</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/gage.jpg}" class="img-fluid" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Gage Jackson
+                        </p>
+                        <p> Title?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>icons go here</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/tamica.png}" class="img-fluid" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Tamica Simon
+                        </p>
+                        <p> Title?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>icons go here</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <img  th:src="@{/img/team/travis.png}" class="img-fluid" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Travis Gomez
+                        </p>
+                        <p> Title?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>icons go here</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>

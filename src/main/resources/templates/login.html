@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Login')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <!--        <div  th:action="@{/login}" th:method="post" class="position-relative">-->
+        <form>
+            <h1 class="">Login</h1>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="floatingEmail" placeholder="Email" name="email">
+                <label for="floatingEmail">Email</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="mb-4 d-flex justify-content-between">
+                <a href="/passwordReset">forgot password?</a>
+                <button type="submit" class="btn btn-warning">Log in</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>

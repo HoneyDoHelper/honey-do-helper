@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Support')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <h1>FAQs</h1>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header  bg-color-neutral-light">
+                    <button class="accordion-button collapsed  bg-color-neutral-light" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1">
+                        Question 1
+                    </button>
+                </h2>
+                <div id="faq-1" class="accordion-collapse collapse bg-color-neutral-light" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Placeholder content
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header  bg-color-neutral-light">
+                    <button class="accordion-button collapsed  bg-color-neutral-light" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2">
+                        Question 1
+                    </button>
+                </h2>
+                <div id="faq-2" class="accordion-collapse collapse bg-color-neutral-light" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Placeholder content
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header  bg-color-neutral-light">
+                    <button class="accordion-button collapsed  bg-color-neutral-light" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3">
+                        Question 1
+                    </button>
+                </h2>
+                <div id="faq-3" class="accordion-collapse collapse bg-color-neutral-light" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Placeholder content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10">
+                <h2 class="text-center">Still have a question?</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor dolore ducimus error eum fuga impedit labore, magnam magni necessitatibus nostrum officiis quibusdam recusandae sint sit vel voluptas. Adipisci, doloribus!</p>
+            </div>
+            <div class="col"></div>
+        </div>
+    </section>
+    <section class="container">
+        <h2>Contact us</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, obcaecati possimus praesentium recusandae reprehenderit tempore! Animi dolore ipsa soluta. Aliquam aliquid, asperiores distinctio dolorem error facere impedit qui veniam voluptas?</p>
+        <div class="row row-cols-3 g-3 mt-5">
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        icon goes here
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Email
+                        </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>email goes here</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        icon goes here
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Phone
+                        </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>phone goes here</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col">
+                <div class="card">
+                    <div class="card-header">
+                        icon goes here
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">
+                            Office
+                        </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <p>office goes here</p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>
