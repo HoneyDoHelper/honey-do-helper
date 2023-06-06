@@ -172,7 +172,6 @@ public class IndexController {
     model.addAttribute("categories", allCategories);
 
 
-
         return "/services/serviceCategories";
     }
 
