@@ -162,6 +162,7 @@ INSERT INTO honeydoer_services (rate, about_service, service_id, honeydoer_id) V
             (30.00, 'Specializes in exterior painting, using long-lasting, weather-resistant materials.', 1, 22),
             (35.00, 'Interior painting with attention to detail and high-quality materials.', 2, 23),
             (30.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 24),
+
             (40.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 25),
             (35.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 26),
             (35.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 27);
@@ -187,6 +188,7 @@ INSERT INTO tasks (task_details, date_assigned, date_completed, status, is_accep
       ('Power wash driveway', '2023-06-02', NULL, 'Assigned', 1, 19, 19),
       ('Install tile in bathroom', '2023-06-02', NULL, 'Assigned', 1, 20, 20),
       ('Clean out attic', '2023-06-02', NULL, 'In Progress', 1, 21, 21);
+
 INSERT INTO task_costs (honeydoer_pay, site_pay, total_user_cost, taxes, task_id) VALUES
            (80, 16, 102.6, 6.6, 1),
            (150, 30, 193.875, 13.875, 2),
@@ -253,3 +255,4 @@ INSERT INTO client_reviews (stars, comment, task_id, user_id) VALUES
       ('FOUR', 'Client was good but had some issues with payment.', 19, 19),
       ('FIVE', 'Excellent client! Very clear and concise instructions.', 20, 20),
       ('FIVE', 'Amazing client! Would love to work again with them.', 21, 21);
+
