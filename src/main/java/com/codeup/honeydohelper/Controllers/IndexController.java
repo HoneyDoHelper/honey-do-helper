@@ -1,9 +1,16 @@
 package com.codeup.honeydohelper.Controllers;
 
+import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class IndexController {
@@ -115,26 +122,36 @@ public class IndexController {
         return "/services/services";
     }
 
-    @GetMapping("/services/exterior")
-    public String gotoExteriorServices(){
+    @GetMapping("/categories/{categoryId}")
+    public String gotoExteriorServices(Model model, @PathVariable int categoryId){
+
+        Optional<Categories> category = categoriesDao.findById(categoryId);
+
+        if(categoriesDao.findById(categoryId).isPresent()){
+            Categories categoryObject = category.get();
+            model.addAttribute("category", categoryObject);
+        }
+
+        List<Services> allServices = new ArrayList<>();
+        allServices = servicesDao.findAllByCategory_Id(categoryId);
+        model.addAttribute("services", allServices);
+
 
         return "/services/serviceCategory";
     }
 
-    @GetMapping("/services/interior")
-    public String gotoInteriorServices(){
+    @GetMapping("/services/{servicesId}")
+    public String gotoCategories(Model model, @PathVariable int servicesId){
+        Optional<Categories> category = categoriesDao.findById(servicesId);
 
-        return "/services/serviceCategory";
-    }
+        if(categoriesDao.findById(servicesId).isPresent()){
+            Categories categoryObject = category.get();
+            model.addAttribute("category", categoryObject);
+        }
 
-    @GetMapping("/services/miscellaneous")
-    public String gotoMiscellaneousServices(){
-
-        return "/services/serviceCategory";
-    }
-
-    @GetMapping("/services/categories")
-    public String gotoCategories(){
+    List<Categories> allCategories = new ArrayList<>();
+    allCategories = categoriesDao.findAllByServices_id(servicesId);
+    model.addAttribute("categories", allCategories);
 
         return "/services/serviceCategories";
     }
