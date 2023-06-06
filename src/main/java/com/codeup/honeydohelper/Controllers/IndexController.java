@@ -1,9 +1,18 @@
 package com.codeup.honeydohelper.Controllers;
 
+import org.springframework.ui.Model;
+import com.codeup.honeydohelper.Models.HoneydoerReviews;
+import com.codeup.honeydohelper.Models.HoneydoerServices;
+import com.codeup.honeydohelper.Models.Honeydoers;
+import com.codeup.honeydohelper.Models.Tasks;
 import com.codeup.honeydohelper.Repositories.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class IndexController {
