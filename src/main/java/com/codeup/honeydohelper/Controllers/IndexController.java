@@ -89,12 +89,6 @@ public class IndexController {
         return "/passwordReset";
     }
 
-//    @GetMapping("/register")
-//    public String gotoRegister(){
-//
-//        return "/register";
-//    }
-
     @GetMapping("/register/honeydoer")
     public String gotoRegisterHoneydoer(){
         return "/registerHoneydoer";
