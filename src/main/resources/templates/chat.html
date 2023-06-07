@@ -15,7 +15,7 @@
 <div id="talkjs-container" style="width: 90%; margin: 30px; height: 500px">
     <i>Loading chat...</i>
 </div>
-
+</body>
 <script>
     <!-- minified snippet to load TalkJS without delaying your page -->
     (function (t, a, l, k, j, s) {
@@ -40,6 +40,9 @@
     })(window, document, []);
 </script>
 <script th:inline="javascript">
+    let apiKey = [[${apiKey}]];
+    console.log(apiKey);
+
     Talk.ready.then(function () {
         var me = new Talk.User({
             id: '123456',
@@ -49,8 +52,9 @@
             welcomeMessage: 'Hey there! How are you? :-)',
         });
         window.talkSession = new Talk.Session({
-            appId: '${api.key}',
-            me: me,
+            appId: apiKey,
+            // appId: 't7lOXkdB',
+            me: me
         });
         var other = new Talk.User({
             id: '654321',
@@ -70,5 +74,4 @@
         inbox.mount(document.getElementById('talkjs-container'));
     });
 </script>
-</body>
 </html>
