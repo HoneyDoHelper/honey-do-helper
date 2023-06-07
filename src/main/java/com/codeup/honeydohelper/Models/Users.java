@@ -25,27 +25,41 @@ public class Users {
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin;
 
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
+
 
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
     ////////////////////////////////////////////////////////////////*/
     public Users() {}
 
-    public Users(String firstName, String lastName, String email, String password, boolean isAdmin) {
+    public Users(String firstName, String lastName, String email, String password, boolean isAdmin, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.username = username;
     }
 
-    public Users(int id, String firstName, String lastName, String email, String password, boolean isAdmin) {
+    public Users(int id, String firstName, String lastName, String email, String password, boolean isAdmin, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.username = username;
+    }
+    public Users(Users copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        isAdmin = copy.isAdmin;
+        username = copy.username;
     }
 
 
@@ -93,4 +107,6 @@ public class Users {
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+    public String getUsername(){return username;}
+    public void setUsername(String username){this.username = username;}
 }
