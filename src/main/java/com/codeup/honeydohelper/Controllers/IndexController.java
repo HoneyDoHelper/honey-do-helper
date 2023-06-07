@@ -65,11 +65,11 @@ public class IndexController {
         return "/index";
     }
 
-    @GetMapping("/login")
-    public String gotoLogin(){
-
-        return "/login";
-    }
+//    @GetMapping("/login")
+//    public String gotoLogin(){
+//
+//        return "/login";
+//    }
 
     @GetMapping("/contact")
     public String gotoContact(){
@@ -89,11 +89,11 @@ public class IndexController {
         return "/passwordReset";
     }
 
-    @GetMapping("/register")
-    public String gotoRegister(){
-
-        return "/register";
-    }
+//    @GetMapping("/register")
+//    public String gotoRegister(){
+//
+//        return "/register";
+//    }
 
     @GetMapping("/register/honeydoer")
     public String gotoRegisterHoneydoer(){

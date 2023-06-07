@@ -2,6 +2,8 @@ package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.Users;
 import com.codeup.honeydohelper.Repositories.UsersRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,9 +32,13 @@ public class UsersController {
     }
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request) {
-        if (request.isUserInRole("role. name")) {
-            return "redirect:/dashboard/student"; // Suppose we already have an action for this one
+        Users currentLoggedInUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (currentLoggedInUser.getIsHoneydoer()) {
+            return "redirect:/dashboard/honeydoer";
+        } else if (currentLoggedInUser.getIsAdmin()) {
+            return "redirect:/dashboard/admin";
+        } else {
+            return "redirect:/dashboard/user";
         }
-        return "redirect:/dashboard/teacher"; // And another for this one
     }
 }

@@ -9,22 +9,18 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id", nullable = false)
     private int id;
-
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
-
     @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
-
     @Column(name = "email", nullable = false)
     private String email;
-
     @Column(name = "password", nullable = false, length = 25)
     private String password;
-
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin;
-
+    @Column(name = "is_honeydoer", nullable = false)
+    private boolean isHoneydoer;
 
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
@@ -37,6 +33,7 @@ public class Users {
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.isHoneydoer = isHoneydoer;
     }
 
     public Users(int id, String firstName, String lastName, String email, String password, boolean isAdmin) {
@@ -46,6 +43,7 @@ public class Users {
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.isHoneydoer = isHoneydoer;
     }
 
     //Authentication constructor
@@ -56,6 +54,7 @@ public class Users {
         this.email = copy.email;
         this.password = copy.password;
         this.isAdmin = copy.isAdmin;
+        this.isHoneydoer = copy.isHoneydoer;
     }
 
     /*////////////////////////////////////////////////////////////////
@@ -102,4 +101,7 @@ public class Users {
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    public boolean getIsHoneydoer() { return isHoneydoer;}
+    public void setIsHoneydoer(Boolean isHoneydoer) { this.isHoneydoer = isHoneydoer; }
 }
