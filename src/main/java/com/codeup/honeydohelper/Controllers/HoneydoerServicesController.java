@@ -42,8 +42,11 @@ public class HoneydoerServicesController {
     @PostMapping("/create")
     public String createHoneydoerService(@ModelAttribute("service") HoneydoerServices service) {
         servicesRepository.save(service);
+
         return "redirect:/honeydoerServices"; //  add correct re direct
     }
+
+
     // form to edit
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {

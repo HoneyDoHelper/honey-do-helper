@@ -1,6 +1,7 @@
 package com.codeup.honeydohelper.Models;
 
 import jakarta.persistence.*;
+import org.apache.catalina.User;
 
 import java.time.LocalDate;
 
@@ -129,4 +130,7 @@ public class UserDetails {
     public void setUser(Users user) {
         this.user = user;
     }
+
+
+
 }

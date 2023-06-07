@@ -93,4 +93,6 @@ public class Users {
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+
 }
