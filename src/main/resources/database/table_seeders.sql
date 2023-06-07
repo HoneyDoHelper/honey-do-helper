@@ -27,9 +27,7 @@ INSERT INTO users (first_name, last_name, email, password, is_admin) VALUES
        ('Xavier', 'Lewis', 'xavier41@gmail.com', 'Sh@dowM00n', 0),
        ('Yvonne', 'Walker', 'yvonne30@gmail.com', 'R1s1ngSun', 0),
        ('Zane', 'Hall', 'zane49@gmail.com', 'DuskT1llD4wn', 0);
-
-INSERT INTO user_details (address, address2, city, state, zip, phone, img_file_path, user_id)
-VALUES
+INSERT INTO user_details (address, address2, city, state, zip, phone, img_file_path, user_id) VALUES
     ('1234 Trout Rd', 'Apt 205', 'Dallas', 'TX', '75201', '2145551212', '/img/users/user1.jpg', 1),
     ('5678 Bass Ave', NULL, 'Dallas', 'TX', '75202', '2145551313', '/img/users/user2.jpg', 2),
     ('9101 Salmon Ln', NULL, 'Dallas', 'TX', '75203', '2145551414', '/img/users/user3.jpg', 3),
@@ -57,7 +55,6 @@ VALUES
     ('6895 Minnow St', 'Suite 301', 'Dallas', 'TX', '75225', '2145553636', '/img/users/user25.jpg', 25),
     ('4189 Pike Rd', NULL, 'Dallas', 'TX', '75226', '2145553737', '/img/users/user26.jpg', 26),
     ('7831 Perch Ave', NULL, 'Dallas', 'TX', '75227', '2145553838', '/img/users/user27.jpg', 27);
-
 INSERT INTO honeydoers (rating, about_self, user_id) VALUES
      (4.5, 'I love helping people with their tasks. I am reliable and hardworking.', 1),
      (4.7, 'I am a taskmaster. No task is too big or small for me.', 2),
@@ -86,8 +83,6 @@ INSERT INTO honeydoers (rating, about_self, user_id) VALUES
      (4.5, 'I am experienced and efficient. I enjoy taking on new tasks and always complete them to the highest standard.', 25),
      (4.7, 'I am a taskmaster. No task is too big or small for me.', 26),
      (4.6, 'I am experienced in many areas and can handle a variety of tasks.', 27);
-
-
 INSERT INTO categories (name, description, img_file_path) VALUES
       ('Exterior', 'Lawn mowing and garden maintenance', '/img/categories/exterior.jpg'),
       ('Interior', 'Plumbing and fixture installation', '/img/categories/interior.jpg'),
@@ -113,7 +108,6 @@ INSERT INTO categories (name, description, img_file_path) VALUES
 #       ('Exterior', 'Exterior painting and touch ups', '/img/categories/exterior8.jpg'),
 #       ('Interior', 'Window and door installation', '/img/categories/interior8.jpg'),
 #       ('Miscellaneous', 'Attic or crawl space cleanouts', '/img/categories/miscellaneous8.jpg');
-
 INSERT INTO services (name, description, img_file_path, category_id) VALUES
      ('Exterior Painting', 'Application of weather-proof paint to exterior surfaces including walls, fences, and garages.', '/img/services/exterior_painting.jpg', 1),
      ('Interior Painting', 'Professional application of paint to interior walls, ceilings, and trim.', '/img/services/interior_painting.jpg', 2),
@@ -136,36 +130,34 @@ INSERT INTO services (name, description, img_file_path, category_id) VALUES
      ('Power Washing', 'Power washing services for driveways, siding, decks, and patios.', '/img/services/power_washing.jpg', 1),
      ('Tile Installation', 'Professional installation of wall and floor tiles in kitchens, bathrooms, and other spaces.', '/img/services/tile_installation.jpg', 2),
      ('Attic Cleanout', 'Cleaning and organization services for cluttered attics.', '/img/services/attic_cleanout.jpg', 2);
-
 INSERT INTO honeydoer_services (rate, about_service, service_id, honeydoer_id) VALUES
-            (25.00, 'Experienced exterior painter using high quality, weather-resistant materials.', 1, 1),
-            (30.00, 'Specializes in interior painting with clean lines and attention to detail.', 2, 2),
-            (35.00, 'Proficient in installing a variety of electrical fixtures with safety in mind.', 3, 3),
-            (40.00, 'Experienced plumber who can handle installation of all types of plumbing fixtures.', 4, 4),
-            (50.00, 'Landscape expert offering a variety of gardening and outdoor beautification services.', 5, 5),
-            (15.00, 'Efficient mover with a strong work ethic, can help with hauling and heavy lifting tasks.', 6, 6),
-            (20.00, 'Furniture assembly expert skilled at putting together a wide range of items.', 7, 7),
-            (25.00, 'Expert in TV mounting, ensuring secure fixtures and clean cable management.', 8, 8),
-            (20.00, 'Experienced in gutter cleaning, maintenance, and repair for optimal home protection.', 9, 9),
-            (45.00, 'Professional installer of hardwood, laminate, and tile flooring.', 10, 10),
-            (25.00, 'Specializes in outdoor cleaning and maintenance for decks and patios.', 11, 11),
-            (35.00, 'Experienced in installing and repairing cabinetry for kitchens and bathrooms.', 12, 12),
-            (30.00, 'Fence and gate repair specialist who can enhance your home security.', 13, 13),
-            (30.00, 'Experienced in wallpaper removal and installation for a refreshed look.', 14, 14),
-            (40.00, 'Experienced in the installation and setup of major household appliances.', 15, 15),
-            (20.00, 'Comprehensive home cleaning services with great attention to detail.', 16, 16),
-            (20.00, 'Professional garage organizer who can sort, clean, and declutter spaces.', 17, 17),
-            (40.00, 'Skilled at installing and replacing windows for improved home efficiency.', 18, 18),
-            (30.00, 'Offers power washing services to restore the look of outdoor spaces.', 19, 19),
-            (40.00, 'Professional tile installer for kitchens, bathrooms, and other spaces.', 20, 20),
-            (20.00, 'Provides efficient attic cleaning and organization services.', 21, 21),
-            (30.00, 'Specializes in exterior painting, using long-lasting, weather-resistant materials.', 1, 22),
-            (35.00, 'Interior painting with attention to detail and high-quality materials.', 2, 23),
-            (30.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 24),
-
-            (40.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 25),
-            (35.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 26),
-            (35.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 27);
+    (25.00, 'Experienced exterior painter using high quality, weather-resistant materials.', 1, 1),
+    (30.00, 'Specializes in interior painting with clean lines and attention to detail.', 2, 2),
+    (35.00, 'Proficient in installing a variety of electrical fixtures with safety in mind.', 3, 3),
+    (40.00, 'Experienced plumber who can handle installation of all types of plumbing fixtures.', 4, 4),
+    (50.00, 'Landscape expert offering a variety of gardening and outdoor beautification services.', 5, 5),
+    (15.00, 'Efficient mover with a strong work ethic, can help with hauling and heavy lifting tasks.', 6, 6),
+    (20.00, 'Furniture assembly expert skilled at putting together a wide range of items.', 7, 7),
+    (25.00, 'Expert in TV mounting, ensuring secure fixtures and clean cable management.', 8, 8),
+    (20.00, 'Experienced in gutter cleaning, maintenance, and repair for optimal home protection.', 9, 9),
+    (45.00, 'Professional installer of hardwood, laminate, and tile flooring.', 10, 10),
+    (25.00, 'Specializes in outdoor cleaning and maintenance for decks and patios.', 11, 11),
+    (35.00, 'Experienced in installing and repairing cabinetry for kitchens and bathrooms.', 12, 12),
+    (30.00, 'Fence and gate repair specialist who can enhance your home security.', 13, 13),
+    (30.00, 'Experienced in wallpaper removal and installation for a refreshed look.', 14, 14),
+    (40.00, 'Experienced in the installation and setup of major household appliances.', 15, 15),
+    (20.00, 'Comprehensive home cleaning services with great attention to detail.', 16, 16),
+    (20.00, 'Professional garage organizer who can sort, clean, and declutter spaces.', 17, 17),
+    (40.00, 'Skilled at installing and replacing windows for improved home efficiency.', 18, 18),
+    (30.00, 'Offers power washing services to restore the look of outdoor spaces.', 19, 19),
+    (40.00, 'Professional tile installer for kitchens, bathrooms, and other spaces.', 20, 20),
+    (20.00, 'Provides efficient attic cleaning and organization services.', 21, 21),
+    (30.00, 'Specializes in exterior painting, using long-lasting, weather-resistant materials.', 1, 22),
+    (35.00, 'Interior painting with attention to detail and high-quality materials.', 2, 23),
+    (30.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 24),
+    (40.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 25),
+    (35.00, 'Installation of various electrical fixtures with safety and function in mind.', 3, 26),
+    (35.00, 'Plumbing expert capable of installing a variety of fixtures.', 4, 27);
 INSERT INTO tasks (task_details, date_assigned, date_completed, status, is_accepted, user_id, honeydoer_service_id) VALUES
       ('Paint exterior fence', '2023-06-02', NULL, 'Assigned', 1, 1, 1),
       ('Paint living room', '2023-06-02', NULL, 'Assigned', 1, 2, 2),
@@ -188,7 +180,6 @@ INSERT INTO tasks (task_details, date_assigned, date_completed, status, is_accep
       ('Power wash driveway', '2023-06-02', NULL, 'Assigned', 1, 19, 19),
       ('Install tile in bathroom', '2023-06-02', NULL, 'Assigned', 1, 20, 20),
       ('Clean out attic', '2023-06-02', NULL, 'In Progress', 1, 21, 21);
-
 INSERT INTO task_costs (honeydoer_pay, site_pay, total_user_cost, taxes, task_id) VALUES
            (80, 16, 102.6, 6.6, 1),
            (150, 30, 193.875, 13.875, 2),
@@ -255,4 +246,5 @@ INSERT INTO client_reviews (stars, comment, task_id, user_id) VALUES
       ('FOUR', 'Client was good but had some issues with payment.', 19, 19),
       ('FIVE', 'Excellent client! Very clear and concise instructions.', 20, 20),
       ('FIVE', 'Amazing client! Would love to work again with them.', 21, 21);
-
+INSERT INTO roles (name) VALUES
+     ('user'),('honeydoer'),('admin');

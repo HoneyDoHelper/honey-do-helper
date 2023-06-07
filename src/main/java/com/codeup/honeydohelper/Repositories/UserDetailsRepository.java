@@ -1,7 +1,7 @@
 package com.codeup.honeydohelper.Repositories;
 
-import com.codeup.honeydohelper.Models.UserDetails;
+import com.codeup.honeydohelper.Models.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserDetailsRepository extends JpaRepository<UserDetails, Integer> {
+public interface UserDetailsRepository extends JpaRepository<UserProfile, Integer> {
 }

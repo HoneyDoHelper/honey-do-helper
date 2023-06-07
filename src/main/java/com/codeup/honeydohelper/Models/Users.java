@@ -1,7 +1,7 @@
 package com.codeup.honeydohelper.Models;
-
 import jakarta.persistence.*;
-
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.core.userdetails.User;
 @Entity
 @Table(name = "users")
 public class Users {
@@ -48,6 +48,15 @@ public class Users {
         this.isAdmin = isAdmin;
     }
 
+    //Authentication constructor
+    public Users(Users copy) {
+        this.id = copy.id;
+        this.firstName = copy.firstName;
+        this.lastName = copy.lastName;
+        this.email = copy.email;
+        this.password = copy.password;
+        this.isAdmin = copy.isAdmin;
+    }
 
     /*////////////////////////////////////////////////////////////////
     GETTERS & SETTERS
