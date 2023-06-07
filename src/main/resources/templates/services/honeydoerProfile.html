@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col">
-                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
+                <img th:src="@{{serviceImg}(serviceImg = ${service.services.imgFilePath})}" class="img-fluid"/>
             </div>
         </div>
     </section>
@@ -41,7 +41,7 @@
         </div>
     </section>
 
-    <section th:replace="partials/honeydoerRatings.html :: ratings"></section>
+    <section th:replace="~{partials/honeydoerRatings.html :: ratings}"></section>
 
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
