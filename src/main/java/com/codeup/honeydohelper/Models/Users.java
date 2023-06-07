@@ -1,6 +1,5 @@
 package com.codeup.honeydohelper.Models;
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.userdetails.User;
 @Entity
 @Table(name = "users")
@@ -21,12 +20,10 @@ public class Users {
     private boolean isAdmin;
     @Column(name = "is_honeydoer", nullable = false)
     private boolean isHoneydoer;
-
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
     ////////////////////////////////////////////////////////////////*/
     public Users() {}
-
     public Users(String firstName, String lastName, String email, String password, boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +32,6 @@ public class Users {
         this.isAdmin = isAdmin;
         this.isHoneydoer = isHoneydoer;
     }
-
     public Users(int id, String firstName, String lastName, String email, String password, boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
@@ -45,8 +41,7 @@ public class Users {
         this.isAdmin = isAdmin;
         this.isHoneydoer = isHoneydoer;
     }
-
-    //Authentication constructor
+//    Authentication constructor
     public Users(Users copy) {
         this.id = copy.id;
         this.firstName = copy.firstName;
@@ -56,7 +51,6 @@ public class Users {
         this.isAdmin = copy.isAdmin;
         this.isHoneydoer = copy.isHoneydoer;
     }
-
     /*////////////////////////////////////////////////////////////////
     GETTERS & SETTERS
     ////////////////////////////////////////////////////////////////*/
@@ -66,7 +60,6 @@ public class Users {
     public void setId(int id) {
         this.id = id;
     }
-
     public String getFirstName() {
         return firstName;
     }

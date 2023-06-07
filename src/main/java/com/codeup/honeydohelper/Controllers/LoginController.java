@@ -13,7 +13,7 @@ public class LoginController {
         if (error != null) {
             model.addAttribute("errorMessage", "Invalid username or password");
         }
-        return "users/login"; // in case incorrect credentials are entered
+        return "/login"; // in case incorrect credentials are entered
     }
     @PostMapping("/login")
     public String performLogin() {

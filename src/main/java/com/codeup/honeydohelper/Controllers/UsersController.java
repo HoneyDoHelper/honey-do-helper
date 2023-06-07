@@ -18,18 +18,18 @@ public class UsersController {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
-    @GetMapping("/register")
-    public String showSignupForm(Model model){
-        model.addAttribute("user", new Users());
-        return "users/register";
-    }
-    @PostMapping("/register")
-    public String saveUser(@ModelAttribute Users user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        userDao.save(user);
-        return "redirect:/index";
-    }
+//    @GetMapping("/register")
+//    public String showSignupForm(Model model){
+//        model.addAttribute("user", new Users());
+//        return "users/register";
+//    }
+//    @PostMapping("/register")
+//    public String saveUser(@ModelAttribute Users user) {
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        userDao.save(user);
+//        return "redirect:/index";
+//    }
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request) {
         Users currentLoggedInUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
