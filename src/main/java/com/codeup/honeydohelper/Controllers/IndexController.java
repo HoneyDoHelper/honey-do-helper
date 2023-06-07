@@ -123,6 +123,14 @@ public class IndexController {
         return "/registerHoneydoer";
     }
 
+    @GetMapping("register/user")
+    public String gotoRegisterUser(Model model){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
+        return "/registerUser";
+    }
+
     @GetMapping("/support")
     public String gotoSupport(Model  model){
         List<Categories> allCategories = categoriesDao.findAll();
@@ -152,7 +160,7 @@ public class IndexController {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
       
-      return "/services/serviceCategory"
+      return "/services/serviceCategory";
       }
 
       

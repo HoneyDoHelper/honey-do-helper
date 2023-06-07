@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Register')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+  <section class="container">
+    <h1>Sign up and get help today!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis. Alias
+      animi atque eos illum ipsa, magni natus nobis odit officiis praesentium quibusdam quidem ratione unde
+      voluptatum?</p>
+    <br>
+    <form action="registration_process.php" method="POST" enctype="multipart/form-data">
+      <div class="col">
+        <label for="email">Email:</label><br>
+        <div class="form-floating ">
+          <input type="email" class="form-control" id="email" name="email" required><br><br>
+        </div>
+        <label for="password">Password:</label><br>
+        <div class="form-floating ">
+          <input type="password" class="form-control" id="password" name="password" required><br><br>
+        </div>
+        <label for="confirm_password">Confirm Password:</label><br>
+        <div class="form-floating ">
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                 required><br><br>
+        </div>
+      </div>
+      <div class="col register-background">
+        <div class="m-3">
+          <div class="col d-flex justify-content-between form-row">
+            <div class="form-floating col-5 mt-2">
+              <div>
+                <label for="first_name">First Name:</label><br>
+              </div>
+              <input type="text" class="form-control" id="first_name" name="first_name" required><br><br>
+            </div>
+            <div class="form-floating col-5 mt-2">
+              <div>
+                <label for="last_name">Last Name:</label><br>
+              </div>
+              <input type="text" class="form-control" id="last_name" name="last_name" required><br><br>
+            </div>
+          </div>
+          <label for="phone_number">Phone Number:</label><br>
+          <div class="form-floating ">
+            <input type="tel" class="form-control" id="phone_number" name="phone_number" required><br><br>
+          </div>
+          <label for="profile_picture">Profile Picture:</label><br>
+          <div class=" mb-4">
+            <input type="file" class="form-control form-control-lg" id="profile_picture"
+                   name="profile_picture"><br><br>
+          </div>
+        </div>
+      </div>
+      <label for="address">Address:</label><br>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="address" name="address" required><br><br>
+      </div>
+      <label for="address">Address2:</label><br>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="address2" name="address2" required><br><br>
+      </div>
+      <div class="col d-flex  justify-content-between form-row">
+        <div class="form-floating col-5">
+          <div>
+            <label for="city">City:</label><br>
+          </div>
+          <input type="text" class="form-control" id="city" name="city" required><br><br>
+        </div>
+        <div class="form-floating col-1">
+          <div>
+            <label for="state">State:</label><br>
+          </div>
+          <input type="text" class="form-control" id="state" name="state" required><br><br>
+        </div>
+        <div class="mb-4 form-floating col-3">
+          <div>
+            <label for="zip">ZIP:</label><br>
+          </div>
+          <input type="text" class="form-control" id="zip" name="zip" required><br><br>
+        </div>
+      </div>
+      <div>
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I accept the Terms</label><br><br>
+
+        <input type="submit" class="register-btn"  value="Submit" th:href="">
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>

@@ -10,34 +10,12 @@
 
 <main>
     <section class="container">
-        <h1>Show us what you got, <span th:text="${name}"></span>!</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis. Alias
-        </p>
-        <br>
         <div class="row">
-            <div class="col-lg-3 col">
-                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
-            </div>
-            <div class="col-lg-9" col>
-                <p class="mt-3"><Strong>
-                    Exterior Service
-                </Strong>
-                </p>
-                <h3>
-                    Lawn Care
-                </h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, doloribus nostrum. Aliquam consequuntur cum ducimus ipsam! Accusamus aliquam animi assumenda, dolore error illo iusto, nesciunt officiis omnis reiciendis sint temporibus.
-                </p>
-                <h2>
-                    Rate: $55.55/hr
-                </h2>
-            </div>
-
-        </div>
-    </section>
-    <section class="container">
-        <div class="row">
+            <h1>Show us what you got, <span th:text="${name}"></span>!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis.
+                Alias
+            </p>
+            <br><br>
             <div class="col-lg-3 col">
                 <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
             </div>
@@ -45,7 +23,7 @@
 
                 <form action="/submit" method="post">
                     <div class="form-group mb-2 mt-3">
-                            <label for="category">Category:</label>
+                        <label for="category">Category:</label>
                         <select id="category" name="category" class="form-select form-control ">
                             <option value="" disabled selected>Select One</option>
                             <option value="category1">Category 1</option>
@@ -80,6 +58,31 @@
     </section>
     <section class="container">
         <input type="submit" class="register-btn" value="Done">
+    </section>
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-3 col">
+                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+            </div>
+            <div class="col-lg-9" col>
+                <p class="mt-3"><Strong>
+                    Exterior Service
+                </Strong>
+                </p>
+                <h3>
+                    Lawn Care
+                </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, doloribus nostrum. Aliquam
+                    consequuntur cum ducimus ipsam! Accusamus aliquam animi assumenda, dolore error illo iusto, nesciunt
+                    officiis omnis reiciendis sint temporibus.
+                </p>
+                <h2>
+                    Rate: $55.55/hr
+                </h2>
+            </div>
+
+        </div>
     </section>
 </main>
 
