@@ -36,13 +36,8 @@ public class SecurityConfiguration {
                 /* Logout configuration */
                 .and()
                 .logout()
-                .logoutSuccessUrl("/") // append a query string value
+                .logoutSuccessUrl("/login") // append a query string value
                 /* Pages that can be viewed without having to log in */
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/", "/index", "/about", "/contact", "/support", "/register", "/services/serviceCategories", "/services") // anyone can see these
-                .permitAll()
-                /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
@@ -50,7 +45,12 @@ public class SecurityConfiguration {
                         "/users/{id}/edit", // only authenticated users can edit profiles
                         "/services/honeydoerProfile" // only authenticated honeydoers can edit their profiles
                 )
-                .authenticated();
+                .authenticated()
+                /* Pages that require authentication */
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers("/", "/index", "/about", "/contact", "/support", "/register", "/services/serviceCategories", "/services", "/css/**") // anyone can see these
+                .permitAll();
         return http.build();
     }
 }

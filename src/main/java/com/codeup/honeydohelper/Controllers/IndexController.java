@@ -59,7 +59,7 @@ public class IndexController {
     /*/////////////////////////////////////////////////////////
     Index
     /////////////////////////////////////////////////////////*/
-    @GetMapping("/")
+    @GetMapping("/index")
     public String gotoIndex(){
 
         return "/index";
