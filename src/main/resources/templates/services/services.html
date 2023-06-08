@@ -12,9 +12,8 @@
     <section class="container">
         <h1 th:text="${service.name}">Service</h1>
         <div class="row">
-            <img th:src="@{/img/heroes/about.png}" class="img-fluid mb-4"/>
-            <h2>They see me mowin' they hatin'</h2>
-            <p th:text="${service.description}">Lorem ipsum dolor</p>
+            <img th:src="@{{serviceImg}(serviceImg = ${service.imgFilePath})}" class="img-fluid mb-4"/>
+            <h2 th:text="${service.description}">Lorem ipsum dolor</h2>
         </div>
     </section>
     <section class="container-fluid">
@@ -59,7 +58,7 @@
                         <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}(honeydoerId=${honeydoerServices[index].honeydoers.id}, serviceId=${honeydoerServices[index].services.id})}">Read more</a>
                     </div>
                     <div class="card-footer">
-                        <a type="button" class="btn btn-warning" href="#"  th:href="@{/services/bookService.html/{honeydoerId}(honeydoerId=${honeydoerServices[index].honeydoers.id})}">Read more</a>
+                        <a type="button" class="btn btn-warning" href="#"  th:href="@{/services/bookService/{honeydoerId}/{serviceId}(honeydoerId=${honeydoerServices[index].honeydoers.id}, serviceId=${honeydoerServices[index].services.id})}">Book Service</a>
                     </div>
                 </div>
             </article>
