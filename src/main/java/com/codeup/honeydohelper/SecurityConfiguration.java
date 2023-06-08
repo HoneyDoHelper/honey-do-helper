@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -56,8 +57,7 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/", "/index", "/about", "/contact", "/support", "/register",
                         "/services", "/services/**",
-                        "/categories", "/categories/**", "/css/**"
-                )
+                        "/categories", "/categories/**", "/css/**")
                 .permitAll();
 
         return http.build();
