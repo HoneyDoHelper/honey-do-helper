@@ -57,8 +57,10 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/", "/index", "/about", "/contact", "/support",
                         "/authentication/register","/authentication/**","/register","/register/user",
+                        "/register/honeydoer", "/register/honeydoer/**",
                         "/services", "/services/**", "/apis/**", "/chat", "/calendar",
                         "/categories", "/categories/**", "/css/**", "/img/**")
+
                 .permitAll();
 
         return http.build();

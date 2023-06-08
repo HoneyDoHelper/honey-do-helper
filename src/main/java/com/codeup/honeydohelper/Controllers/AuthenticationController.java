@@ -109,8 +109,13 @@ public class AuthenticationController {
     public String showSignupForm(Model model){
         model.addAttribute("user", new HoneyUsers());
         model.addAttribute("userProfile", new UserProfiles());
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
         return "/authentication/registerUser";
     }
+
+
 
     @PostMapping("/register/user")
     public String saveUser(@ModelAttribute HoneyUsers honeyUser, @ModelAttribute UserProfiles userProfile){

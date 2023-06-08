@@ -11,7 +11,7 @@
 <main>
     <section class="container">
         <div class="row">
-            <h1>Show us what you got, <span th:text="${name}"></span>!</h1>
+            <h1>Show us what you got, <span th:text="${newHoneydoer.user.firstName}"></span>!</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis.
                 Alias
             </p>
@@ -19,9 +19,9 @@
             <div class="col-lg-3 col">
                 <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
             </div>
-            <div class="col-lg-9" col>
+            <div class="col-lg-9 col">
 
-                <form action="@{/register/honeydoer/1}" method="post">
+                <form th:action="@{/register/honeydoer/{newHoneydoerId}(newHoneydoerId=${newHoneydoerId})}" method="post">
                     <div class="form-group mb-2 mt-3">
                         <label for="category" >Category:</label>
                         <select id="category" name="category" class="form-select form-control">
@@ -33,7 +33,7 @@
                         <label for="service">Service:</label>
                         <select id="service" name="service" class="form-select form-control" th:field="${honeydoerServices.services}">
                             <option value="" disabled selected>Select One</option>
-                            <option value="service" th:each="service : ${services}" th:text="${service.name}" th:value="${service}">Service Name</option>
+                            <option value="service" th:each="service : ${services}" th:text="${service.name}" th:value="${service.id}">Service Name</option>
                         </select>
                     </div>
                     <div class="form-group mb-2">
@@ -57,27 +57,27 @@
     <section class="container">
         <input type="submit" class="register-btn" value="Done">
     </section>
-    <section class="container" th:each="entry : ${entries}">
-        <div class="row">
-            <div class="col-lg-3 col">
-                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
-            </div>
-            <div class="col-lg-9 col">
-                <p class="mt-3"><Strong>
-<!--                <span th:text="${entry.honeydoers.name}">Name</span>-->
-                </Strong>
-                </p>
-                <h3>
-                    <span th:text="${entry.services.name}">Service Name</span>
-                </h3>
-                <p th:text="${entry.aboutService}">Experience</p>
-                <h2>
-                    Rate: $<span th:text="${entry.rate}">Rate</span>
-                </h2>
-            </div>
-
-        </div>
-    </section>
+<!--    <section class="container" th:if="${honeydoerServices.services}">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-3 col">-->
+<!--                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>-->
+<!--            </div>-->
+<!--            <div class="col-lg-9 col">-->
+<!--                <p class="mt-3">-->
+<!--                    <strong>-->
+<!--                        <span th:text="${honeydoerServices.categories.name}"></span>-->
+<!--                    </strong>-->
+<!--                </p>-->
+<!--                <h3>-->
+<!--                    <span th:text="${honeydoerServices.services.name}">Service Name</span>-->
+<!--                </h3>-->
+<!--                <p th:text="${honeydoerServices.aboutService}">Experience</p>-->
+<!--                <h2>-->
+<!--                    Rate: $<span th:text="${honeydoerServices.rate}">Rate</span>/hr-->
+<!--                </h2>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 </main>
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
