@@ -70,7 +70,7 @@ public class IndexController {
     /////////////////////////////////////////////////////////*/
 
     @GetMapping("/index")
-    public String gotoIndex(){
+    public String gotoIndex() {
 
         return "/index";
     }
@@ -194,9 +194,8 @@ public class IndexController {
     }
 
 
-
     @GetMapping("/services/bookService/{honeydoerId}/{serviceId}")
-    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
+    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
         displayServiceCategoriesForNav(model);
 
         Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
@@ -218,10 +217,11 @@ public class IndexController {
         return "/services/bookService";
     }
 
-    private void displayServiceCategoriesForNav(Model model){
+    private void displayServiceCategoriesForNav(Model model) {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
     }
+}
 
 
 //    @GetMapping("/user/honeydoer/dashboard/{honeydoerId}")
