@@ -57,7 +57,7 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/", "/index", "/about", "/contact", "/support",
                         "/authentication/register","/authentication/**","/register","/register/user",
-                        "/services", "/services/**",
+                        "/services", "/services/**", "/apis/**", "/chat", "/calendar",
                         "/categories", "/categories/**", "/css/**", "/img/**")
                 .permitAll();
 
