@@ -171,16 +171,11 @@ public class AuthenticationController {
         Optional<Services> service = servicesDao.findById(serviceId);
         honeydoerServices.setServices(service.get());
 
-        System.out.println("honeyUSERId POST = " + honeyUserId);
-
         Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
         honeydoerServices.setHoneydoers(honeydoer);
 
         honeydoerServicesDao.save(honeydoerServices);
 
-        System.out.println("redirect = " + honeydoer.getUser().getId());
-
-//        return "redirect:/register/honeydoer/" + honeyUserId;
         return "redirect:/register/honeydoer/" + honeydoer.getUser().getId();
     }
 

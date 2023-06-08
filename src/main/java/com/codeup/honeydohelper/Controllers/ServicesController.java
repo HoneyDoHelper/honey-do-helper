@@ -3,8 +3,7 @@ import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -186,4 +185,23 @@ public class ServicesController {
 
         return "/services/bookService";
     }
+
+    //HELP TO DO THE POST MAPPING FOR BOOKING SERVICES
+
+//    @PostMapping("/register/honeydoer/{newHoneydoerId}")
+//    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices, @RequestParam("hourly-rate") String rate,
+//                             @RequestParam("service") int serviceId, @RequestParam("honeydoerId") int honeyUserId) {
+//
+//        honeydoerServices.setRate(Float.parseFloat(rate));
+//
+//        Optional<Services> service = servicesDao.findById(serviceId);
+//        honeydoerServices.setServices(service.get());
+//
+//        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
+//        honeydoerServices.setHoneydoers(honeydoer);
+//
+//        honeydoerServicesDao.save(honeydoerServices);
+//
+//        return "redirect:/register/honeydoer/" + honeydoer.getUser().getId();
+//    }
 }

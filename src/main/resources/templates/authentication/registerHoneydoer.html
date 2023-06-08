@@ -54,29 +54,9 @@
         </div>
     </section>
     <section class="container">
-        <input type="submit" class="register-btn" value="Done">
+        <a class="btn btn-warning" th:href="@{/user/honeydoer/dashboard/{newHoneydoerId} (newHoneydoerId = ${newHoneydoerId})}"></a>
     </section>
-    <section class="container" th:each="entry : ${entries}">
-        <div class="row">
-            <div class="col-lg-3 col">
-                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
-            </div>
-            <div class="col-lg-9 col">
-                <p class="mt-3"><Strong>
-<!--                <span th:text="${entry.honeydoers.name}">Name</span>-->
-                </Strong>
-                </p>
-                <h3>
-                    <span th:text="${entry.services.name}">Service Name</span>
-                </h3>
-                <p th:text="${entry.aboutService}">Experience</p>
-                <h2>
-                    Rate: $<span th:text="${entry.rate}">Rate</span>
-                </h2>
-            </div>
 
-        </div>
-    </section>
 </main>
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
