@@ -59,14 +59,14 @@
     <section class="container">
         <input type="submit" class="register-btn" value="Done">
     </section>
-    <section class="container" th:each="entry : ${entries}">
+    <section class="container" th:each="entry : ${honeydoerService}">
         <div class="row">
             <div class="col-lg-3 col">
                 <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
             </div>
             <div class="col-lg-9 col">
                 <p class="mt-3"><Strong>
-<!--                <span th:text="${entry.honeydoers.name}">Name</span>-->
+<!--                <span th:text="${entry}">Name</span>-->
                 </Strong>
                 </p>
                 <h3>

@@ -142,6 +142,11 @@ public class AuthenticationController {
         model.addAttribute("newHoneydoer", honeydoerObject);
         model.addAttribute("newHoneydoerId", newHoneydoerId);
 
+        List<HoneydoerServices> allHoneydoerServices = new ArrayList<>();
+        allHoneydoerServices = honeydoerServicesDao.findAllByHoneydoers_Id(newHoneydoerId);
+        model.addAttribute("honeydoerService", allHoneydoerServices);
+
+
         model.addAttribute("honeydoerServices", new HoneydoerServices());
 
         return "/authentication/registerHoneydoer";
