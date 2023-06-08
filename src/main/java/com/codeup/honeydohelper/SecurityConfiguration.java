@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -24,33 +25,43 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                /* Login configuration */
+                // Login configuration
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/index") // user's home page, it can be any URL
-                .permitAll() // Anyone can go to the login page
-                /* Logout configuration */
+                .defaultSuccessUrl("/index") // Redirect to the user's home page after successful login (can be any URL)
+                .permitAll() // Allow anyone to access the login page
+
+                // Logout configuration
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login") // append a query string value
-                /* Pages that can be viewed without having to log in */
+                .logoutSuccessUrl("/login") // Redirect to the login page after successful logout (with a query string value appended)
+
+                // Pages that require authentication
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/services/bookService", // only authenticated users can book services
-                        "/users/{id}/edit", // only authenticated users can edit profiles
-                        "/services/honeydoerProfile" // only authenticated honeydoers can edit their profiles
+                        "/users/{id}/edit", // Only authenticated users can edit profiles
+                        "/services/honeydoerProfile" // Only authenticated honeydoers can edit their profiles
                 )
                 .authenticated()
-                /* Pages that require authentication */
+
+                // Pages that can be viewed without authentication
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/index", "/about", "/contact", "/support", "/register", "/services/serviceCategories", "/services", "/css/**") // anyone can see these
+                .requestMatchers(
+                        "/", "/index", "/about", "/contact", "/support",
+                        "/authentication/register","/authentication/**","/register","/register/user",
+                        "/services", "/services/**",
+                        "/categories", "/categories/**", "/css/**", "/img/**")
                 .permitAll();
+
         return http.build();
     }
+
 }

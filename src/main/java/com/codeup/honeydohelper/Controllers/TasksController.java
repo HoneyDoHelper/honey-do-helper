@@ -1,8 +1,6 @@
 package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TasksController {
@@ -18,9 +16,9 @@ public class TasksController {
     private final TaskCostsRepository tasksCostsDao;
     private final TasksRepository tasksDao;
     private final TimeBlocksRepository timeBlocksDao;
-    private final UserDetailsRepository userDetailsDao;
-    private final UsersRepository usersDao;
-    public ServicesController (
+    private final UserProfilesRepository userProfileDao;
+    private final HoneyUsersRepository usersDao;
+    public TasksController (
             CategoriesRepository categoriesDao,
             ChatsRepository chatsDao,
             ClientReviewsRepository clientReviewsDao,
@@ -33,8 +31,8 @@ public class TasksController {
             TaskCostsRepository tasksCostsDao,
             TasksRepository tasksDao,
             TimeBlocksRepository timeBlocksDao,
-            UserDetailsRepository userDetailsDao,
-            UsersRepository usersDao
+            UserProfilesRepository userProfileDao,
+            HoneyUsersRepository usersDao
     ){
         this.categoriesDao = categoriesDao;
         this.chatsDao = chatsDao;
@@ -48,7 +46,7 @@ public class TasksController {
         this.tasksCostsDao = tasksCostsDao;
         this.tasksDao = tasksDao;
         this.timeBlocksDao = timeBlocksDao;
-        this.userDetailsDao = userDetailsDao;
+        this.userProfileDao = userProfileDao;
         this.usersDao = usersDao;
     }
 }

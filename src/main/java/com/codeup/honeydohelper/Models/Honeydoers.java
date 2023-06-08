@@ -13,17 +13,17 @@ public class Honeydoers {
     private String aboutSelf;
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private HoneyUsers user;
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
     ////////////////////////////////////////////////////////////////*/
     public Honeydoers() {}
-    public Honeydoers(float rating, String aboutSelf, Users user) {
+    public Honeydoers(float rating, String aboutSelf, HoneyUsers user) {
         this.rating = rating;
         this.aboutSelf = aboutSelf;
         this.user = user;
     }
-    public Honeydoers(int id, float rating, String aboutSelf, Users user) {
+    public Honeydoers(int id, float rating, String aboutSelf, HoneyUsers user) {
         this.id = id;
         this.rating = rating;
         this.aboutSelf = aboutSelf;
@@ -50,10 +50,10 @@ public class Honeydoers {
     public void setAboutSelf(String aboutSelf) {
         this.aboutSelf = aboutSelf;
     }
-    public Users getUser() {
+    public HoneyUsers getUser() {
         return user;
     }
-    public void setUser(Users user) {
+    public void setUser(HoneyUsers user) {
         this.user = user;
     }
 }

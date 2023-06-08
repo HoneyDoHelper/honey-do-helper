@@ -23,7 +23,7 @@ public class ClientReviews {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private HoneyUsers user;
 
 
     /*////////////////////////////////////////////////////////////////
@@ -31,14 +31,14 @@ public class ClientReviews {
     ////////////////////////////////////////////////////////////////*/
     public ClientReviews() {}
 
-    public ClientReviews(Stars stars, String comment, Tasks task, Users user) {
+    public ClientReviews(Stars stars, String comment, Tasks task, HoneyUsers user) {
         this.stars = stars;
         this.comment = comment;
         this.task = task;
         this.user = user;
     }
 
-    public ClientReviews(int id, Stars stars, String comment, Tasks task, Users user) {
+    public ClientReviews(int id, Stars stars, String comment, Tasks task, HoneyUsers user) {
         this.id = id;
         this.stars = stars;
         this.comment = comment;
@@ -78,10 +78,10 @@ public class ClientReviews {
         this.task = task;
     }
 
-    public Users getUser() {
+    public HoneyUsers getUser() {
         return user;
     }
-    public void setUser(Users user) {
+    public void setUser(HoneyUsers user) {
         this.user = user;
     }
 }
