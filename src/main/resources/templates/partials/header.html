@@ -30,9 +30,9 @@
                                 Services
                             </a>
                             <ul class="dropdown-menu bg-color-neutral-light">
-                                <li><a class="dropdown-item" href="/services/exterior">Exterior Services</a></li>
-                                <li><a class="dropdown-item" href="/services/interior">Interior Services</a></li>
-                                <li><a class="dropdown-item" href="/services/miscellaneous">Miscellaneous Services</a></li>
+                                <li th:each="category : ${categories}">
+                                    <a class="dropdown-item" th:href="@{/categories/{categoryId}(categoryId=${category.id})}" th:text="${category.name + ' Service'}">Service Name</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item my-3 my-lg-0 mx-lg-3">

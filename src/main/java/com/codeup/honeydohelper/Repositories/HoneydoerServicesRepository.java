@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface HoneydoerServicesRepository extends JpaRepository<HoneydoerServices, Integer> {
     List<HoneydoerServices> findAllByHoneydoers_Id(int honeydoerId);
+    List<HoneydoerServices> findAllByServices_Id(int serviceId);
 }
