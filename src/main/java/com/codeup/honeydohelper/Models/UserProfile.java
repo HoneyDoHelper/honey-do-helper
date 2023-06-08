@@ -2,11 +2,9 @@ package com.codeup.honeydohelper.Models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "user_details")
-public class UserDetails {
+public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -40,9 +38,9 @@ public class UserDetails {
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
     ////////////////////////////////////////////////////////////////*/
-    public UserDetails() {}
+    public UserProfile() {}
 
-    public UserDetails(String address, String address2, String city, String state, int zip, long phone, String imgFilePath, Users user) {
+    public UserProfile(String address, String address2, String city, String state, int zip, long phone, String imgFilePath, Users user) {
         this.address = address;
         this.address2 = address2;
         this.city = city;
@@ -53,7 +51,7 @@ public class UserDetails {
         this.user = user;
     }
 
-    public UserDetails(int id, String address, String address2, String city, String state, int zip, long phone, String imgFilePath, Users user) {
+    public UserProfile(int id, String address, String address2, String city, String state, int zip, long phone, String imgFilePath, Users user) {
         this.id = id;
         this.address = address;
         this.address2 = address2;

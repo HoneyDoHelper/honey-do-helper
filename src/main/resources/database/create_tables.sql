@@ -76,7 +76,7 @@ CREATE TABLE tasks (
    FOREIGN KEY (user_id) REFERENCES users (id),
    FOREIGN KEY (honeydoers_services_id) REFERENCES honeydoers_services (id)
 );
-CREATE TABLE honeydoers_services (
+CREATE TABLE task_costs (
      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
      honeydoers_pay FLOAT NOT NULL,
      site_pay FLOAT NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE honeydoers_services (
      PRIMARY KEY (id),
      FOREIGN KEY (task_id) REFERENCES tasks (id)
 );
-CREATE TABLE honeydoers_services (
+CREATE TABLE chats (
      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
      comment VARCHAR(255),
      task_id INT UNSIGNED NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE honeydoers_reviews (
     FOREIGN KEY (task_id) REFERENCES tasks (id),
     FOREIGN KEY (honeydoer_id) REFERENCES honeydoers (id)
 );
-CREATE TABLE honeydoers_reviews (
+CREATE TABLE client_reviews (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     stars ENUM(1,2,3,4,5) NOT NULL,
     comment TEXT,
