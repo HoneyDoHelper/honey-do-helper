@@ -3,8 +3,7 @@ import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,6 +183,27 @@ public class ServicesController {
         allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
         model.addAttribute("reviews", allReviews);
 
+        model.addAttribute("newTask", new Tasks());
+
+
         return "/services/bookService";
+    }
+    @PostMapping("//services/bookService/{honeydoerId}/{serviceId}")
+    public String submitProposal(@ModelAttribute Tasks tasks, @RequestParam("details") String task_details,
+                             @RequestParam("serviceId") int honeydoerServiceId, @RequestParam("userId") int userId) {
+
+        tasks.setTaskDetails(task_details);
+//
+//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+//        tasks.setHoneydoerService(honeydoerServiceId);
+//
+//
+//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+//        honeydoerServices.setHoneydoers(honeydoer.get());
+
+
+        tasksDao.save(tasks);
+
+        return "redirect:/register/honeydoer/" + userId + '/' + honeydoerServiceId;
     }
 }
