@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
+//                .failureUrl("/login.html?error=true")
                 .defaultSuccessUrl("/index") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
@@ -38,6 +39,12 @@ public class SecurityConfiguration {
                 .logout()
                 .logoutSuccessUrl("/login") // append a query string value
                 /* Pages that can be viewed without having to log in */
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers("/", "/index", "/about", "/contact", "/support", "/register", "/serviceCategories", "/services") // anyone can see these
+//                .hasAnyRole("user", "admin")
+                .permitAll()
+                /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
