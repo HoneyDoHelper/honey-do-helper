@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class HoneyUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id", nullable = false)
@@ -19,19 +19,22 @@ public class Users {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 25)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin;
+
     @Column(name = "is_honeydoer", nullable = false)
     private boolean isHoneydoer;
+
+
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
     ////////////////////////////////////////////////////////////////*/
-    public Users() {}
+    public HoneyUsers() {}
 
-    public Users(String firstName, String lastName, String email, String password, boolean isAdmin) {
+    public HoneyUsers(String firstName, String lastName, String email, String password, boolean isAdmin, boolean isHoneydoer) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,7 +43,7 @@ public class Users {
         this.isHoneydoer = isHoneydoer;
     }
 
-    public Users(int id, String firstName, String lastName, String email, String password, boolean isAdmin) {
+    public HoneyUsers(int id, String firstName, String lastName, String email, String password, boolean isAdmin, boolean isHoneydoer) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,7 +53,7 @@ public class Users {
         this.isHoneydoer = isHoneydoer;
     }
 //    Authentication constructor
-    public Users(Users copy) {
+    public HoneyUsers(HoneyUsers copy) {
         this.id = copy.id;
         this.firstName = copy.firstName;
         this.lastName = copy.lastName;

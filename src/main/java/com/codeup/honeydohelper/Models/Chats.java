@@ -20,7 +20,7 @@ public class Chats {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private HoneyUsers user;
 
 
     /*////////////////////////////////////////////////////////////////
@@ -28,13 +28,13 @@ public class Chats {
     ////////////////////////////////////////////////////////////////*/
     public Chats() {}
 
-    public Chats(String comment, Tasks task, Users user) {
+    public Chats(String comment, Tasks task, HoneyUsers user) {
         this.comment = comment;
         this.task = task;
         this.user = user;
     }
 
-    public Chats(int id, String comment, Tasks task, Users user) {
+    public Chats(int id, String comment, Tasks task, HoneyUsers user) {
         this.id = id;
         this.comment = comment;
         this.task = task;
@@ -64,8 +64,8 @@ public class Chats {
         this.task = task;
     }
 
-    public Users getUser() {
+    public HoneyUsers getUser() {
         return user;
     }
-    public void setUser(Users user) {this.user = user;}
+    public void setUser(HoneyUsers user) {this.user = user;}
 }

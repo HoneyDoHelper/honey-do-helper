@@ -29,7 +29,7 @@ public class Tasks {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private HoneyUsers user;
 
     @ManyToOne
     @JoinColumn(name = "honeydoer_service_id", nullable = false)
@@ -41,7 +41,7 @@ public class Tasks {
     ////////////////////////////////////////////////////////////////*/
     public Tasks() {}
 
-    public Tasks(String taskDetails, LocalDate dateAssigned, LocalDate dateCompleted, String status, boolean isAccepted, Users user, HoneydoerServices honeydoerService) {
+    public Tasks(String taskDetails, LocalDate dateAssigned, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
         this.dateCompleted = dateCompleted;
@@ -51,7 +51,7 @@ public class Tasks {
         this.honeydoerService = honeydoerService;
     }
 
-    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalDate dateCompleted, String status, boolean isAccepted, Users user, HoneydoerServices honeydoerService) {
+    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.id = id;
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
@@ -108,10 +108,10 @@ public class Tasks {
         this.isAccepted = isAccepted;
     }
 
-    public Users getUser_id() {
+    public HoneyUsers getUser_id() {
         return user;
     }
-    public void setUser_id(Users user) {
+    public void setUser_id(HoneyUsers user) {
         this.user = user;
     }
 

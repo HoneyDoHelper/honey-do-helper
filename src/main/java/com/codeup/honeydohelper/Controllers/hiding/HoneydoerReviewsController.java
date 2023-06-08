@@ -1,4 +1,4 @@
-package com.codeup.honeydohelper.Controllers;
+package com.codeup.honeydohelper.Controllers.hiding;
 
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;

@@ -1,11 +1,10 @@
 package com.codeup.honeydohelper.Models;
 
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 
 @Entity
-@Table(name = "user_details")
-public class UserProfile {
+@Table(name = "user_profile")
+public class UserProfiles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -34,14 +33,14 @@ public class UserProfile {
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private HoneyUsers user;
 
     /*////////////////////////////////////////////////////////////////
     CONSTRUCTORS
     ////////////////////////////////////////////////////////////////*/
-    public UserProfile() {}
+    public UserProfiles() {}
 
-    public UserProfile(String address, String address2, String city, String state, int zip, long phone, String imgFilePath, Users user) {
+    public UserProfiles(String address, String address2, String city, String state, int zip, long phone, String imgFilePath, HoneyUsers user) {
         this.address = address;
         this.address2 = address2;
         this.city = city;
@@ -52,7 +51,7 @@ public class UserProfile {
         this.user = user;
     }
 
-    public UserProfile(int id, String address, String address2, String city, String state, int zip, long phone, String imgFilePath, Users user) {
+    public UserProfiles(int id, String address, String address2, String city, String state, int zip, long phone, String imgFilePath, HoneyUsers user) {
         this.id = id;
         this.address = address;
         this.address2 = address2;
@@ -122,10 +121,10 @@ public class UserProfile {
         this.imgFilePath = imgFilePath;
     }
 
-    public Users getUser() {
+    public HoneyUsers getUser() {
         return user;
     }
-    public void setUser(Users user) {
+    public void setUser(HoneyUsers user) {
         this.user = user;
     }
 
