@@ -2,19 +2,12 @@ package com.codeup.honeydohelper.Controllers;
 
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
-import com.codeup.honeydohelper.Models.*;
 
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +28,10 @@ public class IndexController {
     private final TaskCostsRepository tasksCostsDao;
     private final TasksRepository tasksDao;
     private final TimeBlocksRepository timeBlocksDao;
-    private final UserDetailsRepository userDetailsDao;
+    private final UserProfileRepository userProfileDao;
     private final UsersRepository usersDao;
 
-    public IndexController(
+    public IndexController (
             CategoriesRepository categoriesDao,
             ChatsRepository chatsDao,
             ClientReviewsRepository clientReviewsDao,
@@ -51,9 +44,9 @@ public class IndexController {
             TaskCostsRepository tasksCostsDao,
             TasksRepository tasksDao,
             TimeBlocksRepository timeBlocksDao,
-            UserDetailsRepository userDetailsDao,
+            UserProfileRepository userProfileDao,
             UsersRepository usersDao
-    ) {
+    ){
         this.categoriesDao = categoriesDao;
         this.chatsDao = chatsDao;
         this.clientReviewsDao = clientReviewsDao;
@@ -66,7 +59,7 @@ public class IndexController {
         this.tasksCostsDao = tasksCostsDao;
         this.tasksDao = tasksDao;
         this.timeBlocksDao = timeBlocksDao;
-        this.userDetailsDao = userDetailsDao;
+        this.userProfileDao = userProfileDao;
         this.usersDao = usersDao;
     }
 
@@ -74,17 +67,14 @@ public class IndexController {
     /*/////////////////////////////////////////////////////////
     Index
     /////////////////////////////////////////////////////////*/
-    @GetMapping("/")
-    public String gotoIndex(Model model) {
-        List<Categories> allCategories = new ArrayList<>();
-        allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
 
+    @GetMapping("/index")
+    public String gotoIndex() {
         return "/index";
     }
 
     @GetMapping("/login")
-    public String gotoLogin(Model model) {
+    public String gotoLogin(Model model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
@@ -92,7 +82,7 @@ public class IndexController {
     }
 
     @GetMapping("/contact")
-    public String gotoContact(Model model) {
+    public String gotoContact(Model model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
@@ -109,7 +99,7 @@ public class IndexController {
     }
 
     @GetMapping("/passwordReset")
-    public String gotoPasswordReset(Model model) {
+    public String gotoPasswordReset(Model model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
@@ -117,8 +107,7 @@ public class IndexController {
     }
 
     @GetMapping("/register")
-    public String gotoRegister(Model model) {
-
+    public String gotoRegister(Model model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
@@ -184,7 +173,7 @@ public class IndexController {
     }
 
     @GetMapping("/support")
-    public String gotoSupport(Model model) {
+    public String gotoSupport(Model  model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
@@ -196,11 +185,11 @@ public class IndexController {
     /////////////////////////////////////////////////////////*/
 
     @GetMapping("/categories/{categoryId}")
-    public String gotoCategory(Model model, @PathVariable int categoryId) {
+    public String gotoCategory(Model model, @PathVariable int categoryId){
 
         Optional<Categories> category = categoriesDao.findById(categoryId);
 
-        if (categoriesDao.findById(categoryId).isPresent()) {
+        if(categoriesDao.findById(categoryId).isPresent()){
             Categories categoryObject = category.get();
             model.addAttribute("category", categoryObject);
         }
@@ -211,18 +200,18 @@ public class IndexController {
 
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
+      
+      return "/services/serviceCategory";
+      }
 
-        return "/services/serviceCategory";
-    }
-
-
+      
     @GetMapping("/services/{serviceId}")
-    public String gotoServices(Model model, @PathVariable int serviceId) {
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
-
-        Optional<Services> service = servicesDao.findById(serviceId);
-        if (servicesDao.findById(serviceId).isPresent()) {
+    public String gotoServices(Model model, @PathVariable int serviceId){
+      List<Categories> allCategories = categoriesDao.findAll();
+      model.addAttribute("categories", allCategories); 
+      
+      Optional<Services> service = servicesDao.findById(serviceId);
+        if(servicesDao.findById(serviceId).isPresent()){
             Services serviceObject = service.get();
             model.addAttribute("service", serviceObject);
         }
@@ -231,34 +220,33 @@ public class IndexController {
         allHoneydoerServices = honeydoerServicesDao.findAllByServices_Id(serviceId);
         model.addAttribute("honeydoerServices", allHoneydoerServices);
 
-
         return "/services/services";
     }
 
 
     @GetMapping("/categories")
-    public String gotoCategories(Model model) {
+    public String gotoCategories(Model model){
 
-        List<Categories> allCategories = new ArrayList<>();
-        allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
-        return "/services/serviceCategorties";
+    List<Categories> allCategories = new ArrayList<>();
+    allCategories = categoriesDao.findAll();
+    model.addAttribute("categories", allCategories);
+      return "/services/serviceCategorties";
     }
-
-
+      
+  
     @GetMapping("/services/honeydoer/{honeydoerId}/{serviceId}")
-    public String gotoHoneydoerProfile(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
+    public String gotoHoneydoerProfile(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
-
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-        if (honeydoersDao.findById(honeydoerId).isPresent()) {
+      
+      Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+        if(honeydoersDao.findById(honeydoerId).isPresent()){
             Honeydoers honeydoerObject = honeydoer.get();
             model.addAttribute("honeydoer", honeydoerObject);
         }
 
         Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
-        if (honeydoerServicesDao.findById(serviceId).isPresent()) {
+        if(honeydoerServicesDao.findById(serviceId).isPresent()){
             HoneydoerServices honeydoerServiceObject = honeydoerService.get();
             model.addAttribute("service", honeydoerServiceObject);
         }
@@ -271,12 +259,12 @@ public class IndexController {
     }
 
     @GetMapping("/user/honeydoer/dashboard/{honeydoerId}")
-    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId) {
+    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
-
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-        if (honeydoersDao.findById(honeydoerId).isPresent()) {
+      
+      Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+        if(honeydoersDao.findById(honeydoerId).isPresent()){
             Honeydoers honeydoerObject = honeydoer.get();
             model.addAttribute("honeydoer", honeydoerObject);
         }
@@ -287,7 +275,7 @@ public class IndexController {
 
 
         List<Tasks> allTasks = new ArrayList<>();
-        for (HoneydoerServices service : allServices) {
+        for (HoneydoerServices service: allServices) {
             List<Tasks> objects = new ArrayList<>();
             System.out.println("service = " + service.getId());
             objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
@@ -297,10 +285,51 @@ public class IndexController {
         model.addAttribute("tasks", allTasks);
 
 
+
+
         List<HoneydoerReviews> allReviews = new ArrayList<>();
         allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
         model.addAttribute("reviews", allReviews);
 
         return "/users/honeydoerDashboard";
     }
+
+    private void displayServiceCategoriesForNav(Model model) {
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+    }
 }
+
+
+//    @GetMapping("/user/honeydoer/dashboard/{honeydoerId}")
+//    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId){
+//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+//
+//        List<HoneydoerServices> allServices = new ArrayList<>();
+//        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoerId);
+//        model.addAttribute("services", allServices);
+//
+//
+//        List<Tasks> allTasks = new ArrayList<>();
+//        for (HoneydoerServices service: allServices) {
+//            List<Tasks> objects = new ArrayList<>();
+//            System.out.println("service = " + service.getId());
+//            objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
+//
+//            allTasks.addAll(objects);
+//        }
+//        //allTasks = tasksDao.findAllByHoneydoerService(honeydoerId);
+//        model.addAttribute("tasks", allTasks);
+//
+//
+//        if(honeydoersDao.findById(honeydoerId).isPresent()){
+//            Honeydoers honeydoerObject = honeydoer.get();
+//            model.addAttribute("honeydoer", honeydoerObject);
+//        }
+//
+//        List<HoneydoerReviews> allReviews = new ArrayList<>();
+//        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
+//        model.addAttribute("reviews", allReviews);
+//
+//        return "/users/honeydoerDashboard";
+//    }

@@ -19,14 +19,14 @@
             <article class="col" th:each="item : ${services}">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                        <img th:src="@{{serviceImg}(serviceImg = ${item.imgFilePath})}" class="img-fluid"/>
                     </div>
                     <div class="card-body">
                         <p class="card-title" th:text="${item.name}">Service Name</p>
                         <p th:text="${item.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" type="button" class="btn btn-warning" th:href="@{/service/{serviceId}(serviceId=${item.id})}">Book service</a>
+                        <a href="#" type="button" class="btn btn-warning" th:href="@{/services/{serviceId}(serviceId=${item.id})}">Book service</a>
                     </div>
                 </div>
             </article>

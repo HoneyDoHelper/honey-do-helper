@@ -5,13 +5,17 @@
 
 </head>
 <body>
-
 <header th:replace="~{partials/header.html :: header}"></header>
 
 <main>
     <section class="container">
-        <!--        <div  th:action="@{/login}" th:method="post" class="position-relative">-->
-        <form>
+        <div th:if="${param.error}">
+            Invalid Username and Password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" th:method="post" class="position-relative">
             <h1 class="">Login</h1>
             <div class="form-floating mb-4">
                 <input type="text" class="form-control" id="floatingEmail" placeholder="Email" name="email">
