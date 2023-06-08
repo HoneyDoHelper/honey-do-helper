@@ -55,9 +55,10 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/", "/index", "/about", "/contact", "/support", "/register",
+                        "/", "/index", "/about", "/contact", "/support",
+                        "/authentication/register","/authentication/**","/register","/register/user",
                         "/services", "/services/**",
-                        "/categories", "/categories/**", "/css/**")
+                        "/categories", "/categories/**", "/css/**", "/img/**")
                 .permitAll();
 
         return http.build();

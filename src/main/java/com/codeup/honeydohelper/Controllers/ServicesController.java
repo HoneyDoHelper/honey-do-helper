@@ -162,4 +162,28 @@ public class ServicesController {
 
         return "/services/honeydoerProfile";
     }
+
+    @GetMapping("/services/bookService/{honeydoerId}/{serviceId}")
+    public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
+        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+        if(honeydoersDao.findById(honeydoerId).isPresent()){
+            Honeydoers honeydoerObject = honeydoer.get();
+            model.addAttribute("honeydoer", honeydoerObject);
+        }
+
+        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
+        if(honeydoerServicesDao.findById(serviceId).isPresent()){
+            HoneydoerServices honeydoerServiceObject = honeydoerService.get();
+            model.addAttribute("service", honeydoerServiceObject);
+        }
+
+        List<HoneydoerReviews> allReviews = new ArrayList<>();
+        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
+        model.addAttribute("reviews", allReviews);
+
+        return "/services/bookService";
+    }
 }

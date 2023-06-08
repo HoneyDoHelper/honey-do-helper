@@ -109,7 +109,7 @@ public class AuthenticationController {
     public String showSignupForm(Model model){
         model.addAttribute("user", new HoneyUsers());
         model.addAttribute("userProfile", new UserProfiles());
-        return "registerUser";
+        return "/authentication/registerUser";
     }
 
     @PostMapping("/register/user")
