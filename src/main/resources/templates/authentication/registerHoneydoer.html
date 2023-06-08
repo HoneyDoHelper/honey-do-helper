@@ -11,7 +11,7 @@
 <main>
     <section class="container">
         <div class="row">
-            <h1>Show us what you got, <span th:text="${name}"></span>!</h1>
+            <h1>Show us what you got, <span th:text="${newHoneydoer.user.firstName}"></span>!</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis.
                 Alias
             </p>
@@ -21,7 +21,8 @@
             </div>
             <div class="col-lg-9" col>
 
-                <form action="@{/register/honeydoer/1}" method="post">
+<!--                <form th:action="@{/register/honeydoer/{newHoneydoerId}(newHoneydoerId=${newHoneydoerId})}">-->
+                <form th:action="@{'/register/honeydoer/' + ${newHoneydoerId}}" th:method="post">
                     <div class="form-group mb-2 mt-3">
                         <label for="category" >Category:</label>
                         <select id="category" name="category" class="form-select form-control">
@@ -31,9 +32,10 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="service">Service:</label>
-                        <select id="service" name="service" class="form-select form-control" th:field="${honeydoerServices.services}">
+                        <select id="service" name="service" class="form-select form-control">
+<!--                        th:field="${honeydoerServices.services}"-->
                             <option value="" disabled selected>Select One</option>
-                            <option value="service" th:each="service : ${services}" th:text="${service.name}" th:value="${service}">Service Name</option>
+                            <option th:each="service : ${services}" th:text="${service.name}" th:value="${service.id}">Service Name</option>
                         </select>
                     </div>
                     <div class="form-group mb-2">
@@ -44,11 +46,11 @@
 
                     <div class="form-group mb-2">
                         <label for="hourly-rate">Your hourly rate:</label>
-                        <input type="number" id="hourly-rate" name="hourly-rate" class="form-control"
-                        th:field="${honeydoerServices.rate}"
-                        >
+                        <input type="number" id="hourly-rate" name="hourly-rate" class="form-control">
+<!--                        th:field="${honeydoerServices.rate}"-->
                     </div>
-                    <input type="hidden" th:field="${honeydoerServices.honeydoers}" th:value="${newHoneydoer}">
+                    <input type="hidden" th:value="${newHoneydoer.id}" name="honeydoerId">
+<!--                    th:field="${honeydoerServices.honeydoers}"-->
                     <button type="submit" class="honeydoer-submit mt-2">Add</button>
                 </form>
             </div>
