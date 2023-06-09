@@ -188,22 +188,33 @@ public class ServicesController {
 
         return "/services/bookService";
     }
-    @PostMapping("//services/bookService/{honeydoerId}/{serviceId}")
-    public String submitProposal(@ModelAttribute Tasks tasks, @RequestParam("details") String task_details,
-                             @RequestParam("serviceId") int honeydoerServiceId, @RequestParam("userId") int userId) {
+    @PostMapping("/services/bookService/{honeydoerId}/{serviceId}")
+    public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @PathVariable int serviceId) {
 
-        tasks.setTaskDetails(task_details);
-//
-//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-//        tasks.setHoneydoerService(honeydoerServiceId);
-//
-//
-//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-//        honeydoerServices.setHoneydoers(honeydoer.get());
+        tasks.getTaskDetails();
+        tasks.getDateAssigned();
+        tasks.getDateCompleted();
 
+        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+        if (honeydoer.isPresent()) {
+            Honeydoers honeydoerObject = honeydoer.get();
+
+        }
+
+        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
+        if (honeydoerService.isPresent()) {
+            HoneydoerServices honeydoerServiceObject = honeydoerService.get();
+
+        }
+
+        List<Tasks> allTasks = tasksDao.findAllByHoneydoerService_Id(serviceId);
 
         tasksDao.save(tasks);
 
-        return "redirect:/register/honeydoer/" + userId + '/' + honeydoerServiceId;
+        return "redirect:/about";
     }
 }
+
+//return "redirect:/register/honeydoer/" + userId + '/' + honeydoerServiceId;
+//Optional<Tasks> newTasks = tasksDao.findById(userId);
+

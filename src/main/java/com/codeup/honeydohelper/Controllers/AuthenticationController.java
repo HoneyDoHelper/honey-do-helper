@@ -162,13 +162,10 @@ public class AuthenticationController {
 
         Optional<Services> service = servicesDao.findById(serviceId);
         honeydoerServices.setServices(service.get());
-        System.out.println("serviceId = " + serviceId);
-        System.out.println("service.get().getName() = " + service.get().getName());
 
         Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
         honeydoerServices.setHoneydoers(honeydoer.get());
-        System.out.println("honeydoerId = " + honeydoerId);
-        System.out.println("honeydoer.get().getUser().getFirstName() = " + honeydoer.get().getUser().getFirstName());
+
 
         honeydoerServicesDao.save(honeydoerServices);
 
