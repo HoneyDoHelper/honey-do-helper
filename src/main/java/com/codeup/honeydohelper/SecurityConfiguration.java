@@ -40,14 +40,15 @@ public class SecurityConfiguration {
                 // Logout configuration
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login") // Redirect to the login page after successful logout (with a query string value appended)
+                .logoutSuccessUrl("/") // Redirect to the login page after successful logout (with a query string value appended)
 
                 // Pages that require authentication
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
                         "/users/{id}/edit", // Only authenticated users can edit profiles
-                        "/services/honeydoerProfile" // Only authenticated honeydoers can edit their profiles
+                        "/services/honeydoerProfile",
+                        "/dashboard"// Only authenticated honeydoers can edit their profiles
                 )
                 .authenticated()
 
