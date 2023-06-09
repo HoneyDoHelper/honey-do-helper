@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -189,26 +190,32 @@ public class ServicesController {
         return "/services/bookService";
     }
     @PostMapping("/services/bookService/{honeydoerId}/{serviceId}")
-    public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @PathVariable int serviceId) {
+    public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @RequestParam("honeydoerServiceId") String honeydoerServiceId,
+                                 @PathVariable int serviceId) {
 
-        tasks.getTaskDetails();
-        tasks.getDateAssigned();
-        tasks.getDateCompleted();
+//        tasks.getTaskDetails();
+//        tasks.setDateAssigned(LocalDate.now());
 
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+
+        Optional<HoneydoerServices> honeydoer = honeydoerServicesDao.findById(Integer.parseInt(honeydoerServiceId));
         if (honeydoer.isPresent()) {
-            Honeydoers honeydoerObject = honeydoer.get();
+            HoneydoerServices honeydoerObject = honeydoer.get();
+            tasks.setHoneydoerService(honeydoerObject);
 
         }
 
-        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
-        if (honeydoerService.isPresent()) {
-            HoneydoerServices honeydoerServiceObject = honeydoerService.get();
+        Optional<HoneyUsers> user = usersDao.findById(2);
+        if (user.isPresent()) {
+            HoneyUsers userObject = user.get();
+            tasks.setUser(userObject);
 
         }
 
         List<Tasks> allTasks = tasksDao.findAllByHoneydoerService_Id(serviceId);
 
+//        tasks.setHoneydoerService(Integer.parseInt(honeydoerServiceId));
+        tasks.setIsAccepted(false);
+        tasks.setStatus("Pending");
         tasksDao.save(tasks);
 
         return "redirect:/about";

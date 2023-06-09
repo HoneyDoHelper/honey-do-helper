@@ -38,58 +38,31 @@
             </div>
         </div>
         <div class="row">
-            <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}" th:object="${newTask}" th:method="post">
+            <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}" th:object="${newTask}"
+                  th:method="post">
                 <div class="col">
                     <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
-                    <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
-
                 </div>
                 <div class="col me-3">
                     <div>
-                        <label for="time-select">Select start time</label>
-                        <select id="time-select" th:field="*{dateAssigned}">
-                            <option th:value="6">6:00am</option>
-                            <option th:value="7">7:00am</option>
-                            <option th:value="8">8:00am</option>
-                            <option th:value="9">9:00am</option>
-                            <option th:value="10">10:00am</option>
-                            <option th:value="11">11:00am</option>
-                            <option th:value="12">12:00pm</option>
-                            <option th:value="13">1:00pm</option>
-                            <option th:value="14">2:00pm</option>
-                            <option th:value="15">3:00pm</option>
-                            <option th:value="16">4:00pm</option>
-                            <option th:value="17">5:00pm</option>
-                            <option th:value="18">6:00pm</option>
-                        </select>
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" id="start-date" name="start-date" value="" min="2018-01-01" max="2030-30-12"
+                               th:field="*{dateAssigned}">
                     </div>
                     <div>
-                        <label for="duration-select">Select duration</label>
-                        <select id="duration-select" th:field="*{dateCompleted}">
-                            <option th:value="1">1 hour</option>
-                            <option th:value="1.5">1 hour and 30 minutes</option>
-                            <option th:value="2">2 hours</option>
-                            <option th:value="2.5">2 hours and 30 minutes</option>
-                            <option th:value="3">3 hours</option>
-                            <option th:value="3.5">3 hours and 30 minutes</option>
-                            <option th:value="4">4 hours</option>
-                            <option th:value="4.5">4 hours and 30 minutes</option>
-                            <option th:value="5">5 hours</option>
-                            <option th:value="5.5">5 hours and 30 minutes</option>
-                            <option th:value="6">6 hours</option>
-                            <option th:value="6.5">6 hours and 30 minutes</option>
-                            <option th:value="7">7 hours</option>
-                            <option th:value="7.5">7 hours and 30 minutes</option>
-                            <option th:value="8">8 hours</option>
-                            <option th:value="8.5">8 hours and 30 minutes</option>
-                        </select>
+                        <label for="start-time">Start Time:</label>
+                        <input type="time" id="start-time">
+                    </div>
+                    <div>
+                        <label for="end-time">End Time:</label>
+                        <input type="time" id="end-time">
                     </div>
                     <div>
                         <label for="details">Job Description</label>
                         <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}"></textarea>
                     </div>
-                    <input type="hidden">
-<!--                           th:value="${newTask.id}" name="newTaskId">-->
+                    <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
+<!--                                               th:value="${newTask.id}" name="newTaskId">-->
                     <button type="submit">Submit Proposal</button>
                 </div>
             </form>
@@ -121,10 +94,10 @@
                         <p>MONEY LOGIC GOES HERE</p>
                     </div>
                     <div class="card-footer">
-<!--                        <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"-->
-<!--                              th:method="post">-->
-<!--                           -->
-<!--                        </form>-->
+                        <!--                        <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"-->
+                        <!--                              th:method="post">-->
+                        <!--                           -->
+                        <!--                        </form>-->
                     </div>
                 </div>
             </article>
