@@ -15,19 +15,6 @@
             <div class="col me-3">
                 <h2>Upcoming Tasks</h2>
 
-<!--                <th:block th:if="${tasks.size() <= 0}"-->
-<!--                <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">-->
-<!--                    <div th:each="index : ${tasksSize}" class="row">-->
-<!--                        <div class="col-2 align-self-center">-->
-<!--                            <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>-->
-<!--                        </div>-->
-<!--                        <div class="col align-self-center">-->
-<!--                            <p th:text="'Date: ' + ${tasks[index].dateAssigned} " class="text-start">Date</p>-->
-<!--                            <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name} " class="text-start">Date</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
                 <th:block th:if="${tasks.size() <= 0}">
                     <p>No tasks available.</p>
                 </th:block>
@@ -55,7 +42,7 @@
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
                                     <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
-                                    <button class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</button>
+                                    <a th:href="@{/edit/profile/{userId}(userId = ${honeydoer.user.id})}" href="" class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</a>
                                 </div>
                             </div>
                         </article>
