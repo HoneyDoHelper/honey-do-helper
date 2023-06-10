@@ -71,16 +71,53 @@ public class HoneyUsersController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(HttpServletRequest request) {
+    public String dashboard(HttpServletRequest request, Model model) {
         HoneyUsers currentLoggedInUser = (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("current first name "+ currentLoggedInUser.getFirstName());
+        System.out.println("current id "+ currentLoggedInUser.getId());
+        model.addAttribute("user", currentLoggedInUser);
+
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(currentLoggedInUser.getId());
+        model.addAttribute("honeydoer", honeydoer);
+
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
+//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
+//        if(honeydoersDao.findById(honeydoerId).isPresent()){
+//            Honeydoers honeydoerObject = honeydoer.get();
+//            model.addAttribute("honeydoer", honeydoerObject);
+//        }
+
+        List<HoneydoerServices> allServices = new ArrayList<>();
+        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+        model.addAttribute("services", allServices);
+
+
+        List<Tasks> allTasks = new ArrayList<>();
+        for (HoneydoerServices service: allServices) {
+            List<Tasks> objects = new ArrayList<>();
+            System.out.println("service = " + service.getId());
+            objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
+
+            allTasks.addAll(objects);
+        }
+        model.addAttribute("tasks", allTasks);
+
+        List<HoneydoerReviews> allReviews = new ArrayList<>();
+        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
+        model.addAttribute("reviews", allReviews);
+
         if (currentLoggedInUser.getIsHoneydoer()) {
-            return "redirect:/dashboard/honeydoer";
+            return "users/honeydoerDashboard";
         } else if (currentLoggedInUser.getIsAdmin()) {
-            return "redirect:/dashboard/admin";
+
+            return "users/adminDashboard";
         } else {
-            return "redirect:/dashboard/user";
+            return "users/userDashboard";
         }
     }
+
 
     @GetMapping("/user/honeydoer/dashboard/{honeydoerId}")
     public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId){

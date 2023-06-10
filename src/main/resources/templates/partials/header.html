@@ -1,4 +1,4 @@
-<header th:fragment="header" class="bg-color-neutral-light">
+<header th:fragment="header" class="bg-color-neutral-light" xmlns:sec="http://www.w3.org/1999/xhtml">
     <nav class="navbar fixed-top navbar-expand-lg px-3 bg-color-neutral-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index">Honeydo Helper</a>
@@ -35,12 +35,26 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item my-3 my-lg-0 mx-lg-3">
-                            <a class="btn btn-outline-secondary" href="/login">Log in/Sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-warning" href="/register/user">Become a Honeydoer!</a>
-                        </li>
+
+                        <div sec:authorize="isAuthenticated()">
+                            <li class="nav-item my-3 my-lg-0 mx-lg-3">
+                                <a class="btn btn-outlinesecondary" href="/profile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <form th:action="@{/logout}" th:method="post">
+                                    <button class="btn btn-warning" style="margin-top: 8px">Logout</button>
+                                </form>
+                            </li>
+                        </div>
+                        <div sec:authorize="!isAuthenticated()">
+                            <li class="nav-item">
+                                <a class="btn btn-outline-secondary" href="/login">Log in/Sign up</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-warning" href="/register/user">Become a Honeydoer!</a>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </div>
