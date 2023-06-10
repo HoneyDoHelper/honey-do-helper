@@ -3,6 +3,7 @@ package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -151,4 +152,60 @@ public class HoneyUsersController {
         return "/users/honeydoerDashboard";
     }
 
+    @GetMapping("/edit/profile/{userId}")
+    public String editUserProfileForm(Model model, @PathVariable int userId){
+        UserProfiles userProfile = userProfileDao.findByUser_Id(userId);
+        model.addAttribute("userProfile", userProfile);
+
+        return "/users/editProfile";
+    }
+
+    @PostMapping("/edit/profile/{userId}")
+    public String editUserProfileSubmit(@RequestParam("honeyUserID") int honeyUserId,
+                                        @RequestParam("address") String address,
+                                        @RequestParam("address2") String address2,
+                                        @RequestParam("city") String city,
+                                        @RequestParam("state") String state,
+                                        @RequestParam("zip") String zip,
+                                        @RequestParam("first_name") String first_name,
+                                        @RequestParam("last_name") String last_name,
+                                        @RequestParam("phone_number") String phone_number
+
+    ){
+        Optional<HoneyUsers> honeyUsersOptional = honeyUsersDao.findById(honeyUserId);
+        HoneyUsers honeyUser = honeyUsersOptional.get();
+        UserProfiles userProfile = userProfileDao.findByUser_Id(honeyUserId);
+
+
+        if (address != null){
+            userProfile.setAddress(address);
+        }
+        if (address2 != null){
+            userProfile.setAddress2(address2);
+        }
+        if (city != null){
+            userProfile.setCity(city);
+        }
+        if (state != null){
+            userProfile.setState(state);
+        }
+        if (zip != null){
+            userProfile.setZip(Integer.parseInt(zip));
+        }
+        if (phone_number != null){
+            userProfile.setPhone(Long.parseLong(phone_number));
+        }
+        if (first_name != null){
+            honeyUser.setFirstName(first_name);
+        }
+        if (last_name != null){
+            honeyUser.setLastName(last_name);
+        }
+
+
+        userProfileDao.save(userProfile);
+        honeyUsersDao.save(honeyUser);
+
+        return "redirect:/index";
+    }
 }

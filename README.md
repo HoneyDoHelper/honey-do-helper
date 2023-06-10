@@ -1,1 +1,2 @@
 # honey-do-helper
+Project Description: HoneyDo Helper is a web-based application that connects users in need of services around the house with “honeydoers” who are reputable and skilled in their specific areas of work.  Users can create profiles, locate “honeydoers” in their areas, and request services.  “Honeydoers” can create profiles, list the services they provide, and schedule jobs with clients once they’ve accepted a job.

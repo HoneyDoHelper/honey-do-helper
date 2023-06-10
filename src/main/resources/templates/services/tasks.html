@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Honey Todo')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <h1 th:text="${task.user_id.firstName} + '\'s Honey Todo'"></h1>
+        <div class="row row-cols-2 g-5">
+            <div class="col-4">
+                <div class="mb-3">
+                    <p th:text="${task.honeydoerService.services.name}"
+                    class="bold mb-0">Task type</p>
+                    <hr>
+                    <p th:text="${task.taskDetails}"
+                    class="mb-5">Task Details</p>
+                </div>
+                <div class="mb-3">
+                    <div class="row row-cols-2 g-3 d-flex align-items-center mb-2">
+                        <div class="col-3">
+                            <img th:src="@{/img/users/anon.png}" class="w-100 ratio ratio-1x1 rounded-circle"/>
+                        </div>
+                        <div class="col-9">
+                            <span th:text="${task.user_id.firstName}">Task Details</span>
+                            <span>(</span>
+                            <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
+                            <span th:text="${task.honeydoerService.honeydoers.rating}">Stars</span>
+                            <span>)</span>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 g-3 d-flex align-items-center mb-2">
+                        <div class="col-3">
+                            <img th:src="@{/img/users/anon.png}" class="w-100 ratio ratio-1x1 rounded-circle"/>
+                        </div>
+                        <div class="col-9">
+                            <span th:text="${task.honeydoerService.honeydoers.user.firstName}">Task Details</span>
+                            <span>(</span>
+                            <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
+                            <span th:text="${task.honeydoerService.honeydoers.rating}">Stars</span>
+                            <span>)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <img th:src="@{{serviceImg}(serviceImg = ${task.honeydoerService.services.imgFilePath})}" class="img-fluid"/>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid">
+        <div>
+            <h2 th:text="${task.status} + ' Project Proposal' " class="text-center">Project Status</h2>
+            <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
+
+            <p th:text="'Honeydoer Pay ' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+            <p th:text="'Honeydo Helper Fee ' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+            <p th:text="'Taxes ' + ${task_cost.taxes}">Taxes</p>
+            <h3 th:text="'Total Cost ' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+        </div>
+    </section>
+
+
+</main>
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>
