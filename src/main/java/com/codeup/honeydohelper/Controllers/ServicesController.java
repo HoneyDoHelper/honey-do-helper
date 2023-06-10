@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -180,6 +181,7 @@ public class ServicesController {
         return "/services/honeydoerProfile";
     }
 
+  
     @GetMapping("/services/bookService/{honeydoerId}/{serviceId}")
     public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
         List<Categories> allCategories = categoriesDao.findAll();
@@ -201,25 +203,36 @@ public class ServicesController {
         allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
         model.addAttribute("reviews", allReviews);
 
+        model.addAttribute("newTask", new Tasks());
+
+
         return "/services/bookService";
     }
+  
+  
+    @PostMapping("/services/bookService/{honeydoerId}/{serviceId}")
+    public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @RequestParam("honeydoerServiceId") String honeydoerServiceId,
+                                 @PathVariable int serviceId) {
 
-    //HELP TO DO THE POST MAPPING FOR BOOKING SERVICES
 
-//    @PostMapping("/register/honeydoer/{newHoneydoerId}")
-//    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices, @RequestParam("hourly-rate") String rate,
-//                             @RequestParam("service") int serviceId, @RequestParam("honeydoerId") int honeyUserId) {
-//
-//        honeydoerServices.setRate(Float.parseFloat(rate));
-//
-//        Optional<Services> service = servicesDao.findById(serviceId);
-//        honeydoerServices.setServices(service.get());
-//
-//        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
-//        honeydoerServices.setHoneydoers(honeydoer);
-//
-//        honeydoerServicesDao.save(honeydoerServices);
-//
-//        return "redirect:/register/honeydoer/" + honeydoer.getUser().getId();
-//    }
-}
+        Optional<HoneydoerServices> honeydoer = honeydoerServicesDao.findById(Integer.parseInt(honeydoerServiceId));
+        if (honeydoer.isPresent()) {
+            HoneydoerServices honeydoerObject = honeydoer.get();
+            tasks.setHoneydoerService(honeydoerObject);
+        }
+
+        Optional<HoneyUsers> user = usersDao.findById(2);
+        if (user.isPresent()) {
+            HoneyUsers userObject = user.get();
+            tasks.setUser(userObject);
+        }
+
+        List<Tasks> allTasks = tasksDao.findAllByHoneydoerService_Id(serviceId);
+
+//        tasks.setHoneydoerService(Integer.parseInt(honeydoerServiceId));
+        tasks.setIsAccepted(false);
+        tasks.setStatus("Pending");
+        tasksDao.save(tasks);
+
+        return "redirect:/about";
+    }

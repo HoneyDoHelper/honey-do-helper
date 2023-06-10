@@ -125,10 +125,10 @@ public class Tasks {
         this.isAccepted = isAccepted;
     }
 
-    public HoneyUsers getUser_id() {
+    public HoneyUsers getUser() {
         return user;
     }
-    public void setUser_id(HoneyUsers user) {
+    public void setUser(HoneyUsers user) {
         this.user = user;
     }
 
@@ -141,6 +141,7 @@ public class Tasks {
     public void setHoneydoerService(HoneydoerServices honeydoerService) {
         this.honeydoerService = honeydoerService;
     }
+
 
 
 }
