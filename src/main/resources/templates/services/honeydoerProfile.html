@@ -25,7 +25,11 @@
                 <div class="row">
                     <p th:text="${service.services.name} + ' Experience'">Service Experience</p>
                     <p th:text="${service.aboutService}">Experience Description</p>
-                    <a class="btn btn-warning" type="button">Book <span th:text="${honeydoer.user.firstName}"></span></a>
+                    <a type="button" class="btn btn-warning" href="#"
+                       th:href="@{/services/bookService/{honeydoerId}/{serviceId}(honeydoerId=${honeydoer.id}, serviceId=${service.services.id})}">
+                        Book <span th:text="${honeydoer.user.firstName}"></span>
+                    </a>
+
                 </div>
             </div>
             <div class="col">

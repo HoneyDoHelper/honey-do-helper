@@ -1,88 +1,98 @@
+
 <section th:fragment="ratings" class="container">
-  <h2 th:text="'Reviews (' + ${reviews.size()} + ')'">Reviews(7)</h2>
-  <div id="ratingsCarousel" class="carousel slide">
-    <div th:with="reviewsSize=${#numbers.sequence(0, reviews.size()-1)}" class="carousel-inner">
-      <div th:each="index : ${reviewsSize}"
-           th:classappend="${index == 0} ? 'carousel-item active' : 'carousel-item'">
-        <div class=" row row-cols-3 g-3">
-          <article class="col"></article>
-          <article class="col border border-dark-subtle border-1">
-            <div class="card">
-              <div class="card-header">
-                <div th:switch="${reviews[index].getStars().toString()}">
-                  <div th:case="ONE">
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
+  <th:block th:if="${reviews.size() <= 0}">
+    <p>No reviews yet.</p>
+  </th:block>
+
+  <th:block th:unless="${reviews.size() <= 0}">
+    <h2 th:text="'Reviews (' + ${reviews.size()} + ')'">Reviews(7)</h2>
+    <div id="ratingsCarousel" class="carousel slide">
+      <div th:with="reviewsSize=${#numbers.sequence(0, reviews.size()-1)}" class="carousel-inner">
+        <div th:each="index : ${reviewsSize}"
+             th:classappend="${index == 0} ? 'carousel-item active' : 'carousel-item'">
+          <div class=" row row-cols-3 g-3">
+
+            <article class="col"></article>
+
+            <article class="col border border-dark-subtle border-1">
+              <div class="card">
+                <div class="card-header">
+                  <div th:switch="${reviews[index].getStars().toString()}">
+                    <div th:case="ONE">
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                    </div>
+                    <div th:case="TWO">
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                    </div>
+                    <div th:case="THREE">
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                    </div>
+                    <div th:case="FOUR">
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: emptyStarBig}"></svg>
+                    </div>
+                    <div th:case="FIVE">
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                      <svg th:replace="~{partials/star.html :: fullStarBig}"></svg>
+                    </div>
                   </div>
-                  <div th:case="TWO">
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                  </div>
-                  <div th:case="THREE">
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                  </div>
-                  <div th:case="FOUR">
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: emptyStar}"></svg>
-                  </div>
-                  <div th:case="FIVE">
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
-                    <svg th:replace="~{partials/star.html :: fullStar}"></svg>
+                </div>
+
+                <div class="card-body">
+                  <p th:text="${reviews[index].comment}">Placeholder</p>
+                </div>
+
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col-3 align-self-center">
+                      <img th:src="@{/img/users/{imgPath}(imgPath=${'user' + reviews[index].task.user_id + '.png'})}" class="h-100 w-100 rounded-circle"/>
+                    </div>
+                    <div class="col align-self-center">
+                      <p th:text="${reviews[index].task.honeydoerService.services.name}"
+                         class="text-start">Service Type</p>
+                      <p th:text="${reviews[index].task.user_id.firstName}" class="text-start">
+                        Client Name</p>
+                    </div>
                   </div>
                 </div>
               </div>
+            </article>
 
-              <div class="card-body">
-                <p th:text="${reviews[index].comment}">Placeholder</p>
-              </div>
-
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col-3 align-self-center">
-                    <img th:src="@{/img/users/{imgPath}(imgPath=${'user' + reviews[index].task.user_id + '.png'})}" class="h-100 w-100 rounded-circle"/>
-                  </div>
-                  <div class="col align-self-center">
-                    <p th:text="${reviews[index].task.honeydoerService.services.name}"
-                       class="text-start">Service Type</p>
-                    <p th:text="${reviews[index].task.user_id.firstName}" class="text-start">
-                      Client Name</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="col"></article>
+            <article class="col"></article>
+          </div>
         </div>
       </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#ratingsCarousel" data-bs-slide="prev">
-      <div class="bg-color-primary-main p-3 rounded-circle d-flex align-items-center justify-content-center">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#ratingsCarousel" data-bs-slide="prev">
+        <div class="bg-color-primary-main p-3 rounded-circle d-flex align-items-center justify-content-center">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </div>
 
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#ratingsCarousel" data-bs-slide="next">
-      <div class="bg-color-primary-main p-3 rounded-circle d-flex align-items-center justify-content-center">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </div>
-    </button>
-  </div>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#ratingsCarousel" data-bs-slide="next">
+        <div class="bg-color-primary-main p-3 rounded-circle d-flex align-items-center justify-content-center">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </div>
+      </button>
+    </div>
+  </th:block>
 </section>

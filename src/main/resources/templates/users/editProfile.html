@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Edit Profile')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+  <section class="container">
+    <h1>Edit your profile</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis. Alias
+      animi atque eos illum ipsa, magni natus nobis odit officiis praesentium quibusdam quidem ratione unde
+      voluptatum?</p>
+    <br>
+
+    <form  th:action="@{'/edit/profile/' + ${userProfile.user.id}}" th:method="post">
+      <div class="row register-background py-3 mb-3">
+        <div class="col-12">
+          <div class="row row-cols-2 g-3">
+            <div class="col">
+              <div class="form-floating mb-3">
+                <input th:value="${userProfile.user.firstName}"
+                       type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                <label for="first_name">First Name</label>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-floating mb-3">
+                <input  th:value="${userProfile.user.lastName}"
+                        type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-6">
+          <div class="form-floating mb-3">
+            <input th:value="${userProfile.phone}"
+                   type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+            <label for="phone_number">Phone Number</label>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div>
+            <input type="file" class="form-control form-control-lg" id="profile_picture" name="profile_picture" placeholder="upload profile photo">
+            <label for="profile_picture"></label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-floating mb-3">
+        <input  th:value="${userProfile.address}"
+                type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+        <label for="address">Address</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input th:value="${userProfile.address2}"
+               type="text" class="form-control" id="address2" name="address2" placeholder="Address">
+        <label for="address2">Address</label>
+      </div>
+
+      <div class="row row-cols-3 g-3">
+        <div class="col-7">
+          <div class="form-floating mb-3">
+            <input th:value="${userProfile.city}"
+                   type="text" class="form-control" id="city" name="city" placeholder="City" required>
+            <label for="city">City</label>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="form-floating mb-3">
+            <input th:value="${userProfile.state}"
+                   type="text" class="form-control" id="state" name="state" placeholder="State" required>
+            <label for="state">State</label>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="form-floating mb-3">
+            <input th:value="${userProfile.zip}"
+                   type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
+            <label for="zip">Zip</label>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">
+        <input type="hidden" th:value="${userId}" name="honeyUserID">
+
+        <button id="submit-btn" type="submit" class="btn btn-warning">Submit Changes</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+
+</body>
+</html>

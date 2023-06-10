@@ -128,6 +128,24 @@ public class ServicesController {
         return "/services/services";
     }
 
+    @GetMapping("/tasks/{taskId}")
+    public String gotoTasks(Model model, @PathVariable int taskId){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        if(tasksDao.findById(taskId).isPresent()){
+            Tasks taskObject = task.get();
+            model.addAttribute("task", taskObject);
+        }
+
+        TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
+            model.addAttribute("task_cost", taskCost);
+
+
+        return "/services/tasks";
+    }
+
 
     @GetMapping("/categories")
     public String gotoCategories(Model model){
@@ -163,6 +181,7 @@ public class ServicesController {
         return "/services/honeydoerProfile";
     }
 
+  
     @GetMapping("/services/bookService/{honeydoerId}/{serviceId}")
     public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
         List<Categories> allCategories = categoriesDao.findAll();
@@ -189,26 +208,23 @@ public class ServicesController {
 
         return "/services/bookService";
     }
+  
+  
     @PostMapping("/services/bookService/{honeydoerId}/{serviceId}")
     public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @RequestParam("honeydoerServiceId") String honeydoerServiceId,
                                  @PathVariable int serviceId) {
-
-//        tasks.getTaskDetails();
-//        tasks.setDateAssigned(LocalDate.now());
 
 
         Optional<HoneydoerServices> honeydoer = honeydoerServicesDao.findById(Integer.parseInt(honeydoerServiceId));
         if (honeydoer.isPresent()) {
             HoneydoerServices honeydoerObject = honeydoer.get();
             tasks.setHoneydoerService(honeydoerObject);
-
         }
 
         Optional<HoneyUsers> user = usersDao.findById(2);
         if (user.isPresent()) {
             HoneyUsers userObject = user.get();
             tasks.setUser(userObject);
-
         }
 
         List<Tasks> allTasks = tasksDao.findAllByHoneydoerService_Id(serviceId);
@@ -220,8 +236,3 @@ public class ServicesController {
 
         return "redirect:/about";
     }
-}
-
-//return "redirect:/register/honeydoer/" + userId + '/' + honeydoerServiceId;
-//Optional<Tasks> newTasks = tasksDao.findById(userId);
-
