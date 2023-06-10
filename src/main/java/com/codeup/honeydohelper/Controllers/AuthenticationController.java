@@ -113,18 +113,31 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register/user")
-    public String saveUser(@ModelAttribute HoneyUsers honeyUser, @ModelAttribute UserProfiles userProfile){
+    public String saveUser(@ModelAttribute HoneyUsers honeyUser, @ModelAttribute UserProfiles userProfile, @ModelAttribute Honeydoers honeydoer,
+                           @RequestParam("about_self") String aboutSelf){
         String hash = passwordEncoder.encode(honeyUser.getPassword());
         honeyUser.setPassword(hash);
         honeyUsersDao.save(honeyUser);
 
         userProfile.setUser(honeyUser);
         userProfileDao.save(userProfile);
-        return "redirect:/index";
+
+        if (honeyUser.getIsHoneydoer()){
+            honeydoer.setUser(honeyUsersDao.findTopByOrderByIdDesc());
+            honeydoer.setAboutSelf(aboutSelf);
+            honeydoer.setRating(5);
+            honeydoersDao.save(honeydoer);
+            Honeydoers newHoneydoer = honeydoersDao.findTopByOrderByIdDesc();
+            int newHoneydoerId = newHoneydoer.getUser().getId();
+            System.out.println("newHoneyUserId = " + newHoneydoerId);
+            return "redirect:/register/honeydoer/" + newHoneydoerId;
+        } else {
+            return "redirect:/index";
+        }
     }
 
-    @GetMapping("/register/honeydoer/{newHoneydoerId}")
-    public String gotoRegisterHoneydoer(Model model, @PathVariable int newHoneydoerId) {
+    @GetMapping("/register/honeydoer/{newHoneyUserId}")
+    public String gotoRegisterHoneydoer(Model model, @PathVariable int newHoneyUserId) {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
@@ -137,10 +150,12 @@ public class AuthenticationController {
         model.addAttribute("newUser", newUser);
 
 
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(newHoneydoerId);
-        Honeydoers honeydoerObject = honeydoer.get();
-        model.addAttribute("newHoneydoer", honeydoerObject);
-        model.addAttribute("newHoneydoerId", newHoneydoerId);
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(newHoneyUserId);
+
+        System.out.println("honeydoerId GET = " + honeydoer.getId());
+
+        model.addAttribute("newHoneydoer", honeydoer);
+        model.addAttribute("newHoneydoerId", honeydoer.getId());
 
         model.addAttribute("honeydoerServices", new HoneydoerServices());
 
@@ -148,10 +163,20 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register/honeydoer/{newHoneydoerId}")
-    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices) {
+    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices, @RequestParam("hourly-rate") String rate,
+                             @RequestParam("service") int serviceId, @RequestParam("honeydoerId") int honeyUserId) {
+
+        honeydoerServices.setRate(Float.parseFloat(rate));
+
+        Optional<Services> service = servicesDao.findById(serviceId);
+        honeydoerServices.setServices(service.get());
+
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
+        honeydoerServices.setHoneydoers(honeydoer);
+
         honeydoerServicesDao.save(honeydoerServices);
 
-        return "redirect:/about";
+        return "redirect:/register/honeydoer/" + honeydoer.getUser().getId();
     }
 
 

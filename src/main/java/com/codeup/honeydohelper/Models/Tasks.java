@@ -3,6 +3,7 @@ package com.codeup.honeydohelper.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tasks")
@@ -17,6 +18,12 @@ public class Tasks {
 
     @Column(name = "date_assigned", nullable = false)
     private LocalDate dateAssigned;
+
+    @Column(name = "time_start", nullable = false)
+    private LocalTime timeStart;
+
+    @Column(name = "budgeted_duration", nullable = false)
+    private int budgetedDuration;
 
     @Column(name = "date_completed")
     private LocalDate dateCompleted;
@@ -41,9 +48,11 @@ public class Tasks {
     ////////////////////////////////////////////////////////////////*/
     public Tasks() {}
 
-    public Tasks(String taskDetails, LocalDate dateAssigned, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
+    public Tasks(String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
+        this.timeStart = timeStart;
+        this.budgetedDuration = budgetedDuration;
         this.dateCompleted = dateCompleted;
         this.status = status;
         this.isAccepted = isAccepted;
@@ -51,10 +60,12 @@ public class Tasks {
         this.honeydoerService = honeydoerService;
     }
 
-    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
+    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.id = id;
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
+        this.timeStart = timeStart;
+        this.budgetedDuration = budgetedDuration;
         this.dateCompleted = dateCompleted;
         this.status = status;
         this.isAccepted = isAccepted;
@@ -87,6 +98,12 @@ public class Tasks {
         this.dateAssigned = dateAssigned;
     }
 
+    public LocalTime getTimeStart() {return timeStart;}
+    public void setTimeStart(LocalTime timeStart) {this.timeStart = timeStart;}
+
+    public int getBudgetedDuration() {return budgetedDuration;}
+    public void setBudgetedDuration(int budgetedDuration) {this.budgetedDuration = budgetedDuration;}
+
     public LocalDate getDateCompleted() {
         return dateCompleted;
     }
@@ -114,6 +131,9 @@ public class Tasks {
     public void setUser_id(HoneyUsers user) {
         this.user = user;
     }
+
+    public HoneyUsers getUser() {return user;}
+    public void setUser(HoneyUsers user) {this.user = user;}
 
     public HoneydoerServices getHoneydoerService() {
         return honeydoerService;

@@ -52,17 +52,17 @@
 
                 </div>
 
-                <div class="col-12">
+                <div class="col-6">
                     <div class="form-floating mb-3">
                         <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
                         <label for="phone_number">Phone Number</label>
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-6">
                     <div>
-                        <label for="profile_picture">Profile Picture:</label>
-                        <input type="file" class="form-control form-control-lg" id="profile_picture" name="profile_picture">
+                        <input type="file" class="form-control form-control-lg" id="profile_picture" name="profile_picture" placeholder="upload profile photo">
+                        <label for="profile_picture"></label>
                     </div>
                 </div>
 
@@ -102,19 +102,58 @@
             </div>
 
             <div>
-                <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">I accept the Terms</label><br><br>
+                <div class="row row-cols-2 g-3 register-background mb-3">
+                    <div class="col-3">
+                        <p>Do you want to be a Honeydoer?</p>
+                        <div class="mb-3">
+                            <input type="radio" th:field="${user.isHoneydoer}" value="true" onclick="toggleInputs(true)"/>Yes
+                            <input type="radio" th:field="${user.isHoneydoer}" value="false" onclick="toggleInputs(false)"/>No
+                        </div>
+                    </div>
 
-                <p>Do you want to be a Honeydoer?</p>
-                <input type="radio" th:field="${user.isHoneydoer}" value="true" />Yes
-                <input type="radio" th:field="${user.isHoneydoer}" value="false" />No<br/>
+                    <div class="col-9">
+                        <!-- Hidden inputs for honeydoers -->
+                        <div id="hiddenInputs" style="display: none;"  class="row py-3 my-3">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <textarea type="text" class="form-control" id="about_self" name="about_self" placeholder="Tell us about your experience!" required></textarea>
+                                    <label for="about_self">Tell us about your experience!</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">
-                <input type="submit" class="register-btn" value="Next">
+
+                <div class="mb-3">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I accept the Terms</label><br><br>
+                </div>
+
+                <input id="submit-btn" type="submit" class="register-btn" value="Next">
             </div>
         </form>
     </section>
 </main>
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+<script>
+    function toggleInputs(isHoneydoer) {
+        const hiddenInputs = document.getElementById("hiddenInputs");
+        const requiredInput = document.getElementById("about_self");
+        const submitBtn = document.getElementById("submit-btn");
+
+        if (isHoneydoer) {
+            hiddenInputs.style.display = "block";
+            requiredInput.setAttribute("required", "");
+            submitBtn.value = "Next";
+        } else {
+            hiddenInputs.style.display = "none";
+            requiredInput.removeAttribute("required");
+            submitBtn.value = "Submit";
+        }
+    }
+</script>
 </body>
 </html>

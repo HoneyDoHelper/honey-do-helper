@@ -3,8 +3,7 @@ import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +127,24 @@ public class ServicesController {
         return "/services/services";
     }
 
+    @GetMapping("/tasks/{taskId}")
+    public String gotoTasks(Model model, @PathVariable int taskId){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        if(tasksDao.findById(taskId).isPresent()){
+            Tasks taskObject = task.get();
+            model.addAttribute("task", taskObject);
+        }
+
+        TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
+            model.addAttribute("task_cost", taskCost);
+
+
+        return "/services/tasks";
+    }
+
 
     @GetMapping("/categories")
     public String gotoCategories(Model model){
@@ -186,4 +203,23 @@ public class ServicesController {
 
         return "/services/bookService";
     }
+
+    //HELP TO DO THE POST MAPPING FOR BOOKING SERVICES
+
+//    @PostMapping("/register/honeydoer/{newHoneydoerId}")
+//    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices, @RequestParam("hourly-rate") String rate,
+//                             @RequestParam("service") int serviceId, @RequestParam("honeydoerId") int honeyUserId) {
+//
+//        honeydoerServices.setRate(Float.parseFloat(rate));
+//
+//        Optional<Services> service = servicesDao.findById(serviceId);
+//        honeydoerServices.setServices(service.get());
+//
+//        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
+//        honeydoerServices.setHoneydoers(honeydoer);
+//
+//        honeydoerServicesDao.save(honeydoerServices);
+//
+//        return "redirect:/register/honeydoer/" + honeydoer.getUser().getId();
+//    }
 }
