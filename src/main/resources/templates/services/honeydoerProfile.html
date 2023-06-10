@@ -6,72 +6,48 @@
 </head>
 <body>
 
-  <header th:replace="~{partials/header.html :: header}"></header>
+<header th:replace="~{partials/header.html :: header}"></header>
 
-  <main>
+<main>
     <section class="container">
-      <div class="row">
-        <div class="col me-3">
-          <h1><span th:text="${name}"></span></h1>
-          <div class="row mb-5">
+        <div class="row">
+            <div class="col me-3">
+                <h1 th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName}"></h1>
+                <div class="row mb-5">
+                    <div class="col">
+                        <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
+                    </div>
+                    <div class="col-8 align-self-center">
+                        <p th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
+                        <p th:text="${honeydoer.rating}">Stars</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <p th:text="${service.services.name} + ' Experience'">Service Experience</p>
+                    <p th:text="${service.aboutService}">Experience Description</p>
+                    <a type="button" class="btn btn-warning" href="#"
+                       th:href="@{/services/bookService/{honeydoerId}/{serviceId}(honeydoerId=${honeydoer.id}, serviceId=${service.services.id})}">
+                        Book <span th:text="${honeydoer.user.firstName}"></span>
+                    </a>
+
+                </div>
+            </div>
             <div class="col">
-              <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
+                <img th:src="@{{serviceImg}(serviceImg = ${service.services.imgFilePath})}" class="img-fluid"/>
             </div>
-            <div class="col-8 align-self-center">
-              <p class="card-title">$55.55/hr</p>
-              <p>Stars</p>
-              <p>Avg 4.9 (102 reviews)</p>
-            </div>
-          </div>
-          <div class="row">
-            <p>Lawn Service Experience</p>
-            <p>
-              Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
-            </p>
-            <a class="btn btn-warning" type="button">Book <span th:text="${name}"></span></a>
-          </div>
         </div>
-        <div class="col">
-          <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
-        </div>
-      </div>
     </section>
 
     <section class="container-fluid">
-      <div>
-        <h2 class="text-center">About Richard</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci amet autem dolore exercitationem hic illum impedit, ipsa laudantium magni, maxime modi molestiae mollitia natus nisi nulla reiciendis saepe suscipit totam vel voluptate voluptates voluptatibus!</p>
-      </div>
+        <div>
+            <h2 th:text="'About ' + ${honeydoer.user.firstName}" class="text-center">About Honeydoer</h2>
+            <p th:text="${honeydoer.aboutSelf}">About Section</p>
+        </div>
     </section>
 
-    <section class="container">
-      <h2>Reviews(102)</h2>
-      <div class="row row-cols-3 g-3">
-        <article class="col border border-light border-1">
-          <div class="card">
-            <div class="card-header">
-              <p>Stars</p>
-            </div>
-            <div class="card-body">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi exercitationem illo inventore optio praesentium quia recusandae rem soluta veritatis?</p>
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-4 align-self-center">
-                  <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
-                </div>
-                <div class="col align-self-center">
-                  <p class="text-start">Service Type</p>
-                  <p class="text-start">Client Name</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
+    <section th:replace="~{partials/honeydoerRatings.html :: ratings}"></section>
 
-  </main>
-  <footer th:replace="~{partials/footer.html :: footer}"></footer>
+</main>
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
 </body>
 </html>

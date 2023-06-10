@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Honeydoer Register')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <div class="row col">
+            <h1>Show us what you got, <span th:text="${newHoneydoer.user.firstName}"></span>!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis.
+                Alias
+            </p>
+            <!--            <div class="col-lg-2 col">-->
+            <!--            </div>-->
+            <div class="col-lg-4 col">
+                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+
+            </div>
+            <div class="col-lg-9" col>
+                <form th:action="@{'/register/honeydoer/' + ${newHoneydoerId}}" th:method="post">
+                    <div class="form-group mb-2 mt-3">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" class="form-select form-control">
+                            <option value="" disabled selected>Select One</option>
+                            <option value="category" th:each="category : ${categories}"
+                                    th:text="${category.name + ' Service'}">Category Name
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="service">Service:</label>
+                        <select id="service" name="service" class="form-select form-control">
+
+                            <option value="" disabled selected>Select One</option>
+                            <option th:each="service : ${services}" th:text="${service.name}" th:value="${service.id}">
+                                Service Name
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="experience">Your Experience:</label>
+                        <textarea id="experience" name="experience" rows="4" class="form-control" maxlength="250"
+                                  th:field="${honeydoerServices.aboutService}"></textarea>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="hourly-rate">Your hourly rate:</label>
+                        <input type="number" id="hourly-rate" name="hourly-rate" class="form-control">
+                    </div>
+                    <input type="hidden" th:value="${newHoneydoer.id}" name="honeydoerId">
+
+                    <!--</div>-->
+
+                   <!-- <input type="hidden" th:value="${newHoneydoer.user.id}" name="honeydoerId"> -->
+                    <button type="submit" class="honeydoer-submit mt-2">Add</button>
+                </form>
+            </div>
+            <div class="col-lg-8 col row">
+                <div class="col-lg-4 col" th:each="entry : ${honeydoerService}">
+                    <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+                    <div>
+                        <p class="mt-3"><Strong>
+                            <span th:text="${entry.services.category.name}">Name</span>
+                        </Strong>
+                        </p>
+                    </div>
+                    <div>
+                        <h3>
+                            <span th:text="${entry.services.name}">Service Name</span>
+                        </h3>
+                    </div>
+                    <div>
+                        <p th:text="${entry.aboutService}">Experience</p>
+                    </div>
+                    <div>
+                        <h2>
+                            Rate: $<span th:text="${entry.rate}">Rate</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <a class="btn btn-warning" th:href="@{/user/honeydoer/dashboard/{newHoneydoerId} (newHoneydoerId = ${newHoneydoerId})}"></a>
+    </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>

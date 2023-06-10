@@ -15,17 +15,24 @@
             <div class="col me-3">
                 <h2>Upcoming Tasks</h2>
 
-                <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                    <div th:each="index : ${tasksSize}" class="row">
-                        <div class="col-2 align-self-center">
-                            <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
-                        </div>
-                        <div class="col align-self-center">
-                            <p th:text="'Date: ' + ${tasks[index].dateAssigned} " class="text-start">Date</p>
-                            <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name} " class="text-start">Date</p>
+                <th:block th:if="${tasks.size() <= 0}">
+                    <p>No tasks available.</p>
+                </th:block>
+                <th:block th:unless="${tasks.size() <= 0}">
+                    <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
+                        <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}" class="row">
+                            <div class="col-2 align-self-center">
+                                <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
+                            </div>
+                            <div class="col align-self-center">
+                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
+                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
+
+
 
             </div>
             <div class="col">
@@ -35,7 +42,7 @@
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
                                     <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
-                                    <button class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</button>
+                                    <a th:href="@{/edit/profile/{userId}(userId = ${honeydoer.user.id})}" href="" class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</a>
                                 </div>
                             </div>
                         </article>
@@ -95,32 +102,7 @@
         </div>
     </section>
 
-    <section class="container">
-        <h2>Reviews(102)</h2>
-        <div th:with="reviewsSize=${#numbers.sequence(0, reviews.size()-1)}" class="row row-cols-3 g-3">
-            <article th:each="index : ${reviewsSize}" class="col border border-dark-subtle border-1">
-                <div class="card">
-                    <div class="card-header">
-                        <p th:text="${reviews[index].getStars().toString()}">Stars</p>
-                    </div>
-                    <div class="card-body">
-                        <p  th:text="${reviews[index].comment}">Placeholder</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-4 align-self-center">
-                                <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
-                            </div>
-                            <div class="col align-self-center">
-                                <p class="text-start">Service Type</p>
-                                <p class="text-start">Client Name</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
+    <section th:replace="~{partials/honeydoerRatings.html :: ratings}"></section>
 
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
