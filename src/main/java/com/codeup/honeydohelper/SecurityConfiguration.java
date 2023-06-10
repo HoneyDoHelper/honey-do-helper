@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/", "/index", "/about", "/contact", "/support",
+                        "/", "/index", "/about", "/contact", "/support", "/tasks/**",
                         "/authentication/register","/authentication/**","/register","/register/user",
                         "/register/honeydoer", "/register/honeydoer/**", "/user/honeydoer/dashboard/**",
                         "/services", "/services/**", "/apis/**", "/chat", "/calendar", "/edit/profile/**", "/edit/**",

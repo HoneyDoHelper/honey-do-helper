@@ -127,6 +127,24 @@ public class ServicesController {
         return "/services/services";
     }
 
+    @GetMapping("/tasks/{taskId}")
+    public String gotoTasks(Model model, @PathVariable int taskId){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        if(tasksDao.findById(taskId).isPresent()){
+            Tasks taskObject = task.get();
+            model.addAttribute("task", taskObject);
+        }
+
+        TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
+            model.addAttribute("task_cost", taskCost);
+
+
+        return "/services/tasks";
+    }
+
 
     @GetMapping("/categories")
     public String gotoCategories(Model model){
