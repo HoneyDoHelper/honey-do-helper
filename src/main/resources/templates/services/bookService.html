@@ -11,8 +11,7 @@
 <main>
     <section class="container">
         <div class="row mb-4">
-            <div class="col me-3">
-                <!--                <h1 th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName} + ' ' +"></h1>-->
+            <div class="col-lg-6 col-md-12">
                 <h1>
                     <span th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName}"></span>
                     <span>(</span>
@@ -22,10 +21,10 @@
                 </h1>
 
                 <div class="row mb-5">
-                    <div class="col">
+                    <div class="col-lg-4 col-md-4">
                         <img th:src="@{/img/team/travis.png}" class="ratio ratio-1x1 w-100 rounded-circle"/>
                     </div>
-                    <div class="col-8 align-self-center">
+                    <div class="col-lg-8 col-md-8">
                         <h2 th:text="${service.services.name}"></h2>
                         <p th:text="${honeydoer.user.firstName} + '\'s Experience'">Service Experience</p>
                         <p th:text="${service.aboutService}">Experience Description</p>
@@ -33,43 +32,76 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-lg-6 col-md-12">
                 <img th:src="@{{serviceImg}(serviceImg = ${service.services.imgFilePath})}" class="img-fluid"/>
             </div>
         </div>
+    </section>
+    <section class="container">
         <div class="row">
-            <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}" th:object="${newTask}"
-                  th:method="post">
-                <div class="col">
-                    <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
-                </div>
-                <div class="col me-3">
-                    <div>
-                        <label for="start-date">Start Date:</label>
-                        <input type="date" id="start-date" name="start-date" value="" min="2018-01-01" max="2030-30-12"
-                               th:field="*{dateAssigned}">
+            <div class="col-lg-4 col-md-12">
+                <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                      th:object="${newTask}"
+                      th:method="post" oninput="updateCard()">
+                    <div class="mb-4">
+                        <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
                     </div>
-                    <div>
-                        <label for="start-time">Start Time:</label>
-                        <input type="time" id="start-time">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="start-date">Start Date:</label>
+                            <input type="date" id="start-date" name="start-date" value="" min="2018-01-01" max="2030-30-12"
+                                   th:field="*{dateAssigned}" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label for="start-time">Start Time:</label>
+                            <input type="time" id="start-time" class="form-control">
+                        </div>
                     </div>
-                    <div>
-                        <label for="end-time">End Time:</label>
-                        <input type="time" id="end-time">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="end-time">End Time:</label>
+                            <input type="time" id="end-time" class="form-control">
+                        </div>
                     </div>
-                    <div>
-                        <label for="details">Job Description</label>
-                        <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}"></textarea>
+                    <div class="mb-4">
+                        <label for="details">Job Description:</label>
+                        <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}" class="form-control"></textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
-<!--                                               th:value="${newTask.id}" name="newTaskId">-->
-                    <button type="submit">Submit Proposal</button>
-                </div>
-            </form>
+                    <button type="submit" class="btn proposal-btn">Submit Proposal</button>
+                </form>
 
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">
+                    Your X service proposal to X
+                </h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Start Date: (YYYY-MM-DD)</h5>
+                        <p class="card-text" id="card-start-date">Your start date goes here</p>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <h5 class="card-title">Start Time:</h5>
+                        <p class="card-text" id="card-start-time">Your start time goes here</p>
+                        <p class="card-text" id="card-start-time-ampm">AM/PM</p>
+
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <h5 class="card-title">Job Description:</h5>
+                        <p class="card-text" id="card-job-description">Your job description goes here</p>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <h5 class="card-title">Rate: </h5>
+                        <p>MONEY LOGIC GOES HERE</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
     <section class="container-fluid">
         <div>
             <h2 class="text-center">Upload images for your project</h2>
@@ -80,31 +112,31 @@
             </div>
         </div>
     </section>
-
-    <section class="container">
-        <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">Your X
-            service proposal to X</h2>
-        <div class="row row-cols-3 g-3">
-            <article class="col border border-light border-1">
-                <div class="card">
-                    <div class="card-header">
-                        <p>Stars</p>
-                    </div>
-                    <div class="card-body">
-                        <p>MONEY LOGIC GOES HERE</p>
-                    </div>
-                    <div class="card-footer">
-                        <!--                        <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"-->
-                        <!--                              th:method="post">-->
-                        <!--                           -->
-                        <!--                        </form>-->
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
-
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+<script>
+    function updateCard() {
+        var startDate = document.getElementById('start-date').value;
+        var startTime = document.getElementById('start-time').value;
+        var jobDescription = document.getElementById('details').value;
+
+        var [hour, minute] = startTime.split(':');
+        var ampm = 'AM';
+        hour = parseInt(hour);
+        if (hour >= 12) {
+            ampm = 'PM';
+            if (hour > 12) {
+                hour -= 12;
+            }
+        }
+
+        document.getElementById('card-start-date').textContent = startDate;
+        document.getElementById('card-start-time').textContent = startTime;
+        document.getElementById('card-start-time-ampm').textContent = ampm;
+        document.getElementById('card-job-description').textContent = jobDescription;
+
+    }
+
+</script>
 </body>
 </html>

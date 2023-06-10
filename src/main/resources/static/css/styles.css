@@ -143,3 +143,8 @@ h3 {
     display: inline-block;
     margin-inline-end: 1rem;
 }
+
+.proposal-btn {
+    background-color: var(--color-primary-main);
+    color: white;
+}
