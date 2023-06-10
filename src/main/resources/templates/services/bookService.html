@@ -51,6 +51,8 @@
                             <label for="start-date">Start Date:</label>
                             <input type="date" id="start-date" name="start-date" value="" min="2018-01-01" max="2030-30-12"
                                    th:field="*{dateAssigned}" class="form-control">
+
+
                         </div>
                         <div class="col">
                             <label for="start-time">Start Time:</label>
@@ -68,10 +70,16 @@
                         <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}" class="form-control"></textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
-                    <button type="submit" class="btn proposal-btn">Submit Proposal</button>
+                    <button type="submit" class="btn btn-warning">Submit Proposal</button>
                 </form>
 
             </div>
+
+            <!-- with some help of the internet, baeldung and chat, was able to get the calendar
+             to only accept tomorrow's date and 4 weeks from now. js at the bottom. Not having ISO script was
+             a fun issue... anyways, this is looking great! need any help, just reach out and i'll come by and help
+             happy coding! -->
+
             <div class="col-lg-8 col-md-12">
                 <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">
                     Your X service proposal to X
@@ -134,9 +142,26 @@
         document.getElementById('card-start-time').textContent = startTime;
         document.getElementById('card-start-time-ampm').textContent = ampm;
         document.getElementById('card-job-description').textContent = jobDescription;
-
     }
 
 </script>
+
+<script>
+    const currentDate = new Date().getDate();
+
+    const tomorrow = new Date();
+    tomorrow.setDate(currentDate + 1);
+
+    const maxDate = new Date();
+    maxDate.setDate(currentDate + 28);
+
+    // Format the dates in YYYY-MM-DD format
+    const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+    const maxDateFormatted = maxDate.toISOString().split('T')[0];
+
+    document.getElementById('start-date').setAttribute('min', tomorrowFormatted);
+    document.getElementById('start-date').setAttribute('max', maxDateFormatted);
+</script>
+
 </body>
 </html>

@@ -36,25 +36,30 @@
                             </ul>
                         </li>
 
-                        <div sec:authorize="isAuthenticated()">
+
+                        <!-- th:blocks are neat. they allow you to create code-like structures,  -->
+                        <!-- without taking up visual space, it's why the logout button was acting strange -->
+                        <!-- happy coding! -->
+
+                        <th:block sec:authorize="isAuthenticated()">
                             <li class="nav-item my-3 my-lg-0 mx-lg-3">
-                                <a class="btn btn-outlinesecondary" href="/profile">Profile</a>
+                                <a class="btn btn-outline-secondary" href="/dashboard">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <form th:action="@{/logout}" th:method="post">
-                                    <button class="btn btn-warning" style="margin-top: 8px">Logout</button>
+                                    <button class="btn btn-warning">Logout</button>
                                 </form>
                             </li>
-                        </div>
-                        <div sec:authorize="!isAuthenticated()">
-                            <li class="nav-item">
+                        </th:block>
+                        <th:block sec:authorize="!isAuthenticated()">
+                            <li class="nav-item my-3 my-lg-0 mx-lg-3">
                                 <a class="btn btn-outline-secondary" href="/login">Log in/Sign up</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="btn btn-warning" href="/register/user">Become a Honeydoer!</a>
                             </li>
-                        </div>
+                        </th:block>
                     </ul>
                 </div>
             </div>

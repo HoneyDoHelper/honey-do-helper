@@ -63,12 +63,12 @@
                 <div class="card-footer">
                   <div class="row">
                     <div class="col-3 align-self-center">
-                      <img th:src="@{/img/users/{imgPath}(imgPath=${'user' + reviews[index].task.user_id + '.png'})}" class="h-100 w-100 rounded-circle"/>
+                      <img th:src="@{/img/users/{imgPath}(imgPath=${'user' + reviews[index].task.user.id + '.png'})}" class="h-100 w-100 rounded-circle"/>
                     </div>
                     <div class="col align-self-center">
                       <p th:text="${reviews[index].task.honeydoerService.services.name}"
                          class="text-start">Service Type</p>
-                      <p th:text="${reviews[index].task.user_id.firstName}" class="text-start">
+                      <p th:text="${reviews[index].task.user.firstName}" class="text-start">
                         Client Name</p>
                     </div>
                   </div>

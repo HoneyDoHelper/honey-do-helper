@@ -26,7 +26,8 @@ public class ServicesController {
     private final TimeBlocksRepository timeBlocksDao;
     private final UserProfilesRepository userProfileDao;
     private final HoneyUsersRepository usersDao;
-    public ServicesController (
+
+    public ServicesController(
             CategoriesRepository categoriesDao,
             ChatsRepository chatsDao,
             ClientReviewsRepository clientReviewsDao,
@@ -41,7 +42,7 @@ public class ServicesController {
             TimeBlocksRepository timeBlocksDao,
             UserProfilesRepository userProfileDao,
             HoneyUsersRepository usersDao
-    ){
+    ) {
         this.categoriesDao = categoriesDao;
         this.chatsDao = chatsDao;
         this.clientReviewsDao = clientReviewsDao;
@@ -90,11 +91,11 @@ public class ServicesController {
 
 
     @GetMapping("/categories/{categoryId}")
-    public String gotoCategory(Model model, @PathVariable int categoryId){
+    public String gotoCategory(Model model, @PathVariable int categoryId) {
 
         Optional<Categories> category = categoriesDao.findById(categoryId);
 
-        if(categoriesDao.findById(categoryId).isPresent()){
+        if (categoriesDao.findById(categoryId).isPresent()) {
             Categories categoryObject = category.get();
             model.addAttribute("category", categoryObject);
         }
@@ -111,12 +112,12 @@ public class ServicesController {
 
 
     @GetMapping("/services/{serviceId}")
-    public String gotoServices(Model model, @PathVariable int serviceId){
+    public String gotoServices(Model model, @PathVariable int serviceId) {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
         Optional<Services> service = servicesDao.findById(serviceId);
-        if(servicesDao.findById(serviceId).isPresent()){
+        if (servicesDao.findById(serviceId).isPresent()) {
             Services serviceObject = service.get();
             model.addAttribute("service", serviceObject);
         }
@@ -129,18 +130,18 @@ public class ServicesController {
     }
 
     @GetMapping("/tasks/{taskId}")
-    public String gotoTasks(Model model, @PathVariable int taskId){
+    public String gotoTasks(Model model, @PathVariable int taskId) {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
         Optional<Tasks> task = tasksDao.findById(taskId);
-        if(tasksDao.findById(taskId).isPresent()){
+        if (tasksDao.findById(taskId).isPresent()) {
             Tasks taskObject = task.get();
             model.addAttribute("task", taskObject);
         }
 
         TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
-            model.addAttribute("task_cost", taskCost);
+        model.addAttribute("task_cost", taskCost);
 
 
         return "/services/tasks";
@@ -148,7 +149,7 @@ public class ServicesController {
 
 
     @GetMapping("/categories")
-    public String gotoCategories(Model model){
+    public String gotoCategories(Model model) {
 
         List<Categories> allCategories = new ArrayList<>();
         allCategories = categoriesDao.findAll();
@@ -158,18 +159,18 @@ public class ServicesController {
 
 
     @GetMapping("/services/honeydoer/{honeydoerId}/{serviceId}")
-    public String gotoHoneydoerProfile(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
+    public String gotoHoneydoerProfile(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
         Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-        if(honeydoersDao.findById(honeydoerId).isPresent()){
+        if (honeydoersDao.findById(honeydoerId).isPresent()) {
             Honeydoers honeydoerObject = honeydoer.get();
             model.addAttribute("honeydoer", honeydoerObject);
         }
 
         Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
-        if(honeydoerServicesDao.findById(serviceId).isPresent()){
+        if (honeydoerServicesDao.findById(serviceId).isPresent()) {
             HoneydoerServices honeydoerServiceObject = honeydoerService.get();
             model.addAttribute("service", honeydoerServiceObject);
         }
@@ -181,20 +182,20 @@ public class ServicesController {
         return "/services/honeydoerProfile";
     }
 
-  
+
     @GetMapping("/services/bookService/{honeydoerId}/{serviceId}")
-    public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId){
+    public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
 
         Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-        if(honeydoersDao.findById(honeydoerId).isPresent()){
+        if (honeydoersDao.findById(honeydoerId).isPresent()) {
             Honeydoers honeydoerObject = honeydoer.get();
             model.addAttribute("honeydoer", honeydoerObject);
         }
 
         Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
-        if(honeydoerServicesDao.findById(serviceId).isPresent()){
+        if (honeydoerServicesDao.findById(serviceId).isPresent()) {
             HoneydoerServices honeydoerServiceObject = honeydoerService.get();
             model.addAttribute("service", honeydoerServiceObject);
         }
@@ -208,8 +209,8 @@ public class ServicesController {
 
         return "/services/bookService";
     }
-  
-  
+
+
     @PostMapping("/services/bookService/{honeydoerId}/{serviceId}")
     public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @RequestParam("honeydoerServiceId") String honeydoerServiceId,
                                  @PathVariable int serviceId) {
@@ -236,3 +237,4 @@ public class ServicesController {
 
         return "redirect:/about";
     }
+}

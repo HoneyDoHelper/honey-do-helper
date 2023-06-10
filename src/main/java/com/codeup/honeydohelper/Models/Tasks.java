@@ -125,13 +125,6 @@ public class Tasks {
         this.isAccepted = isAccepted;
     }
 
-    public HoneyUsers getUser() {
-        return user;
-    }
-    public void setUser(HoneyUsers user) {
-        this.user = user;
-    }
-
     public HoneyUsers getUser() {return user;}
     public void setUser(HoneyUsers user) {this.user = user;}
 

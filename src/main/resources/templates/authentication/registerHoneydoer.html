@@ -52,11 +52,8 @@
                         <label for="hourly-rate">Your hourly rate:</label>
                         <input type="number" id="hourly-rate" name="hourly-rate" class="form-control">
                     </div>
-                    <input type="hidden" th:value="${newHoneydoer.id}" name="honeydoerId">
 
-                    <!--</div>-->
-
-                   <!-- <input type="hidden" th:value="${newHoneydoer.user.id}" name="honeydoerId"> -->
+                    <input type="hidden" th:value="${newHoneydoer.user.id}" name="honeydoerId">
                     <button type="submit" class="honeydoer-submit mt-2">Add</button>
                 </form>
             </div>
