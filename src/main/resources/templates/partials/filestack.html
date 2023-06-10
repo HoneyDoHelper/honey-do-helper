@@ -3,7 +3,7 @@ the script in here to keep the htmls clean -->
 
 <script th:fragment="filestackScript">
   // Set up the picker
-  const client = filestack.init('');
+  const client = filestack.init('AWtdV2qMYRj65gTN17b7az');
   const options = {
     fromSources: ["local_file_system", "instagram", "facebook","picasa"],
     onUploadDone: updateForm,
@@ -15,7 +15,6 @@ the script in here to keep the htmls clean -->
 
   // Get references to the DOM elements
 
-  const form = document.getElementById('pick-form');
   const fileInput = document.getElementById('fileupload');
   const btn = document.getElementById('picker');
   const nameBox = document.getElementById('nameBox');
@@ -26,11 +25,6 @@ the script in here to keep the htmls clean -->
   btn.addEventListener('click', function (e) {
     e.preventDefault();
     picker.open();
-  });
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    alert('Submitting: ' + fileInput.value);
   });
 
   // Helper to overwrite the field input value
@@ -63,6 +57,15 @@ the script in here to keep the htmls clean -->
     url.appendChild(document.createTextNode(fileData.url));
     nameBox.appendChild(name);
     urlBox.appendChild(document.createTextNode('Uploaded to: '));
-    urlBox.appendChild(url);
+      urlBox.appendChild(url);
+
+      // Create the hidden input element
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'image_url';
+      hiddenInput.setAttribute('value', url);
+
+      // Append the hidden input element to the urlBox
+      urlBox.appendChild(hiddenInput);
   };
 </script>

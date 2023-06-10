@@ -336,27 +336,27 @@ VALUES (ROUND(RAND() * 50 + 25, 2), 'Experienced exterior painter using high-qua
        (ROUND(RAND() * 50 + 25, 2), 'Skilled in irrigation system installation and repair.', 4, 30);
 
 
-INSERT INTO tasks (task_details, date_assigned, time_start, budgeted_duration, date_completed, status, is_accepted, user_id, honeydoer_service_id)
-VALUES ('Paint exterior fence', '2023-06-02', '09:00', 4, NULL, 'Assigned', 1, 1, 1),
-       ('Paint living room', '2023-06-02', '10:30', 3, NULL, 'Assigned', 1, 2, 2),
-       ('Install new ceiling fan', '2023-06-02', '13:00', 2, NULL, 'Assigned', 1, 3, 3),
-       ('Replace bathroom sink', '2023-06-02', '14:30', 1, NULL, 'Assigned', 1, 4, 4),
-       ('Landscaping front yard', '2023-06-02', '08:00', 6, NULL, 'Assigned', 1, 5, 5),
-       ('Move furniture to storage', '2023-06-02', '11:00', 3, NULL, 'Assigned', 1, 6, 6),
-       ('Assemble new dining set', '2023-06-02', '12:30', 2, NULL, 'Assigned', 1, 7, 7),
-       ('Mount TV in living room', '2023-06-02', '15:00', 1, NULL, 'Assigned', 1, 8, 8),
-       ('Clean gutters', '2023-06-02', '09:30', 2, NULL, 'Assigned', 1, 9, 9),
-       ('Install laminate flooring in kitchen', '2023-06-02', '13:30', 5, NULL, 'Assigned', 1, 10, 10),
-       ('Power wash deck', '2023-06-02', '11:30', 3, NULL, 'Assigned', 1, 11, 11),
-       ('Install kitchen cabinets', '2023-06-02', '09:00', 4, '2023-06-02', 'Completed', 1, 12, 12),
-       ('Repair backyard fence', '2023-06-02', '12:00', 3, NULL, 'In Progress', 1, 13, 13),
-       ('Remove wallpaper in guest room', '2023-06-02', '14:30', 2, NULL, 'Assigned', 1, 14, 14),
-       ('Install dishwasher', '2023-06-02', '10:00', 4, NULL, 'In Progress', 1, 15, 15),
-       ('Clean entire house', '2023-06-02', '11:30', 5, NULL, 'Assigned', 1, 16, 16),
-       ('Organize garage', '2023-06-02', '13:00', 2, NULL, 'Assigned', 1, 17, 17),
-       ('Replace living room window', '2023-06-02', '09:00', 4, '2023-06-02', 'Completed', 1, 18, 18),
-       ('Power wash driveway', '2023-06-02', '14:00', 3, NULL, 'Assigned', 1, 19, 19),
-       ('Install tile in bathroom', '2023-06-02', '10:30', 2, NULL, 'Assigned', 1, 20, 20);
+INSERT INTO tasks (task_details, date_assigned, time_start, budgeted_duration, date_completed, is_completed, is_accepted, user_id, honeydoer_service_id)
+VALUES ('Paint exterior fence', '2023-06-02', '09:00', 4, NULL, 1, 1, 1, 1),
+       ('Paint living room', '2023-06-02', '10:30', 3, NULL, 1, 1, 2, 2),
+       ('Install new ceiling fan', '2023-06-02', '13:00', 2, NULL, 1, 1, 3, 3),
+       ('Replace bathroom sink', '2023-06-02', '14:30', 1, NULL, 1, 1, 4, 4),
+       ('Landscaping front yard', '2023-06-02', '08:00', 6, NULL, 1, 1, 5, 5),
+       ('Move furniture to storage', '2023-06-02', '11:00', 3, NULL, 1, 1, 6, 6),
+       ('Assemble new dining set', '2023-06-02', '12:30', 2, NULL, 1, 1, 7, 7),
+       ('Mount TV in living room', '2023-06-02', '15:00', 1, NULL, 1, 1, 8, 8),
+       ('Clean gutters', '2023-06-02', '09:30', 2, NULL, 1, 1, 9, 9),
+       ('Install laminate flooring in kitchen', '2023-06-02', '13:30', 5, NULL, 1, 1, 10, 10),
+       ('Power wash deck', '2023-06-02', '11:30', 3, NULL, 1, 1, 11, 11),
+       ('Install kitchen cabinets', '2023-06-02', '09:00', 4, '2023-06-02', 1, 1, 12, 12),
+       ('Repair backyard fence', '2023-06-02', '12:00', 3, NULL, 1, 1, 13, 13),
+       ('Remove wallpaper in guest room', '2023-06-02', '14:30', 2, NULL, 1, 1, 14, 14),
+       ('Install dishwasher', '2023-06-02', '10:00', 4, NULL, 1, 1, 15, 15),
+       ('Clean entire house', '2023-06-02', '11:30', 5, NULL, 1, 1, 16, 16),
+       ('Organize garage', '2023-06-02', '13:00', 2, NULL, 1, 1, 17, 17),
+       ('Replace living room window', '2023-06-02', '09:00', 4, '2023-06-02', 1, 1, 18, 18),
+       ('Power wash driveway', '2023-06-02', '14:00', 3, NULL, 1, 1, 19, 19),
+       ('Install tile in bathroom', '2023-06-02', '10:30', 2, NULL, 1, 1, 20, 20);
 
 
 INSERT INTO task_costs (honeydoer_pay, site_pay, total_user_cost, taxes, task_id)

@@ -1,7 +1,9 @@
 package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,6 +91,8 @@ public class ServicesController {
 //        return "/services/honeydoerProfile";
 //    }
 
+    @Value("${filestack.key}")
+    private String filestackKey;
 
     @GetMapping("/categories/{categoryId}")
     public String gotoCategory(Model model, @PathVariable int categoryId) {
@@ -205,6 +209,7 @@ public class ServicesController {
         model.addAttribute("reviews", allReviews);
 
         model.addAttribute("newTask", new Tasks());
+        model.addAttribute("filestackKey", filestackKey);
 
 
         return "/services/bookService";
@@ -212,13 +217,15 @@ public class ServicesController {
 
 
     @PostMapping("/services/bookService/{honeydoerId}/{serviceId}")
-    public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId, @RequestParam("honeydoerServiceId") String honeydoerServiceId,
+    public String submitProposal(@ModelAttribute Tasks tasks, @PathVariable int honeydoerId,
+                                 @RequestParam("honeydoerServiceId") String honeydoerServiceId,
+                                 @RequestParam("image_url") String imageUrl,
                                  @PathVariable int serviceId) {
 
 
-        Optional<HoneydoerServices> honeydoer = honeydoerServicesDao.findById(Integer.parseInt(honeydoerServiceId));
-        if (honeydoer.isPresent()) {
-            HoneydoerServices honeydoerObject = honeydoer.get();
+        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(Integer.parseInt(honeydoerServiceId));
+        if (honeydoerService.isPresent()) {
+            HoneydoerServices honeydoerObject = honeydoerService.get();
             tasks.setHoneydoerService(honeydoerObject);
         }
 
@@ -234,6 +241,20 @@ public class ServicesController {
         tasks.setIsAccepted(false);
         tasks.setStatus("Pending");
         tasksDao.save(tasks);
+
+        HoneydoerImages honeydoerImage = new HoneydoerImages();
+
+
+        //hardcoded honeydoer for now
+        //
+        Optional<Honeydoers> honeydoer = honeydoersDao.findById(1);
+        Honeydoers honeydoerObject = honeydoer.get();
+
+        honeydoerImage.setHoneydoer(honeydoerObject);
+        System.out.println("imageUrl = " + imageUrl);
+        honeydoerImage.setFilePath(imageUrl);
+        honeydoerImagesDao.save(honeydoerImage);
+
 
         return "redirect:/about";
     }

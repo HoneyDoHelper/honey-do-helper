@@ -40,9 +40,11 @@
     <section class="container">
         <div class="row">
             <div class="col-lg-4 col-md-12">
-                <form th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                <form
+                      th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
                       th:object="${newTask}"
-                      th:method="post" oninput="updateCard()">
+                      th:method="post" oninput="updateCard()"
+                >
                     <div class="mb-4">
                         <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
                     </div>
@@ -56,7 +58,8 @@
                         </div>
                         <div class="col">
                             <label for="start-time">Start Time:</label>
-                            <input type="time" id="start-time" class="form-control">
+                            <input type="time" id="start-time" class="form-control"
+                            th:field="*{timeStart}">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -70,6 +73,18 @@
                         <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}" class="form-control"></textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
+
+                    <div class="field">
+                        <div class="control">
+                            <label for="fileupload">Select a file to upload</label>
+                            <input type="hidden" id="fileupload">
+                            <button class="button" type="button" id="picker">Pick file</button>
+                        </div>
+                        <div id="thumbnail-container"></div>
+                        <div class="control" id="nameBox"></div>
+                        <div class="control" id="urlBox"></div>
+                    </div>
+
                     <button type="submit" class="btn btn-warning">Submit Proposal</button>
                 </form>
 
@@ -121,25 +136,9 @@
             </div>
         </div>
 
-        <div class="boxx">
-            <form id="pick-form">
-                <div class="field">
-                    <div class="control">
-                        <label for="fileupload">Select a file to upload</label>
-                        <input type="hidden" id="fileupload">
-                        <button class="button" type="button" id="picker">Pick file</button>
-                    </div>
-                    <div id="thumbnail-container"></div>
-                    <div class="control" id="nameBox"></div>
-                    <div class="control" id="urlBox"></div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <input class="button" type="submit" value="Submit">
-                    </div>
-                </div>
-            </form>
-        </div>
+
+<!--        <p th:text="${filestackKey}"></p>-->
+<!--        <p th:value="${filestackKey}"></p>-->
     </section>
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
@@ -183,7 +182,6 @@
     document.getElementById('start-date').setAttribute('min', tomorrowFormatted);
     document.getElementById('start-date').setAttribute('max', maxDateFormatted);
 </script>
-
 <script th:replace="~{partials/filestack.html :: filestackScript}"></script>
 </body>
 </html>

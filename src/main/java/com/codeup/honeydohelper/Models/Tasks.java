@@ -28,8 +28,8 @@ public class Tasks {
     @Column(name = "date_completed")
     private LocalDate dateCompleted;
 
-    @Column(name = "status", length = 15)
-    private String status;
+    @Column(name = "is_completed", length = 15)
+    private boolean isCompleted;
 
     @Column(name = "is_accepted", nullable = false)
     private boolean isAccepted;
@@ -54,20 +54,20 @@ public class Tasks {
         this.timeStart = timeStart;
         this.budgetedDuration = budgetedDuration;
         this.dateCompleted = dateCompleted;
-        this.status = status;
+        this.isCompleted = isCompleted;
         this.isAccepted = isAccepted;
         this.user = user;
         this.honeydoerService = honeydoerService;
     }
 
-    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
+    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, boolean isCompleted, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.id = id;
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
         this.timeStart = timeStart;
         this.budgetedDuration = budgetedDuration;
         this.dateCompleted = dateCompleted;
-        this.status = status;
+        this.isCompleted = isCompleted;
         this.isAccepted = isAccepted;
         this.user = user;
         this.honeydoerService = honeydoerService;
@@ -111,11 +111,11 @@ public class Tasks {
         this.dateCompleted = dateCompleted;
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getIsCompleted() {
+        return isCompleted;
     }
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public Boolean getIsAccepted() {

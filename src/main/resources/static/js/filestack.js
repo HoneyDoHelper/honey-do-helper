@@ -11,7 +11,7 @@
 
 
 // Set up the picker
-const client = filestack.init('API_KEY');
+const client = filestack.init(FILESTACK_KEY);
 const options = {
     fromSources: ["local_file_system", "instagram", "facebook","picasa"],
     onUploadDone: updateForm,
