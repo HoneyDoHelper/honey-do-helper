@@ -73,8 +73,10 @@ public class HoneyUsersController {
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request, Model model) {
         HoneyUsers currentLoggedInUser = (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         System.out.println("current first name "+ currentLoggedInUser.getFirstName());
         System.out.println("current id "+ currentLoggedInUser.getId());
+
         model.addAttribute("user", currentLoggedInUser);
 
         Honeydoers honeydoer = honeydoersDao.findByUser_Id(currentLoggedInUser.getId());
