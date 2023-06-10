@@ -239,7 +239,7 @@ public class ServicesController {
 
 //        tasks.setHoneydoerService(Integer.parseInt(honeydoerServiceId));
         tasks.setIsAccepted(false);
-        tasks.setStatus("Pending");
+        tasks.setIsCompleted(false);
         tasksDao.save(tasks);
 
         HoneydoerImages honeydoerImage = new HoneydoerImages();
