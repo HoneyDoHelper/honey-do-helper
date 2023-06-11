@@ -89,14 +89,14 @@
 
 
                     <div class="field">
-                        <div class="control">
+                        <div class="control mb-3">
                             <label for="fileupload">Select a file to upload</label>
                             <input type="hidden" id="fileupload">
-                            <button class="button" type="button" id="picker">Pick file</button>
+                            <button class="btn btn-warning" type="button" id="picker">Pick file</button>
                         </div>
-                        <div id="thumbnail-container"></div>
+                        <div id="thumbnail-container mb-3"></div>
                         <div class="control" id="nameBox"></div>
-                        <div class="control" id="urlBox"></div>
+                        <div class="control mb-3" id="urlBox"></div>
                     </div>
 
                     <button type="submit" class="btn btn-warning ">Submit Proposal</button>
@@ -135,8 +135,27 @@
                     </div>
                     <hr>
                     <div class="card-body">
-                        <h5 class="card-title">Estimated Total Cost: </h5>
-                        <p id="card-total-cost" class="card-text">Total cost goes here</p>
+                        <h5 class="card-title">Costs: </h5>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Job Cost</td>
+                                <td id="card-job-cost" class="card-text"></td>
+                            </tr>
+                            <tr>
+                                <td> Site Fee (10%)</td>
+                                <td id="card-site-cost" class="card-text"></td>
+                            </tr>
+                            <tr>
+                                <td>Taxes (8.25%)</td>
+                                <td id="card-tax-cost" class="card-text"></td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td id="card-total-cost" class="card-text"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -177,17 +196,29 @@
             }
         }
 
+        // LOGIC FOR MONEY
+        const TAX = .0825;
+        const SITE_FEE = .1;
+
+        var jobCost = (rate * budgetDuration);
+        var siteFeeCost = (jobCost * SITE_FEE);
+        var taxCost = (jobCost * TAX);
+
+        var totalCost = (jobCost) + (siteFeeCost) + (taxCost);
+
+
+        // Set results in DOM
         document.getElementById('card-start-date').textContent = startDate;
         document.getElementById('card-start-time').textContent = startTime;
         document.getElementById('card-start-time-ampm').textContent = ampm;
         document.getElementById('card-job-description').textContent = jobDescription;
 
-        // LOGIC FOR MONEY
-        var totalCost = rate * budgetDuration;
         document.getElementById('card-duration').textContent = budgetDuration + ' hour(s)';
-        document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
-    //     Have to still pull tax info
+        document.getElementById('card-job-cost').textContent = '$' + jobCost.toFixed(2);
+        document.getElementById('card-site-cost').textContent = '$' + siteFeeCost.toFixed(2);
+        document.getElementById('card-tax-cost').textContent = '$' + taxCost.toFixed(2);
+        document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
     }
 
