@@ -71,12 +71,11 @@ public class HoneyUsersController {
 
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request, Model model) {
+        setCategoriesHtml(model);
 
         //Finds current logged in user and sets it in the html doc
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
-
-        setCategoriesHtml(model);
 
         //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
         if (currentLoggedInUser.getIsAdmin()) {
@@ -97,6 +96,8 @@ public class HoneyUsersController {
 
     @GetMapping("/edit/profile")
     public String editUserProfileForm(Model model){
+        setCategoriesHtml(model);
+
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
 

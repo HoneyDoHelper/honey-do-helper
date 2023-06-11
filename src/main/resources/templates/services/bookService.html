@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <form
-                      th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                      th:action="@{/services/bookService}"
                       th:object="${newTask}"
                       th:method="post" oninput="updateCard()"
                 >
@@ -73,6 +73,7 @@
                         <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}" class="form-control"></textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
+                    <input type="hidden" name="honeyUserId" th:value="${user.id}">
 
                     <div class="field">
                         <div class="control">
