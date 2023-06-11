@@ -65,15 +65,14 @@ public class TasksController {
     public String gotoTasks(Model model, @PathVariable int taskId) {
         setCategoriesHtml(model);
 
+        //Finds current logged in user and sets it in the html doc
+        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
+        setUserHtml(model, currentLoggedInUser);
 
-        Optional<Tasks> task = tasksDao.findById(taskId);
-        if (tasksDao.findById(taskId).isPresent()) {
-            Tasks taskObject = task.get();
-            model.addAttribute("task", taskObject);
-        }
+        setTaskHtml(model, taskId);
+        setTaskCostHtml(model, taskId);
 
-        TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
-        model.addAttribute("task_cost", taskCost);
+
 
 
         return "/services/tasks";
@@ -87,9 +86,27 @@ public class TasksController {
         return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    private void setUserHtml(Model model, HoneyUsers honeyUser){
+
+        model.addAttribute("user", honeyUser);
+    }
+
     private void setCategoriesHtml(Model model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
+    }
+
+    private void  setTaskHtml(Model model, int taskId){
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        if (tasksDao.findById(taskId).isPresent()) {
+            Tasks taskObject = task.get();
+            model.addAttribute("task", taskObject);
+        }
+    }
+
+    private void setTaskCostHtml(Model model, int taskId){
+        TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
+        model.addAttribute("task_cost", taskCost);
     }
 
 }

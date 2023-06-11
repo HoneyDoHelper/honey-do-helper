@@ -140,8 +140,8 @@ public class HoneyUsersController {
         model.addAttribute("user", honeyUser);
     }
 
-    private void setHoneydoerDashboardHtml(Model model, int honeydoerId){
-        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeydoerId);
+    private void setHoneydoerDashboardHtml(Model model, int honeyUserId){
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
         model.addAttribute("honeydoer", honeydoer);
         setAllHoneydoerTasksHtml(model,honeydoer);
         setAllHoneydoerServicesHtml(model,honeydoer);
