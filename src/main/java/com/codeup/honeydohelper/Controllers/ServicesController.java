@@ -128,10 +128,11 @@ public class ServicesController {
     public String submitProposal(@ModelAttribute Tasks task,
                                  @RequestParam("honeydoerServiceId") String honeydoerServiceId,
                                  @RequestParam("image_url") String imageUrl,
+                                 @RequestParam("honeydoerId") String honeydoerId,
                                  @RequestParam("honeyUserId") String honeyUserId) {
 
         createTask(task, honeydoerServiceId, honeyUserId);
-        createHoneydoerImage(imageUrl);
+        createHoneydoerImage(imageUrl, honeydoerId);
 
         return "redirect:/about";
     }
@@ -163,8 +164,7 @@ public class ServicesController {
     }
 
     private void setServiceCategoryHtml(Model model, int categoryId) {
-        List<Services> allServices = new ArrayList<>();
-        allServices = servicesDao.findAllByCategory_Id(categoryId);
+        List<Services> allServices = servicesDao.findAllByCategory_Id(categoryId);
         model.addAttribute("services", allServices);
     }
 
@@ -220,26 +220,20 @@ public class ServicesController {
             task.setUser(userObject);
         }
 
-        //List<Tasks> allTasks = tasksDao.findAllByHoneydoerService_Id(serviceId);
-        //tasks.setHoneydoerService(Integer.parseInt(honeydoerServiceId));
-
         task.setIsAccepted(false);
         task.setIsCompleted(false);
         tasksDao.save(task);
     }
 
-    private void createHoneydoerImage(String imageUrl) {
+    private void createHoneydoerImage(String imageUrl, String honeydoerId) {
         HoneydoerImages honeydoerImage = new HoneydoerImages();
 
-
-        //hardcoded honeydoer for now
-        //
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(1);
+        Optional<Honeydoers> honeydoer = honeydoersDao.findById(Integer.parseInt(honeydoerId));
         Honeydoers honeydoerObject = honeydoer.get();
 
         honeydoerImage.setHoneydoer(honeydoerObject);
-        System.out.println("imageUrl = " + imageUrl);
         honeydoerImage.setFilePath(imageUrl);
         honeydoerImagesDao.save(honeydoerImage);
     }
+
 }

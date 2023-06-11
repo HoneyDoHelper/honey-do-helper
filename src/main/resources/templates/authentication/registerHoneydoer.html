@@ -22,7 +22,7 @@
 
             </div>
             <div class="col-lg-9" col>
-                <form th:action="@{'/register/honeydoer/' + ${newHoneydoerId}}" th:method="post">
+                <form th:action="@{'/register/honeydoer/' + ${newHoneydoer.id}}" th:method="post">
                     <div class="form-group mb-2 mt-3">
                         <label for="category">Category:</label>
                         <select id="category" name="category" class="form-select form-control">

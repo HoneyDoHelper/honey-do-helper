@@ -148,14 +148,12 @@ public class HoneyUsersController {
     }
 
     private void setHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
-        List<HoneydoerReviews> allReviews = new ArrayList<>();
-        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
+        List<HoneydoerReviews> allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
         model.addAttribute("reviews", allReviews);
     }
 
     private void setHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
-        List<HoneydoerServices> allServices = new ArrayList<>();
-        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+        List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
         model.addAttribute("services", allServices);
     }
 
