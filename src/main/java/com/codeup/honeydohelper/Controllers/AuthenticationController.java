@@ -3,14 +3,13 @@ package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,23 +72,15 @@ public class AuthenticationController {
     /////////////////////////////////////////////////////////*/
     @GetMapping("/login")
     public String gotoLogin(Model model){
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
 
         return "/authentication/login";
     }
 
-//    @GetMapping("/login")
-//    public String showLoginForm(@RequestParam(name = "error", required = false) String error, Model model) {
-//        if (error != null) {
-//            model.addAttribute("errorMessage", "Invalid username or password");
-//        }
-//        return "/login"; // in case incorrect credentials are entered
-//    }
-//    @PostMapping("/login")
-//    public String performLogin() {
-//        return "redirect:/home"; // should redirect to home page or wherever after a successful login
-//    }
+    @PostMapping("/login")
+    public String performLogin() {
+        return "redirect:/dashboard"; // should redirect to home page or wherever after a successful login
+    }
 
 
     /*/////////////////////////////////////////////////////////
@@ -108,61 +99,44 @@ public class AuthenticationController {
     /////////////////////////////////////////////////////////*/
     @GetMapping("/register/user")
     public String showSignupForm(Model model){
+        setCategoriesHtml(model);
+
         model.addAttribute("user", new HoneyUsers());
         model.addAttribute("userProfile", new UserProfiles());
+
         return "/authentication/registerUser";
     }
 
     @PostMapping("/register/user")
-    public String saveUser(@ModelAttribute HoneyUsers honeyUser, @ModelAttribute UserProfiles userProfile, @ModelAttribute Honeydoers honeydoer,
+    public String saveUser(@ModelAttribute HoneyUsers honeyUser,
+                           @ModelAttribute UserProfiles userProfile,
+                           @ModelAttribute Honeydoers honeydoer,
+                           @RequestParam("image_url") String imageUrl,
                            @RequestParam("about_self") String aboutSelf){
-        String hash = passwordEncoder.encode(honeyUser.getPassword());
-        honeyUser.setPassword(hash);
-        honeyUsersDao.save(honeyUser);
 
-        userProfile.setUser(honeyUser);
-        userProfileDao.save(userProfile);
+        createHoneyUser(honeyUser);
+        createUserProfile(userProfile, honeyUser, imageUrl);
 
         if (honeyUser.getIsHoneydoer()){
-            honeydoer.setUser(honeyUsersDao.findTopByOrderByIdDesc());
-            honeydoer.setAboutSelf(aboutSelf);
-            honeydoer.setRating(5);
-            honeydoersDao.save(honeydoer);
-            Honeydoers newHoneydoer = honeydoersDao.findTopByOrderByIdDesc();
-            int newHoneydoerId = newHoneydoer.getUser().getId();
-            System.out.println("newHoneyUserId = " + newHoneydoerId);
-            return "redirect:/register/honeydoer/" + newHoneydoerId;
+            createHoneydoer(honeydoer, aboutSelf);
+
+            return "redirect:/register/honeydoer/" + findNewHoneydoer();
         } else {
+
             return "redirect:/index";
         }
     }
 
     @GetMapping("/register/honeydoer/{newHoneyUserId}")
     public String gotoRegisterHoneydoer(Model model, @PathVariable int newHoneyUserId) {
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
-
-        List<Services> allServices = new ArrayList<>();
-        allServices = servicesDao.findAll();
-        model.addAttribute("services", allServices);
-
-
-        HoneyUsers newUser = honeyUsersDao.findTopByOrderByIdDesc();
-        model.addAttribute("newUser", newUser);
-
+        setCategoriesHtml(model);
 
         Honeydoers honeydoer = honeydoersDao.findByUser_Id(newHoneyUserId);
-
-        System.out.println("honeydoerId GET = " + honeydoer.getId());
-
         model.addAttribute("newHoneydoer", honeydoer);
-        model.addAttribute("newHoneydoerId", honeydoer.getId());
 
-        List<HoneydoerServices> allHoneydoerServices = new ArrayList<>();
-        allHoneydoerServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
-        model.addAttribute("honeydoerService", allHoneydoerServices);
-
-
+        setAllServicesHtml(model, honeydoer);
+        setNewHoneyUserHtml(model);
+        setHoneydoerServicesHtml(model, honeydoer);
 
         model.addAttribute("honeydoerServices", new HoneydoerServices());
 
@@ -170,18 +144,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register/honeydoer/{newHoneydoerId}")
-    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices, @RequestParam("hourly-rate") String rate,
-                             @RequestParam("service") int serviceId, @RequestParam("honeydoerId") int honeyUserId) {
+    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices,
+                             @RequestParam("hourly-rate") String rate,
+                             @RequestParam("service") int serviceId,
+                             @RequestParam("honeydoerId") int honeyUserId) {
 
-        honeydoerServices.setRate(Float.parseFloat(rate));
-
-        Optional<Services> service = servicesDao.findById(serviceId);
-        honeydoerServices.setServices(service.get());
-
-        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
-        honeydoerServices.setHoneydoers(honeydoer);
-
-        honeydoerServicesDao.save(honeydoerServices);
+        Honeydoers honeydoer = findHoneydoer(honeyUserId);
+        createHoneydoerService(honeydoerServices, rate, serviceId, honeydoer);
 
         return "redirect:/register/honeydoer/" + honeydoer.getUser().getId();
     }
@@ -192,8 +161,7 @@ public class AuthenticationController {
     /////////////////////////////////////////////////////////*/
     @GetMapping("/passwordReset")
     public String gotoPasswordReset(Model model){
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
 
         return "/authentication/passwordReset";
     }
@@ -217,4 +185,82 @@ public class AuthenticationController {
 //    private String generatePasswordResetToken() {
 //        return null;
 //    }
+
+
+
+    /*================================================================================
+    Controller Methods to set model Attributes
+    ================================================================================*/
+    private HoneyUsers findLoggedInHoneyUser() {
+        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    private void setUserHtml(Model model, HoneyUsers honeyUser){
+        model.addAttribute("user", honeyUser);
+    }
+
+    private void setCategoriesHtml(Model model) {
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+    }
+
+    private void setAllServicesHtml(Model model, Honeydoers honeydoer){
+        List<Services> allServices = servicesDao.findAll();
+        model.addAttribute("services", allServices);
+    }
+
+    private void setNewHoneyUserHtml(Model model){
+        HoneyUsers newUser = honeyUsersDao.findTopByOrderByIdDesc();
+        model.addAttribute("newUser", newUser);
+    }
+
+    private void setHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerServices> allHoneydoerServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+        model.addAttribute("honeydoerService", allHoneydoerServices);
+    }
+
+
+    /*================================================================================
+    Controller Methods to Create Honeyusers & Honeydoers
+    ================================================================================*/
+    private void createHoneyUser(HoneyUsers honeyUser){
+        String hash = passwordEncoder.encode(honeyUser.getPassword());
+        honeyUser.setPassword(hash);
+        honeyUsersDao.save(honeyUser);
+    }
+
+    private void createHoneydoer(Honeydoers honeydoer, String aboutSelf){
+        honeydoer.setUser(honeyUsersDao.findTopByOrderByIdDesc());
+        honeydoer.setAboutSelf(aboutSelf);
+        honeydoer.setRating(5);
+        honeydoersDao.save(honeydoer);
+    }
+
+    private int findNewHoneydoer(){
+        Honeydoers newHoneydoer = honeydoersDao.findTopByOrderByIdDesc();
+        return newHoneydoer.getUser().getId();
+    }
+
+    private void createHoneydoerService(HoneydoerServices honeydoerServices,
+                                        String rate, int serviceId, Honeydoers honeydoer ){
+        honeydoerServices.setRate(Float.parseFloat(rate));
+
+        Optional<Services> service = servicesDao.findById(serviceId);
+        honeydoerServices.setServices(service.get());
+
+        honeydoerServices.setHoneydoers(honeydoer);
+
+        honeydoerServicesDao.save(honeydoerServices);
+    }
+
+    private void createUserProfile(UserProfiles userProfile, HoneyUsers honeyUser, String imageUrl){
+        userProfile.setUser(honeyUser);
+        userProfile.setImgFilePath(imageUrl);
+        userProfileDao.save(userProfile);
+    }
+
+    private Honeydoers findHoneydoer(int honeyUserId){
+        return honeydoersDao.findByUser_Id(honeyUserId);
+    }
+
 }

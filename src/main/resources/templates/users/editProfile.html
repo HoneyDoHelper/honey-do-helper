@@ -16,7 +16,7 @@
       voluptatum?</p>
     <br>
 
-    <form  th:action="@{'/edit/profile/' + ${userProfile.user.id}}" th:method="post">
+    <form  th:action="@{/edit/profile}" th:method="post">
       <div class="row register-background py-3 mb-3">
         <div class="col-12">
           <div class="row row-cols-2 g-3">
@@ -96,7 +96,7 @@
 
       <div>
         <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">
-        <input type="hidden" th:value="${userId}" name="honeyUserID">
+        <input type="hidden" th:value="${user.id}" name="honeyUserID">
 
         <button id="submit-btn" type="submit" class="btn btn-warning">Submit Changes</button>
       </div>
