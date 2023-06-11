@@ -2,6 +2,7 @@ package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -117,8 +118,8 @@ public class ServicesController {
 
     @GetMapping("/services/{serviceId}")
     public String gotoServices(Model model, @PathVariable int serviceId) {
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
+
 
         Optional<Services> service = servicesDao.findById(serviceId);
         if (servicesDao.findById(serviceId).isPresent()) {
@@ -135,8 +136,8 @@ public class ServicesController {
 
     @GetMapping("/tasks/{taskId}")
     public String gotoTasks(Model model, @PathVariable int taskId) {
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
+
 
         Optional<Tasks> task = tasksDao.findById(taskId);
         if (tasksDao.findById(taskId).isPresent()) {
@@ -154,18 +155,15 @@ public class ServicesController {
 
     @GetMapping("/categories")
     public String gotoCategories(Model model) {
-
-        List<Categories> allCategories = new ArrayList<>();
-        allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
         return "/services/serviceCategories";
     }
 
 
     @GetMapping("/services/honeydoer/{honeydoerId}/{serviceId}")
     public String gotoHoneydoerProfile(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
+
 
         Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
         if (honeydoersDao.findById(honeydoerId).isPresent()) {
@@ -189,8 +187,8 @@ public class ServicesController {
 
     @GetMapping("/services/bookService/{honeydoerId}/{serviceId}")
     public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
+        setCategoriesHtml(model);
+
 
         Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
         if (honeydoersDao.findById(honeydoerId).isPresent()) {
@@ -257,5 +255,18 @@ public class ServicesController {
 
 
         return "redirect:/about";
+    }
+
+
+    /*================================================================================
+        Controller Methods to set model Attributes
+        ================================================================================*/
+    private HoneyUsers findLoggedInHoneyUser(){
+        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    private void setCategoriesHtml(Model model){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
     }
 }
