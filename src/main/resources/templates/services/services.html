@@ -48,17 +48,28 @@
             <article th:each="index : ${honeydoerSize}" class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                        <th:block th:each="profile : ${userProfiles}">
+                            <th:block th:if="${profile.id} == ${honeydoerServices[index].honeydoers.user.id}">
+                                <img th:src="@{${profile.imgFilePath}}" class="img-fluid">
+                            </th:block>
+                        </th:block>
                     </div>
                     <div class="card-body">
                         <p th:text="${honeydoerServices[index].services.name}">Service</p>
                         <p th:text="${honeydoerServices[index].honeydoers.user.firstName}" class="card-title">Name</p>
                         <p th:text="${honeydoerServices[index].honeydoers.rating}">Rating</p>
                         <p th:text="${honeydoerServices[index].aboutService}">Experience</p>
-                        <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}(honeydoerId=${honeydoerServices[index].honeydoers.id}, serviceId=${honeydoerServices[index].services.id})}">Read more</a>
+                        <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
+                            (honeydoerId=${honeydoerServices[index].honeydoers.id},
+                            serviceId=${honeydoerServices[index].services.id})}"
+                        >Read more</a>
                     </div>
                     <div class="card-footer">
-                        <a type="button" class="btn btn-warning" href="#"  th:href="@{/services/bookService/{honeydoerId}/{serviceId}(honeydoerId=${honeydoerServices[index].honeydoers.id}, serviceId=${honeydoerServices[index].services.id})}">Book Service</a>
+                        <a type="button" class="btn btn-warning" href="#"
+                           th:href="@{/services/bookService/{honeydoerId}/{serviceId}
+                           (honeydoerId=${honeydoerServices[index].honeydoers.id},
+                           serviceId=${honeydoerServices[index].services.id})}"
+                        >Book Service</a>
                     </div>
                 </div>
             </article>

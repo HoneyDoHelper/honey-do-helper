@@ -22,7 +22,7 @@
 
             </div>
             <div class="col-lg-9" col>
-                <form th:action="@{'/register/honeydoer/' + ${newHoneydoerId}}" th:method="post">
+                <form th:action="@{'/register/honeydoer/' + ${newHoneydoer.id}}" th:method="post">
                     <div class="form-group mb-2 mt-3">
                         <label for="category">Category:</label>
                         <select id="category" name="category" class="form-select form-control">
@@ -59,7 +59,7 @@
             </div>
             <div class="col-lg-8 col row">
                 <div class="col-lg-4 col" th:each="entry : ${honeydoerService}">
-                    <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+                    <img th:src="@{${entry.services.imgFilePath}}" class="honeydoer-img"/>
                     <div>
                         <p class="mt-3"><Strong>
                             <span th:text="${entry.services.category.name}">Name</span>
@@ -84,7 +84,7 @@
         </div>
     </section>
     <section class="container">
-        <a class="btn btn-warning" th:href="@{/user/honeydoer/dashboard/{newHoneydoerId} (newHoneydoerId = ${newHoneydoerId})}"></a>
+        <a class="btn btn-warning" th:href="@{/login}">Done</a>
     </section>
 </main>
 

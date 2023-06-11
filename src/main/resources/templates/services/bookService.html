@@ -22,7 +22,11 @@
 
                 <div class="row mb-5">
                     <div class="col-lg-4 col-md-4">
-                        <img th:src="@{/img/team/travis.png}" class="ratio ratio-1x1 w-100 rounded-circle"/>
+                        <th:block th:each="profile : ${userProfiles}">
+                            <th:block th:if="${profile.id} == ${honeydoer.user.id}">
+                                <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                            </th:block>
+                        </th:block>
                     </div>
                     <div class="col-lg-8 col-md-8">
                         <h2 th:text="${service.services.name}"></h2>
@@ -41,10 +45,15 @@
         <div class="row">
             <div class="col-lg-4 col-md-12 mb-5">
                 <form
-                        th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
-                        th:object="${newTask}"
-                        th:method="post" oninput="updateCard()" onchange="updateCard()"
+                      th:action="@{/services/bookService}"
+                      th:object="${newTask}"
+                      th:method="post" oninput="updateCard()"
                 >
+                  
+                   <!-- th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                        th:object="${newTask}"
+                        th:method="post" oninput="updateCard()" onchange="updateCard()" -->
+                  
                     <div class="mb-4">
                         <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
                     </div>
@@ -75,16 +84,19 @@
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
                     <input type="hidden" id="honeyderServiceRate" name="honeydoerServiceRate" th:value="${service.rate}">
+                    <input type="hidden" name="honeyUserId" th:value="${user.id}">
+                    <input type="hidden" name="honeydoerId" th:value="${honeydoer.id}">
+
 
                     <div class="field">
-                        <div class="control">
+                        <div class="control mb-3">
                             <label for="fileupload">Select a file to upload</label>
                             <input type="hidden" id="fileupload">
-                            <button class="button" type="button" id="picker">Pick file</button>
+                            <button class="btn btn-warning" type="button" id="picker">Pick file</button>
                         </div>
-                        <div id="thumbnail-container"></div>
+                        <div id="thumbnail-container mb-3"></div>
                         <div class="control" id="nameBox"></div>
-                        <div class="control" id="urlBox"></div>
+                        <div class="control mb-3" id="urlBox"></div>
                     </div>
 
                     <button type="submit" class="btn btn-warning ">Submit Proposal</button>
@@ -123,8 +135,27 @@
                     </div>
                     <hr>
                     <div class="card-body">
-                        <h5 class="card-title">Estimated Total Cost: </h5>
-                        <p id="card-total-cost" class="card-text">Total cost goes here</p>
+                        <h5 class="card-title">Costs: </h5>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Job Cost</td>
+                                <td id="card-job-cost" class="card-text"></td>
+                            </tr>
+                            <tr>
+                                <td> Site Fee (10%)</td>
+                                <td id="card-site-cost" class="card-text"></td>
+                            </tr>
+                            <tr>
+                                <td>Taxes (8.25%)</td>
+                                <td id="card-tax-cost" class="card-text"></td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td id="card-total-cost" class="card-text"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -165,17 +196,29 @@
             }
         }
 
+        // LOGIC FOR MONEY
+        const TAX = .0825;
+        const SITE_FEE = .1;
+
+        var jobCost = (rate * budgetDuration);
+        var siteFeeCost = (jobCost * SITE_FEE);
+        var taxCost = (jobCost * TAX);
+
+        var totalCost = (jobCost) + (siteFeeCost) + (taxCost);
+
+
+        // Set results in DOM
         document.getElementById('card-start-date').textContent = startDate;
         document.getElementById('card-start-time').textContent = startTime;
         document.getElementById('card-start-time-ampm').textContent = ampm;
         document.getElementById('card-job-description').textContent = jobDescription;
 
-        // LOGIC FOR MONEY
-        var totalCost = rate * budgetDuration;
         document.getElementById('card-duration').textContent = budgetDuration + ' hour(s)';
-        document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2) + " (Before taxes)";
 
-    //     Have to still pull tax info
+        document.getElementById('card-job-cost').textContent = '$' + jobCost.toFixed(2);
+        document.getElementById('card-site-cost').textContent = '$' + siteFeeCost.toFixed(2);
+        document.getElementById('card-tax-cost').textContent = '$' + taxCost.toFixed(2);
+        document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
     }
 

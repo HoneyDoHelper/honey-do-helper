@@ -32,8 +32,6 @@
                     </div>
                 </th:block>
 
-
-
             </div>
             <div class="col">
                 <div class="row row-cols-2 mb-4">
@@ -41,8 +39,8 @@
                         <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
-                                    <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
-                                    <a th:href="@{/edit/profile/{userId}(userId = ${honeydoer.user.id})}" href="" class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</a>
+                                    <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
+                                    <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</a>
                                 </div>
                             </div>
                         </article>
@@ -52,7 +50,7 @@
                         <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
-                                    <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
+                                    <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
                                     <button class="btn btn-warning position-absolute bottom-0 end-0">View Earnings</button>
                                 </div>
                             </div>

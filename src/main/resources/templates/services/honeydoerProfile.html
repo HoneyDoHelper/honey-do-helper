@@ -15,7 +15,11 @@
                 <h1 th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName}"></h1>
                 <div class="row mb-5">
                     <div class="col">
-                        <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
+                        <th:block th:each="profile : ${userProfiles}">
+                            <th:block th:if="${profile.id} == ${honeydoer.user.id}">
+                                <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                            </th:block>
+                        </th:block>
                     </div>
                     <div class="col-8 align-self-center">
                         <p th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
