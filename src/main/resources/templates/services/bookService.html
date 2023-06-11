@@ -28,7 +28,7 @@
                         <h2 th:text="${service.services.name}"></h2>
                         <p th:text="${honeydoer.user.firstName} + '\'s Experience'">Service Experience</p>
                         <p th:text="${service.aboutService}">Experience Description</p>
-                        <p th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
+                        <p id="rate"  th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
                     </div>
                 </div>
             </div>
@@ -39,11 +39,11 @@
     </section>
     <section class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-4 col-md-12 mb-5">
                 <form
-                      th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
-                      th:object="${newTask}"
-                      th:method="post" oninput="updateCard()"
+                        th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                        th:object="${newTask}"
+                        th:method="post" oninput="updateCard()" onchange="updateCard()"
                 >
                     <div class="mb-4">
                         <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
@@ -51,28 +51,30 @@
                     <div class="row mb-4">
                         <div class="col">
                             <label for="start-date">Start Date:</label>
-                            <input type="date" id="start-date" name="start-date" value="" min="2018-01-01" max="2030-30-12"
+                            <input type="date" id="start-date" name="start-date" value="" min="2018-01-01"
+                                   max="2030-30-12"
                                    th:field="*{dateAssigned}" class="form-control">
-
-
                         </div>
                         <div class="col">
                             <label for="start-time">Start Time:</label>
                             <input type="time" id="start-time" class="form-control"
-                            th:field="*{timeStart}">
+                                   th:field="*{timeStart}">
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col">
-                            <label for="end-time">End Time:</label>
-                            <input type="time" id="end-time" class="form-control">
+                            <label for="budget-duration">Job Duration: </label>
+                            <input id="budget-duration" class="form-control" th:field="*{budgetedDuration}"
+                                   type="number" step="0.5" min="0" max="10" list="budget-duration"/>
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="details">Job Description:</label>
-                        <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}" class="form-control"></textarea>
+                        <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}"
+                                  class="form-control"></textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
+                    <input type="hidden" id="honeyderServiceRate" name="honeydoerServiceRate" th:value="${service.rate}">
 
                     <div class="field">
                         <div class="control">
@@ -85,7 +87,7 @@
                         <div class="control" id="urlBox"></div>
                     </div>
 
-                    <button type="submit" class="btn btn-warning">Submit Proposal</button>
+                    <button type="submit" class="btn btn-warning ">Submit Proposal</button>
                 </form>
 
             </div>
@@ -95,7 +97,7 @@
              a fun issue... anyways, this is looking great! need any help, just reach out and i'll come by and help
              happy coding! -->
 
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-8 col-md-12 ">
                 <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">
                     Your X service proposal to X
                 </h2>
@@ -109,7 +111,10 @@
                         <h5 class="card-title">Start Time:</h5>
                         <p class="card-text" id="card-start-time">Your start time goes here</p>
                         <p class="card-text" id="card-start-time-ampm">AM/PM</p>
-
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Duration: </h5>
+                        <p id="card-duration" class="card-text">Duration goes here</p>
                     </div>
                     <hr>
                     <div class="card-body">
@@ -118,8 +123,8 @@
                     </div>
                     <hr>
                     <div class="card-body">
-                        <h5 class="card-title">Rate: </h5>
-                        <p>MONEY LOGIC GOES HERE</p>
+                        <h5 class="card-title">Estimated Total Cost: </h5>
+                        <p id="card-total-cost" class="card-text">Total cost goes here</p>
                     </div>
                 </div>
             </div>
@@ -137,8 +142,8 @@
         </div>
 
 
-<!--        <p th:text="${filestackKey}"></p>-->
-<!--        <p th:value="${filestackKey}"></p>-->
+        <!--        <p th:text="${filestackKey}"></p>-->
+        <!--        <p th:value="${filestackKey}"></p>-->
     </section>
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
@@ -147,6 +152,8 @@
         var startDate = document.getElementById('start-date').value;
         var startTime = document.getElementById('start-time').value;
         var jobDescription = document.getElementById('details').value;
+        var budgetDuration = parseFloat(document.getElementById('budget-duration').value);
+        var rate = parseFloat(document.getElementById('honeyderServiceRate').value);
 
         var [hour, minute] = startTime.split(':');
         var ampm = 'AM';
@@ -162,7 +169,16 @@
         document.getElementById('card-start-time').textContent = startTime;
         document.getElementById('card-start-time-ampm').textContent = ampm;
         document.getElementById('card-job-description').textContent = jobDescription;
+
+        // LOGIC FOR MONEY
+        var totalCost = rate * budgetDuration;
+        document.getElementById('card-duration').textContent = budgetDuration + ' hour(s)';
+        document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
+
+    //     Have to still pull tax info
+
     }
+
 
 </script>
 
