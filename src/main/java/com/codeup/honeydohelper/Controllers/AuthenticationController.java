@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -135,7 +134,7 @@ public class AuthenticationController {
         Honeydoers honeydoer = honeydoersDao.findByUser_Id(newHoneyUserId);
         model.addAttribute("newHoneydoer", honeydoer);
 
-        setAllHoneydoerServicesHtml(model, honeydoer);
+        setAllServicesHtml(model, honeydoer);
         setNewHoneyUserHtml(model);
         setHoneydoerServicesHtml(model, honeydoer);
 
@@ -205,9 +204,8 @@ public class AuthenticationController {
         model.addAttribute("categories", allCategories);
     }
 
-    private void setAllHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
-        List<HoneydoerServices> allServices = new ArrayList<>();
-        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+    private void setAllServicesHtml(Model model, Honeydoers honeydoer){
+        List<Services> allServices = servicesDao.findAll();
         model.addAttribute("services", allServices);
     }
 

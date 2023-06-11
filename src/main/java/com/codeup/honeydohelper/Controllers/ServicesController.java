@@ -79,6 +79,7 @@ public class ServicesController {
     public String gotoServices(Model model, @PathVariable int serviceId) {
         setCategoriesHtml(model);
 
+        setAllUserProfilesHtml(model);
         setServiceHtml(model, serviceId);
         setAllHoneydoerServicesHtml(model, serviceId);
 
@@ -98,8 +99,9 @@ public class ServicesController {
     public String gotoHoneydoerProfile(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
         setCategoriesHtml(model);
 
+        setAllUserProfilesHtml(model);
         setHoneydoerHtml(model, honeydoerId);
-        setServiceHtml(model, serviceId);
+        setHoneydoerServiceHtml(model, serviceId);
         setReviewsHtml(model, honeydoerId);
 
         return "/services/honeydoerProfile";
@@ -113,6 +115,7 @@ public class ServicesController {
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
 
+        setAllUserProfilesHtml(model);
         setHoneydoerHtml(model, honeydoerId);
         setHoneydoerServiceHtml(model, serviceId);
         setReviewsHtml(model, honeydoerId);
@@ -198,9 +201,13 @@ public class ServicesController {
     }
 
     private void setReviewsHtml(Model model, int honeydoerId) {
-        List<HoneydoerReviews> allReviews = new ArrayList<>();
-        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
+        List<HoneydoerReviews> allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
         model.addAttribute("reviews", allReviews);
+    }
+
+    private void setAllUserProfilesHtml(Model model) {
+        List<UserProfiles> allUserProfiles = userProfileDao.findAll();
+        model.addAttribute("userProfiles", allUserProfiles);
     }
 
 

@@ -63,7 +63,11 @@
                 <div class="card-footer">
                   <div class="row">
                     <div class="col-3 align-self-center">
-                      <img th:src="@{/img/users/{imgPath}(imgPath=${'user' + reviews[index].task.user.id + '.png'})}" class="h-100 w-100 rounded-circle"/>
+                      <th:block th:each="profile : ${userProfiles}">
+                        <th:block th:if="${profile.id} == ${reviews[index].task.user.id}">
+                          <img th:src="@{${profile.imgFilePath}}" class="w-100 ratio ratio-1x1 rounded-circle">
+                        </th:block>
+                      </th:block>
                     </div>
                     <div class="col align-self-center">
                       <p th:text="${reviews[index].task.honeydoerService.services.name}"
