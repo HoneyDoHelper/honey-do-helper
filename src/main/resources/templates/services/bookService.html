@@ -22,7 +22,11 @@
 
                 <div class="row mb-5">
                     <div class="col-lg-4 col-md-4">
-                        <img th:src="@{/img/team/travis.png}" class="ratio ratio-1x1 w-100 rounded-circle"/>
+                        <th:block th:each="profile : ${userProfiles}">
+                            <th:block th:if="${profile.id} == ${honeydoer.user.id}">
+                                <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                            </th:block>
+                        </th:block>
                     </div>
                     <div class="col-lg-8 col-md-8">
                         <h2 th:text="${service.services.name}"></h2>
@@ -41,7 +45,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <form
-                      th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                      th:action="@{/services/bookService}"
                       th:object="${newTask}"
                       th:method="post" oninput="updateCard()"
                 >
@@ -73,6 +77,8 @@
                         <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}" class="form-control"></textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
+                    <input type="hidden" name="honeyUserId" th:value="${user.id}">
+                    <input type="hidden" name="honeydoerId" th:value="${honeydoer.id}">
 
                     <div class="field">
                         <div class="control">
