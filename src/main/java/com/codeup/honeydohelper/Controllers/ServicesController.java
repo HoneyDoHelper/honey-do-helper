@@ -120,6 +120,7 @@ public class ServicesController {
         setHoneydoerServiceHtml(model, serviceId);
         setReviewsHtml(model, honeydoerId);
 
+        model.addAttribute("taskCost", new TaskCosts());
         model.addAttribute("newTask", new Tasks());
         model.addAttribute("filestackKey", filestackKey);
 
