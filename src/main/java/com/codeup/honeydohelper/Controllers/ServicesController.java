@@ -101,7 +101,7 @@ public class ServicesController {
 
         setAllUserProfilesHtml(model);
         setHoneydoerHtml(model, honeydoerId);
-        setHoneydoerServiceHtml(model, serviceId);
+        setHoneydoerServiceHtml(model, serviceId, honeydoerId);
         setReviewsHtml(model, honeydoerId);
 
         return "/services/honeydoerProfile";
@@ -117,7 +117,7 @@ public class ServicesController {
 
         setAllUserProfilesHtml(model);
         setHoneydoerHtml(model, honeydoerId);
-        setHoneydoerServiceHtml(model, serviceId);
+        setHoneydoerServiceHtml(model, serviceId, honeydoerId);
         setReviewsHtml(model, honeydoerId);
 
         model.addAttribute("newTask", new Tasks());
@@ -184,12 +184,9 @@ public class ServicesController {
         model.addAttribute("honeydoerServices", allHoneydoerServices);
     }
 
-    private void setHoneydoerServiceHtml(Model model, int serviceId) {
-        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(serviceId);
-        if (honeydoerServicesDao.findById(serviceId).isPresent()) {
-            HoneydoerServices honeydoerServiceObject = honeydoerService.get();
-            model.addAttribute("service", honeydoerServiceObject);
-        }
+    private void setHoneydoerServiceHtml(Model model, int serviceId, int honeydoerId) {
+        HoneydoerServices honeydoerService = honeydoerServicesDao.findByServices_IdAndHoneydoers_Id(serviceId, honeydoerId);
+            model.addAttribute("service", honeydoerService);
     }
 
     private void setHoneydoerHtml(Model model, int honeydoerId) {

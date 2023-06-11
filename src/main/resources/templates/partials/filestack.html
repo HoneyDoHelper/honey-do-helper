@@ -50,12 +50,16 @@ the script in here to keep the htmls clean -->
     }
 
     // console.log(JSON.stringify(result))
-    // Some ugly DOM code to show some data.
-    // const name = document.createTextNode('Selected: ' + fileData.filename);
+    const name = document.createTextNode('Selected: ' + fileData.filename);
+
+    //creates an <a> tag
     const url = document.createElement('a');
     url.href = fileData.url;
-    // url.appendChild(document.createTextNode(fileData.url));
-    // nameBox.appendChild(name);
+    url.appendChild(document.createTextNode(fileData.url));
+      // urlBox.appendChild(document.createTextNode('Uploaded to: '));
+      // urlBox.appendChild(url);
+
+    nameBox.appendChild(name);
 
       // Create the hidden input element
       const hiddenInput = document.createElement('input');
