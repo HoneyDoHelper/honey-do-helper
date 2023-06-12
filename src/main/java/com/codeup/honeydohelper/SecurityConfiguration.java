@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                         "/authentication/register","/authentication/**","/register","/register/user",
                         "/register/honeydoer", "/register/honeydoer/**", "/user/honeydoer/dashboard/**",
                         "/services", "/services/**", "/apis/**", "/chat", "/calendar", "/edit/profile/**", "/edit/**",
-                        "/categories", "/categories/**", "/css/**", "/img/**")
+                        "/categories", "/categories/**", "/css/**", "/img/**", "/services/bookService/*/*")
                 .permitAll();
 
         return http.build();

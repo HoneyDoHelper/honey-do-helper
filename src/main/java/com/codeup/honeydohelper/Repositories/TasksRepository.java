@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface TasksRepository extends JpaRepository<Tasks, Integer> {
     List<Tasks> findAllByHoneydoerService_Id(int honeydoerServiceId);
+    Tasks findTopByOrderByIdDesc();
 
 }

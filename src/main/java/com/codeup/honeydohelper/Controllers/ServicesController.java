@@ -1,4 +1,5 @@
 package com.codeup.honeydohelper.Controllers;
+
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -112,7 +113,9 @@ public class ServicesController {
     public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
         setCategoriesHtml(model);
 
-        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
+        HoneyUsers currentLoggedInUser = (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        System.out.println("currentLoggedInUser.getId() + ' ' + currentLoggedInUser.getFirstName() = " + currentLoggedInUser.getId() + ' ' + currentLoggedInUser.getFirstName());
         setUserHtml(model, currentLoggedInUser);
 
         setAllUserProfilesHtml(model);
@@ -124,7 +127,7 @@ public class ServicesController {
         model.addAttribute("newTask", new Tasks());
         model.addAttribute("filestackKey", filestackKey);
 
-        return "/services/bookService";
+        return "services/bookService";
     }
 
 
@@ -133,23 +136,39 @@ public class ServicesController {
                                  @RequestParam("honeydoerServiceId") String honeydoerServiceId,
                                  @RequestParam("image_url") String imageUrl,
                                  @RequestParam("honeydoerId") String honeydoerId,
-                                 @RequestParam("honeyUserId") String honeyUserId) {
+                                 @RequestParam("honeyUserId") String honeyUserId,
+                                 )
+    {
 
         createTask(task, honeydoerServiceId, honeyUserId);
         createHoneydoerImage(imageUrl, honeydoerId);
+        findNewTask();
 
         return "redirect:/about";
     }
+
+//    private int findNewHoneydoer(){
+//        Honeydoers newHoneydoer = honeydoersDao.findTopByOrderByIdDesc();
+
+//        return newHoneydoer.getUser().getId();
+//    }
+
 
 
     /*================================================================================
     Controller Methods to set model Attributes
     ================================================================================*/
-    private HoneyUsers findLoggedInHoneyUser() {
-        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    private int findNewTask() {
+        Tasks newTask = tasksDao.findTopByOrderByIdDesc();
+        return newTask.getId();
     }
 
-    private void setUserHtml(Model model, HoneyUsers honeyUser){
+//    private HoneyUsers findLoggedInHoneyUser() {
+//        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    }
+
+    private void setUserHtml(Model model, HoneyUsers honeyUser) {
         model.addAttribute("user", honeyUser);
     }
 
@@ -187,7 +206,7 @@ public class ServicesController {
 
     private void setHoneydoerServiceHtml(Model model, int serviceId, int honeydoerId) {
         HoneydoerServices honeydoerService = honeydoerServicesDao.findByServices_IdAndHoneydoers_Id(serviceId, honeydoerId);
-            model.addAttribute("service", honeydoerService);
+        model.addAttribute("service", honeydoerService);
     }
 
     private void setHoneydoerHtml(Model model, int honeydoerId) {
