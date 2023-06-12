@@ -1,8 +1,5 @@
 package com.codeup.honeydohelper.Controllers;
-import com.codeup.honeydohelper.Models.Categories;
-import com.codeup.honeydohelper.Models.HoneyUsers;
-import com.codeup.honeydohelper.Models.TaskCosts;
-import com.codeup.honeydohelper.Models.Tasks;
+import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -71,11 +68,38 @@ public class TasksController {
 
         setTaskHtml(model, taskId);
         setTaskCostHtml(model, taskId);
+        setAllUserProfilesHtml(model);
 
 
+        Tasks task = findTask(taskId);
+        Honeydoers honeydoer = new Honeydoers();
+        if(currentLoggedInUser.getIsHoneydoer()){
+            honeydoer = findHoneydoer(currentLoggedInUser.getId());
+        }
 
+        //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
+        if (currentLoggedInUser.getIsAdmin()) {
 
-        return "/services/tasks";
+            return "/services/tasks";
+
+        } else if (currentLoggedInUser.getIsHoneydoer()
+                && currentLoggedInUser.getId() == honeydoer.getUser().getId()
+                && task.getHoneydoerService().getHoneydoers().getId() == honeydoer.getId()) {
+
+            model.addAttribute("isHoneydoer", true);
+
+            return "/services/tasks";
+
+        } else if (currentLoggedInUser.getId() == task.getUser().getId()){
+
+            model.addAttribute("isHoneydoer", false);
+
+            return "/services/tasks";
+
+        } else {
+            return "redirect:/login";
+        }
+        //return "/services/tasks";
     }
 
 
@@ -107,6 +131,25 @@ public class TasksController {
     private void setTaskCostHtml(Model model, int taskId){
         TaskCosts taskCost = tasksCostsDao.findByTask_Id(taskId);
         model.addAttribute("task_cost", taskCost);
+    }
+
+    private Tasks findTask(int taskId){
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        if (tasksDao.findById(taskId).isPresent()) {
+            Tasks taskObject = task.get();
+            return taskObject;
+        } else {
+            return null;
+        }
+    }
+
+    private Honeydoers findHoneydoer(int userId){
+        return honeydoersDao.findByUser_Id(userId);
+    }
+
+    private void setAllUserProfilesHtml(Model model) {
+        List<UserProfiles> allUserProfiles = userProfileDao.findAll();
+        model.addAttribute("userProfiles", allUserProfiles);
     }
 
 }

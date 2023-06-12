@@ -10,7 +10,7 @@
 
 <main>
     <section class="container">
-        <h1 th:text="${task.user_id.firstName} + '\'s Honey Todo'"></h1>
+        <h1 th:text="${task.user.firstName} + '\'s Honey Todo'"></h1>
         <div class="row row-cols-2 g-5">
             <div class="col-4">
                 <div class="mb-3">
@@ -23,10 +23,16 @@
                 <div class="mb-3">
                     <div class="row row-cols-2 g-3 d-flex align-items-center mb-2">
                         <div class="col-3">
-                            <img th:src="@{/img/users/anon.png}" class="w-100 ratio ratio-1x1 rounded-circle"/>
+                            <th:block th:each="profile : ${userProfiles}">
+                                <th:block th:if="${profile.id} == ${task.user.id}">
+                                    <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                                </th:block>
+                            </th:block>
+
+<!--                            <img th:src="@{/img/users/anon.png}" class="w-100 ratio ratio-1x1 rounded-circle"/>-->
                         </div>
                         <div class="col-9">
-                            <span th:text="${task.user_id.firstName}">Task Details</span>
+                            <span th:text="${task.user.firstName}">Task Details</span>
                             <span>(</span>
                             <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
                             <span th:text="${task.honeydoerService.honeydoers.rating}">Stars</span>
@@ -35,7 +41,13 @@
                     </div>
                     <div class="row row-cols-2 g-3 d-flex align-items-center mb-2">
                         <div class="col-3">
-                            <img th:src="@{/img/users/anon.png}" class="w-100 ratio ratio-1x1 rounded-circle"/>
+                            <th:block th:each="profile : ${userProfiles}">
+                                <th:block th:if="${profile.id} == ${task.honeydoerService.honeydoers.user.id}">
+                                    <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                                </th:block>
+                            </th:block>
+
+<!--                            <img th:src="@{/img/users/anon.png}" class="w-100 ratio ratio-1x1 rounded-circle"/>-->
                         </div>
                         <div class="col-9">
                             <span th:text="${task.honeydoerService.honeydoers.user.firstName}">Task Details</span>
@@ -54,15 +66,39 @@
     </section>
 
     <section class="container-fluid">
-        <div>
-            <h2 th:text="${task.status} + ' Project Proposal' " class="text-center">Project Status</h2>
-            <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
+        <th:block th:if="${task.isAccepted == true }">
+            <div>
+                <h2 th:text="'Accepted Project Proposal'" class="text-center">Project Status</h2>
+                <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-            <p th:text="'Honeydoer Pay ' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-            <p th:text="'Honeydo Helper Fee ' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-            <p th:text="'Taxes ' + ${task_cost.taxes}">Taxes</p>
-            <h3 th:text="'Total Cost ' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
-        </div>
+                <p th:text="'Honeydoer Pay ' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+                <p th:text="'Honeydo Helper Fee ' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+                <p th:text="'Taxes ' + ${task_cost.taxes}">Taxes</p>
+                <h3 th:text="'Total Cost ' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <th:block th:if="${isHoneydoer}">
+                    <button class="btn btn-warning">Complete Todo</button>
+                </th:block>
+            </div>
+        </th:block>
+
+        <th:block th:if="${task.isAccepted == false }">
+            <div>
+                <h2 th:text="'Pending Project Proposal'" class="text-center">Project Status</h2>
+                <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
+
+                <p th:text="'Honeydoer Pay ' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+                <p th:text="'Honeydo Helper Fee ' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+                <p th:text="'Taxes ' + ${task_cost.taxes}">Taxes</p>
+                <h3 th:text="'Total Cost ' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <th:block th:if="${isHoneydoer}">
+                    <button class="btn btn-warning">Accept Todo</button>
+                    <button class="btn btn-danger">Decline Todo</button>
+                </th:block>
+                <th:block th:if="${!isHoneydoer}">
+                    <button class="btn btn-danger">Cancel Todo</button>
+                </th:block>
+            </div>
+        </th:block>
     </section>
 
 
