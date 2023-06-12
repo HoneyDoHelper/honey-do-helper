@@ -356,7 +356,17 @@ VALUES ('Paint exterior fence', '2023-06-02', '09:00', 4, NULL, 1, 1, 1, 1),
        ('Organize garage', '2023-06-02', '13:00', 2, NULL, 1, 1, 17, 17),
        ('Replace living room window', '2023-06-02', '09:00', 4, '2023-06-02', 1, 1, 18, 18),
        ('Power wash driveway', '2023-06-02', '14:00', 3, NULL, 1, 1, 19, 19),
-       ('Install tile in bathroom', '2023-06-02', '10:30', 2, NULL, 1, 1, 20, 20);
+       ('Install tile in bathroom', '2023-06-02', '10:30', 2, NULL, 1, 1, 20, 20),
+       ('Install LVP in primary bedroom', '2023-06-03', '09:15', 8, NULL, 1, 1, 21, 21),
+       ('Install garbage disposal', '2023-06-03', '14:45', 1, NULL, 1, 1, 22, 22),
+       ('Install floating shelves in living room', '2023-06-03', '10:15', 5, NULL, 1, 1, 23, 23),
+       ('Remove dead bushes from backyard', '2023-06-03', '07:00', 6, NULL, 1, 1, 24, 24),
+       ('Demo and remove outdoor shed', '2023-06-03', '06:30', 8, NULL, 1, 1, 25, 25),
+       ('Power wash front porch and driveway', '2023-06-04', '07:00', 2, NULL, 1, 1, 26, 26),
+       ('Install floating bathroom vanity', '2023-06-04', '11:15', 2, NULL, 1, 1, 27, 27),
+       ('Remove heavy sleeper sofa from basement', '2023-06-04', '09:30', 2, NULL, 1, 1, 28, 28),
+       ('Mount 85 inch television in primary bedroom', '2023-06-04', '15:15', 1, NULL, 1, 1, 29, 29),
+       ('Install back porch ceiling fans', '2023-06-04', '08:30', 2, NULL, 1, 1, 30, 30);
 
 
 INSERT INTO task_costs (honeydoer_pay, site_pay, total_user_cost, taxes, task_id)
@@ -406,7 +416,20 @@ VALUES ('FIVE', 'Excellent work on painting the fence. Highly recommended.', 1, 
        ('FIVE', 'Organized the garage beautifully! Very pleased with the result.', 17, 17),
        ('FOUR', 'Did a good job replacing the window.', 18, 18),
        ('FOUR', 'Driveway looks cleaner after the power wash.', 19, 19),
-       ('FIVE', 'Excellent tile installation in the bathroom.', 20, 20);
+       ('FIVE', 'Excellent tile installation in the bathroom.', 20, 20),
+        ('ONE', 'Flooring was not the color or width I asked for.', 21, 21),
+        ('FIVE', 'Took less than 15 minutes and he did not charge me for the full hour.', 22, 22),
+        ('FIVE', 'Shelves look great and I will definitely use him again.', 23, 23),
+        ('ONE', 'Roots were still left sticking out of the ground and he did not clean up the area after he finished.', 24, 24),
+        ('ONE', 'He left wood chunks, nails, and screws on the ground and I have children.', 25, 25),
+        ('THREE', 'A few of my flowers were damaged by the power washer but overall decent job.', 26, 26),
+        ('FOUR', 'Excellent job minus some sloppy caulking around the corners.', 27, 27),
+        ('TWO', 'He left several dents in my wall but at least he gave me a discount for it.', 28, 28),
+        ('FIVE', 'TV looks great.  He was very professional and quick!', 29, 29),
+        ('FOUR', 'One fan is a little wobbly, but they work great during this hot TX summer!', 30, 30);
+
+
+
 
 
 INSERT INTO client_reviews (stars, comment, task_id, user_id)
@@ -429,5 +452,15 @@ VALUES ('FIVE', 'Very responsible and respectful client.', 1, 1),
        ('FIVE', 'Great client! Always available for clarifications.', 17, 17),
        ('FOUR', 'Good client but needs to work on their communication.', 18, 18),
        ('FOUR', 'Client was good but had some issues with payment.', 19, 19),
-       ('FIVE', 'Excellent client! Very clear and concise instructions.', 20, 20);
+       ('FIVE', 'Excellent client! Very clear and concise instructions.', 20, 20),
+       ('ONE', 'Client asked me to pick up materials for her so I did as a favor, but then she got mad when she realized it did not look how she thought it would.', 21, 21),
+       ('FIVE', 'Client had all materials laid out for me in a clean working area.', 22, 22),
+       ('FOUR', 'Very nice client, but kids kept interrupting my work.', 23, 23),
+       ('THREE', 'Client kept asking if she could pay by check.', 24, 24),
+       ('FIVE', 'Good work environment', 25, 25),
+       ('FIVE', 'Client very nice and I promised to replace damaged flowers', 26, 26),
+       ('THREE', 'House was very humid and had a weird smell', 27, 27),
+       ('ONE', 'Client said she had an appointment and was rushing me then got mad when I accidentally dented the walls due to going too fast', 28, 28),
+       ('FIVE', 'Very polite and professional', 29, 29),
+       ('TWO', 'Client only communicated through text but stood there watching me the whole time through the back door window....weird', 30, 30);
 
