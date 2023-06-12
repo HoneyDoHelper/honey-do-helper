@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +72,6 @@ public class TasksController {
         setTaskCostHtml(model, taskId);
         setAllUserProfilesHtml(model);
 
-
         Tasks task = findTask(taskId);
         Honeydoers honeydoer = new Honeydoers();
         if(currentLoggedInUser.getIsHoneydoer()){
@@ -102,6 +103,77 @@ public class TasksController {
         //return "/services/tasks";
     }
 
+    @PostMapping("/tasks/update")
+    public String updateTasks(Model model,
+                              @RequestParam("task-id") int taskId,
+                              @RequestParam("todo-status") String status){
+
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        Tasks taskObject = task.get();
+
+        if (status.equals("Accepted")){
+
+            System.out.println("Accepted task = " + taskId);
+            taskObject.setIsAccepted(true);
+
+        } else if (status.equals("Completed")) {
+
+            System.out.println("Completed task = " + taskId);
+            taskObject.setIsCompleted(true);
+
+        } else {
+            System.out.println("Declined task = " + taskId);
+            taskObject.setIsAccepted(false);
+        }
+
+        tasksDao.save(taskObject);
+
+
+        return "redirect:/tasks/" + taskId;
+    }
+
+    @PostMapping("/tasks/review")
+    public String reviewTasks(Model model,
+                              @RequestParam("task-id") int taskId,
+                              @RequestParam("isHoneydoer") boolean isHoneydoer,
+                              @RequestParam("review-id") int reviewId,
+                              @RequestParam("stars") String starInput,
+                              @RequestParam("comment") String comment){
+
+        Optional<Tasks> task = tasksDao.findById(taskId);
+        Tasks taskObject = task.get();
+
+        Stars stars = setStars(starInput);
+
+        if (isHoneydoer){
+
+            Optional<HoneyUsers> honeyUser = usersDao.findById(reviewId);
+            HoneyUsers honeyUserObject = honeyUser.get();
+
+            ClientReviews review = new ClientReviews();
+            review.setTask(taskObject);
+            review.setUser(honeyUserObject);
+            review.setStars(stars);
+            review.setComment(comment);
+
+            clientReviewsDao.save(review);
+
+        } else {
+
+            Optional<Honeydoers> honeydoer = honeydoersDao.findById(reviewId);
+            Honeydoers honeydoerObject = honeydoer.get();
+
+            HoneydoerReviews review = new HoneydoerReviews();
+            review.setTask(taskObject);
+            review.setHoneydoer(honeydoerObject);
+            review.setStars(stars);
+            review.setComment(comment);
+
+            honeydoerReviewsDao.save(review);
+        }
+
+        return "redirect:/tasks/" + taskId;
+    }
 
     /*================================================================================
     Controller Methods to set model Attributes
@@ -152,4 +224,13 @@ public class TasksController {
         model.addAttribute("userProfiles", allUserProfiles);
     }
 
+    private Stars setStars (String starInput){
+        return switch (starInput) {
+            case "ONE" -> Stars.ONE;
+            case "TWO" -> Stars.TWO;
+            case "THREE" -> Stars.THREE;
+            case "FOUR" -> Stars.FOUR;
+            default -> Stars.FIVE;
+        };
+    }
 }

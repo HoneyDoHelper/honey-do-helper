@@ -20,14 +20,20 @@
                 </th:block>
                 <th:block th:unless="${tasks.size() <= 0}">
                     <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                        <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}" class="row">
-                            <div class="col-2 align-self-center">
-                                <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
-                            </div>
-                            <div class="col align-self-center">
-                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
-                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
-                            </div>
+                        <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
+                            <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
+                                <div class="col-2 align-self-center">
+                                    <th:block th:each="profile : ${userProfiles}">
+                                        <th:block th:if="${profile.id} == ${tasks[index].user.id}">
+                                            <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                                        </th:block>
+                                    </th:block>
+                                </div>
+                                <div class="col align-self-center">
+                                    <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
+                                    <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </th:block>

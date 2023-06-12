@@ -137,7 +137,7 @@ public class ServicesController {
         createTask(task, honeydoerServiceId, honeyUserId);
         createHoneydoerImage(imageUrl, honeydoerId);
 
-        return "redirect:/about";
+        return "redirect:/dashboard";
     }
 
 

@@ -66,17 +66,21 @@
     </section>
 
     <section class="container-fluid">
-        <th:block th:if="${task.isAccepted == true }">
+        <th:block th:if="${task.isAccepted == true && task.isCompleted == false}">
             <div>
                 <h2 th:text="'Accepted Project Proposal'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-                <p th:text="'Honeydoer Pay ' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-                <p th:text="'Honeydo Helper Fee ' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-                <p th:text="'Taxes ' + ${task_cost.taxes}">Taxes</p>
-                <h3 th:text="'Total Cost ' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
+                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
                 <th:block th:if="${isHoneydoer}">
-                    <button class="btn btn-warning">Complete Todo</button>
+                    <form th:action="@{'/tasks/update'}" th:method="post">
+                        <input type="hidden" name="todo-status" th:value="${'Completed'}">
+                        <input type="hidden" name="task-id" th:value="${task.id}">
+                        <button class="btn btn-warning">Complete Todo</button>
+                    </form>
                 </th:block>
             </div>
         </th:block>
@@ -86,16 +90,96 @@
                 <h2 th:text="'Pending Project Proposal'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-                <p th:text="'Honeydoer Pay ' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-                <p th:text="'Honeydo Helper Fee ' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-                <p th:text="'Taxes ' + ${task_cost.taxes}">Taxes</p>
-                <h3 th:text="'Total Cost ' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
+                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
                 <th:block th:if="${isHoneydoer}">
-                    <button class="btn btn-warning">Accept Todo</button>
-                    <button class="btn btn-danger">Decline Todo</button>
+                    <form th:action="@{'/tasks/update'}" th:method="post">
+                        <input type="hidden" name="todo-status" th:value="${'Accepted'}">
+                        <input type="hidden" name="task-id" th:value="${task.id}">
+                        <button class="btn btn-warning">Accept Todo</button>
+                    </form>
+
+                    <form th:action="@{'/tasks/update'}" th:method="post">
+                        <input type="hidden" name="todo-status" th:value="${'Declined'}">
+                        <input type="hidden" name="task-id" th:value="${task.id}">
+                        <button class="btn btn-danger">Decline Todo</button>
+                    </form>
                 </th:block>
                 <th:block th:if="${!isHoneydoer}">
-                    <button class="btn btn-danger">Cancel Todo</button>
+                    <form th:action="@{'/tasks/update'}" th:method="post">
+                        <input type="hidden" name="todo-status" th:value="${'Declined'}">
+                        <input type="hidden" name="task-id" th:value="${task.id}">
+                        <button class="btn btn-danger">Cancel Todo</button>
+                    </form>
+                </th:block>
+            </div>
+        </th:block>
+
+        <th:block th:if="${task.isCompleted == true }">
+            <div>
+                <h2 th:text="'Completed Project'" class="text-center">Project Status</h2>
+                <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
+
+                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
+                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+
+                <th:block th:if="${!isHoneydoer}">
+                    <form th:action="@{'/tasks/review'}" th:method="post">
+                        <input type="hidden" name="isHoneydoer" th:value="${false}">
+                        <input type="hidden" name="task-id" th:value="${task.id}">
+                        <input type="hidden" name="review-id" th:value="${task.honeydoerService.honeydoers.id}">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" maxlength="240"
+                                   id="comment-honeydoer" name="comment" placeholder="Leave a comment" required>
+                            <label for="comment-honeydoer">Leave a comment</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-control" id="stars-honeydoer" name="stars" required>
+                                <option th:value="FIVE">5 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="FOUR">4 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="THREE">3 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="TWO">2 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="ONE">1 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                            </select>
+                            <label for="stars-honeydoer">Give Rating</label>
+                        </div>
+
+                        <button class="btn btn-warning">Submit</button>
+                    </form>
+                </th:block>
+
+                <th:block th:if="${isHoneydoer}">
+                    <form th:action="@{'/tasks/review'}" th:method="post">
+                        <input type="hidden" name="isHoneydoer" th:value="${true}">
+                        <input type="hidden" name="task-id" th:value="${task.id}">
+                        <input type="hidden" name="review-id" th:value="${task.user.id}">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" maxlength="240"
+                                   id="comment-honeyuser" name="comment" placeholder="Leave a comment" required>
+                            <label for="comment-honeyuser">Leave a comment</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+
+                            <select class="form-control" id="stars-honeyuser" name="stars" required>
+                                <option th:value="FIVE">5 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="FOUR">4 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="THREE">3 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="TWO">2 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                                <option th:value="ONE">1 <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span></option>
+                            </select>
+                            <label for="stars-honeyuser">Give Rating</label>
+                        </div>
+
+                        <button class="btn btn-warning">Submit</button>
+                    </form>
                 </th:block>
             </div>
         </th:block>

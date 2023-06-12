@@ -56,10 +56,10 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/", "/index", "/about", "/contact", "/support", "/tasks/**",
+                        "/", "/index", "/about", "/contact", "/support", "/tasks/**", "/tasks/update",
                         "/authentication/register","/authentication/**","/register","/register/user",
                         "/register/honeydoer", "/register/honeydoer/**", "/user/honeydoer/dashboard/**",
-                        "/services", "/services/**", "/apis/**", "/chat", "/calendar", "/edit/profile/**", "/edit/**",
+                        "/services", "/services/**", "/apis/**", "/chat", "/chat2", "/calendar", "/edit/profile/**", "/edit/**",
                         "/categories", "/categories/**", "/css/**", "/img/**")
                 .permitAll();
 

@@ -46,8 +46,8 @@
 
   Talk.ready.then(function () {
     var me = new Talk.User({
-      id: '1',
-      name: 'Thomas',
+      id: '123456',
+      name: 'Alice',
       email: 'alice@example.com',
       photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
       welcomeMessage: 'Hey there! How are you? :-)',
@@ -58,16 +58,14 @@
       me: me
     });
     var other = new Talk.User({
-      id: '123456',
-      name: 'Alice',
+      id: '1',
+      name: 'Thomas',
       email: 'Sebastian@example.com',
       photoUrl: 'https://talkjs.com/images/avatar-5.jpg',
       welcomeMessage: 'Hey, how can I help?',
     });
 
-    var conversation = talkSession.getOrCreateConversation(
-            Talk.oneOnOneId(me, other)
-    );
+    var conversation = talkSession.getOrCreateConversation('37e22a9442fc2ff234ee');
     conversation.setParticipant(me);
     conversation.setParticipant(other);
 

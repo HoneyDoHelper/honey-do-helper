@@ -76,6 +76,7 @@ public class HoneyUsersController {
         //Finds current logged in user and sets it in the html doc
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
+        setAllUserProfilesHtml(model);
 
         //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
         if (currentLoggedInUser.getIsAdmin()) {
@@ -177,6 +178,11 @@ public class HoneyUsersController {
     private void setUserProfileHtml(Model model, int userId){
         UserProfiles userProfile = userProfileDao.findByUser_Id(userId);
         model.addAttribute("userProfile", userProfile);
+    }
+
+    private void setAllUserProfilesHtml(Model model) {
+        List<UserProfiles> allUserProfiles = userProfileDao.findAll();
+        model.addAttribute("userProfiles", allUserProfiles);
     }
 
     /*================================================================================
