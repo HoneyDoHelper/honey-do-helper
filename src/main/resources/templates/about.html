@@ -26,22 +26,47 @@
         </div>
     </section>
     <section class="container-fluid">
+        <h2>Reviews</h2>
         <div class="row">
             <div class="col">
-                <h2>Honeydo Helper-self to our site</h2>
-            </div>
-            <div class="col">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor dolore ducimus error eum fuga impedit labore, magnam magni necessitatibus nostrum officiis quibusdam recusandae sint sit vel voluptas. Adipisci, doloribus!</p>
-                <div>
-                    <button class="btn btn-light">Button</button>
-                    <button class="btn btn-light">Button</button>
+                <div id="review-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#review-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#review-carousel" data-slide-to="1"></li>
+                        <li data-target="#review-carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <p class="review-text">"Honeydo Helpers made my life so much easier! The professionals were prompt, skilled, and completed the tasks to my satisfaction. Highly recommended!"</p>
+                            <p class="review-author">- John D.</p>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="review-text">"I'm impressed with the quality of work and professionalism shown by the Honeydo Helpers. They took care of my home maintenance needs efficiently and at a reasonable price. Will definitely hire them again!"</p>
+                            <p class="review-author">- Sarah M.</p>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="review-text">"Honeydo Helpers exceeded my expectations. From start to finish, the process was smooth and hassle-free. The professionals were friendly, knowledgeable, and completed the tasks with precision. Highly recommended!"</p>
+                            <p class="review-author">- Mark R.</p>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#review-carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#review-carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="container">
         <h2>Our team</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, obcaecati possimus praesentium recusandae reprehenderit tempore! Animi dolore ipsa soluta. Aliquam aliquid, asperiores distinctio dolorem error facere impedit qui veniam voluptas?</p>
+        <p>Our exceptional team of experts at HoneyDo Helper collaborates harmoniously to make your dreams a reality. With a shared commitment to excellence and a passion for delivering remarkable results, we bring together diverse skills and expertise. From unleashing the hidden potential of your space to turning your visions into stunning realities, our team is dedicated to providing exceptional service. With seamless coordination and unwavering dedication, we ensure a smooth and hassle-free experience for all our users. Experience the HoneyDo Helper difference and embark on a transformative journey with us.
+
+        </p>
         <div class="row row-cols-3 g-3">
             <article class="col">
                 <div class="card">
@@ -52,11 +77,11 @@
                         <p class="card-title">
                             Anthony Chhor
                         </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p> Design Dynamo</p>
+                        <p>With Anthony's design magic, your vision comes to life in stunning, stylish detail.</p>
                     </div>
                     <div class="card-footer">
-                        <p>icons go here</p>
+                        <img src="/img/team/palette-fill.svg" alt="Palette">
                     </div>
                 </div>
             </article>
@@ -70,11 +95,11 @@
                         <p class="card-title">
                             David Renteria
                         </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p> Task Master</p>
+                        <p>Mastering tasks, one HoneyDo at a time! David ensures nothing slips through the cracks.</p>
                     </div>
                     <div class="card-footer">
-                        <p>icons go here</p>
+                        <img src="/img/team/card-checklist.svg" alt="Checklist">
                     </div>
                 </div>
             </article>
@@ -88,11 +113,11 @@
                         <p class="card-title">
                             Gage Jackson
                         </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p> Renovation Guru</p>
+                        <p>Unlock the hidden potential of your space with Gage, the master of renovations.</p>
                     </div>
                     <div class="card-footer">
-                        <p>icons go here</p>
+                        <img src="/img/team/gear-wide-connected.svg" alt="Gear">
                     </div>
                 </div>
             </article>
@@ -106,11 +131,11 @@
                         <p class="card-title">
                             Tamica Simon
                         </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p> Chat Maven</p>
+                        <p>With Tamica as your friendly guide, communication and coordination become a breeze, ensuring a seamless journey towards project success.</p>
                     </div>
                     <div class="card-footer">
-                        <p>icons go here</p>
+                        <img src="/img/team/chat-heart-fill.svg" alt="Chat">
                     </div>
                 </div>
             </article>
@@ -124,11 +149,14 @@
                         <p class="card-title">
                             Travis Gomez
                         </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
+                        <p> Data Maestro</p>
+                        <p>Travis conducts symphonies of data, harmonizing insights that drive your project's success.
+                        </p>
                     </div>
                     <div class="card-footer">
-                        <p>icons go here</p>
+                        <p>static/img/team/database-fill.svg</p>
+                        <img src="/img/team/database-fill.svg" alt="Database">
+
                     </div>
                 </div>
             </article>
