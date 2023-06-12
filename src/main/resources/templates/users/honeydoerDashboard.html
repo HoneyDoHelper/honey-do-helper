@@ -14,7 +14,6 @@
             <h1 th:text="'Hello, ' + ${honeydoer.user.firstName}">Hello, Honeydoer</h1>
             <div class="col me-3">
                 <h2>Upcoming Tasks</h2>
-
                 <th:block th:if="${tasks.size() <= 0}">
                     <p>No tasks available.</p>
                 </th:block>
@@ -40,18 +39,17 @@
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
                                     <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
-                                    <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</a>
+                                    <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 end-0 z-3">Edit Profile</a>
                                 </div>
                             </div>
                         </article>
                     </div>
-
                     <div class="col border border-1 border-light">
                         <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
                                     <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
-                                    <button class="btn btn-warning position-absolute bottom-0 end-0">View Earnings</button>
+                                    <button class="btn btn-warning position-absolute bottom-0 end-0 z-3">View Earnings</button>
                                 </div>
                             </div>
                         </article>

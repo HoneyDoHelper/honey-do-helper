@@ -87,6 +87,7 @@ public class HoneyUsersController {
 
             return "users/honeydoerDashboard";
         } else if (currentLoggedInUser != null){
+            setUserProfileHtml(model, currentLoggedInUser.getId());
 
             return "users/userDashboard";
         } else {
@@ -108,6 +109,7 @@ public class HoneyUsersController {
 
     @PostMapping("/edit/profile")
     public String editUserProfileSubmit(@RequestParam("honeyUserID") int honeyUserId,
+                                        @RequestParam("userId") int userId,
                                         @RequestParam("address") String address,
                                         @RequestParam("address2") String address2,
                                         @RequestParam("city") String city,
@@ -121,6 +123,7 @@ public class HoneyUsersController {
         Optional<HoneyUsers> honeyUsersOptional = honeyUsersDao.findById(honeyUserId);
         HoneyUsers honeyUser = honeyUsersOptional.get();
         UserProfiles userProfile = userProfileDao.findByUser_Id(honeyUserId);
+
 
         editHoneyUser(honeyUser, first_name, last_name);
         editUserProfile(userProfile, address, address2, city, state, zip, phone_number);
@@ -137,7 +140,10 @@ public class HoneyUsersController {
     }
 
     private void setUserHtml(Model model, HoneyUsers honeyUser){
-        model.addAttribute("user", honeyUser);
+                model.addAttribute("user", honeyUser);
+        UserProfiles userProfile = userProfileDao.findByUser_Id(honeyUser.getId());
+        model.addAttribute("userProfile", userProfile);
+
     }
 
     private void setHoneydoerDashboardHtml(Model model, int honeyUserId){
@@ -147,6 +153,7 @@ public class HoneyUsersController {
         setAllHoneydoerServicesHtml(model,honeydoer);
         setAllHoneydoerReviewsHtml(model,honeydoer);
     }
+
 
     private void setAllHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
         List<HoneydoerReviews> allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
