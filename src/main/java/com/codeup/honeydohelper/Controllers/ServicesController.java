@@ -3,6 +3,7 @@ package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.config.Task;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -137,32 +138,37 @@ public class ServicesController {
                                  @RequestParam("image_url") String imageUrl,
                                  @RequestParam("honeydoerId") String honeydoerId,
                                  @RequestParam("honeyUserId") String honeyUserId,
-                                 )
+                                 @RequestParam("taxes") Float taxes,
+                                 @RequestParam("totalUserCost") Float totalUserCost,
+                                 @RequestParam("sitePay") Float sitePay,
+                                 @RequestParam("honeydoerPay") Float honeydoerPay)
     {
 
         createTask(task, honeydoerServiceId, honeyUserId);
         createHoneydoerImage(imageUrl, honeydoerId);
-        findNewTask();
 
-        return "redirect:/about";
+        TaskCosts taskCostToSave = new TaskCosts();
+
+        taskCostToSave.setTaxes(taxes);
+        taskCostToSave.setSitePay(sitePay);
+        taskCostToSave.setTotalUserCost(totalUserCost);
+        taskCostToSave.setHoneydoerPay(honeydoerPay);
+
+        //Finish setting up our TaskCost object
+
+        taskCostToSave.setTask(task);
+        tasksCostsDao.save(taskCostToSave);
+
+
+    return "redirect:/about";
     }
-
-//    private int findNewHoneydoer(){
-//        Honeydoers newHoneydoer = honeydoersDao.findTopByOrderByIdDesc();
-
-//        return newHoneydoer.getUser().getId();
-//    }
-
 
 
     /*================================================================================
     Controller Methods to set model Attributes
     ================================================================================*/
 
-    private int findNewTask() {
-        Tasks newTask = tasksDao.findTopByOrderByIdDesc();
-        return newTask.getId();
-    }
+
 
 //    private HoneyUsers findLoggedInHoneyUser() {
 //        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -258,6 +264,17 @@ public class ServicesController {
         honeydoerImage.setHoneydoer(honeydoerObject);
         honeydoerImage.setFilePath(imageUrl);
         honeydoerImagesDao.save(honeydoerImage);
+    }
+
+
+    private int findNewTask() {
+        Tasks newTask = tasksDao.findTopByOrderByIdDesc();
+        return newTask.getId();
+    }
+
+    private void createTaskCost(Tasks tasks, Float taxes, Float totalUserCost, Float sitePay){
+
+
     }
 
 }

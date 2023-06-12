@@ -84,12 +84,12 @@
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
                     <input type="hidden" id="honeyderServiceRate" name="honeydoerServiceRate" th:value="${service.rate}">
-                    <input type="hidden" name="honeyUserId" th:value="${user.id}">
+                    <input type="hidden"  name="honeyUserId" th:value="${user.id}">
                     <input type="hidden" name="honeydoerId" th:value="${honeydoer.id}">
-                    <input type="hidden" name="taxes" th:value="${taskCost.taxes}">
-                    <input type="hidden" name="totalUserCost" th:value="${taskCost.totalUserCost}">
-                    <input type="hidden" name="sitePay" th:value="${taskCost.sitePay}">
-                    <input type="hidden" name="honeydoerPay" th:value="${taskCost.honeydoerPay}">
+                    <input type="hidden" id="taxes" name="taxes" th:value="${taxesValue}">
+                    <input type="hidden" id="totalUserCost"  name="totalUserCost" th:value="${totalUserCostValue}">
+                    <input type="hidden" id="sitePay" name="sitePay" th:value="${sitePayValue}">
+                    <input type="hidden" id="honeydoerPayValue" name="honeydoerPay" th:value="${honeydoerPayValue}">
 
 
 
@@ -229,6 +229,15 @@
         document.getElementById('card-tax-cost').textContent = '$' + taxCost.toFixed(2);
         document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
+        var taxesValue = taxCost.toFixed(2);
+        var totalUserCostValue = totalCost.toFixed(2);
+        var sitePayValue = siteFeeCost.toFixed(2);
+        var honeydoerPayValue = jobCost.toFixed(2);
+
+        document.getElementById('taxes').value = taxesValue;
+        document.getElementById('totalUserCost').value = totalUserCostValue;
+        document.getElementById('sitePay').value = sitePayValue;
+        document.getElementById('honeydoerPayValue').value = honeydoerPayValue;
     }
 
 
