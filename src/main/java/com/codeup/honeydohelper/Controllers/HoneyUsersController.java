@@ -3,7 +3,6 @@ package com.codeup.honeydohelper.Controllers;
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -72,97 +71,40 @@ public class HoneyUsersController {
 
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request, Model model) {
-        HoneyUsers currentLoggedInUser = (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        System.out.println("current first name "+ currentLoggedInUser.getFirstName());
-        System.out.println("current id "+ currentLoggedInUser.getId());
+        //Finds current logged in user and sets it in the html doc
+        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
+        setUserHtml(model, currentLoggedInUser);
 
-        model.addAttribute("user", currentLoggedInUser);
+        setCategoriesHtml(model);
 
-        Honeydoers honeydoer = honeydoersDao.findByUser_Id(currentLoggedInUser.getId());
-        model.addAttribute("honeydoer", honeydoer);
-
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
-
-//        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-//        if(honeydoersDao.findById(honeydoerId).isPresent()){
-//            Honeydoers honeydoerObject = honeydoer.get();
-//            model.addAttribute("honeydoer", honeydoerObject);
-//        }
-
-        List<HoneydoerServices> allServices = new ArrayList<>();
-        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
-        model.addAttribute("services", allServices);
-
-
-        List<Tasks> allTasks = new ArrayList<>();
-        for (HoneydoerServices service: allServices) {
-            List<Tasks> objects = new ArrayList<>();
-            System.out.println("service = " + service.getId());
-            objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
-
-            allTasks.addAll(objects);
-        }
-        model.addAttribute("tasks", allTasks);
-
-        List<HoneydoerReviews> allReviews = new ArrayList<>();
-        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
-        model.addAttribute("reviews", allReviews);
-
-        if (currentLoggedInUser.getIsHoneydoer()) {
-            return "users/honeydoerDashboard";
-        } else if (currentLoggedInUser.getIsAdmin()) {
+        //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
+        if (currentLoggedInUser.getIsAdmin()) {
 
             return "users/adminDashboard";
-        } else {
+        } else if (currentLoggedInUser.getIsHoneydoer()) {
+            setHoneydoerDashboardHtml(model, currentLoggedInUser.getId());
+
+            return "users/honeydoerDashboard";
+        } else if (currentLoggedInUser != null){
+
             return "users/userDashboard";
+        } else {
+
+            return "redirect:/login";
         }
     }
 
+    @GetMapping("/edit/profile")
+    public String editUserProfileForm(Model model){
+        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
+        setUserHtml(model, currentLoggedInUser);
 
-    @GetMapping("/user/honeydoer/dashboard/{honeydoerId}")
-    public String gotoHoneydoerDashboard(Model model, @PathVariable int honeydoerId){
-        List<Categories> allCategories = categoriesDao.findAll();
-        model.addAttribute("categories", allCategories);
-
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-        if(honeydoersDao.findById(honeydoerId).isPresent()){
-            Honeydoers honeydoerObject = honeydoer.get();
-            model.addAttribute("honeydoer", honeydoerObject);
-        }
-
-        List<HoneydoerServices> allServices = new ArrayList<>();
-        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoerId);
-        model.addAttribute("services", allServices);
-
-
-        List<Tasks> allTasks = new ArrayList<>();
-        for (HoneydoerServices service: allServices) {
-            List<Tasks> objects = new ArrayList<>();
-            System.out.println("service = " + service.getId());
-            objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
-
-            allTasks.addAll(objects);
-        }
-        model.addAttribute("tasks", allTasks);
-
-        List<HoneydoerReviews> allReviews = new ArrayList<>();
-        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoerId);
-        model.addAttribute("reviews", allReviews);
-
-        return "/users/honeydoerDashboard";
-    }
-
-    @GetMapping("/edit/profile/{userId}")
-    public String editUserProfileForm(Model model, @PathVariable int userId){
-        UserProfiles userProfile = userProfileDao.findByUser_Id(userId);
-        model.addAttribute("userProfile", userProfile);
-
+        setUserProfileHtml(model, currentLoggedInUser.getId());
         return "/users/editProfile";
     }
 
-    @PostMapping("/edit/profile/{userId}")
+    @PostMapping("/edit/profile")
     public String editUserProfileSubmit(@RequestParam("honeyUserID") int honeyUserId,
                                         @RequestParam("address") String address,
                                         @RequestParam("address2") String address2,
@@ -178,7 +120,81 @@ public class HoneyUsersController {
         HoneyUsers honeyUser = honeyUsersOptional.get();
         UserProfiles userProfile = userProfileDao.findByUser_Id(honeyUserId);
 
+        editHoneyUser(honeyUser, first_name, last_name);
+        editUserProfile(userProfile, address, address2, city, state, zip, phone_number);
 
+        return "redirect:/dashboard";
+    }
+
+
+    /*================================================================================
+    Controller Methods to set model Attributes
+    ================================================================================*/
+    private HoneyUsers findLoggedInHoneyUser(){
+        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    private void setUserHtml(Model model, HoneyUsers honeyUser){
+        model.addAttribute("user", honeyUser);
+    }
+
+    private void setHoneydoerDashboardHtml(Model model, int honeydoerId){
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeydoerId);
+        model.addAttribute("honeydoer", honeydoer);
+        setHoneydoerTasksHtml(model,honeydoer);
+        setHoneydoerServicesHtml(model,honeydoer);
+        setHoneydoerReviewsHtml(model,honeydoer);
+    }
+
+    private void setHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerReviews> allReviews = new ArrayList<>();
+        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
+        model.addAttribute("reviews", allReviews);
+    }
+
+    private void setHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerServices> allServices = new ArrayList<>();
+        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+        model.addAttribute("services", allServices);
+    }
+
+    private void setHoneydoerTasksHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+        List<Tasks> allTasks = new ArrayList<>();
+
+        for (HoneydoerServices service: allServices) {
+            List<Tasks> objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
+            allTasks.addAll(objects);
+        }
+        model.addAttribute("tasks", allTasks);
+    }
+
+    private void setCategoriesHtml(Model model){
+        List<Categories> allCategories = categoriesDao.findAll();
+        model.addAttribute("categories", allCategories);
+    }
+
+    private void setUserProfileHtml(Model model, int userId){
+        UserProfiles userProfile = userProfileDao.findByUser_Id(userId);
+        model.addAttribute("userProfile", userProfile);
+    }
+
+    /*================================================================================
+    Controller Methods Edit Users
+    ================================================================================*/
+    private void editHoneyUser(HoneyUsers honeyUser, String first_name, String last_name){
+        if (first_name != null){
+            honeyUser.setFirstName(first_name);
+        }
+        if (last_name != null){
+            honeyUser.setLastName(last_name);
+        }
+
+        honeyUsersDao.save(honeyUser);
+    }
+
+    private void editUserProfile(UserProfiles userProfile, String address, String address2,
+                                 String city, String state, String zip, String phone_number){
         if (address != null){
             userProfile.setAddress(address);
         }
@@ -197,17 +213,13 @@ public class HoneyUsersController {
         if (phone_number != null){
             userProfile.setPhone(Long.parseLong(phone_number));
         }
-        if (first_name != null){
-            honeyUser.setFirstName(first_name);
-        }
-        if (last_name != null){
-            honeyUser.setLastName(last_name);
-        }
-
 
         userProfileDao.save(userProfile);
-        honeyUsersDao.save(honeyUser);
-
-        return "redirect:/index";
     }
+
+
+    /*================================================================================
+    Controller Methods Delete Users
+    ================================================================================*/
+
 }
