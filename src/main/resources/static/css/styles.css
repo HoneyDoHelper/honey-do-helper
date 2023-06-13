@@ -108,6 +108,11 @@ h3 {
     font-size: 1.5rem;
 }
 
+.custom-img {
+    max-height: 500px;
+    max-width: fit-content;
+}
+
 /*REGISTER CSS*/
 
 .register-background {

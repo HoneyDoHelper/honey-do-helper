@@ -109,7 +109,7 @@ public class HoneyUsersController {
 
     @PostMapping("/edit/profile")
     public String editUserProfileSubmit(@RequestParam("honeyUserID") int honeyUserId,
-                                        @RequestParam("userId") int userId,
+//
                                         @RequestParam("address") String address,
                                         @RequestParam("address2") String address2,
                                         @RequestParam("city") String city,

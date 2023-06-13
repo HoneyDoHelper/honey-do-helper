@@ -1,87 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{partials/head.html :: head('Profile')}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+<head th:replace="~{partials/head.html :: head('Profile')}">
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .custom-img {
+            max-height: 250px;
+            object-fit: cover;
+        }
+    </style>
 </head>
+
 <body>
 
 <header th:replace="~{partials/header.html :: header}"></header>
 
 <main>
-<section class="container">
-    <div class="row">
-        <h1 th:text="'Hello, ' + ${user.firstName}">Hello, User</h1>
-        <div class="col me-3">
-            <h2>Upcoming Tasks</h2>
-        </div>
-        <div class="col">
-            <div class="row row-cols-2 mb-4">
-                <div class="col border border-1 border-light">
-                    <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
-                        <div class="card p-0">
-                            <div class="card-body position-relative p-0">
-                                <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid "/>
-                                <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 end-0 z-3">Edit Profile</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col border border-1 border-light">
-                    <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
-                        <div class="card p-0">
-                            <div class="card-body position-relative p-0">
-                                <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
-                                <button class="btn btn-warning position-absolute bottom-0 end-0 z-3">View Earnings</button>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col border border-1 border-light">
-                    <article class="col border border-dark-subtle border-1">
-                        <div class="card p-0">
-                            <div class="card-body position-relative p-0">
-                                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
-                                <button class="btn btn-warning position-absolute bottom-0 end-0">Past Projects</button>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container-fluid">
-    <h2>Current Proposals</h2>
-    <div class="row row-cols-3 g-3">
-        <article class="col border border-light border-1">
-            <div class="card">
-                <div class="card-header">
-                    <p>Service Type</p>
-                </div>
-                <div class="card-body">
-                    <p>Date</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi exercitationem illo inventore optio praesentium quia recusandae rem soluta veritatis?</p>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <p>Proposed pay</p>
-                        </div>
-                        <div class="col align-self-center">
-                            <button class="btn btn-light">View Project</button>
-                        </div>
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <h1 th:text="'Hello, ' + ${user.firstName}">Hello, User</h1>
+                <div class="card mb-3">
+                    <img th:src="@{${userProfile.imgFilePath}}" class="card-img-top img-fluid custom-img" alt="User Profile Image">
+                    <div class="card-body">
+                        <a th:href="@{/edit/profile}" class="btn btn-warning btn-block">Edit Profile</a>
                     </div>
                 </div>
             </div>
-        </article>
-    </div>
-</section>
-
+            <div class="col-lg-6 col-md-12">
+                <h2>Proposals</h2>
+                <article class="card border border-dark-subtle container-fluid" th:each="item : ${services}">
+                    <div class="card-header">
+                        <p >Service Type</p>
+                    </div>
+                    <div class="card-body">
+                        <p>Date</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi exercitationem</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-light btn-block">View Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
 </main>
+
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+
+<!-- Add Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
