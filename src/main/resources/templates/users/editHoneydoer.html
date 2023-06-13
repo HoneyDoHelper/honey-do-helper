@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{partials/head.html :: head('Honeydoer Register')}">
+
+</head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+    <section class="container">
+        <div class="row">
+            <h1>What would you like to edit, <span th:text="${honeydoer.user.firstName}"></span>!</h1>
+
+            <div class="col">
+                <div class="row row-cols-3 g-3">
+                    <div class="col h-100" th:each="entry : ${honeydoerService}">
+                        <div class="mb-0">
+                            <p>
+                                <Strong><span th:text="${entry.services.category.name}">Name</span></Strong>
+                            </p>
+                        </div>
+                        <img th:src="@{${entry.services.imgFilePath}}" class="img-fluid mb-3"/>
+                        <div class="mb-3">
+                            <p><span th:text="${entry.services.name}">Service Name</span></p>
+                            <p th:text="${entry.aboutService}">Experience</p>
+                            <p>Rate: $<span th:text="${entry.rate}">Rate</span></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/edit/skills/{skillId}(skillId = ${entry.id})}"
+                               class="btn btn-warning"
+                            >Edit</a>
+                            <form th:action="@{/delete/skills/{skillId}(skillId = ${entry.id})}" th:method="post">
+                                <input type="hidden" th:value="${entry.id}" name="honeydoerSkillId">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <a class="btn btn-warning" th:href="@{/add/skills}">Add a new Service!</a>
+    </section>
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+</body>
+</html>

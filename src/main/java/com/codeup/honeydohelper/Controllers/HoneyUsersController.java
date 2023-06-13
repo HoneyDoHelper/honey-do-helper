@@ -71,11 +71,12 @@ public class HoneyUsersController {
 
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request, Model model) {
-        setCategoriesHtml(model);
 
         //Finds current logged in user and sets it in the html doc
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
+
+        setCategoriesHtml(model);
 
         //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
         if (currentLoggedInUser.getIsAdmin()) {
@@ -83,7 +84,6 @@ public class HoneyUsersController {
             return "users/adminDashboard";
         } else if (currentLoggedInUser.getIsHoneydoer()) {
             setHoneydoerDashboardHtml(model, currentLoggedInUser.getId());
-            setUserProfileHtml(model, currentLoggedInUser.getId());
 
             return "users/honeydoerDashboard";
         } else if (currentLoggedInUser != null){
@@ -97,8 +97,6 @@ public class HoneyUsersController {
 
     @GetMapping("/edit/profile")
     public String editUserProfileForm(Model model){
-        setCategoriesHtml(model);
-
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
 
@@ -140,25 +138,27 @@ public class HoneyUsersController {
         model.addAttribute("user", honeyUser);
     }
 
-    private void setHoneydoerDashboardHtml(Model model, int honeyUserId){
-        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
+    private void setHoneydoerDashboardHtml(Model model, int honeydoerId){
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeydoerId);
         model.addAttribute("honeydoer", honeydoer);
-        setAllHoneydoerTasksHtml(model,honeydoer);
-        setAllHoneydoerServicesHtml(model,honeydoer);
-        setAllHoneydoerReviewsHtml(model,honeydoer);
+        setHoneydoerTasksHtml(model,honeydoer);
+        setHoneydoerServicesHtml(model,honeydoer);
+        setHoneydoerReviewsHtml(model,honeydoer);
     }
 
-    private void setAllHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
-        List<HoneydoerReviews> allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
+    private void setHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerReviews> allReviews = new ArrayList<>();
+        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
         model.addAttribute("reviews", allReviews);
     }
 
-    private void setAllHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
-        List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+    private void setHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerServices> allServices = new ArrayList<>();
+        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
         model.addAttribute("services", allServices);
     }
 
-    private void setAllHoneydoerTasksHtml(Model model, Honeydoers honeydoer){
+    private void setHoneydoerTasksHtml(Model model, Honeydoers honeydoer){
         List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
         List<Tasks> allTasks = new ArrayList<>();
 

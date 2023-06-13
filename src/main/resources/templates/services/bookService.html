@@ -74,7 +74,7 @@
                         <div class="col">
                             <label for="budget-duration">Job Duration: </label>
                             <input id="budget-duration" class="form-control" th:field="*{budgetedDuration}"
-                                   type="number" step="0.5" min="0" max="10" list="budget-duration"/>
+                                   type="number" step="1" min="0" max="6" list="budget-duration"/>
                         </div>
                     </div>
                     <div class="mb-4">
@@ -84,8 +84,15 @@
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
                     <input type="hidden" id="honeyderServiceRate" name="honeydoerServiceRate" th:value="${service.rate}">
-                    <input type="hidden" name="honeyUserId" th:value="${user.id}">
+                    <input type="hidden"  name="honeyUserId" th:value="${user.id}">
                     <input type="hidden" name="honeydoerId" th:value="${honeydoer.id}">
+                    <input type="hidden" id="taxes" name="taxes" th:value="${taxesValue}">
+                    <input type="hidden" id="totalUserCost"  name="totalUserCost" th:value="${totalUserCostValue}">
+                    <input type="hidden" id="sitePay" name="sitePay" th:value="${sitePayValue}">
+                    <input type="hidden" id="honeydoerPayValue" name="honeydoerPay" th:value="${honeydoerPayValue}">
+
+
+
 
 
                     <div class="field">
@@ -222,6 +229,15 @@
         document.getElementById('card-tax-cost').textContent = '$' + taxCost.toFixed(2);
         document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
+        var taxesValue = taxCost.toFixed(2);
+        var totalUserCostValue = totalCost.toFixed(2);
+        var sitePayValue = siteFeeCost.toFixed(2);
+        var honeydoerPayValue = jobCost.toFixed(2);
+
+        document.getElementById('taxes').value = taxesValue;
+        document.getElementById('totalUserCost').value = totalUserCostValue;
+        document.getElementById('sitePay').value = sitePayValue;
+        document.getElementById('honeydoerPayValue').value = honeydoerPayValue;
     }
 
 

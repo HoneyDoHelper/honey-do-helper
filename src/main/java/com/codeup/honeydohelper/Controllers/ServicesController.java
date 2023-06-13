@@ -1,7 +1,9 @@
 package com.codeup.honeydohelper.Controllers;
+
 import com.codeup.honeydohelper.Models.*;
 import com.codeup.honeydohelper.Repositories.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.config.Task;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -112,7 +114,9 @@ public class ServicesController {
     public String gotoBookService(Model model, @PathVariable int honeydoerId, @PathVariable int serviceId) {
         setCategoriesHtml(model);
 
-        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
+        HoneyUsers currentLoggedInUser = (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        System.out.println("currentLoggedInUser.getId() + ' ' + currentLoggedInUser.getFirstName() = " + currentLoggedInUser.getId() + ' ' + currentLoggedInUser.getFirstName());
         setUserHtml(model, currentLoggedInUser);
 
         setAllUserProfilesHtml(model);
@@ -120,10 +124,11 @@ public class ServicesController {
         setHoneydoerServiceHtml(model, serviceId, honeydoerId);
         setReviewsHtml(model, honeydoerId);
 
+        model.addAttribute("taskCost", new TaskCosts());
         model.addAttribute("newTask", new Tasks());
         model.addAttribute("filestackKey", filestackKey);
 
-        return "/services/bookService";
+        return "services/bookService";
     }
 
 
@@ -132,23 +137,44 @@ public class ServicesController {
                                  @RequestParam("honeydoerServiceId") String honeydoerServiceId,
                                  @RequestParam("image_url") String imageUrl,
                                  @RequestParam("honeydoerId") String honeydoerId,
-                                 @RequestParam("honeyUserId") String honeyUserId) {
+                                 @RequestParam("honeyUserId") String honeyUserId,
+                                 @RequestParam("taxes") Float taxes,
+                                 @RequestParam("totalUserCost") Float totalUserCost,
+                                 @RequestParam("sitePay") Float sitePay,
+                                 @RequestParam("honeydoerPay") Float honeydoerPay)
+    {
 
         createTask(task, honeydoerServiceId, honeyUserId);
         createHoneydoerImage(imageUrl, honeydoerId);
 
-        return "redirect:/about";
+        //TaskCosts taskCostToSave = new TaskCosts();
+
+        //taskCostToSave.setTaxes(taxes);
+        //taskCostToSave.setSitePay(sitePay);
+        //taskCostToSave.setTotalUserCost(totalUserCost);
+        //taskCostToSave.setHoneydoerPay(honeydoerPay);
+
+        //Finish setting up our TaskCost object
+
+        //taskCostToSave.setTask(task);
+        //tasksCostsDao.save(taskCostToSave);
+
+        return "redirect:/dashboard";
+
     }
 
 
     /*================================================================================
     Controller Methods to set model Attributes
     ================================================================================*/
-    private HoneyUsers findLoggedInHoneyUser() {
-        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
 
-    private void setUserHtml(Model model, HoneyUsers honeyUser){
+
+
+//    private HoneyUsers findLoggedInHoneyUser() {
+//        return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    }
+
+    private void setUserHtml(Model model, HoneyUsers honeyUser) {
         model.addAttribute("user", honeyUser);
     }
 
@@ -186,7 +212,7 @@ public class ServicesController {
 
     private void setHoneydoerServiceHtml(Model model, int serviceId, int honeydoerId) {
         HoneydoerServices honeydoerService = honeydoerServicesDao.findByServices_IdAndHoneydoers_Id(serviceId, honeydoerId);
-            model.addAttribute("service", honeydoerService);
+        model.addAttribute("service", honeydoerService);
     }
 
     private void setHoneydoerHtml(Model model, int honeydoerId) {
@@ -238,6 +264,17 @@ public class ServicesController {
         honeydoerImage.setHoneydoer(honeydoerObject);
         honeydoerImage.setFilePath(imageUrl);
         honeydoerImagesDao.save(honeydoerImage);
+    }
+
+
+    private int findNewTask() {
+        Tasks newTask = tasksDao.findTopByOrderByIdDesc();
+        return newTask.getId();
+    }
+
+    private void createTaskCost(Tasks tasks, Float taxes, Float totalUserCost, Float sitePay){
+
+
     }
 
 }
