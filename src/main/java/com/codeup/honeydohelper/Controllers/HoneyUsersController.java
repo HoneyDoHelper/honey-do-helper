@@ -134,9 +134,23 @@ public class HoneyUsersController {
         setCategoriesHtml(model);
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
 
+        model.addAttribute("honeydoerServices", new HoneydoerServices());
+
         setHoneydoerHtml(model, findLoggedInHoneyUser().getId());
 
         return "/users/addSkill";
+    }
+
+    @PostMapping("/add/skills")
+    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices,
+                             @RequestParam("hourly-rate") String rate,
+                             @RequestParam("service") int serviceId,
+                             @RequestParam("honeydoerId") int honeyUserId) {
+
+        Honeydoers honeydoer = findHoneydoer(honeyUserId);
+        createHoneydoerService(honeydoerServices, rate, serviceId, honeydoer);
+
+        return "redirect:/users/editHoneydoer";
     }
 
     @GetMapping("/edit/skills")
@@ -184,7 +198,7 @@ public class HoneyUsersController {
 
         editHoneydoerSkill(honeydoerServiceObject, honeydoerObject, serviceObject, aboutService, hourlyRate);
 
-        return "redirect:/dashboard";
+        return "redirect:/users/editHoneydoer";
     }
 
     @PostMapping("/delete/skills/{skillId}")
@@ -195,7 +209,7 @@ public class HoneyUsersController {
 
         honeydoerServicesDao.delete(honeydoerServiceObject);
 
-        return "redirect:/dashboard";
+        return "redirect:/users/editHoneydoer";
     }
 
 
@@ -322,9 +336,20 @@ public class HoneyUsersController {
         honeydoerServicesDao.save(honeydoerService);
     }
 
+    private Honeydoers findHoneydoer(int honeyUserId){
+        return honeydoersDao.findByUser_Id(honeyUserId);
+    }
 
-    /*================================================================================
-    Controller Methods Delete Users
-    ================================================================================*/
+    private void createHoneydoerService(HoneydoerServices honeydoerServices,
+                                        String rate, int serviceId, Honeydoers honeydoer ){
+        honeydoerServices.setRate(Float.parseFloat(rate));
+
+        Optional<Services> service = servicesDao.findById(serviceId);
+        honeydoerServices.setServices(service.get());
+
+        honeydoerServices.setHoneydoers(honeydoer);
+
+        honeydoerServicesDao.save(honeydoerServices);
+    }
 
 }
