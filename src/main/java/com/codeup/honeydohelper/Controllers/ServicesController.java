@@ -147,20 +147,20 @@ public class ServicesController {
         createTask(task, honeydoerServiceId, honeyUserId);
         createHoneydoerImage(imageUrl, honeydoerId);
 
-        TaskCosts taskCostToSave = new TaskCosts();
+        //TaskCosts taskCostToSave = new TaskCosts();
 
-        taskCostToSave.setTaxes(taxes);
-        taskCostToSave.setSitePay(sitePay);
-        taskCostToSave.setTotalUserCost(totalUserCost);
-        taskCostToSave.setHoneydoerPay(honeydoerPay);
+        //taskCostToSave.setTaxes(taxes);
+        //taskCostToSave.setSitePay(sitePay);
+        //taskCostToSave.setTotalUserCost(totalUserCost);
+        //taskCostToSave.setHoneydoerPay(honeydoerPay);
 
         //Finish setting up our TaskCost object
 
-        taskCostToSave.setTask(task);
-        tasksCostsDao.save(taskCostToSave);
+        //taskCostToSave.setTask(task);
+        //tasksCostsDao.save(taskCostToSave);
 
+        return "redirect:/dashboard";
 
-    return "redirect:/about";
     }
 
 

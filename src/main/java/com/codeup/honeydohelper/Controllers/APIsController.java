@@ -25,6 +25,12 @@ public class APIsController {
         return "/apis/chat";
     }
 
+    @GetMapping("/chat2")
+    public String chatPage2(Model model) {
+        model.addAttribute("apiKey", apiKey);
+        return "/apis/chat2";
+    }
+
     @GetMapping("/calendar")
     public String showCalendar(Model model) {
         // You can add any necessary model attributes if needed

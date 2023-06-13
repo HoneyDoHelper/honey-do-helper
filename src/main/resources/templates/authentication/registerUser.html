@@ -49,7 +49,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-6">
@@ -143,7 +142,7 @@
                     <label for="terms">I accept the Terms</label><br><br>
                 </div>
 
-                <input id="submit-btn" type="submit" class="register-btn" value="Next">
+                <input id="submit-btn" type="submit" class="register-btn" value="Submit">
             </div>
         </form>
     </section>
@@ -151,19 +150,21 @@
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 <script>
+
     function toggleInputs(isHoneydoer) {
         const hiddenInputs = document.getElementById("hiddenInputs");
         const requiredInput = document.getElementById("about_self");
         const submitBtn = document.getElementById("submit-btn");
 
-        if (isHoneydoer) {
-            hiddenInputs.style.display = "block";
-            requiredInput.setAttribute("required", "");
-            submitBtn.value = "Next";
-        } else {
+        if (!isHoneydoer) {
             hiddenInputs.style.display = "none";
             requiredInput.removeAttribute("required");
             submitBtn.value = "Submit";
+
+        } else {
+            hiddenInputs.style.display = "block";
+            requiredInput.setAttribute("required", "");
+            submitBtn.value = "Next";
         }
     }
 </script>
