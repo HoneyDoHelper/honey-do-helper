@@ -1,142 +1,169 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{partials/head.html :: head('About')}">
-
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css"/>
 </head>
 <body>
-
 <header th:replace="~{partials/header.html :: header}"></header>
-
 <main>
-    <section class="container">
-        <h1>About Honeydo Helpers</h1>
-        <div class="row">
-            <div class="col">
-                <p>
-                    Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
-                </p>
-                <p>
-                    At Honeydo Helper, we believe in the power of neighbors helping neighbors. Our platform is designed to foster a sense of community and provide a reliable solution for all your interior and exterior home maintenance needs. Whether it's a daunting yardwork project or a painting task you've been putting off, our network of skilled professionals is here to assist you.
-                </p>
+<!--        <section class="hero-section">-->
+<!--            <div class="container">-->
+<!--                <h1 class="text-center">Unlock Your Home's Full Potential: Empower Your Honey Do List with Trusted Professionals and Get Things Done!</h1>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--        <div class="logo-container">-->
+<!--            <img th:src="@{/img/logo.svg}" alt="Honeydo Helper Logo" class="logo">-->
+<!--        </div>-->
+        <section class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <img th:src="@{/img/logo.svg}" alt="Honeydo Helper Logo" class="logo">
+                    <h2 class="catchphrase">Unlock Your Home's Full Potential: Empower Your Honey Do List with Trusted Professionals and Get Things Done!</h2>
+                </div>
             </div>
-            <div class="col">
-                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
+        </section>
+
+    <div class="row">
+        <div class="col text-center">
+            <p class="text-bold text-lg">
+                Experience the Ultimate Home Maintenance Solution with Honeydo Helper. From Repairs to Renovations, We've Got You Covered. Say Goodbye to Your Never-Ending To-Do List and Hello to More Quality Time. Our Trusted Professionals Will Tackle the Tasks, While You Relax and Recharge. Rediscover the Freedom of a Well-Managed Home and Embrace the Lifestyle You Deserve. Honeydo Helper: Your Path to Stress-Free Living.
+            </p>
+        </div>
+    </div>
+
+
+<!--            <div class="col">-->
+<!--                <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>-->
+<!--            </div>-->
+            <section class="collage-section">
+                <div class="collage-container">
+                    <div class="collage-item">
+                        <img th:src="@{/img/collage/housepainter.jpg}" alt="Photo 1">
+                    </div>
+                    <div class="collage-item">
+                        <img th:src="@{/img/collage/lighting.jpg}" alt="Photo 2">
+                    </div>
+                    <div class="collage-item">
+                        <img th:src="@{/img/collage/moving.jpg}" alt="Photo 3">
+                    </div>
+                    <div class="collage-item">
+                        <img th:src="@{/img/collage/windows.jpg}" alt="Photo 4">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+    <section class="call-to-action buzzer">
+        <a href="/register/user" class="buzzer-button">Don't delay, join today!</a>
+    </section>
+
+    <section class="review-section">
+        <div class="container">
+            <h2>What our customers say</h2>
+            <div class="review-columns">
+                <div class="review-column">
+                    <div class="review-content">
+                        <p>I was amazed by the quality of service provided by Honeydo Helper. They helped me with various home repair tasks, and the results were outstanding. Highly recommend!</p>
+                        <p class="author">- John Donaldson</p>
+                    </div>
+                </div>
+                <div class="review-column">
+                    <div class="review-content">
+                        <p>"Honeydo Helper made my life so much easier. Their professionals are reliable, skilled, and efficient. I no longer worry about unfinished tasks around the house!"</p>
+                        <p class="author">- Jane Smith</p>
+                    </div>
+                </div>
+                <div class="review-column">
+                    <div class="review-content">
+                        <p>"I've tried other similar services, but Honeydo Helper exceeded my expectations. Their team is friendly, and they always deliver exceptional results. I'm a happy customer!"</p>
+                        <p class="author">- Mike Hernandez</p>
+                    </div>
+                </div>
+                <div class="review-column">
+                    <div class="review-content">
+                        <p>"I've been using Honeydo Helper for all my home maintenance needs, and I couldn't be happier. The professionals are professional, prompt, and skilled. Thank you!"</p>
+                        <p class="author">- Mary Katherine</p>
+                    </div>
+                </div>
+                <div class="review-column">
+                    <div class="review-content">
+                        <p>"Honeydo Helper is a game-changer. I no longer have to spend hours searching for reliable professionals. The platform is user-friendly, and the service is top-notch."</p>
+                        <p class="author">- Marcus Johnson</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <section class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h2>Honeydo Helper-self to our site</h2>
-            </div>
-            <div class="col">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor dolore ducimus error eum fuga impedit labore, magnam magni necessitatibus nostrum officiis quibusdam recusandae sint sit vel voluptas. Adipisci, doloribus!</p>
-                <div>
-                    <button class="btn btn-light">Button</button>
-                    <button class="btn btn-light">Button</button>
+    <section class="featured-professionals">
+        <div class="container">
+            <h2>Featured Professionals</h2>
+            <div class="row">
+                <div class="col">
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img th:src="@{/img/featuredProfessionals/plumber.jpg}" alt="Professional Photo">
+                        </div>
+                        <div class="professional-details">
+                            <h3>John Smith</h3>
+                            <p>Expert in Plumbing</p>
+                            <div class="rating">
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                            </div>
+                            <p class="review">"John did an excellent job fixing my plumbing issue. Highly recommended!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img th:src="@{/img/featuredProfessionals/woman_painter.jpg}" alt="Professional Photo">
+                        </div>
+                        <div class="professional-details">
+                            <h3>Sarah Johnson</h3>
+                            <p>Expert in Painting</p>
+                            <div class="rating">
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                            </div>
+                            <p class="review">"Sarah transformed my living room with her amazing painting skills. So happy with the results!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img th:src="@{/img/featuredProfessionals/electricians.jpg}" alt="Professional Photo">
+                        </div>
+                        <div class="professional-details">
+                            <h3>Michael Davis</h3>
+                            <p>Expert in Electrical Work</p>
+                            <div class="rating">
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                            </div>
+                            <p class="review">"Michael fixed all the electrical issues in my home efficiently. Highly skilled professional!"</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="container">
-        <h2>Our team</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, obcaecati possimus praesentium recusandae reprehenderit tempore! Animi dolore ipsa soluta. Aliquam aliquid, asperiores distinctio dolorem error facere impedit qui veniam voluptas?</p>
-        <div class="row row-cols-3 g-3">
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/anthony.jpg}" class="img-fluid"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Anthony Chhor
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
 
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/david.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            David Renteria
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
 
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/gage.jpg}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Gage Jackson
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/tamica.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Tamica Simon
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/travis.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Travis Gomez
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
 </main>
-//random comment
-
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+
 </body>
 </html>

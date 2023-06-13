@@ -136,9 +136,284 @@ h3 {
     border: none;
     border-radius: 5px;
     width: 100%;
-    height: 40px;}
+    height: 40px;
+}
+
+
 
 .proposal-btn {
     background-color: var(--color-primary-main);
     color: white;
+}
+
+/* Reviews homepage */
+
+.review-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.review-column {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
+
+/* Featured Professionals home page */
+.featured-professionals {
+    background-color: #f7f7f7;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.featured-professionals h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.featured-professionals .row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.featured-professionals .col {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.professional-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.professional-card img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.professional-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.professional-card p {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.rating {
+    margin-bottom: 15px;
+}
+
+.rating .star {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+
+.review {
+    font-style: italic;
+    color: #555;
+}
+.collage-section {
+    padding: 40px;
+}
+
+.collage-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.collage-item {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 75%;
+}
+
+.collage-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.hero-section {
+    background-color: #f7f7f7;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero-section h1 {
+    margin: 0 auto;
+    max-width: 800px;
+}
+.logo {
+    margin-bottom: 20px;
+}
+
+.catchphrase {
+    margin-top: 20px;
+}
+
+.logo-small {
+    width: 65px;
+    height: 65px;
+    margin-right: 10px;
+}
+.headline {
+    margin-bottom: 2px;
+}
+.container .custom-review-card {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.container .custom-review-card p.custom-review-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.container .custom-review-card p.custom-review-author {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+/*Team Photos*/
+.container .card-header {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container .card-header img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.container .card-footer img {
+    font-size: 60px;
+}
+.card-body,
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.team-section {
+    text-align: center;
+}
+
+.team-section .col {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.team-section .card {
+    width: 100%;
+}
+
+.team-section .row-cols-3 {
+    justify-content: center;
+}
+
+
+
+/*About Us*/
+.image-container {
+    position: relative;
+    text-align: center;
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+/*Call to Action*/
+.call-to-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.buzzer {
+    position: relative;
+}
+
+.buzzer:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+}
+
+.buzzer-button {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding: 40px 60px;
+    background-color: #ffffff;
+    border: 2px solid #ffcc00;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buzzer-button:hover {
+    background-color: #ffcc00;
+    color: #ffffff;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    .featured-professionals .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .featured-professionals .col {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
