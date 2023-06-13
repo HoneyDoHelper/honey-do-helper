@@ -59,6 +59,7 @@ public class SecurityConfiguration {
                         "/", "/index", "/about", "/contact", "/support", "/tasks/**", "/tasks/update",
                         "/authentication/register","/authentication/**","/register","/register/user", "/add/skills",
                         "/register/honeydoer", "/register/honeydoer/**", "/user/honeydoer/dashboard/**",
+
                         "/services", "/services/**", "/apis/**", "/chat", "/chat2", "/calendar", "/edit/profile/**", "/edit/**",
                         "/categories", "/categories/**", "/css/**", "/img/**", "/edit/skills/**", "/delete/skills/**")
                 .permitAll();

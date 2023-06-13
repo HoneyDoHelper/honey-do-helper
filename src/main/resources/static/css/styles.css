@@ -108,6 +108,11 @@ h3 {
     font-size: 1.5rem;
 }
 
+.custom-img {
+    max-height: 500px;
+    max-width: fit-content;
+}
+
 /*REGISTER CSS*/
 
 .register-background {
@@ -137,6 +142,7 @@ h3 {
     border-radius: 5px;
     width: 100%;
     height: 40px;
+}
 
 .proposal-btn {
     background-color: var(--color-primary-main);
