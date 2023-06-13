@@ -71,12 +71,12 @@ public class HoneyUsersController {
 
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request, Model model) {
-        setCategoriesHtml(model);
 
         //Finds current logged in user and sets it in the html doc
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
-        setAllUserProfilesHtml(model);
+
+        setCategoriesHtml(model);
 
         //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
         if (currentLoggedInUser.getIsAdmin()) {
@@ -84,20 +84,9 @@ public class HoneyUsersController {
             return "users/adminDashboard";
         } else if (currentLoggedInUser.getIsHoneydoer()) {
             setHoneydoerDashboardHtml(model, currentLoggedInUser.getId());
-            setUserProfileHtml(model, currentLoggedInUser.getId());
 
             return "users/honeydoerDashboard";
-        } else if (currentLoggedInUser != null) {
-            setUserProfileHtml(model, currentLoggedInUser.getId());
-            List<ClientReviews> allReviews = clientReviewsDao.findAllByUser_Id(currentLoggedInUser.getId());
-            model.addAttribute("reviews", allReviews);
-
-//            List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
-//            List<Tasks> allTasks = new ArrayList<>();
-
-            List<Tasks> allTasks = tasksDao.findAllByUser_Id(currentLoggedInUser.getId());
-            allTasks.addAll(allTasks);
-            model.addAttribute("tasks", allTasks);
+        } else if (currentLoggedInUser != null){
 
             return "users/userDashboard";
         } else {
@@ -107,9 +96,7 @@ public class HoneyUsersController {
     }
 
     @GetMapping("/edit/profile")
-    public String editUserProfileForm(Model model) {
-        setCategoriesHtml(model);
-
+    public String editUserProfileForm(Model model){
         HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
         setUserHtml(model, currentLoggedInUser);
 
@@ -119,7 +106,6 @@ public class HoneyUsersController {
 
     @PostMapping("/edit/profile")
     public String editUserProfileSubmit(@RequestParam("honeyUserID") int honeyUserId,
-//
                                         @RequestParam("address") String address,
                                         @RequestParam("address2") String address2,
                                         @RequestParam("city") String city,
@@ -129,11 +115,10 @@ public class HoneyUsersController {
                                         @RequestParam("last_name") String last_name,
                                         @RequestParam("phone_number") String phone_number
 
-    ) {
+    ){
         Optional<HoneyUsers> honeyUsersOptional = honeyUsersDao.findById(honeyUserId);
         HoneyUsers honeyUser = honeyUsersOptional.get();
         UserProfiles userProfile = userProfileDao.findByUser_Id(honeyUserId);
-
 
         editHoneyUser(honeyUser, first_name, last_name);
         editUserProfile(userProfile, address, address2, city, state, zip, phone_number);
@@ -141,177 +126,67 @@ public class HoneyUsersController {
         return "redirect:/dashboard";
     }
 
-    @GetMapping("/add/skills")
-    public String addHoneydoerSkillsForm(Model model){
-        setCategoriesHtml(model);
-        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
-
-        model.addAttribute("honeydoerServices", new HoneydoerServices());
-
-        setHoneydoerHtml(model, findLoggedInHoneyUser().getId());
-
-        return "/users/addSkill";
-    }
-
-    @PostMapping("/add/skills")
-    public String submitForm(@ModelAttribute HoneydoerServices honeydoerServices,
-                             @RequestParam("hourly-rate") String rate,
-                             @RequestParam("service") int serviceId,
-                             @RequestParam("honeydoerId") int honeyUserId) {
-
-        Honeydoers honeydoer = findHoneydoer(honeyUserId);
-        createHoneydoerService(honeydoerServices, rate, serviceId, honeydoer);
-
-        return "redirect:/users/editHoneydoer";
-    }
-
-    @GetMapping("/edit/skills")
-    public String editHoneydoerSkillsForm(Model model){
-        setCategoriesHtml(model);
-        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
-
-        setHoneydoerHtml(model, findLoggedInHoneyUser().getId());
-
-        return "/users/editHoneydoer";
-    }
-
-    @GetMapping("/edit/skills/{skillId}")
-    public String editHoneydoerSkillsForm(Model model, @PathVariable int skillId){
-        setCategoriesHtml(model);
-        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
-
-        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(skillId);
-        HoneydoerServices honeydoerServiceObject = honeydoerService.get();
-        model.addAttribute("honeydoerSkill", honeydoerServiceObject);
-
-        setHoneydoerHtml(model, findLoggedInHoneyUser().getId());
-
-        setCategoriesHtml(model);
-
-        return "/users/editSkill";
-    }
-
-    @PostMapping("/edit/skills/{skillId}")
-    public String saveHoneydoerSkill(@RequestParam("hourly-rate") String hourlyRate,
-                                     @RequestParam("service") int serviceId,
-                                     @RequestParam("experience") String aboutService,
-                                     @RequestParam("honeydoerId") int honeydoerId,
-                                     @RequestParam("honeydoerSkillId") int honeydoerSkillId){
-
-        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(honeydoerSkillId);
-        HoneydoerServices honeydoerServiceObject = honeydoerService.get();
-
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(honeydoerId);
-        Honeydoers honeydoerObject = honeydoer.get();
-
-        Optional<Services> service = servicesDao.findById(serviceId);
-        Services serviceObject = service.get();
-
-
-        editHoneydoerSkill(honeydoerServiceObject, honeydoerObject, serviceObject, aboutService, hourlyRate);
-
-        return "redirect:/users/editHoneydoer";
-    }
-
-    @PostMapping("/delete/skills/{skillId}")
-    public String deleteHoneydoerSkill(@RequestParam("honeydoerSkillId") int honeydoerSkillId){
-
-        Optional<HoneydoerServices> honeydoerService = honeydoerServicesDao.findById(honeydoerSkillId);
-        HoneydoerServices honeydoerServiceObject = honeydoerService.get();
-
-        honeydoerServicesDao.delete(honeydoerServiceObject);
-
-        return "redirect:/users/editHoneydoer";
-    }
-
 
     /*================================================================================
     Controller Methods to set model Attributes
     ================================================================================*/
-    private HoneyUsers findLoggedInHoneyUser() {
+    private HoneyUsers findLoggedInHoneyUser(){
         return (HoneyUsers) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    private void setUserHtml(Model model, HoneyUsers honeyUser) {
+    private void setUserHtml(Model model, HoneyUsers honeyUser){
         model.addAttribute("user", honeyUser);
-        UserProfiles userProfile = userProfileDao.findByUser_Id(honeyUser.getId());
-        model.addAttribute("userProfile", userProfile);
-
     }
 
-    private void setAllUserProfilesHtml(Model model) {
-        List<UserProfiles> allUserProfiles = userProfileDao.findAll();
-        model.addAttribute("userProfiles", allUserProfiles);
-    }
-
-
-    private void setHoneydoerHtml(Model model, int honeyUserId){
-        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
+    private void setHoneydoerDashboardHtml(Model model, int honeydoerId){
+        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeydoerId);
         model.addAttribute("honeydoer", honeydoer);
-        setAllHoneydoerServicesHtml(model, honeydoer);
-        setAllServicesHtml(model, honeydoer);
+        setHoneydoerTasksHtml(model,honeydoer);
+        setHoneydoerServicesHtml(model,honeydoer);
+        setHoneydoerReviewsHtml(model,honeydoer);
     }
 
-    private void setHoneydoerDashboardHtml(Model model, int honeyUserId){
-        Honeydoers honeydoer = honeydoersDao.findByUser_Id(honeyUserId);
-        model.addAttribute("honeydoer", honeydoer);
-        setAllHoneydoerTasksHtml(model, honeydoer);
-        setAllHoneydoerServicesHtml(model, honeydoer);
-        setAllHoneydoerReviewsHtml(model, honeydoer);
-    }
-
-
-    private void setAllHoneydoerReviewsHtml(Model model, Honeydoers honeydoer) {
-        List<HoneydoerReviews> allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
+    private void setHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerReviews> allReviews = new ArrayList<>();
+        allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
         model.addAttribute("reviews", allReviews);
     }
 
-    private void setAllHoneydoerServicesHtml(Model model, Honeydoers honeydoer) {
-        List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
-        model.addAttribute("honeydoerService", allServices);
+    private void setHoneydoerServicesHtml(Model model, Honeydoers honeydoer){
+        List<HoneydoerServices> allServices = new ArrayList<>();
+        allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
+        model.addAttribute("services", allServices);
     }
 
-
-    private void setAllHoneydoerTasksHtml(Model model, Honeydoers honeydoer) {
+    private void setHoneydoerTasksHtml(Model model, Honeydoers honeydoer){
         List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
         List<Tasks> allTasks = new ArrayList<>();
 
-        for (HoneydoerServices service : allServices) {
+        for (HoneydoerServices service: allServices) {
             List<Tasks> objects = tasksDao.findAllByHoneydoerService_Id(service.getId());
             allTasks.addAll(objects);
         }
         model.addAttribute("tasks", allTasks);
     }
 
-    private void setCategoriesHtml(Model model) {
+    private void setCategoriesHtml(Model model){
         List<Categories> allCategories = categoriesDao.findAll();
         model.addAttribute("categories", allCategories);
     }
 
-    private void setUserProfileHtml(Model model, int userId) {
+    private void setUserProfileHtml(Model model, int userId){
         UserProfiles userProfile = userProfileDao.findByUser_Id(userId);
         model.addAttribute("userProfile", userProfile);
     }
 
-    private void setAllUserProfilesHtml(Model model) {
-        List<UserProfiles> allUserProfiles = userProfileDao.findAll();
-        model.addAttribute("userProfiles", allUserProfiles);
-    }
-
-    private void setAllServicesHtml(Model model, Honeydoers honeydoer){
-        List<Services> allServices = servicesDao.findAll();
-        model.addAttribute("services", allServices);
-    }
-
-
     /*================================================================================
     Controller Methods Edit Users
     ================================================================================*/
-    private void editHoneyUser(HoneyUsers honeyUser, String first_name, String last_name) {
-        if (first_name != null) {
+    private void editHoneyUser(HoneyUsers honeyUser, String first_name, String last_name){
+        if (first_name != null){
             honeyUser.setFirstName(first_name);
         }
-        if (last_name != null) {
+        if (last_name != null){
             honeyUser.setLastName(last_name);
         }
 
@@ -319,61 +194,32 @@ public class HoneyUsersController {
     }
 
     private void editUserProfile(UserProfiles userProfile, String address, String address2,
-                                 String city, String state, String zip, String phone_number) {
-        if (address != null) {
+                                 String city, String state, String zip, String phone_number){
+        if (address != null){
             userProfile.setAddress(address);
         }
-        if (address2 != null) {
+        if (address2 != null){
             userProfile.setAddress2(address2);
         }
-        if (city != null) {
+        if (city != null){
             userProfile.setCity(city);
         }
-        if (state != null) {
+        if (state != null){
             userProfile.setState(state);
         }
-        if (zip != null) {
+        if (zip != null){
             userProfile.setZip(Integer.parseInt(zip));
         }
-        if (phone_number != null) {
+        if (phone_number != null){
             userProfile.setPhone(Long.parseLong(phone_number));
         }
 
         userProfileDao.save(userProfile);
     }
 
-    private void editHoneydoerSkill(HoneydoerServices honeydoerService, Honeydoers honeydoer,
-                                    Services service, String aboutService, String rate){
-        if (honeydoer != null){
-            honeydoerService.setHoneydoers(honeydoer);
-        }
-        if (service != null){
-            honeydoerService.setServices(service);
-        }
-        if (aboutService != null){
-            honeydoerService.setAboutService(aboutService);
-        }
-        if (rate != null){
-            honeydoerService.setRate(Float.parseFloat(rate));
-        }
 
-        honeydoerServicesDao.save(honeydoerService);
-    }
-
-    private Honeydoers findHoneydoer(int honeyUserId){
-        return honeydoersDao.findByUser_Id(honeyUserId);
-    }
-
-    private void createHoneydoerService(HoneydoerServices honeydoerServices,
-                                        String rate, int serviceId, Honeydoers honeydoer ){
-        honeydoerServices.setRate(Float.parseFloat(rate));
-
-        Optional<Services> service = servicesDao.findById(serviceId);
-        honeydoerServices.setServices(service.get());
-
-        honeydoerServices.setHoneydoers(honeydoer);
-
-        honeydoerServicesDao.save(honeydoerServices);
-    }
+    /*================================================================================
+    Controller Methods Delete Users
+    ================================================================================*/
 
 }
