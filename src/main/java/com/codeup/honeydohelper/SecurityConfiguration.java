@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                 // Logout configuration
                 .and()
                 .logout()
-                .logoutSuccessUrl("/") // Redirect to the login page after successful logout (with a query string value appended)
+                .logoutSuccessUrl("/login") // Redirect to the login page after successful logout (with a query string value appended)
 
                 // Pages that require authentication
                 .and()

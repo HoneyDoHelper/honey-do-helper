@@ -84,17 +84,6 @@ public class AuthenticationController {
 
 
     /*/////////////////////////////////////////////////////////
-    Logout
-    /////////////////////////////////////////////////////////*/
-//    @GetMapping("/logout")
-//    public String performLogout() {
-//        return "redirect:/login?logout";
-//    }
-
-    //this needs a proper redirect to correct page after logout is complete
-
-
-    /*/////////////////////////////////////////////////////////
     Register
     /////////////////////////////////////////////////////////*/
     @GetMapping("/register/user")

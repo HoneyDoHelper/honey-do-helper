@@ -41,11 +41,6 @@
                             </ul>
                         </li>
 
-
-                        <!-- th:blocks are neat. they allow you to create code-like structures,  -->
-                        <!-- without taking up visual space, it's why the logout button was acting strange -->
-                        <!-- happy coding! -->
-
                         <th:block sec:authorize="isAuthenticated()">
                             <li class="nav-item my-3 my-lg-0 mx-lg-3">
                                 <a class="btn btn-outline-secondary" href="/dashboard">Profile</a>
