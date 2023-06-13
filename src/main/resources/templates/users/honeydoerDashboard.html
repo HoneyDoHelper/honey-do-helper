@@ -14,91 +14,163 @@
             <h1 th:text="'Hello, ' + ${honeydoer.user.firstName}">Hello, Honeydoer</h1>
             <div class="col me-3">
                 <h2>Upcoming Tasks</h2>
-
                 <th:block th:if="${tasks.size() <= 0}">
                     <p>No tasks available.</p>
                 </th:block>
+
                 <th:block th:unless="${tasks.size() <= 0}">
-                    <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                        <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}" class="row">
-                            <div class="col-2 align-self-center">
-                                <img th:src="@{/img/team/travis.png}" class="h-100 w-100 rounded-circle"/>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-home"
+                                    type="button" role="tab" aria-controls="pills-home"
+                                    aria-selected="true"
+                            >Pending</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-profile"
+                                    type="button" role="tab" aria-controls="pills-profile"
+                                    aria-selected="false"
+                            >Accepted</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-contact"
+                                    type="button" role="tab" aria-controls="pills-contact"
+                                    aria-selected="false"
+                            >Completed</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="pills-tabContent">
+
+<!--                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">-->
+<!--                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">-->
+<!--                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">-->
+<!--                                    <th:block  th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">-->
+<!--                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">-->
+<!--                                            <div class="col-2 align-self-center">-->
+<!--                                                <th:block th:each="profile : ${userProfiles}">-->
+<!--                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">-->
+<!--                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">-->
+<!--                                                    </th:block>-->
+<!--                                                </th:block>-->
+<!--                                            </div>-->
+<!--                                            <div class="col align-self-center">-->
+<!--                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>-->
+<!--                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>-->
+<!--                                            </div>-->
+<!--                                        </a>-->
+<!--                                    </th:block>-->
+<!--                                    <th:block  th:unless="${!tasks[index].isAccepted && !tasks[index].isCompleted}">-->
+<!--                                        <h3>No pending tasks</h3>-->
+<!--                                    </th:block>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
+                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
+
+                                    <th:block th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">
+                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
+                                            <div class="col-2 align-self-center">
+                                                <th:block th:each="profile : ${userProfiles}">
+                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">
+                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                                                    </th:block>
+                                                </th:block>
+                                            </div>
+
+                                            <div class="col align-self-center">
+                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
+                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+                                            </div>
+                                        </a>
+                                    </th:block>
+
+                                    <th:block th:with="pendingTasksFound=false">
+                                        <th:block  th:remove="tag" th:unless="${pendingTasksFound}">
+                                            <th:block th:unless="${!tasks[index].isAccepted && !tasks[index].isCompleted}">
+                                                <h3>No pending tasks</h3>
+                                                <th:block th:with="pendingTasksFound=true"></th:block>
+                                            </th:block>
+                                        </th:block>
+                                    </th:block>
+                                </div>
                             </div>
-                            <div class="col align-self-center">
-                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
-                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
+                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
+                                    <th:block  th:if="${tasks[index].isAccepted && !tasks[index].isCompleted}">
+                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
+                                            <div class="col-2 align-self-center">
+                                                <th:block th:each="profile : ${userProfiles}">
+                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">
+                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                                                    </th:block>
+                                                </th:block>
+                                            </div>
+                                            <div class="col align-self-center">
+                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
+                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+                                            </div>
+                                        </a>
+                                    </th:block>
+                                    <th:block  th:unless="${tasks[index].isAccepted && !tasks[index].isCompleted}">
+                                        <h3>No accepted tasks</h3>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
+                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
+                                    <th:block  th:if="${tasks[index].isAccepted && tasks[index].isCompleted}">
+                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
+                                            <div class="col-2 align-self-center">
+                                                <th:block th:each="profile : ${userProfiles}">
+                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">
+                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
+                                                    </th:block>
+                                                </th:block>
+                                            </div>
+                                            <div class="col align-self-center">
+                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
+                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+                                            </div>
+                                        </a>
+                                    </th:block>
+                                    <th:block  th:unless="${tasks[index].isAccepted && tasks[index].isCompleted}">
+                                        <h3>No completed tasks</h3>
+                                    </th:block>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </th:block>
-
-
-
             </div>
+
             <div class="col">
                 <div class="row row-cols-2 mb-4">
-                    <div class="col border border-1 border-light">
-                        <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
+                    <div class="col">
+                        <article class="col ratio ratio-1x1">
                             <div class="card p-0">
                                 <div class="card-body position-relative p-0">
-                                    <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
-                                    <a th:href="@{/edit/profile/{userId}(userId = ${honeydoer.user.id})}" href="" class="btn btn-warning position-absolute bottom-0 end-0">Edit Profile</a>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="col border border-1 border-light">
-                        <article class="col border border-dark-subtle border-1 ratio ratio-1x1">
-                            <div class="card p-0">
-                                <div class="card-body position-relative p-0">
-                                    <img th:src="@{/img/team/travis.png}" class="img-fluid"/>
-                                    <button class="btn btn-warning position-absolute bottom-0 end-0">View Earnings</button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col border border-1 border-light">
-                        <article class="col border border-dark-subtle border-1">
-                            <div class="card p-0">
-                                <div class="card-body position-relative p-0">
-                                    <img th:src="@{/img/heroes/about.png}" class="img-fluid"/>
-                                    <button class="btn btn-warning position-absolute bottom-0 end-0">Past Projects</button>
+                                    <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
+                                    <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 start-0">Edit Profile</a>
+                                    <a th:href="@{/edit/skills}" class="btn btn-warning position-absolute bottom-0 end-0">Edit Skills</a>
                                 </div>
                             </div>
                         </article>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="container-fluid">
-        <h2>Current Proposals</h2>
-        <div class="row row-cols-3 g-3">
-            <article class="col border border-light border-1">
-                <div class="card">
-                    <div class="card-header">
-                        <p>Service Type</p>
-                    </div>
-                    <div class="card-body">
-                        <p>Date</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi exercitationem illo inventore optio praesentium quia recusandae rem soluta veritatis?</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col align-self-center">
-                                <p>Proposed pay</p>
-                            </div>
-                            <div class="col align-self-center">
-                                <button class="btn btn-light">View Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
         </div>
     </section>
 

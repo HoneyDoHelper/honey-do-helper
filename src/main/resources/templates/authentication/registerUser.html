@@ -49,7 +49,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-6">
@@ -125,14 +124,25 @@
                     </div>
                 </div>
 
-                <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">
+                <div class="field">
+                    <div class="control">
+                        <label for="fileupload">Select a file to upload</label>
+                        <input type="hidden" id="fileupload">
+                        <button class="button" type="button" id="picker">Pick file</button>
+                    </div>
+                    <div id="thumbnail-container"></div>
+                    <div class="control" id="nameBox"></div>
+                    <div class="control" id="urlBox"></div>
+                </div>
+
+<!--                <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">-->
 
                 <div class="mb-3">
                     <input type="checkbox" id="terms" name="terms" required>
                     <label for="terms">I accept the Terms</label><br><br>
                 </div>
 
-                <input id="submit-btn" type="submit" class="register-btn" value="Next">
+                <input id="submit-btn" type="submit" class="register-btn" value="Submit">
             </div>
         </form>
     </section>
@@ -140,21 +150,24 @@
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 <script>
+
     function toggleInputs(isHoneydoer) {
         const hiddenInputs = document.getElementById("hiddenInputs");
         const requiredInput = document.getElementById("about_self");
         const submitBtn = document.getElementById("submit-btn");
 
-        if (isHoneydoer) {
-            hiddenInputs.style.display = "block";
-            requiredInput.setAttribute("required", "");
-            submitBtn.value = "Next";
-        } else {
+        if (!isHoneydoer) {
             hiddenInputs.style.display = "none";
             requiredInput.removeAttribute("required");
             submitBtn.value = "Submit";
+
+        } else {
+            hiddenInputs.style.display = "block";
+            requiredInput.setAttribute("required", "");
+            submitBtn.value = "Next";
         }
     }
 </script>
+<script th:replace="~{partials/filestack.html :: filestackScript}"></script>
 </body>
 </html>
