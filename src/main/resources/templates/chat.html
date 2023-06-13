@@ -45,11 +45,11 @@
 
     Talk.ready.then(function () {
         var me = new Talk.User({
-            id: '123456',
-            name: 'Alice',
-            email: 'alice@example.com',
-            photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
-            welcomeMessage: 'Hey there! How are you? :-)',
+            id: 'id',
+            name: 'first_name',
+            email: 'email',
+            photoUrl: 'img_file_path',
+            welcomeMessage: 'Hey there, '+ first_name +'! How are you? :-)',
         });
         window.talkSession = new Talk.Session({
             appId: apiKey,
@@ -57,10 +57,10 @@
             me: me
         });
         var other = new Talk.User({
-            id: '654321',
-            name: 'Sebastian',
-            email: 'Sebastian@example.com',
-            photoUrl: 'https://talkjs.com/images/avatar-5.jpg',
+            id: 'id',
+            name: 'first_name',
+            email: 'email',
+            photoUrl: 'img_file_path',
             welcomeMessage: 'Hey, how can I help?',
         });
 
