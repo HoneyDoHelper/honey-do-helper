@@ -9,5 +9,4 @@ public interface HoneyUsersRepository extends JpaRepository<HoneyUsers, Integer>
     HoneyUsers findByEmail(String email);
     HoneyUsers findTopByOrderByIdDesc();
 
-    List<HoneyUsers> findAllByHoneyUsers_Id(int id);
 }
