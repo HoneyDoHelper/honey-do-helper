@@ -9,4 +9,5 @@ public interface TasksRepository extends JpaRepository<Tasks, Integer> {
     List<Tasks> findAllByHoneydoerService_Id(int honeydoerServiceId);
     Tasks findTopByOrderByIdDesc();
 
+    List<Tasks> findAllByHoneyUsers_Id(int id);
 }

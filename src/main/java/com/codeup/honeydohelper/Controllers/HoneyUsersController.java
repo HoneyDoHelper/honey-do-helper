@@ -165,6 +165,11 @@ public class HoneyUsersController {
         model.addAttribute("services", allServices);
     }
 
+    private void setAllHoneyUsersTasksHtml(Model model, HoneyUsers honeyUser){
+        List<Tasks> allProposals = tasksDao.findAllByHoneyUsers_Id(honeyUser.getId());
+        model.addAttribute("proposals", allProposals);
+    }
+
     private void setAllHoneydoerTasksHtml(Model model, Honeydoers honeydoer){
         List<HoneydoerServices> allServices = honeydoerServicesDao.findAllByHoneydoers_Id(honeydoer.getId());
         List<Tasks> allTasks = new ArrayList<>();
@@ -185,6 +190,9 @@ public class HoneyUsersController {
         UserProfiles userProfile = userProfileDao.findByUser_Id(userId);
         model.addAttribute("userProfile", userProfile);
     }
+
+
+
 
     /*================================================================================
     Controller Methods Edit Users

@@ -31,18 +31,18 @@
             </div>
             <div class="col-lg-6 col-md-12">
                 <h2>Proposals</h2>
-                <article class="card border border-dark-subtle container-fluid" th:each="item : ${services}">
+                <article class="card border border-dark-subtle container-fluid" th:each="service : ${services}">
                     <div class="card-header">
-                        <p >Service Type</p>
+                        <p th:text="${service.serviceType}">Service Type</p>
                     </div>
                     <div class="card-body">
-                        <p>Date</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi exercitationem</p>
+                        <p th:text="${service.date}">Date</p>
+                        <p th:text="${service.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi exercitationem</p>
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-6">
-                                <button class="btn btn-light btn-block">View Project</button>
+                                <a th:href="@{'/tasks/' + ${service.id}}" class="btn btn-light btn-block">View Proposal</a>
                             </div>
                         </div>
                     </div>
