@@ -10,79 +10,39 @@
 
 <main>
     <section class="container">
-        <div class="row col">
-            <h1>Show us what you got, <span th:text="${newHoneydoer.user.firstName}"></span>!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis.
-                Alias
-            </p>
-            <div class="col-lg-4 col">
-                <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
+        <div class="row">
+            <h1>What would you like to edit, <span th:text="${honeydoer.user.firstName}"></span>!</h1>
 
-            </div>
-            <div class="col-lg-9" col>
-                <form th:action="@{'/register/honeydoer/' + ${newHoneydoer.id}}" th:method="post">
-                    <div class="form-group mb-2 mt-3">
-                        <label for="category">Category:</label>
-                        <select id="category" name="category" class="form-select form-control">
-                            <option value="" disabled selected>Select One</option>
-                            <option value="category" th:each="category : ${categories}"
-                                    th:text="${category.name + ' Service'}">Category Name
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="service">Service:</label>
-                        <select id="service" name="service" class="form-select form-control">
-
-                            <option value="" disabled selected>Select One</option>
-                            <option th:each="service : ${services}" th:text="${service.name}" th:value="${service.id}">
-                                Service Name
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="experience">Your Experience:</label>
-                        <textarea id="experience" name="experience" rows="4" class="form-control" maxlength="250"
-                                  th:field="${honeydoerServices.aboutService}"></textarea>
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <label for="hourly-rate">Your hourly rate:</label>
-                        <input type="number" id="hourly-rate" name="hourly-rate" class="form-control">
-                    </div>
-
-                    <input type="hidden" th:value="${newHoneydoer.user.id}" name="honeydoerId">
-                    <button type="submit" class="honeydoer-submit mt-2">Add</button>
-                </form>
-            </div>
-            <div class="col-lg-8 col row">
-                <div class="col-lg-4 col" th:each="entry : ${honeydoerService}">
-                    <img th:src="@{${entry.services.imgFilePath}}" class="honeydoer-img"/>
-                    <div>
-                        <p class="mt-3"><Strong>
-                            <span th:text="${entry.services.category.name}">Name</span>
-                        </Strong>
-                        </p>
-                    </div>
-                    <div>
-                        <h3>
-                            <span th:text="${entry.services.name}">Service Name</span>
-                        </h3>
-                    </div>
-                    <div>
-                        <p th:text="${entry.aboutService}">Experience</p>
-                    </div>
-                    <div>
-                        <h2>
-                            Rate: $<span th:text="${entry.rate}">Rate</span>
-                        </h2>
+            <div class="col">
+                <div class="row row-cols-3 g-3">
+                    <div class="col h-100" th:each="entry : ${honeydoerService}">
+                        <div class="mb-0">
+                            <p>
+                                <Strong><span th:text="${entry.services.category.name}">Name</span></Strong>
+                            </p>
+                        </div>
+                        <img th:src="@{${entry.services.imgFilePath}}" class="img-fluid mb-3"/>
+                        <div class="mb-3">
+                            <p><span th:text="${entry.services.name}">Service Name</span></p>
+                            <p th:text="${entry.aboutService}">Experience</p>
+                            <p>Rate: $<span th:text="${entry.rate}">Rate</span></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/edit/skills/{skillId}(skillId = ${entry.id})}"
+                               class="btn btn-warning"
+                            >Edit</a>
+                            <form th:action="@{/delete/skills/{skillId}(skillId = ${entry.id})}" th:method="post">
+                                <input type="hidden" th:value="${entry.id}" name="honeydoerSkillId">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <section class="container">
-        <a class="btn btn-warning" th:href="@{/login}">Done</a>
+        <a class="btn btn-warning" th:href="@{/login}">Add a new Service!</a>
     </section>
 </main>
 
