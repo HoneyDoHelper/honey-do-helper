@@ -19,7 +19,7 @@ public class HoneyUsers {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 100)
+    @Column(name = "password", nullable = false, length = 250)
     private String password;
 
     @Column(name = "is_admin", nullable = false)
