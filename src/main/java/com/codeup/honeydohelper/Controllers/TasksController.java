@@ -63,7 +63,7 @@ public class TasksController {
         //Puts user in appropriate dashboard based on isAdmin or isHoneydoer
         if (currentLoggedInUser.getIsAdmin()) {
 
-            return "/services/tasks";
+            return "services/tasks";
 
         } else if (currentLoggedInUser.getIsHoneydoer()
                 && currentLoggedInUser.getId() == honeydoer.getUser().getId()
@@ -71,13 +71,13 @@ public class TasksController {
 
             model.addAttribute("isHoneydoer", true);
 
-            return "/services/tasks";
+            return "services/tasks";
 
         } else if (currentLoggedInUser.getId() == task.getUser().getId()){
 
             model.addAttribute("isHoneydoer", false);
 
-            return "/services/tasks";
+            return "services/tasks";
 
         } else {
             return "redirect:/login";
