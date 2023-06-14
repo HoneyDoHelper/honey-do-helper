@@ -153,7 +153,7 @@ public class HoneyUsersController {
         Honeydoers honeydoer = findHoneydoer(honeyUserId);
         createHoneydoerService(honeydoerServices, rate, serviceId, honeydoer);
 
-        return "redirect:/users/editHoneydoer";
+        return "redirect:/edit/profile";
     }
 
     @GetMapping("/edit/skills")
@@ -201,7 +201,7 @@ public class HoneyUsersController {
 
         editHoneydoerSkill(honeydoerServiceObject, honeydoerObject, serviceObject, aboutService, hourlyRate);
 
-        return "redirect:/users/editHoneydoer";
+        return "redirect:/edit/profile";
     }
 
     @PostMapping("/delete/skills/{skillId}")
@@ -212,7 +212,7 @@ public class HoneyUsersController {
 
         honeydoerServicesDao.delete(honeydoerServiceObject);
 
-        return "redirect:/users/editHoneydoer";
+        return "redirect:/edit/profile";
     }
 
 

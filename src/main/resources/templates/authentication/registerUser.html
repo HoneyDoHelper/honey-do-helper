@@ -10,11 +10,7 @@
 
 <main>
     <section class="container">
-        <h1>Register - Honeydoer</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur laboriosam magni veritatis. Alias
-            animi atque eos illum ipsa, magni natus nobis odit officiis praesentium quibusdam quidem ratione unde
-            voluptatum?</p>
-        <br>
+        <h1 class="mb-3">Register - Honeydoer</h1>
 
         <form  th:action="@{/register/user}" th:method="post">
             <div class="form-floating mb-3">
@@ -56,15 +52,7 @@
                         <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
                         <label for="phone_number">Phone Number</label>
                     </div>
-                </div>
-
-                <div class="col-6">
-                    <div>
-                        <input type="file" class="form-control form-control-lg" id="profile_picture" name="profile_picture" placeholder="upload profile photo">
-                        <label for="profile_picture"></label>
-                    </div>
-                </div>
-
+                </div>v>
             </div>
 
             <div class="form-floating mb-3">

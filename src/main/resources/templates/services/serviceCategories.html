@@ -11,11 +11,9 @@
 <main>
     <section class="container">
         <h1>Service Categories</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur eos ipsum libero magni neque nesciunt provident qui quo ratione temporibus?</p>
     </section>
     <section class="container">
         <div class="row row-cols-3 g-3">
-            <!--Thyme logic goes here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
             <article class="col" th:each="item : ${categories}">
                 <div class="card">
                     <div class="card-header">
@@ -26,7 +24,9 @@
                         <p th:text="${item.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
                     </div>
                     <div class="card-footer">
-                        <p>links go here</p>
+                       <a th:href="@{/categories/{categoryID}(categoryID=${item.id})}"
+                          th:text="${'Go to ' + item.name}"
+                          class="btn btn-warning">Edit Skills</a>
                     </div>
                 </div>
             </article>

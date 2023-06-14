@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{partials/head.html :: head('Home')}">
-    <link rel="stylesheet" type="text/css" href="../static/css/styles.css"/>
 </head>
 <body>
 <header th:replace="~{partials/header.html :: header}"></header>
@@ -10,7 +9,7 @@
     <section class="container">
         <div class="row">
             <div class="col text-center">
-                <img th:src="@{/img/logo.svg}" alt="Honeydo Helper Logo" class="logo">
+                <img th:src="@{/img/logo2.svg}" alt="Honeydo Helper Logo" class="logo">
                 <h2 class="catchphrase">Unlock Your Home's Full Potential: Empower Your Honey Do List with Trusted Professionals and Get Things Done!</h2>
                 <p class="text-bold text-lg">
                     Experience the Ultimate Home Maintenance Solution with Honeydo Helper. From Repairs to Renovations, We've Got You Covered. Say Goodbye to Your Never-Ending To-Do List and Hello to More Quality Time. Our Trusted Professionals Will Tackle the Tasks, While You Relax and Recharge. Rediscover the Freedom of a Well-Managed Home and Embrace the Lifestyle You Deserve. Honeydo Helper: Your Path to Stress-Free Living.
@@ -137,62 +136,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/gage.jpg}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Gage Jackson
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/tamica.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Tamica Simon
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/travis.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Travis Gomez
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-                <!-- random comment -->
-            </article>
         </div>
     </section>
 </main>

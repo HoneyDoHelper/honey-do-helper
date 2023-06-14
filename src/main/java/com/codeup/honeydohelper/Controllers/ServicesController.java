@@ -130,13 +130,24 @@ public class ServicesController {
     @PostMapping("/services/bookService")
     public String submitProposal(@ModelAttribute Tasks task,
                                  @RequestParam("honeydoerServiceId") String honeydoerServiceId,
-                                 @RequestParam("image_url") String imageUrl,
-                                 @RequestParam("honeydoerId") String honeydoerId,
-                                 @RequestParam("honeyUserId") String honeyUserId) {
+                                 @RequestParam("honeyUserId") String honeyUserId,
+                                 @RequestParam("taxes") float taxes,
+                                 @RequestParam("totalUserCost") float totalUserCost,
+                                 @RequestParam("sitePay") float sitePay,
+                                 @RequestParam("honeydoerPay") float honeydoerPay) {
 
         createTask(task, honeydoerServiceId, honeyUserId);
-        createHoneydoerImage(imageUrl, honeydoerId);
+//        createHoneydoerImage(imageUrl, honeydoerId);
 
+        TaskCosts taskCostToSave = new TaskCosts();
+
+        taskCostToSave.setTaxes(taxes);
+        taskCostToSave.setSitePay(sitePay);
+        taskCostToSave.setTotalUserCost(totalUserCost);
+        taskCostToSave.setHoneydoerPay(honeydoerPay);
+
+        taskCostToSave.setTask(task);
+        tasksCostsDao.save(taskCostToSave);
         return "redirect:/dashboard";
     }
 
