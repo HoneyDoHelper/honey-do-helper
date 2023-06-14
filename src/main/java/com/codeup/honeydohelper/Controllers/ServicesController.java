@@ -15,48 +15,36 @@ import java.util.Optional;
 @Controller
 public class ServicesController {
     private final CategoriesRepository categoriesDao;
-    private final ChatsRepository chatsDao;
-    private final ClientReviewsRepository clientReviewsDao;
     private final HoneydoerImagesRepository honeydoerImagesDao;
     private final HoneydoerReviewsRepository honeydoerReviewsDao;
-    private final HoneydoerSchedulesRepository honeydoerSchedulesDao;
     private final HoneydoerServicesRepository honeydoerServicesDao;
     private final HoneydoersRepository honeydoersDao;
     private final ServicesRepository servicesDao;
     private final TaskCostsRepository tasksCostsDao;
     private final TasksRepository tasksDao;
-    private final TimeBlocksRepository timeBlocksDao;
     private final UserProfilesRepository userProfileDao;
     private final HoneyUsersRepository usersDao;
 
     public ServicesController(
             CategoriesRepository categoriesDao,
-            ChatsRepository chatsDao,
-            ClientReviewsRepository clientReviewsDao,
             HoneydoerImagesRepository honeydoerImagesDao,
             HoneydoerReviewsRepository honeydoerReviewsDao,
-            HoneydoerSchedulesRepository honeydoerSchedulesDao,
             HoneydoerServicesRepository honeydoerServicesDao,
             HoneydoersRepository honeydoersDao,
             ServicesRepository servicesDao,
             TaskCostsRepository tasksCostsDao,
             TasksRepository tasksDao,
-            TimeBlocksRepository timeBlocksDao,
             UserProfilesRepository userProfileDao,
             HoneyUsersRepository usersDao
     ) {
         this.categoriesDao = categoriesDao;
-        this.chatsDao = chatsDao;
-        this.clientReviewsDao = clientReviewsDao;
         this.honeydoerImagesDao = honeydoerImagesDao;
         this.honeydoerReviewsDao = honeydoerReviewsDao;
-        this.honeydoerSchedulesDao = honeydoerSchedulesDao;
         this.honeydoerServicesDao = honeydoerServicesDao;
         this.honeydoersDao = honeydoersDao;
         this.servicesDao = servicesDao;
         this.tasksCostsDao = tasksCostsDao;
         this.tasksDao = tasksDao;
-        this.timeBlocksDao = timeBlocksDao;
         this.userProfileDao = userProfileDao;
         this.usersDao = usersDao;
     }
@@ -130,13 +118,24 @@ public class ServicesController {
     @PostMapping("/services/bookService")
     public String submitProposal(@ModelAttribute Tasks task,
                                  @RequestParam("honeydoerServiceId") String honeydoerServiceId,
-                                 @RequestParam("image_url") String imageUrl,
-                                 @RequestParam("honeydoerId") String honeydoerId,
-                                 @RequestParam("honeyUserId") String honeyUserId) {
+                                 @RequestParam("honeyUserId") String honeyUserId,
+                                 @RequestParam("taxes") float taxes,
+                                 @RequestParam("totalUserCost") float totalUserCost,
+                                 @RequestParam("sitePay") float sitePay,
+                                 @RequestParam("honeydoerPay") float honeydoerPay) {
 
         createTask(task, honeydoerServiceId, honeyUserId);
-        createHoneydoerImage(imageUrl, honeydoerId);
+//        createHoneydoerImage(imageUrl, honeydoerId);
 
+        TaskCosts taskCostToSave = new TaskCosts();
+
+        taskCostToSave.setTaxes(taxes);
+        taskCostToSave.setSitePay(sitePay);
+        taskCostToSave.setTotalUserCost(totalUserCost);
+        taskCostToSave.setHoneydoerPay(honeydoerPay);
+
+        taskCostToSave.setTask(task);
+        tasksCostsDao.save(taskCostToSave);
         return "redirect:/dashboard";
     }
 

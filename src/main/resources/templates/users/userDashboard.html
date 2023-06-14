@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{partials/head.html :: head('Profile')}">
-    <!-- Add Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
+<head th:replace="~{partials/head.html :: head('Profile')}"></head>
 <body>
 
 <header th:replace="~{partials/header.html :: header}"></header>
 
 <main>
-    <section class="container py-5">
+    <section class="container">
+        <h1 th:text="'Hello, ' + ${user.firstName}">Hello, User</h1>
         <div class="row">
-            <div class="col-lg-6">
-                    <div class="col">
-                        <h1 th:text="'Hello, ' + ${user.firstName}">Hello, User</h1>
-                    </div>
-                    <div class="col">
-                        <article class="card">
+            <div class="col">
+                <div class="row mb-4">
+                    <article class="col">
+                        <div class="card p-0">
                             <div class="card-body position-relative p-0">
-                                <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid" alt="Profile Image">
+                                <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
                                 <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 start-0">Edit Profile</a>
                             </div>
-                        </article>
-                    </div>
+                        </div>
+                    </article>
+                </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col me-3">
                 <h2>Upcoming Tasks</h2>
                 <th:block th:if="${tasks.size() <= 0}">
                     <p>No tasks available.</p>
@@ -39,74 +35,73 @@
                             <button class="nav-link active" id="pills-home-tab"
                                     data-bs-toggle="pill" data-bs-target="#pills-home"
                                     type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true">Pending
-                            </button>
+                                    aria-selected="true"
+                            >Pending</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-profile-tab"
                                     data-bs-toggle="pill" data-bs-target="#pills-profile"
                                     type="button" role="tab" aria-controls="pills-profile"
-                                    aria-selected="false">Accepted
-                            </button>
+                                    aria-selected="false"
+                            >Accepted</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-contact-tab"
                                     data-bs-toggle="pill" data-bs-target="#pills-contact"
                                     type="button" role="tab" aria-controls="pills-contact"
-                                    aria-selected="false">Completed
-                            </button>
+                                    aria-selected="false"
+                            >Completed</button>
                         </li>
                     </ul>
 
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                             aria-labelledby="pills-home-tab">
-                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
-                                    <th:block th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">
-                                        <a th:replace="~{partials/task.html :: task}"></a>
-                                    </th:block>
 
-                                    <th:block th:with="pendingTasksFound=false">
-                                        <th:block th:remove="tag" th:unless="${pendingTasksFound}">
-                                            <th:block
-                                                    th:unless="${tasks[index].isAccepted && !tasks[index].isCompleted}">
-                                                <h3>No pending tasks</h3>
-                                                <th:block th:with="pendingTasksFound=true"></th:block>
-                                            </th:block>
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
+                                <div th:if="${!tasks.isEmpty()}">
+                                    <div th:each="index : ${tasksSize}">
+                                        <th:block th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">
+                                            <a th:replace="~{partials/task.html :: task}"></a>
                                         </th:block>
-                                    </th:block>
+                                    </div>
                                 </div>
+
+                                <th:block th:unless="${!tasks.isEmpty()}">
+                                    <h3>No pending tasks</h3>
+                                </th:block>
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                             aria-labelledby="pills-profile-tab">
-                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
-                                    <th:block th:if="${tasks[index].isAccepted && !tasks[index].isCompleted}">
-                                        <a th:replace="~{partials/task.html :: task}"></a>
-                                    </th:block>
 
-                                    <th:block th:unless="${tasks[index].isAccepted && !tasks[index].isCompleted}">
-                                        <h3>No accepted tasks</h3>
-                                    </th:block>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
+                                <div th:if="${!tasks.isEmpty()}">
+                                    <div th:each="index : ${tasksSize}">
+                                        <th:block th:if="${tasks[index].isAccepted && !tasks[index].isCompleted}">
+                                            <a th:replace="~{partials/task.html :: task}"></a>
+                                        </th:block>
+                                    </div>
                                 </div>
+
+                                <th:block th:unless="${!tasks.isEmpty()}">
+                                    <h3>No accepted tasks</h3>
+                                </th:block>
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                             aria-labelledby="pills-contact-tab">
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
-                                    <th:block th:if="${tasks[index].isAccepted && tasks[index].isCompleted}">
-                                        <a th:replace="~{partials/task.html :: task}"></a>
-                                    </th:block>
-
-                                    <th:block th:unless="${tasks[index].isAccepted && tasks[index].isCompleted}">
-                                        <h3>No completed tasks</h3>
-                                    </th:block>
+                                <div th:if="${!tasks.isEmpty()}">
+                                    <div th:each="index : ${tasksSize}">
+                                        <th:block th:if="${tasks[index].isAccepted && tasks[index].isCompleted}">
+                                            <a th:replace="~{partials/task.html :: task}"></a>
+                                        </th:block>
+                                    </div>
                                 </div>
+
+                                <th:block th:unless="${!tasks.isEmpty()}">
+                                    <h3>No completed tasks</h3>
+                                </th:block>
                             </div>
                         </div>
                     </div>

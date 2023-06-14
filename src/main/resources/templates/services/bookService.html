@@ -57,43 +57,78 @@
                         <div class="col">
                             <label for="start-date">Start Date:</label>
                             <input type="date" id="start-date" name="start-date" value="" min="2018-01-01"
-                                   max="2030-30-12"
+                                   max="2030-30-12" required
                                    th:field="*{dateAssigned}" class="form-control">
                         </div>
                         <div class="col">
                             <label for="start-time">Start Time:</label>
                             <input type="time" id="start-time" class="form-control"
-                                   th:field="*{timeStart}">
+                                   th:field="*{timeStart}"  step="1800" list="time-options" required>
+                            <datalist id="time-options">
+                                <option value="06:00"></option>
+                                <option value="06:30"></option>
+                                <option value="07:00"></option>
+                                <option value="07:30"></option>
+                                <option value="08:00"></option>
+                                <option value="08:30"></option>
+                                <option value="09:00"></option>
+                                <option value="09:30"></option>
+                                <option value="10:00"></option>
+                                <option value="10:30"></option>
+                                <option value="11:00"></option>
+                                <option value="11:30"></option>
+                                <option value="12:00"></option>
+                                <option value="12:30"></option>
+                                <option value="13:00"></option>
+                                <option value="13:30"></option>
+                                <option value="14:00"></option>
+                                <option value="14:30"></option>
+                                <option value="15:00"></option>
+                                <option value="15:30"></option>
+                                <option value="16:00"></option>
+                                <option value="16:30"></option>
+                                <option value="17:00"></option>
+                                <option value="17:30"></option>
+                                <option value="18:00"></option>
+                            </datalist>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col">
                             <label for="budget-duration">Job Duration: </label>
                             <input id="budget-duration" class="form-control" th:field="*{budgetedDuration}"
-                                   type="number" step="1" min="0" max="6" list="budget-duration"/>
+                                   type="number" step="1" min="0" max="6" list="budget-duration" required/>
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="details">Job Description:</label>
                         <textarea id="details" name="details" maxlength="250" th:field="*{taskDetails}"
-                                  class="form-control"></textarea>
+                                  class="form-control" required>
+                        </textarea>
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
                     <input type="hidden" id="honeyderServiceRate" name="honeydoerServiceRate" th:value="${service.rate}">
                     <input type="hidden" name="honeyUserId" th:value="${user.id}">
                     <input type="hidden" name="honeydoerId" th:value="${honeydoer.id}">
 
+                    <input type="hidden" id="taxes" name="taxes">
+                    <input type="hidden" id="totalUserCost"  name="totalUserCost">
+                    <input type="hidden" id="sitePay" name="sitePay">
+                    <input type="hidden" id="honeydoerPayValue" name="honeydoerPay">
 
-                    <div class="field">
-                        <div class="control mb-3">
-                            <label for="fileupload">Select a file to upload</label>
-                            <input type="hidden" id="fileupload">
-                            <button class="btn btn-warning" type="button" id="picker">Pick file</button>
-                        </div>
-                        <div id="thumbnail-container" class="mb-3"></div>
-                        <div class="control" id="nameBox" style="display: none"></div>
-                        <div class="control mb-3" id="urlBox" style="display: none"></div>
-                    </div>
+
+
+
+<!--                    <div class="field">-->
+<!--                        <div class="control mb-3">-->
+<!--                            <label for="fileupload">Select a file to upload</label>-->
+<!--                            <input type="hidden" id="fileupload">-->
+<!--                            <button class="btn btn-warning" type="button" id="picker">Pick file</button>-->
+<!--                        </div>-->
+<!--                        <div id="thumbnail-container" class="mb-3"></div>-->
+<!--                        <div class="control" id="nameBox" style="display: none"></div>-->
+<!--                        <div class="control mb-3" id="urlBox" style="display: none"></div>-->
+<!--                    </div>-->
 
                     <button type="submit" class="btn btn-warning ">Submit Proposal</button>
                 </form>
@@ -199,9 +234,16 @@
         document.getElementById('card-tax-cost').textContent = '$' + taxCost.toFixed(2);
         document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
+        var taxesValue = taxCost.toFixed(2);
+        var totalUserCostValue = totalCost.toFixed(2);
+        var sitePayValue = siteFeeCost.toFixed(2);
+        var honeydoerPayValue = jobCost.toFixed(2);
+
+        document.getElementById('taxes').value = taxesValue;
+        document.getElementById('totalUserCost').value = totalUserCostValue;
+        document.getElementById('sitePay').value = sitePayValue;
+        document.getElementById('honeydoerPayValue').value = honeydoerPayValue;
     }
-
-
 </script>
 
 <script>

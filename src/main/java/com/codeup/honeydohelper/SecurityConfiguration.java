@@ -17,10 +17,12 @@ public class SecurityConfiguration {
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -34,13 +36,13 @@ public class SecurityConfiguration {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/index") // Redirect to the user's home page after successful login (can be any URL)
+                .defaultSuccessUrl("/dashboard") // Redirect to the user's home page after successful login (can be any URL)
                 .permitAll() // Allow anyone to access the login page
 
                 // Logout configuration
                 .and()
                 .logout()
-                .logoutSuccessUrl("/register") // Redirect to the login page after successful logout (with a query string value appended)
+                .logoutSuccessUrl("/login") // Redirect to the login page after successful logout (with a query string value appended)
 
                 // Pages that require authentication
                 .and()
@@ -48,7 +50,7 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/users/{id}/edit", // Only authenticated users can edit profiles
                         "/services/honeydoerProfile",
-                        "/dashboard"// Only authenticated honeydoers can edit their profiles
+                        "/dashboard"// Only authenticated honeydoers can view their profiles
                 )
                 .authenticated()
 
@@ -56,11 +58,33 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/", "/index", "/about", "/contact", "/support", "/tasks/**", "/tasks/update",
-                        "/authentication/register","/authentication/**","/register","/register/user", "/add/skills",
-                        "/register/honeydoer", "/register/honeydoer/**", "/user/honeydoer/dashboard/**",
-                        "/services", "/services/**", "/apis/**", "/chat", "/chat2", "/calendar", "/edit/profile/**", "/edit/**",
-                        "/categories", "/categories/**", "/css/**", "/img/**", "/edit/skills/**", "/delete/skills/**")
+                        "/",
+                        "/index",
+                        "/about",
+                        "/contact",
+                        "/support",
+                        "/authentication/register",
+                        "/authentication/**",
+                        "/register",
+                        "/register/user",
+                        "/register/honeydoer",
+                        "/register/honeydoer/**",
+                        "/add/skills",
+                        "/user/honeydoer/dashboard/**",
+                        "/services",
+                        "/services/**",
+                        "/apis/**",
+                        "/categories",
+                        "/categories/**",
+                        "/tasks/**",
+                        "/tasks/update",
+                        "/edit/profile/**",
+                        "/edit/**",
+                        "/edit/skills/**",
+                        "/delete/skills/**",
+                        "/static/**",
+                        "/css/**",
+                        "/img/**")
                 .permitAll();
 
         return http.build();

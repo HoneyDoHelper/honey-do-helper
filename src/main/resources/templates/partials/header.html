@@ -3,17 +3,28 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-start align-items-center">
                 <a class="navbar-brand" href="/index">
-                    <img th:src="@{/img/logo-small.svg}" alt="Honeydo Helper Logo" class="logo-small" />
+                    <img th:src="@{/img/logoSimple.svg}" alt="Honeydo Helper Logo" class="logo-small" />
                 </a>
                 <a class="navbar-brand d-none d-lg-block" href="/index">Honeydo Helper</a>
             </div>
 
-            <div class="d-flex">
-                <a class="btn btn-warning mx-3 d-lg-none" href="/register">Become a Honeydoer!</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="d-flex">
+                    <a class="btn btn-warning mx-3 d-lg-none" href="/dashboard">Profile</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </th:block>
+
+            <th:block sec:authorize="!isAuthenticated()">
+                <div class="d-flex">
+                    <a class="btn btn-warning mx-3 d-lg-none" href="/register">Become a Honeydoer!</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </th:block>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header bg-color-neutral-light">
@@ -54,7 +65,7 @@
                         </th:block>
                         <th:block sec:authorize="!isAuthenticated()">
                             <li class="nav-item my-3 my-lg-0 mx-lg-3">
-                                <a class="btn btn-outline-secondary" href="/login">Log in/Sign up</a>
+                                <a class="btn btn-outline-secondary" href="/login">Log in</a>
                             </li>
 
                             <li class="nav-item">

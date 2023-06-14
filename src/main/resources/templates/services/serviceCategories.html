@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('Service Categories')}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/styles.css">
+
 </head>
 <body>
 
@@ -11,9 +11,11 @@
 <main>
     <section class="container py-5">
         <h1>Service Categories</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur eos ipsum libero magni neque nesciunt provident qui quo ratione temporibus?</p>
     </section>
     <section class="container">
+        <div class="row row-cols-3 g-3">
+            <article class="col" th:each="item : ${categories}">
+                <div class="card">
         <div class="row">
             <!-- Thyme logic goes here -->
             <article class="col-lg-4 col-md-6 mb-4" th:each="item : ${categories}">
@@ -26,7 +28,9 @@
                         <p class="card-text" th:text="${item.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-warning">Links go here</a>
+                       <a th:href="@{/categories/{categoryID}(categoryID=${item.id})}"
+                          th:text="${'Go to ' + item.name}"
+                          class="btn btn-warning">Edit Skills</a>
                     </div>
                 </div>
             </article>

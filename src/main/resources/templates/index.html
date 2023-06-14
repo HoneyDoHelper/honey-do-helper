@@ -2,10 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{partials/head.html :: head('Home')}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../static/css/styles.css"/>
-    <!-- Add Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <header th:replace="~{partials/header.html :: header}"></header>
@@ -13,7 +9,7 @@
     <section class="container">
         <div class="row">
             <div class="col text-center">
-                <img th:src="@{/img/logo.svg}" alt="Honeydo Helper Logo" class="logo">
+                <img th:src="@{/img/logo2.svg}" alt="Honeydo Helper Logo" class="logo">
                 <h2 class="catchphrase">Unlock Your Home's Full Potential: Empower Your Honey Do List with Trusted Professionals and Get Things Done!</h2>
                 <p class="text-bold text-lg">
                     Experience the Ultimate Home Maintenance Solution with Honeydo Helper. From Repairs to Renovations, We've Got You Covered. Say Goodbye to Your Never-Ending To-Do List and Hello to More Quality Time. Our Trusted Professionals Will Tackle the Tasks, While You Relax and Recharge. Rediscover the Freedom of a Well-Managed Home and Embrace the Lifestyle You Deserve. Honeydo Helper: Your Path to Stress-Free Living.
@@ -88,7 +84,6 @@
             </div>
         </div>
     </section>
-
     <section class="container featured-professionals">
         <h2>Featured Professionals</h2>
         <div class="row">
@@ -151,51 +146,8 @@
             </div>
         </div>
     </section>
-
-    <section class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img th:src="@{/img/team/gage.jpg}" class="card-img-top" alt="Gage Jackson">
-                    <div class="card-body">
-                        <h5 class="card-title">Gage Jackson</h5>
-                        <p class="card-text">Title?</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img th:src="@{/img/team/tamica.png}" class="card-img-top" alt="Tamica Simon">
-                    <div class="card-body">
-                        <h5 class="card-title">Tamica Simon</h5>
-                        <p class="card-text">Title?</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img th:src="@{/img/team/travis.png}" class="card-img-top" alt="Travis Gomez">
-                    <div class="card-body">
-                        <h5 class="card-title">Travis Gomez</h5>
-                        <p class="card-text">Title?</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+
 </body>
 </html>
