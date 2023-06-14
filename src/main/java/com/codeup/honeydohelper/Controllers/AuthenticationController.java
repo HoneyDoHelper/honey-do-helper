@@ -155,6 +155,28 @@ public class AuthenticationController {
         return "/authentication/passwordReset";
     }
 
+//    @GetMapping("/forgot-password")
+//    public String showForgotPasswordForm() {
+//        return "users/forgot-password";
+//    }
+//
+//    @PostMapping("/forgot-password")
+//    public String initiatePasswordReset(@RequestParam("email") String email, Model model) {
+//        String resetToken = generatePasswordResetToken();
+//        sendPasswordResetEmail(email, resetToken);
+//        model.addAttribute("emailSent", true);
+//        return "users/forgot-password"; // to send an email, with reset token
+//    }
+//
+//    private void sendPasswordResetEmail(String email, String resetToken) {
+//    }
+//
+//    private String generatePasswordResetToken() {
+//        return null;
+//    }
+
+
+
     /*================================================================================
     Controller Methods to set model Attributes
     ================================================================================*/
