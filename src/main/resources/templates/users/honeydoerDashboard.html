@@ -9,9 +9,23 @@
 <header th:replace="~{partials/header.html :: header}"></header>
 
 <main>
+
     <section class="container">
         <div class="row">
-            <h1 th:text="'Hello, ' + ${honeydoer.user.firstName}">Hello, Honeydoer</h1>
+            <div class="col ">
+                <div class="row mb-4">
+                    <article class="col">
+                        <div class="card p-0">
+                            <div class="card-body position-relative p-0">
+                                <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
+                                <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 start-0">Edit Profile</a>
+                                <a th:href="@{/edit/skills}" class="btn btn-warning position-absolute bottom-0 end-0">Edit Skills</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
             <div class="col me-3">
                 <h2>Upcoming Tasks</h2>
                 <th:block th:if="${tasks.size() <= 0}">
@@ -45,50 +59,37 @@
 
                     <div class="tab-content" id="pills-tabContent">
 
-<!--                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">-->
-<!--                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">-->
-<!--                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">-->
-<!--                                    <th:block  th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">-->
-<!--                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">-->
-<!--                                            <div class="col-2 align-self-center">-->
-<!--                                                <th:block th:each="profile : ${userProfiles}">-->
-<!--                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">-->
-<!--                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">-->
-<!--                                                    </th:block>-->
-<!--                                                </th:block>-->
-<!--                                            </div>-->
-<!--                                            <div class="col align-self-center">-->
-<!--                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>-->
-<!--                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>-->
-<!--                                            </div>-->
-<!--                                        </a>-->
-<!--                                    </th:block>-->
-<!--                                    <th:block  th:unless="${!tasks[index].isAccepted && !tasks[index].isCompleted}">-->
-<!--                                        <h3>No pending tasks</h3>-->
-<!--                                    </th:block>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">-->
+                        <!--                            <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">-->
+                        <!--                                <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">-->
+                        <!--                                    <th:block  th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">-->
+                        <!--                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">-->
+                        <!--                                            <div class="col-2 align-self-center">-->
+                        <!--                                                <th:block th:each="profile : ${userProfiles}">-->
+                        <!--                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">-->
+                        <!--                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">-->
+                        <!--                                                    </th:block>-->
+                        <!--                                                </th:block>-->
+                        <!--                                            </div>-->
+                        <!--                                            <div class="col align-self-center">-->
+                        <!--                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>-->
+                        <!--                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>-->
+                        <!--                                            </div>-->
+                        <!--                                        </a>-->
+                        <!--                                    </th:block>-->
+                        <!--                                    <th:block  th:unless="${!tasks[index].isAccepted && !tasks[index].isCompleted}">-->
+                        <!--                                        <h3>No pending tasks</h3>-->
+                        <!--                                    </th:block>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
 
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
                                 <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
 
                                     <th:block th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted}">
-                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
-                                            <div class="col-2 align-self-center">
-                                                <th:block th:each="profile : ${userProfiles}">
-                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">
-                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
-                                                    </th:block>
-                                                </th:block>
-                                            </div>
-
-                                            <div class="col align-self-center">
-                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
-                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
-                                            </div>
-                                        </a>
+                                        <a th:replace="~{partials/task.html :: task}"></a>
                                     </th:block>
 
                                     <th:block th:with="pendingTasksFound=false">
@@ -107,20 +108,9 @@
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
                                 <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
                                     <th:block  th:if="${tasks[index].isAccepted && !tasks[index].isCompleted}">
-                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
-                                            <div class="col-2 align-self-center">
-                                                <th:block th:each="profile : ${userProfiles}">
-                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">
-                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
-                                                    </th:block>
-                                                </th:block>
-                                            </div>
-                                            <div class="col align-self-center">
-                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
-                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
-                                            </div>
-                                        </a>
+                                        <a th:replace="~{partials/task.html :: task}"></a>
                                     </th:block>
+
                                     <th:block  th:unless="${tasks[index].isAccepted && !tasks[index].isCompleted}">
                                         <h3>No accepted tasks</h3>
                                     </th:block>
@@ -132,20 +122,9 @@
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
                                 <div th:if="${!tasks.isEmpty()}" th:each="index : ${tasksSize}">
                                     <th:block  th:if="${tasks[index].isAccepted && tasks[index].isCompleted}">
-                                        <a class="row" th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}">
-                                            <div class="col-2 align-self-center">
-                                                <th:block th:each="profile : ${userProfiles}">
-                                                    <th:block th:if="${profile.id} == ${tasks[index].user.id}">
-                                                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
-                                                    </th:block>
-                                                </th:block>
-                                            </div>
-                                            <div class="col align-self-center">
-                                                <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
-                                                <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
-                                            </div>
-                                        </a>
+                                        <a th:replace="~{partials/task.html :: task}"></a>
                                     </th:block>
+
                                     <th:block  th:unless="${tasks[index].isAccepted && tasks[index].isCompleted}">
                                         <h3>No completed tasks</h3>
                                     </th:block>
@@ -154,22 +133,6 @@
                         </div>
                     </div>
                 </th:block>
-            </div>
-
-            <div class="col">
-                <div class="row row-cols-2 mb-4">
-                    <div class="col">
-                        <article class="col ratio ratio-1x1">
-                            <div class="card p-0">
-                                <div class="card-body position-relative p-0">
-                                    <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
-                                    <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 start-0">Edit Profile</a>
-                                    <a th:href="@{/edit/skills}" class="btn btn-warning position-absolute bottom-0 end-0">Edit Skills</a>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

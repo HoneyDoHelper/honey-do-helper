@@ -1,12 +1,13 @@
 <header th:fragment="header" class="bg-color-neutral-light" xmlns:sec="http://www.w3.org/1999/xhtml">
     <nav class="navbar fixed-top navbar-expand-lg px-3 bg-color-neutral-light">
-        <a class="navbar-brand" href="/index">
-            <img th:src="@{/img/logo-small.svg}" alt="Honeydo Helper Logo" class="logo-small" />
-        </a>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-start align-items-center">
+                <a class="navbar-brand" href="/index">
+                    <img th:src="@{/img/logo-small.svg}" alt="Honeydo Helper Logo" class="logo-small" />
+                </a>
+                <a class="navbar-brand d-none d-lg-block" href="/index">Honeydo Helper</a>
+            </div>
 
-
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/index">Honeydo Helper</a>
             <div class="d-flex">
                 <a class="btn btn-warning mx-3 d-lg-none" href="/register">Become a Honeydoer!</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -40,11 +41,6 @@
                                 </li>
                             </ul>
                         </li>
-
-
-                        <!-- th:blocks are neat. they allow you to create code-like structures,  -->
-                        <!-- without taking up visual space, it's why the logout button was acting strange -->
-                        <!-- happy coding! -->
 
                         <th:block sec:authorize="isAuthenticated()">
                             <li class="nav-item my-3 my-lg-0 mx-lg-3">

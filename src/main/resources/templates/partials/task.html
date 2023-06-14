@@ -1,0 +1,16 @@
+<a th:fragment="task" class="row text-decoration-none color-neutral-dark"
+   th:href="@{/tasks/{taskid}(taskid = ${tasks[index].id})}"
+>
+  <div class="col-2 align-self-center">
+    <th:block th:each="profile : ${userProfiles}">
+      <th:block th:if="${profile.id} == ${tasks[index].user.id}">
+        <img th:src="@{${profile.imgFilePath}}" class="img-fluid rounded-circle">
+      </th:block>
+    </th:block>
+  </div>
+
+  <div class="col align-self-center">
+    <p th:text="'Date: ' + ${tasks[index].dateAssigned}" class="text-start">Date</p>
+    <p th:text="'Service: ' + ${tasks[index].honeydoerService.services.name}" class="text-start">Service</p>
+  </div>
+</a>

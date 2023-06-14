@@ -79,19 +79,8 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public String performLogin() {
-        return "redirect:/dashboard"; // should redirect to home page or wherever after a successful login
+        return "redirect:/index";
     }
-
-
-    /*/////////////////////////////////////////////////////////
-    Logout
-    /////////////////////////////////////////////////////////*/
-//    @GetMapping("/logout")
-//    public String performLogout() {
-//        return "redirect:/login?logout";
-//    }
-
-    //this needs a proper redirect to correct page after logout is complete
 
 
     /*/////////////////////////////////////////////////////////

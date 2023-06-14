@@ -45,15 +45,11 @@
         <div class="row">
             <div class="col-lg-4 col-md-12 mb-5">
                 <form
-                      th:action="@{/services/bookService}"
-                      th:object="${newTask}"
-                      th:method="post" oninput="updateCard()"
-                >
-                  
-                   <!-- th:action="@{'/services/bookService/' + ${honeydoer.id} + '/' + ${service.id}}"
+                        th:action="@{/services/bookService}"
                         th:object="${newTask}"
-                        th:method="post" oninput="updateCard()" onchange="updateCard()" -->
-                  
+                        th:method="post" oninput="updateCard()"
+                >
+
                     <div class="mb-4">
                         <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
                     </div>
@@ -84,15 +80,8 @@
                     </div>
                     <input type="hidden" name="honeydoerServiceId" th:value="${service.id}">
                     <input type="hidden" id="honeyderServiceRate" name="honeydoerServiceRate" th:value="${service.rate}">
-                    <input type="hidden"  name="honeyUserId" th:value="${user.id}">
+                    <input type="hidden" name="honeyUserId" th:value="${user.id}">
                     <input type="hidden" name="honeydoerId" th:value="${honeydoer.id}">
-                    <input type="hidden" id="taxes" name="taxes" th:value="${taxesValue}">
-                    <input type="hidden" id="totalUserCost"  name="totalUserCost" th:value="${totalUserCostValue}">
-                    <input type="hidden" id="sitePay" name="sitePay" th:value="${sitePayValue}">
-                    <input type="hidden" id="honeydoerPayValue" name="honeydoerPay" th:value="${honeydoerPayValue}">
-
-
-
 
 
                     <div class="field">
@@ -110,11 +99,6 @@
                 </form>
 
             </div>
-
-            <!-- with some help of the internet, baeldung and chat, was able to get the calendar
-             to only accept tomorrow's date and 4 weeks from now. js at the bottom. Not having ISO script was
-             a fun issue... anyways, this is looking great! need any help, just reach out and i'll come by and help
-             happy coding! -->
 
             <div class="col-lg-8 col-md-12 ">
                 <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">
@@ -168,21 +152,7 @@
             </div>
         </div>
     </section>
-    <!--push> -->
-    <section class="container-fluid">
-        <div>
-            <h2 class="text-center">Upload images for your project</h2>
-            <label for="project_img">Project Photo:</label><br>
-            <div class="mb-4">
-                <input type="file" class="form-control form-control-lg" id="project_img"
-                       name="project_img">
-            </div>
-        </div>
 
-
-        <!--        <p th:text="${filestackKey}"></p>-->
-        <!--        <p th:value="${filestackKey}"></p>-->
-    </section>
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 
@@ -229,15 +199,6 @@
         document.getElementById('card-tax-cost').textContent = '$' + taxCost.toFixed(2);
         document.getElementById('card-total-cost').textContent = '$' + totalCost.toFixed(2);
 
-        var taxesValue = taxCost.toFixed(2);
-        var totalUserCostValue = totalCost.toFixed(2);
-        var sitePayValue = siteFeeCost.toFixed(2);
-        var honeydoerPayValue = jobCost.toFixed(2);
-
-        document.getElementById('taxes').value = taxesValue;
-        document.getElementById('totalUserCost').value = totalUserCostValue;
-        document.getElementById('sitePay').value = sitePayValue;
-        document.getElementById('honeydoerPayValue').value = honeydoerPayValue;
     }
 
 

@@ -158,13 +158,13 @@ h3 {
     width: 300px;
     margin: 20px;
     padding: 20px;
-    background-color: #f7f7f7;
+    background: var(--color-neutral-light);
     border-radius: 5px;
 }
 
 /* Featured Professionals home page */
 .featured-professionals {
-    background-color: #f7f7f7;
+    background: var(--color-neutral-light);
     padding: 60px 0;
     text-align: center;
 }
@@ -186,7 +186,7 @@ h3 {
 }
 
 .professional-card {
-    background-color: #fff;
+    background: var(--color-neutral-light);
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -219,7 +219,7 @@ h3 {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-color: #FFD700;
+    background: var(--color-primary-main);
     border-radius: 50%;
     margin-right: 2px;
 }
@@ -256,7 +256,7 @@ h3 {
 
 
 .hero-section {
-    background-color: #f7f7f7;
+    background: var(--color-neutral-light);
     padding: 60px 0;
     text-align: center;
 }
@@ -282,7 +282,7 @@ h3 {
     margin-bottom: 2px;
 }
 .container .custom-review-card {
-    background-color: #f8f8f8;
+    background: var(--color-neutral-light);
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
@@ -365,7 +365,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f9f9f9;
+    background: var(--color-neutral-light);
     padding: 20px;
 }
 
@@ -392,7 +392,7 @@ h3 {
     text-align: center;
     margin: 0;
     padding: 40px 60px;
-    background-color: #ffffff;
+    background: var(--color-neutral-light);
     border: 2px solid #ffcc00;
     border-radius: 10px;
     text-decoration: none;
@@ -401,8 +401,7 @@ h3 {
 }
 
 .buzzer-button:hover {
-    background-color: #ffcc00;
-    color: #ffffff;
+    background: #ffcc00;
 }
 
 /* Responsive styles */
@@ -417,3 +416,32 @@ h3 {
         margin: 10px 0;
     }
 }
+
+.nav-link {
+    color: var(--color-neutral-dark);
+}
+
+.nav-link:hover {
+    color: var(--color-primary-main);
+}
+
+.btn-warning {
+    color: var(--color-neutral-light);
+    background: var(--color-primary-main);
+    border: solid 1px var(--color-primary-main);
+}
+
+.btn-warning:hover {
+    color: var(--color-neutral-light);
+    background: var(--color-primary-dark);
+    border: solid 1px var(--color-primary-light);
+}
+
+.nav-link.active,
+.nav-link.active:focus,
+.nav-link.active:active,
+.nav-link.active:hover {
+    color: var(--color-neutral-light) !important;
+    background: var(--color-primary-main) !important;
+}
+
