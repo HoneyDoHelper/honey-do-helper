@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('Register')}">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -12,77 +13,84 @@
     <section class="container">
         <h1 class="mb-3">Register - Honeydoer</h1>
 
-        <form  th:action="@{/register/user}" th:method="post">
+        <form th:action="@{/register/user}" th:method="post">
             <div class="form-floating mb-3">
-                <input th:field="${user.email}" type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                <input th:field="${user.email}" type="email" class="form-control" id="email" name="email"
+                       placeholder="Email" required>
                 <label for="email">Email</label>
             </div>
 
-            <div class="form-floating mb-3 ">
-                <input th:field="${user.password}" type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <div class="form-floating mb-3">
+                <input th:field="${user.password}" type="password" class="form-control" id="password" name="password"
+                       placeholder="Password" required>
                 <label for="password">Password</label>
             </div>
 
-            <div class="form-floating mb-3 ">
-                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                       placeholder="Confirm Password" required>
                 <label for="confirm_password">Confirm Password</label>
             </div>
 
             <div class="row register-background py-3 mb-3">
-                <div class="col-12">
-                    <div class="row row-cols-2 g-3">
-                        <div class="col">
-                            <div class="form-floating mb-3">
-                                <input th:field="${user.firstName}" type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
-                                <label for="first_name">First Name</label>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-floating mb-3">
-                                <input  th:field="${user.lastName}" type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
-                                <label for="last_name">Last Name</label>
-                            </div>
-                        </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input th:field="${user.firstName}" type="text" class="form-control" id="first_name"
+                               name="first_name" placeholder="First Name" required>
+                        <label for="first_name">First Name</label>
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <div class="form-floating">
-                        <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
-                        <label for="phone_number">Phone Number</label>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input th:field="${user.lastName}" type="text" class="form-control" id="last_name"
+                               name="last_name" placeholder="Last Name" required>
+                        <label for="last_name">Last Name</label>
                     </div>
                 </div>
             </div>
 
+            <div class="col-12">
+                <div class="form-floating">
+                    <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number"
+                           name="phone_number" placeholder="Phone Number" required>
+                    <label for="phone_number">Phone Number</label>
+                </div>
+            </div>
+
             <div class="form-floating mb-3">
-                <input th:field="${userProfile.address}" type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+                <input th:field="${userProfile.address}" type="text" class="form-control" id="address" name="address"
+                       placeholder="Address" required>
                 <label for="address">Address</label>
             </div>
 
             <div class="form-floating mb-3">
-                <input th:field="${userProfile.address2}" type="text" class="form-control" id="address2" name="address2" placeholder="Address">
+                <input th:field="${userProfile.address2}" type="text" class="form-control" id="address2"
+                       name="address2" placeholder="Address">
                 <label for="address2">Address</label>
             </div>
 
             <div class="row row-cols-3 g-3">
-                <div class="col-7">
+                <div class="col-md-7">
                     <div class="form-floating mb-3">
-                        <input th:field="${userProfile.city}" type="text" class="form-control" id="city" name="city" placeholder="City" required>
+                        <input th:field="${userProfile.city}" type="text" class="form-control" id="city" name="city"
+                               placeholder="City" required>
                         <label for="city">City</label>
                     </div>
                 </div>
 
-                <div class="col-2">
+                <div class="col-md-2">
                     <div class="form-floating mb-3">
-                        <input th:field="${userProfile.state}" type="text" class="form-control" id="state" name="state" placeholder="State" minlength="2" maxlength="2" required>
+                        <input th:field="${userProfile.state}" type="text" class="form-control" id="state" name="state"
+                               placeholder="State" minlength="2" maxlength="2" required>
                         <label for="state">State</label>
                     </div>
                 </div>
 
-                <div class="col-3">
+                <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input th:field="${userProfile.zip}" type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
+                        <input th:field="${userProfile.zip}" type="text" class="form-control" id="zip" name="zip"
+                               placeholder="Zip" required>
                         <label for="zip">Zip</label>
                     </div>
                 </div>
@@ -90,20 +98,29 @@
 
             <div>
                 <div class="row row-cols-2 g-3 register-background mb-3">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <p>Do you want to be a Honeydoer?</p>
                         <div class="mb-3">
-                            <input type="radio" th:field="${user.isHoneydoer}" value="true" onclick="toggleInputs(true)"/>Yes
-                            <input type="radio" th:field="${user.isHoneydoer}" value="false" onclick="toggleInputs(false)"/>No
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" th:field="${user.isHoneydoer}"
+                                       value="true" onclick="toggleInputs(true)" id="honeydoer_yes">
+                                <label class="form-check-label" for="honeydoer_yes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" th:field="${user.isHoneydoer}"
+                                       value="false" onclick="toggleInputs(false)" id="honeydoer_no">
+                                <label class="form-check-label" for="honeydoer_no">No</label>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <!-- Hidden inputs for honeydoers -->
-                        <div id="hiddenInputs" style="display: none;"  class="row py-3 my-3">
-                            <div class="col-6">
+                        <div id="hiddenInputs" style="display: none;" class="row py-3 my-3">
+                            <div class="col-md-6">
                                 <div class="form-floating">
-                                    <textarea type="text" class="form-control" id="about_self" name="about_self"  maxlength="235"
+                                    <textarea type="text" class="form-control" id="about_self" name="about_self"
+                                              maxlength="235"
                                               placeholder="Tell us about your experience!" required></textarea>
                                     <label for="about_self">Tell us about your experience!</label>
                                 </div>
@@ -116,29 +133,31 @@
                     <div class="control">
                         <label for="fileupload">Select a file to upload</label>
                         <input type="hidden" id="fileupload">
-                        <button class="button" type="button" id="picker">Pick file</button>
+                        <button class="btn btn-warning" type="button" id="picker">Pick file</button>
                     </div>
                     <div id="thumbnail-container"></div>
                     <div class="control" id="nameBox"></div>
                     <div class="control" id="urlBox"></div>
                 </div>
 
-<!--                <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">-->
+                <!--                <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">-->
 
                 <div class="mb-3">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I accept the Terms</label><br><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                        <label class="form-check-label" for="terms">I accept the Terms</label>
+                    </div>
                 </div>
 
-                <input id="submit-btn" type="submit" class="register-btn" value="Submit">
+                <input id="submit-btn" type="submit" class="btn btn-warning" value="Submit">
             </div>
         </form>
     </section>
 </main>
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
-<script>
 
+<script>
     function toggleInputs(isHoneydoer) {
         const hiddenInputs = document.getElementById("hiddenInputs");
         const requiredInput = document.getElementById("about_self");
@@ -148,7 +167,6 @@
             hiddenInputs.style.display = "none";
             requiredInput.removeAttribute("required");
             submitBtn.value = "Submit";
-
         } else {
             hiddenInputs.style.display = "block";
             requiredInput.setAttribute("required", "");
