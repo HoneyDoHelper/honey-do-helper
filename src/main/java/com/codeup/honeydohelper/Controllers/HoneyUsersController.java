@@ -82,17 +82,20 @@ public class HoneyUsersController {
         if (currentLoggedInUser.getIsAdmin()) {
 
             return "users/adminDashboard";
+
         } else if (currentLoggedInUser.getIsHoneydoer()) {
             setHoneydoerDashboardHtml(model, currentLoggedInUser.getId());
             setUserProfileHtml(model, currentLoggedInUser.getId());
 
             return "users/honeydoerDashboard";
-        } else if (currentLoggedInUser != null){
+
+        } else {
+            setUserProfileHtml(model, currentLoggedInUser.getId());
+
+            List<Tasks> tasks = tasksDao.findAllByUser_Id(currentLoggedInUser.getId());
+            model.addAttribute("tasks", tasks);
 
             return "users/userDashboard";
-        } else {
-
-            return "redirect:/login";
         }
     }
 

@@ -79,7 +79,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public String performLogin() {
-        return "redirect:/dashboard"; // should redirect to home page or wherever after a successful login
+        return "redirect:/index";
     }
 
 
