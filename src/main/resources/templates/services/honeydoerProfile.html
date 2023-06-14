@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('Profile')}">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -10,48 +9,52 @@
 
 <main>
     <section class="container">
+        <div class="text-center mb-4">
+            <img th:src="@{{serviceImg}(serviceImg = ${service.services.imgFilePath})}" class="img-fluid"/>
+        </div>
         <div class="row">
-            <div class="col me-3">
+
+            <div class="col-md-6">
                 <h1 th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName}"></h1>
                 <div class="row mb-5">
-                    <div class="col">
+                    <div class="col-sm-4">
                         <th:block th:each="profile : ${userProfiles}">
                             <th:block th:if="${profile.id} == ${honeydoer.user.id}">
                                 <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle">
                             </th:block>
                         </th:block>
                     </div>
-                    <div class="col-8 align-self-center">
+                    <div class="col-sm-8 align-self-center">
                         <p th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
                         <p th:text="${honeydoer.rating}">Stars</p>
                     </div>
                 </div>
                 <div class="row">
-                    <p th:text="${service.services.name} + ' Experience'">Service Experience</p>
-                    <p th:text="${service.aboutService}">Experience Description</p>
-                    <a type="button" class="btn btn-warning" href="#"
-                       th:href="@{/services/bookService/{honeydoerId}/{serviceId}(honeydoerId=${honeydoer.id}, serviceId=${service.services.id})}">
-                        Book <span th:text="${honeydoer.user.firstName}"></span>
-                    </a>
-
+                    <div class="col">
+                        <p th:text="${service.services.name} + ' Experience'">Service Experience</p>
+                        <p th:text="${service.aboutService}">Experience Description</p>
+                        <a type="button" class="btn btn-warning" href="#"
+                           th:href="@{/services/bookService/{honeydoerId}/{serviceId}(honeydoerId=${honeydoer.id}, serviceId=${service.services.id})}">
+                            Book <span th:text="${honeydoer.user.firstName}"></span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <img th:src="@{{serviceImg}(serviceImg = ${service.services.imgFilePath})}" class="img-fluid"/>
             </div>
         </div>
     </section>
 
     <section class="container-fluid">
-        <div>
-            <h2 th:text="'About ' + ${honeydoer.user.firstName}" class="text-center">About Honeydoer</h2>
-            <p th:text="${honeydoer.aboutSelf}">About Section</p>
+        <div class="text-center">
+            <h2 th:text="'About ' + ${honeydoer.user.firstName}" class="mb-4">About Honeydoer</h2>
+            <p th:text="${honeydoer.aboutSelf}" class="mb-4">About Section</p>
         </div>
     </section>
 
     <section th:replace="~{partials/honeydoerRatings.html :: ratings}"></section>
 
 </main>
+
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+
 </body>
 </html>

@@ -22,10 +22,10 @@
         <div th:with="honeydoerSize=${#numbers.sequence(0, honeydoerServices.size()-1)}" class="row">
             <article th:each="index : ${honeydoerSize}" class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
-                    <div class="card-header">
+                    <div class="card">
                         <th:block th:each="profile : ${userProfiles}">
                             <th:block th:if="${profile.id} == ${honeydoerServices[index].honeydoers.user.id}">
-                                <img th:src="@{${profile.imgFilePath}}" class="card-img-top" alt="Honeydoer Image">
+                                <img th:src="@{${profile.imgFilePath}}" class="card-img-top book-img" alt="Honeydoer Image">
                             </th:block>
                         </th:block>
                     </div>
