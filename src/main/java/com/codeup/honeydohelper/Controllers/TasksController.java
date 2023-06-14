@@ -82,7 +82,6 @@ public class TasksController {
         } else {
             return "redirect:/login";
         }
-        //return "/services/tasks";
     }
 
     @PostMapping("/tasks/update")

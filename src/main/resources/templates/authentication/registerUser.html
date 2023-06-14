@@ -49,7 +49,7 @@
 
                 <div class="col-6">
                     <div class="form-floating mb-3">
-                        <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                        <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required value="">
                         <label for="phone_number">Phone Number</label>
                     </div>
                 </div>v>
@@ -82,7 +82,7 @@
 
                 <div class="col-3">
                     <div class="form-floating mb-3">
-                        <input th:field="${userProfile.zip}" type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
+                        <input th:field="${userProfile.zip}" type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required value="">
                         <label for="zip">Zip</label>
                     </div>
                 </div>
@@ -123,7 +123,6 @@
                     <div class="control" id="urlBox"></div>
                 </div>
 
-<!--                <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">-->
 
                 <div class="mb-3">
                     <input type="checkbox" id="terms" name="terms" required>
