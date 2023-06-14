@@ -17,51 +17,27 @@ import java.util.Optional;
 public class AuthenticationController {
 
     private final CategoriesRepository categoriesDao;
-    private final ChatsRepository chatsDao;
-    private final ClientReviewsRepository clientReviewsDao;
-    private final HoneydoerImagesRepository honeydoerImagesDao;
-    private final HoneydoerReviewsRepository honeydoerReviewsDao;
-    private final HoneydoerSchedulesRepository honeydoerSchedulesDao;
     private final HoneydoerServicesRepository honeydoerServicesDao;
     private final HoneydoersRepository honeydoersDao;
     private final ServicesRepository servicesDao;
-    private final TaskCostsRepository tasksCostsDao;
-    private final TasksRepository tasksDao;
-    private final TimeBlocksRepository timeBlocksDao;
     private final UserProfilesRepository userProfileDao;
     private final HoneyUsersRepository honeyUsersDao;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
     public AuthenticationController(
             CategoriesRepository categoriesDao,
-            ChatsRepository chatsDao,
-            ClientReviewsRepository clientReviewsDao,
-            HoneydoerImagesRepository honeydoerImagesDao,
-            HoneydoerReviewsRepository honeydoerReviewsDao,
-            HoneydoerSchedulesRepository honeydoerSchedulesDao,
             HoneydoerServicesRepository honeydoerServicesDao,
             HoneydoersRepository honeydoersDao,
             ServicesRepository servicesDao,
-            TaskCostsRepository tasksCostsDao,
-            TasksRepository tasksDao,
-            TimeBlocksRepository timeBlocksDao,
             UserProfilesRepository userProfileDao,
             HoneyUsersRepository honeyUsersDao,
             PasswordEncoder passwordEncoder
     ) {
         this.categoriesDao = categoriesDao;
-        this.chatsDao = chatsDao;
-        this.clientReviewsDao = clientReviewsDao;
-        this.honeydoerImagesDao = honeydoerImagesDao;
-        this.honeydoerReviewsDao = honeydoerReviewsDao;
-        this.honeydoerSchedulesDao = honeydoerSchedulesDao;
         this.honeydoerServicesDao = honeydoerServicesDao;
         this.honeydoersDao = honeydoersDao;
         this.servicesDao = servicesDao;
-        this.tasksCostsDao = tasksCostsDao;
-        this.tasksDao = tasksDao;
-        this.timeBlocksDao = timeBlocksDao;
         this.userProfileDao = userProfileDao;
         this.honeyUsersDao = honeyUsersDao;
         this.passwordEncoder = passwordEncoder;
@@ -75,11 +51,6 @@ public class AuthenticationController {
         setCategoriesHtml(model);
 
         return "/authentication/login";
-    }
-
-    @PostMapping("/login")
-    public String performLogin() {
-        return "redirect:/index";
     }
 
 
@@ -112,7 +83,7 @@ public class AuthenticationController {
             return "redirect:/register/honeydoer/" + findNewHoneydoer();
         } else {
 
-            return "redirect:/index";
+            return "redirect:/dashboard";
         }
     }
 
@@ -154,27 +125,6 @@ public class AuthenticationController {
 
         return "/authentication/passwordReset";
     }
-
-//    @GetMapping("/forgot-password")
-//    public String showForgotPasswordForm() {
-//        return "users/forgot-password";
-//    }
-//
-//    @PostMapping("/forgot-password")
-//    public String initiatePasswordReset(@RequestParam("email") String email, Model model) {
-//        String resetToken = generatePasswordResetToken();
-//        sendPasswordResetEmail(email, resetToken);
-//        model.addAttribute("emailSent", true);
-//        return "users/forgot-password"; // to send an email, with reset token
-//    }
-//
-//    private void sendPasswordResetEmail(String email, String resetToken) {
-//    }
-//
-//    private String generatePasswordResetToken() {
-//        return null;
-//    }
-
 
 
     /*================================================================================

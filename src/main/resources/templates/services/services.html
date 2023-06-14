@@ -1,50 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('About')}">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
 
 <header th:replace="~{partials/header.html :: header}"></header>
 
 <main>
-    <section class="container">
+    <section class="container py-5">
         <h1 th:text="${service.name}">Service</h1>
         <div class="row">
-            <img th:src="@{{serviceImg}(serviceImg = ${service.imgFilePath})}" class="img-fluid mb-4"/>
-            <h2 th:text="${service.description}">Lorem ipsum dolor</h2>
+                <img th:src="@{{serviceImg}(serviceImg=${service.imgFilePath})}" class="img-fluid" alt="Service Image">
+                <h2 th:text="${service.description}">Lorem ipsum dolor</h2>
         </div>
     </section>
 
     <section class="container">
         <h2>Available workers in your area</h2>
-        <div th:with="honeydoerSize=${#numbers.sequence(0, honeydoerServices.size()-1)}" class="row row-cols-3 g-3">
-            <article th:each="index : ${honeydoerSize}" class="col">
-                <div class="card">
+        <div th:with="honeydoerSize=${#numbers.sequence(0, honeydoerServices.size()-1)}" class="row">
+            <article th:each="index : ${honeydoerSize}" class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
                     <div class="card-header">
                         <th:block th:each="profile : ${userProfiles}">
                             <th:block th:if="${profile.id} == ${honeydoerServices[index].honeydoers.user.id}">
-                                <img th:src="@{${profile.imgFilePath}}" class="img-fluid">
+                                <img th:src="@{${profile.imgFilePath}}" class="card-img-top" alt="Honeydoer Image">
                             </th:block>
                         </th:block>
                     </div>
                     <div class="card-body">
-                        <p th:text="${honeydoerServices[index].services.name}">Service</p>
-                        <p th:text="${honeydoerServices[index].honeydoers.user.firstName}" class="card-title">Name</p>
+                        <h5 class="card-title" th:text="${honeydoerServices[index].services.name}">Service</h5>
+                        <p class="card-text" th:text="${honeydoerServices[index].honeydoers.user.firstName}" >Name</p>
                         <p>
                             <span><svg th:replace="~{partials/star.html :: fullStarBig}"></svg></span>
                             <span th:text="${honeydoerServices[index].honeydoers.rating}"></span>
                         </p>
-                        <p th:text="${honeydoerServices[index].aboutService}">Experience</p>
-                        <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
+                        <p class="card-text" th:text="${honeydoerServices[index].aboutService}">Experience</p>
+                        <a href="#" class="btn btn-link" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
                             (honeydoerId=${honeydoerServices[index].honeydoers.id},
                             serviceId=${honeydoerServices[index].services.id})}"
                         >Read more</a>
                     </div>
                     <div class="card-footer">
-                        <a type="button" class="btn btn-warning" href="#"
-                           th:href="@{/services/bookService/{honeydoerId}/{serviceId}
+                        <a href="#" class="btn btn-warning" th:href="@{/services/bookService/{honeydoerId}/{serviceId}
                            (honeydoerId=${honeydoerServices[index].honeydoers.id},
                            serviceId=${honeydoerServices[index].services.id})}"
                         >Book Service</a>
@@ -58,3 +57,4 @@
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 </body>
 </html>
+

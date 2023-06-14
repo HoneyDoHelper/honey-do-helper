@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{partials/head.html :: head('Home')}">
-    <link rel="stylesheet" type="text/css" href="../static/css/styles.css"/>
 </head>
 <body>
 <header th:replace="~{partials/header.html :: header}"></header>
@@ -10,7 +9,7 @@
     <section class="container">
         <div class="row">
             <div class="col text-center">
-                <img th:src="@{/img/logo.svg}" alt="Honeydo Helper Logo" class="logo">
+                <img th:src="@{/img/logo2.svg}" alt="Honeydo Helper Logo" class="logo">
                 <h2 class="catchphrase">Unlock Your Home's Full Potential: Empower Your Honey Do List with Trusted Professionals and Get Things Done!</h2>
                 <p class="text-bold text-lg">
                     Experience the Ultimate Home Maintenance Solution with Honeydo Helper. From Repairs to Renovations, We've Got You Covered. Say Goodbye to Your Never-Ending To-Do List and Hello to More Quality Time. Our Trusted Professionals Will Tackle the Tasks, While You Relax and Recharge. Rediscover the Freedom of a Well-Managed Home and Embrace the Lifestyle You Deserve. Honeydo Helper: Your Path to Stress-Free Living.
@@ -22,53 +21,61 @@
     <section class="container collage-section">
         <div class="collage-container">
             <div class="collage-item">
-                <img th:src="@{/img/collage/housepainter.jpg}" alt="Photo 1">
+                <img th:src="@{/img/collage/housepainter.jpg}" alt="Photo 1" class="img-fluid">
             </div>
             <div class="collage-item">
-                <img th:src="@{/img/collage/lighting.jpg}" alt="Photo 2">
+                <img th:src="@{/img/collage/lighting.jpg}" alt="Photo 2" class="img-fluid">
             </div>
             <div class="collage-item">
-                <img th:src="@{/img/collage/moving.jpg}" alt="Photo 3">
+                <img th:src="@{/img/collage/moving.jpg}" alt="Photo 3" class="img-fluid">
             </div>
             <div class="collage-item">
-                <img th:src="@{/img/collage/windows.jpg}" alt="Photo 4">
+                <img th:src="@{/img/collage/windows.jpg}" alt="Photo 4" class="img-fluid">
             </div>
         </div>
     </section>
 
     <section class="container-fluid call-to-action buzzer">
-        <a href="/register/user" class="buzzer-button">Don't delay, join today!</a>
+        <a href="/register/user" class="buzzer-button btn btn-primary">Don't delay, join today!</a>
     </section>
 
-    <section class="review-section">
-        <div class="container">
-            <h2>What our customers say</h2>
-            <div class="review-columns">
-                <div class="review-column border border-1 border-dark-subtle">
+    <section class="container review-section">
+        <h2>What our customers say</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="review-column border border-1 border-dark-subtle p-3">
                     <div class="review-content">
                         <p>I was amazed by the quality of service provided by Honeydo Helper. They helped me with various home repair tasks, and the results were outstanding. Highly recommend!</p>
                         <p class="author">- John Donaldson</p>
                     </div>
                 </div>
-                <div class="review-column border border-1 border-dark-subtle">
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="review-column border border-1 border-dark-subtle p-3">
                     <div class="review-content">
                         <p>"Honeydo Helper made my life so much easier. Their professionals are reliable, skilled, and efficient. I no longer worry about unfinished tasks around the house!"</p>
                         <p class="author">- Jane Smith</p>
                     </div>
                 </div>
-                <div class="review-column border border-1 border-dark-subtle">
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="review-column border border-1 border-dark-subtle p-3">
                     <div class="review-content">
                         <p>"I've tried other similar services, but Honeydo Helper exceeded my expectations. Their team is friendly, and they always deliver exceptional results. I'm a happy customer!"</p>
                         <p class="author">- Mike Hernandez</p>
                     </div>
                 </div>
-                <div class="review-column border border-1 border-dark-subtle">
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="review-column border border-1 border-dark-subtle p-3">
                     <div class="review-content">
                         <p>"I've been using Honeydo Helper for all my home maintenance needs, and I couldn't be happier. The professionals are professional, prompt, and skilled. Thank you!"</p>
                         <p class="author">- Mary Katherine</p>
                     </div>
                 </div>
-                <div class="review-column border border-1 border-dark-subtle">
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="review-column border border-1 border-dark-subtle p-3">
                     <div class="review-content">
                         <p>"Honeydo Helper is a game-changer. I no longer have to spend hours searching for reliable professionals. The platform is user-friendly, and the service is top-notch."</p>
                         <p class="author">- Marcus Johnson</p>
@@ -80,10 +87,10 @@
     <section class="container featured-professionals">
         <h2>Featured Professionals</h2>
         <div class="row">
-            <div class="col h-100">
-                <div class="professional-card">
+            <div class="col-md-4">
+                <div class="professional-card h-100">
                     <div class="professional-image">
-                        <img th:src="@{/img/featuredProfessionals/plumber.jpg}" alt="Professional Photo">
+                        <img th:src="@{/img/featuredProfessionals/plumber.jpg}" alt="Professional Photo" class="img-fluid">
                     </div>
                     <div class="professional-details">
                         <h3>John Smith</h3>
@@ -99,10 +106,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="professional-card h-100">
                     <div class="professional-image">
-                        <img th:src="@{/img/featuredProfessionals/woman_painter.jpg}" alt="Professional Photo">
+                        <img th:src="@{/img/featuredProfessionals/woman_painter.jpg}" alt="Professional Photo" class="img-fluid">
                     </div>
                     <div class="professional-details">
                         <h3>Sarah Johnson</h3>
@@ -118,10 +125,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="professional-card h-100">
                     <div class="professional-image">
-                        <img th:src="@{/img/featuredProfessionals/electricians.jpg}" alt="Professional Photo">
+                        <img th:src="@{/img/featuredProfessionals/electricians.jpg}" alt="Professional Photo" class="img-fluid">
                     </div>
                     <div class="professional-details">
                         <h3>Michael Davis</h3>
@@ -137,62 +144,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/gage.jpg}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Gage Jackson
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/tamica.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Tamica Simon
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <img  th:src="@{/img/team/travis.png}" class="img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-title">
-                            Travis Gomez
-                        </p>
-                        <p> Title?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
-                    </div>
-                    <div class="card-footer">
-                        <p>icons go here</p>
-                    </div>
-                </div>
-                <!-- random comment -->
-            </article>
         </div>
     </section>
 </main>

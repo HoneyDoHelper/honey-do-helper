@@ -17,7 +17,7 @@
                 <img th:src="@{/img/team/travis.png}" class="honeydoer-img"/>
 
             </div>
-            <div class="col-lg-9" col>
+            <div class="col-lg-9 col">
                 <form th:action="@{'/register/honeydoer/' + ${newHoneydoer.id}}" th:method="post">
                     <div class="form-group mb-2">
                         <label for="service">Service:</label>
@@ -71,7 +71,7 @@
         </div>
     </section>
     <section class="container">
-        <a class="btn btn-warning" th:href="@{/login}">Done</a>
+        <a class="btn btn-warning" th:href="@{/dashboard}">Done</a>
     </section>
 </main>
 

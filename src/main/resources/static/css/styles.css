@@ -108,6 +108,11 @@ h3 {
     font-size: 1.5rem;
 }
 
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
 /*REGISTER CSS*/
 
 .register-background {
@@ -301,7 +306,6 @@ h3 {
 }
 /*Team Photos*/
 .container .card-header {
-    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -444,4 +448,20 @@ h3 {
     color: var(--color-neutral-light) !important;
     background: var(--color-primary-main) !important;
 }
+
+/*Service images*/
+
+.service-img {
+    transition: filter 0.3s, transform 0.3s;
+    -moz-box-shadow: 0 0 5px var(--color-primary-dark);
+    -webkit-box-shadow: 0 0 15px var(--color-primary-dark);
+    box-shadow: 0px 0px 15px var(--color-primary-dark);
+}
+.service-img:hover {
+    filter: brightness(75%);
+    transform: scale(1.1);
+
+}
+
+
 

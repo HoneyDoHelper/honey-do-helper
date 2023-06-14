@@ -19,54 +19,33 @@ import java.util.Optional;
 public class HoneyUsersController {
 
     private final CategoriesRepository categoriesDao;
-    private final ChatsRepository chatsDao;
-    private final ClientReviewsRepository clientReviewsDao;
-    private final HoneydoerImagesRepository honeydoerImagesDao;
     private final HoneydoerReviewsRepository honeydoerReviewsDao;
-    private final HoneydoerSchedulesRepository honeydoerSchedulesDao;
     private final HoneydoerServicesRepository honeydoerServicesDao;
     private final HoneydoersRepository honeydoersDao;
     private final ServicesRepository servicesDao;
-    private final TaskCostsRepository tasksCostsDao;
     private final TasksRepository tasksDao;
-    private final TimeBlocksRepository timeBlocksDao;
     private final UserProfilesRepository userProfileDao;
     private final HoneyUsersRepository honeyUsersDao;
-    private PasswordEncoder passwordEncoder;
 
 
     public HoneyUsersController(
             CategoriesRepository categoriesDao,
-            ChatsRepository chatsDao,
-            ClientReviewsRepository clientReviewsDao,
-            HoneydoerImagesRepository honeydoerImagesDao,
             HoneydoerReviewsRepository honeydoerReviewsDao,
-            HoneydoerSchedulesRepository honeydoerSchedulesDao,
             HoneydoerServicesRepository honeydoerServicesDao,
             HoneydoersRepository honeydoersDao,
             ServicesRepository servicesDao,
-            TaskCostsRepository tasksCostsDao,
             TasksRepository tasksDao,
-            TimeBlocksRepository timeBlocksDao,
             UserProfilesRepository userProfileDao,
-            HoneyUsersRepository honeyUsersDao,
-            PasswordEncoder passwordEncoder
+            HoneyUsersRepository honeyUsersDao
     ) {
         this.categoriesDao = categoriesDao;
-        this.chatsDao = chatsDao;
-        this.clientReviewsDao = clientReviewsDao;
-        this.honeydoerImagesDao = honeydoerImagesDao;
         this.honeydoerReviewsDao = honeydoerReviewsDao;
-        this.honeydoerSchedulesDao = honeydoerSchedulesDao;
         this.honeydoerServicesDao = honeydoerServicesDao;
         this.honeydoersDao = honeydoersDao;
         this.servicesDao = servicesDao;
-        this.tasksCostsDao = tasksCostsDao;
         this.tasksDao = tasksDao;
-        this.timeBlocksDao = timeBlocksDao;
         this.userProfileDao = userProfileDao;
         this.honeyUsersDao = honeyUsersDao;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/dashboard")
@@ -153,7 +132,7 @@ public class HoneyUsersController {
         Honeydoers honeydoer = findHoneydoer(honeyUserId);
         createHoneydoerService(honeydoerServices, rate, serviceId, honeydoer);
 
-        return "redirect:/users/editHoneydoer";
+        return "redirect:/edit/profile";
     }
 
     @GetMapping("/edit/skills")
@@ -201,7 +180,7 @@ public class HoneyUsersController {
 
         editHoneydoerSkill(honeydoerServiceObject, honeydoerObject, serviceObject, aboutService, hourlyRate);
 
-        return "redirect:/users/editHoneydoer";
+        return "redirect:/edit/profile";
     }
 
     @PostMapping("/delete/skills/{skillId}")
@@ -212,7 +191,7 @@ public class HoneyUsersController {
 
         honeydoerServicesDao.delete(honeydoerServiceObject);
 
-        return "redirect:/users/editHoneydoer";
+        return "redirect:/edit/profile";
     }
 
 
