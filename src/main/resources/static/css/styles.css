@@ -452,5 +452,17 @@ h3 {
 
 /*Service images*/
 
+.service-img {
+    transition: filter 0.3s, transform 0.3s;
+    -moz-box-shadow: 0 0 5px var(--color-primary-dark);
+    -webkit-box-shadow: 0 0 15px var(--color-primary-dark);
+    box-shadow: 0px 0px 15px var(--color-primary-dark);
+}
+.service-img:hover {
+    filter: brightness(75%);
+    transform: scale(1.1);
+
+}
+
 
 
