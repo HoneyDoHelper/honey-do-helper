@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('About')}">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -12,7 +12,7 @@
     <section class="container">
         <h1>About Honeydo Helpers</h1>
         <div class="row">
-            <div class="col">
+            <div class="col-md-6">
                 <p>
                     Welcome to Honeydo Helper, your go-to app for connecting with local professionals who are ready to lend a helping hand. We understand that life can get busy and there are often numerous tasks that need to be taken care of around the house. That's where Honeydo Helper comes in.
                 </p>
@@ -20,7 +20,7 @@
                     At Honeydo Helper, we believe in the power of neighbors helping neighbors. Our platform is designed to foster a sense of community and provide a reliable solution for all your interior and exterior home maintenance needs. Whether it's a daunting yardwork project or a painting task you've been putting off, our network of skilled professionals is here to assist you.
                 </p>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <div class="image-container">
                     <img th:src="@{/img/heroes/about.png}" class="img-fluid" alt="About Photo" />
                     <div class="caption">Let a Honeydoer Help Your Elderly Parents Today!!</div>
@@ -31,19 +31,19 @@
     <section class="container">
         <h2>Reviews</h2>
         <div class="row">
-            <div class="col">
+            <div class="col-md-4">
                 <div class="custom-review-card h-100">
                     <p class="custom-review-text">"Honeydo Helpers made my life so much easier! The professionals were prompt, skilled, and completed the tasks to my satisfaction. Highly recommended!"</p>
                     <p class="custom-review-author">- John D.</p>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="custom-review-card h-100">
                     <p class="custom-review-text">"I'm impressed with the quality of work and professionalism shown by the Honeydo Helpers. They took care of my home maintenance needs efficiently and at a reasonable price. Will definitely hire them again!"</p>
                     <p class="custom-review-author">- Sarah M.</p>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="custom-review-card h-100">
                     <p class="custom-review-text">"Honeydo Helpers exceeded my expectations. From start to finish, the process was smooth and hassle-free. The professionals were friendly, knowledgeable, and completed the tasks with precision. Highly recommended!"</p>
                     <p class="custom-review-author">- Mark R.</p>
@@ -59,98 +59,88 @@
     <section class="container team-section">
         <h2>Our team</h2>
         <p>Our exceptional team of experts at HoneyDo Helper collaborates harmoniously to make your dreams a reality. With a shared commitment to excellence and a passion for delivering remarkable results, we bring together diverse skills and expertise. From unleashing the hidden potential of your space to turning your visions into stunning realities, our team is dedicated to providing exceptional service. With seamless coordination and unwavering dedication, we ensure a smooth and hassle-free experience for all our users. Experience the HoneyDo Helper difference and embark on a transformative journey with us.</p>
-        <div class="row row-cols-3 g-3">
-            <article class="col">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/anthony.jpg}" class="img-fluid"/>
+                        <img th:src="@{/img/team/anthony.jpg}" class="img-fluid" alt="Anthony Chhor">
                     </div>
                     <div class="card-body">
-                        <p class="card-title">
-                            Anthony Chhor
-                        </p>
-                        <p> Design Dynamo</p>
+                        <p class="card-title">Anthony Chhor</p>
+                        <p>Design Dynamo</p>
                         <p>With Anthony's design magic, your vision comes to life in stunning, stylish detail.</p>
                     </div>
                     <div class="card-footer">
                         <img src="/img/team/palette-fill.svg" alt="Palette">
                     </div>
                 </div>
-            </article>
+            </div>
 
-            <article class="col">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/david.png}" class="img-fluid" />
+                        <img th:src="@{/img/team/david.png}" class="img-fluid" alt="David Renteria">
                     </div>
                     <div class="card-body">
-                        <p class="card-title">
-                            David Renteria
-                        </p>
-                        <p> Task Master</p>
+                        <p class="card-title">David Renteria</p>
+                        <p>Task Master</p>
                         <p>Mastering tasks, one HoneyDo at a time! David ensures nothing slips through the cracks.</p>
                     </div>
                     <div class="card-footer">
                         <img src="/img/team/card-checklist.svg" alt="Checklist">
                     </div>
                 </div>
-            </article>
+            </div>
 
-            <article class="col">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/gage.jpg}" class="img-fluid" />
+                        <img th:src="@{/img/team/gage.jpg}" class="img-fluid" alt="Gage Jackson">
                     </div>
                     <div class="card-body">
-                        <p class="card-title">
-                            Gage Jackson
-                        </p>
-                        <p> Renovation Guru</p>
+                        <p class="card-title">Gage Jackson</p>
+                        <p>Renovation Guru</p>
                         <p>Unlock the hidden potential of your space with Gage, the master of renovations.</p>
                     </div>
                     <div class="card-footer">
                         <img src="/img/team/gear-wide-connected.svg" alt="Gear">
                     </div>
                 </div>
-            </article>
+            </div>
         </div>
-        <div class="row row-cols-3 g-3">
-            <article class="col">
+
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/tamica2.jpeg}" class="img-fluid" />
+                        <img th:src="@{/img/team/tamica2.jpeg}" class="img-fluid" alt="Tamica Simon">
                     </div>
                     <div class="card-body">
-                        <p class="card-title">
-                            Tamica Simon
-                        </p>
-                        <p> Chat Maven</p>
+                        <p class="card-title">Tamica Simon</p>
+                        <p>Chat Maven</p>
                         <p class="card-text">With Tamica as your friendly guide, experience seamless communication and coordination.</p>
                     </div>
                     <div class="card-footer">
                         <img src="/img/team/chat-heart-fill.svg" alt="Chat">
                     </div>
                 </div>
-            </article>
+            </div>
 
-            <article class="col">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img  th:src="@{/img/team/travis.jpg}" class="img-fluid" />
+                        <img th:src="@{/img/team/travis.jpg}" class="img-fluid" alt="Travis Gomez">
                     </div>
                     <div class="card-body">
-                        <p class="card-title">
-                            Travis Gomez
-                        </p>
-                        <p> Data Maestro</p>
-                        <p>Travis conducts symphonies of data, harmonizing insights that drive your project's success.
-                        </p>
+                        <p class="card-title">Travis Gomez</p>
+                        <p>Data Maestro</p>
+                        <p>Travis conducts symphonies of data, harmonizing insights that drive your project's success.</p>
                     </div>
                     <div class="card-footer">
                         <img src="/img/team/database-fill.svg" alt="Database">
                     </div>
                 </div>
-            </article>
+            </div>
         </div>
     </section>
 </main>
