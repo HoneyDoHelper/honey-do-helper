@@ -17,17 +17,13 @@
                             <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
                         </div>
                         <div class="card-footer">
-                            <div class="row row-cols-2 row-cols-md-3 g-3 d-flex justify-content-center">
+                            <div class="row row-cols-2 g-3 d-flex justify-content-center">
                                 <div class="col d-flex justify-content-center">
                                     <a th:href="@{/edit/profile}" href="" class="btn btn-warning">Edit Profile</a>
                                 </div>
 
-                                <div class="col d-flex justify-content-center order-md-3">
+                                <div class="col d-flex justify-content-center">
                                     <a th:href="@{/edit/skills}" class="btn btn-warning">Edit Skills</a>
-                                </div>
-
-                                <div class="col d-flex justify-content-center order-md-2">
-                                    <a th:href="@{/delete/profile}" href="" class="btn btn-danger">Delete Profile</a>
                                 </div>
                             </div>
                         </div>

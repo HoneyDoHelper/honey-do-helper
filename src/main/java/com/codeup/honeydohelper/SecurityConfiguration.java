@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
                         .requestMatchers("users/{id}/edit", // Only authenticated users can edit profiles
-                      "/services/honeydoerProfile",
+                      "/services/honeydoerProfile", "/services/bookService/{id1}/{id2}",
                        "/dashboard")
                                 .authenticated()
                         .requestMatchers(
