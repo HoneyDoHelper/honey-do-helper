@@ -38,13 +38,18 @@ public class IndexController {
     /Index  |  /Contact  |  /About  |  /Support
     /////////////////////////////////////////////////////////*/
 
+    @GetMapping("/")
+    public String goHome(Model model) {
+        displayServiceCategoriesForNav(model);
+
+        return "index";
+    }
     @GetMapping("/index")
     public String gotoIndex(Model model) {
         displayServiceCategoriesForNav(model);
 
         return "index";
     }
-
     @GetMapping("/contact")
     public String gotoContact(Model model){
         displayServiceCategoriesForNav(model);
