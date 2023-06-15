@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="~{partials/head.html :: head('Service Categories')}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
+
 <body>
 
 <header th:replace="~{partials/header.html :: header}"></header>
@@ -13,27 +15,19 @@
         <h1>Service Categories</h1>
     </section>
     <section class="container">
-        <div class="row row-cols-3 g-3">
-            <article class="col" th:each="item : ${categories}">
-                <div class="card">
         <div class="row">
-            <!-- Thyme logic goes here -->
-            <article class="col-lg-4 col-md-6 mb-4" th:each="item : ${categories}">
+            <div class="col-lg-4 col-md-6 mb-4" th:each="item : ${categories}">
                 <div class="card h-100">
-                    <div class="card-header">
-                        <img th:src="@{{serviceImg}(serviceImg=${item.img_file_path})}" class="card-img-top" alt="Service Image">
-                    </div>
+                    <img th:src="@{{serviceImg}(serviceImg=${item.img_file_path})}" class="card-img-top" alt="Service Image">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${item.name}">Service Name</h5>
                         <p class="card-text" th:text="${item.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
                     </div>
                     <div class="card-footer">
-                       <a th:href="@{/categories/{categoryID}(categoryID=${item.id})}"
-                          th:text="${'Go to ' + item.name}"
-                          class="btn btn-warning">Edit Skills</a>
+                        <a th:href="@{/categories/{categoryID}(categoryID=${item.id})}" th:text="${'Go to ' + item.name}" class="btn btn-warning">Edit Skills</a>
                     </div>
                 </div>
-            </article>
+            </div>
         </div>
     </section>
 </main>
@@ -41,4 +35,5 @@
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 
 </body>
+
 </html>

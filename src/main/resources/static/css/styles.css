@@ -63,6 +63,14 @@ h3 {
     color: var(--color-neutral-light)
 }
 
+a:hover {
+    color: var(--color-primary-main);
+}
+
+a:active {
+    color: #9400de;
+}
+
 /* Containers */
 .container {
     background: var(--color-neutral-light);
