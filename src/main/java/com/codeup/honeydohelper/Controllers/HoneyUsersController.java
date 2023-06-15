@@ -96,43 +96,6 @@ public class HoneyUsersController {
         return "users/editProfile";
     }
 
-    @GetMapping("/delete/profile")
-    public String deleteUserProfileForm(Model model){
-        setCategoriesHtml(model);
-
-        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
-        setUserHtml(model, currentLoggedInUser);
-
-        setUserProfileHtml(model, currentLoggedInUser.getId());
-        return "users/deleteProfile";
-    }
-
-    @PostMapping("/delete/profile")
-    public String deleteUserProfileSubmit(@RequestParam("userId") int honeyUserId
-
-    ){
-        System.out.println("Deleted ID = " + honeyUserId);
-        Optional<HoneyUsers> honeyUsersOptional = honeyUsersDao.findById(honeyUserId);
-        HoneyUsers honeyUser = honeyUsersOptional.get();
-
-        clientReviewsDao.deleteAllByUser_Id(honeyUserId);
-        userProfileDao.deleteAllByUser_Id(honeyUserId);
-
-        if(honeyUser.getIsHoneydoer()){
-            Honeydoers honeydoer = findHoneydoer(honeyUserId);
-            int honeyDoerId = honeydoer.getId();
-            honeydoerReviewsDao.deleteAllByHoneydoer_Id(honeyDoerId);
-
-            taskCostsDao.deleteAllByTask_HoneydoerService_Honeydoers_Id(honeyDoerId);
-
-            honeydoerServicesDao.deleteAllByHoneydoers_Id(honeyDoerId);
-            honeydoersDao.deleteById(honeyDoerId);
-        }
-
-        tasksDao.deleteAllByHoneydoerService_Honeydoers_User_Id(honeyUserId);
-        honeyUsersDao.deleteById(honeyUserId);
-        return "redirect:/login";
-    }
 
     @PostMapping("/edit/profile")
     public String editUserProfileSubmit(@RequestParam("honeyUserID") int honeyUserId,
@@ -177,7 +140,7 @@ public class HoneyUsersController {
         Honeydoers honeydoer = findHoneydoer(honeyUserId);
         createHoneydoerService(honeydoerServices, rate, serviceId, honeydoer);
 
-        return "redirect:/edit/profile";
+        return "redirect:/edit/skills";
     }
 
     @GetMapping("/edit/skills")
@@ -225,7 +188,7 @@ public class HoneyUsersController {
 
         editHoneydoerSkill(honeydoerServiceObject, honeydoerObject, serviceObject, aboutService, hourlyRate);
 
-        return "redirect:/edit/profile";
+        return "redirect:/edit/skills";
     }
 
     @PostMapping("/delete/skills/{skillId}")
@@ -236,7 +199,7 @@ public class HoneyUsersController {
 
         honeydoerServicesDao.delete(honeydoerServiceObject);
 
-        return "redirect:/edit/profile";
+        return "redirect:/edit/skills";
     }
 
 

@@ -83,7 +83,19 @@
             </div>
         </th:block>
 
-        <th:block th:if="${task.isAccepted == false }">
+        <th:block th:if="${task.isDeclined == true}">
+            <div>
+                <h2 th:text="'Declined Project Proposal'" class="text-center">Project Status</h2>
+                <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
+
+                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
+                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
+                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
+                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+            </div>
+        </th:block>
+
+        <th:block th:if="${task.isAccepted == false  && task.isDeclined == false}">
             <div>
                 <h2 th:text="'Pending Project Proposal'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>

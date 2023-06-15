@@ -28,11 +28,14 @@ public class Tasks {
     @Column(name = "date_completed")
     private LocalDate dateCompleted;
 
-    @Column(name = "is_completed", length = 15)
+    @Column(name = "is_completed")
     private boolean isCompleted;
 
-    @Column(name = "is_accepted", nullable = false)
+    @Column(name = "is_accepted")
     private boolean isAccepted;
+
+    @Column(name = "is_declined")
+    private boolean isDeclined;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -48,7 +51,7 @@ public class Tasks {
     ////////////////////////////////////////////////////////////////*/
     public Tasks() {}
 
-    public Tasks(String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, String status, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
+    public Tasks(String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, boolean isCompleted, boolean isAccepted, boolean isDeclined, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
         this.timeStart = timeStart;
@@ -56,11 +59,12 @@ public class Tasks {
         this.dateCompleted = dateCompleted;
         this.isCompleted = isCompleted;
         this.isAccepted = isAccepted;
+        this.isDeclined = isDeclined;
         this.user = user;
         this.honeydoerService = honeydoerService;
     }
 
-    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, boolean isCompleted, boolean isAccepted, HoneyUsers user, HoneydoerServices honeydoerService) {
+    public Tasks(int id, String taskDetails, LocalDate dateAssigned, LocalTime timeStart, int budgetedDuration, LocalDate dateCompleted, boolean isCompleted, boolean isAccepted, boolean isDeclined, HoneyUsers user, HoneydoerServices honeydoerService) {
         this.id = id;
         this.taskDetails = taskDetails;
         this.dateAssigned = dateAssigned;
@@ -69,6 +73,7 @@ public class Tasks {
         this.dateCompleted = dateCompleted;
         this.isCompleted = isCompleted;
         this.isAccepted = isAccepted;
+        this.isDeclined = isDeclined;
         this.user = user;
         this.honeydoerService = honeydoerService;
     }
@@ -111,19 +116,22 @@ public class Tasks {
         this.dateCompleted = dateCompleted;
     }
 
-    public Boolean getIsCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
-    public void setIsCompleted(Boolean isCompleted) {
+    public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
-    public Boolean getIsAccepted() {
+    public boolean getIsAccepted() {
         return isAccepted;
     }
-    public void setIsAccepted(Boolean isAccepted) {
+    public void setIsAccepted(boolean isAccepted) {
         this.isAccepted = isAccepted;
     }
+
+    public boolean getIsDeclined() {return isDeclined;}
+    public void setIsDeclined(boolean declined) {isDeclined = declined;}
 
     public HoneyUsers getUser() {return user;}
     public void setUser(HoneyUsers user) {this.user = user;}

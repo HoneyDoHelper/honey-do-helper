@@ -220,8 +220,8 @@ public class ServicesController {
             task.setUser(userObject);
         }
 
-        task.setIsAccepted(false);
-        task.setIsCompleted(false);
+//        task.setIsAccepted(null);
+//        task.setIsCompleted(null);
         tasksDao.save(task);
     }
 }

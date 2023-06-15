@@ -104,7 +104,7 @@ public class TasksController {
 
         } else {
             System.out.println("Declined task = " + taskId);
-            taskObject.setIsAccepted(false);
+            taskObject.setIsDeclined(true);
         }
 
         tasksDao.save(taskObject);
