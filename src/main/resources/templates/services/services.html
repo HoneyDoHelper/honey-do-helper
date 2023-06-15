@@ -9,10 +9,10 @@
 <header th:replace="~{partials/header.html :: header}"></header>
 
 <main>
-    <section class="container py-5">
+    <section class="container mb-5">
         <h1 th:text="${service.name}">Service</h1>
         <div class="row">
-                <img th:src="@{{serviceImg}(serviceImg=${service.imgFilePath})}" class="img-fluid" alt="Service Image">
+                <img th:src="@{{serviceImg}(serviceImg=${service.imgFilePath})}" class="img-fluid mb-3" alt="Service Image">
                 <h2 th:text="${service.description}">Lorem ipsum dolor</h2>
         </div>
     </section>
@@ -25,22 +25,32 @@
                     <div class="card">
                         <th:block th:each="profile : ${userProfiles}">
                             <th:block th:if="${profile.id} == ${honeydoerServices[index].honeydoers.user.id}">
-                                <img th:src="@{${profile.imgFilePath}}" class="card-img-top book-img" alt="Honeydoer Image">
+                                <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
+                                (honeydoerId=${honeydoerServices[index].honeydoers.id},
+                                serviceId=${honeydoerServices[index].services.id})}">
+                                    <img th:src="@{${profile.imgFilePath}}" class="img-fluid rounded-circle" alt="Honeydoer Image">
+                                </a>
                             </th:block>
                         </th:block>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${honeydoerServices[index].services.name}">Service</h5>
-                        <p class="card-text" th:text="${honeydoerServices[index].honeydoers.user.firstName}" >Name</p>
                         <p>
-                            <span><svg th:replace="~{partials/star.html :: fullStarBig}"></svg></span>
+                            <span  class="card-text" th:text="${honeydoerServices[index].honeydoers.user.firstName}">Name</span>
+                            <span> (</span>
+                            <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
                             <span th:text="${honeydoerServices[index].honeydoers.rating}"></span>
+                            <span>)</span>
                         </p>
-                        <p class="card-text" th:text="${honeydoerServices[index].aboutService}">Experience</p>
-                        <a href="#" class="btn btn-link" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
+                        <p>
+                            <span th:text="${honeydoerServices[index].aboutService}"></span>
+                            <span>
+                                <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
                             (honeydoerId=${honeydoerServices[index].honeydoers.id},
                             serviceId=${honeydoerServices[index].services.id})}"
-                        >Read more</a>
+                                >Learn more</a>
+                            </span>
+                        </p>
                     </div>
                     <div class="card-footer">
                         <a href="#" class="btn btn-warning" th:href="@{/services/bookService/{honeydoerId}/{serviceId}

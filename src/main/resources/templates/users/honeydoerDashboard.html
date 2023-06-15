@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{partials/head.html :: head('Profile')}">
-
-</head>
+<head th:replace="~{partials/head.html :: head('Profile')}"></head>
 <body>
 
 <header th:replace="~{partials/header.html :: header}"></header>
@@ -12,21 +10,22 @@
     <section class="container">
         <h1 th:text="'Hello, ' + ${user.firstName}">Hello, User</h1>
         <div class="row">
-            <div class="col ">
+            <div class="col-12 col-lg">
                 <div class="row mb-4">
                     <article class="col">
                         <div class="card p-0">
                             <div class="card-body position-relative p-0">
                                 <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
                                 <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 start-0">Edit Profile</a>
-                                <a th:href="@{/edit/skills}" class="btn btn-warning position-absolute bottom-0 end-0">Edit Skills</a>
+                                <a th:href="@{/edit/skills}" class="btn btn-warning position-absolute bottom-50 end-50">Edit Skills</a>
+                                <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 end-0">delete Profile</a>
                             </div>
                         </div>
                     </article>
                 </div>
             </div>
 
-            <div class="col me-3">
+            <div class="col-12 col-lg me-3">
                 <h2>Upcoming Tasks</h2>
                 <th:block th:if="${tasks.size() <= 0}">
                     <p>No tasks available.</p>
