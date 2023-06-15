@@ -543,5 +543,10 @@ a:active {
     aspect-ratio: 1;
 }
 
+.container-fluid .btn-warning {
+    color: var(--color-neutral-light);
+    background: var(--color-primary-dark);
+}
+
 
 
