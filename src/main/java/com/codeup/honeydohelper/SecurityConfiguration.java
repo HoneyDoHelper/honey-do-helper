@@ -32,6 +32,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
                 // Login configuration
                 .formLogin()
                 .loginPage("/login")
@@ -84,7 +85,8 @@ public class SecurityConfiguration {
                         "/delete/skills/**",
                         "/static/**",
                         "/css/**",
-                        "/img/**")
+                        "/img/**",
+                        "/error")
                 .permitAll();
 
         return http.build();

@@ -101,16 +101,9 @@
                     <div class="col-md-3">
                         <p>Do you want to be a Honeydoer?</p>
                         <div class="mb-3">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" th:field="${user.isHoneydoer}"
-                                       value="true" onclick="toggleInputs(true)" id="honeydoer_yes">
-                                <label class="form-check-label" for="honeydoer_yes">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" th:field="${user.isHoneydoer}"
-                                       value="false" onclick="toggleInputs(false)" id="honeydoer_no">
-                                <label class="form-check-label" for="honeydoer_no">No</label>
-                            </div>
+                            <input type="radio" name="isHoneydoer" value="true" onclick="toggleInputs(true)"/>Yes
+                            <input type="radio" name="isHoneydoer" value="false" onclick="toggleInputs(false)"/>No
+
                         </div>
                     </div>
 
