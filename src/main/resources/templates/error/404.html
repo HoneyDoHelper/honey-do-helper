@@ -5,16 +5,28 @@
 
 <body>
 <navbar th:replace="~{partials/header.html :: header}"></navbar>
-<h1>Error 404</h1>
-<p>Error 404</p>
-<iframe
-        width="420"
-        height="315"
-        src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
-        frameborder="0"
-        allowfullscreen="allowfullscreen"
->
-</iframe>
+
+<main>
+    <section class="container">
+        <h1>Error 404</h1>
+        <p>Error 404</p>
+
+        <div class="row row-cols-3 g-3 mb-5">
+            <div class="col-1 col-lg-2"></div>
+            <div class="col-10 col-lg-8">
+                <iframe
+                        width="420"
+                        height="315"
+                        src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+                        frameborder="0"
+                        allowfullscreen="allowfullscreen"
+                >
+                </iframe>
+            </div>
+            <div class="col-1 col-lg-2"></div>
+        </div>
+    </section>
+</main>
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 </body>

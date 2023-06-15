@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{partials/head.html :: head('Profile')}"></head>
+<body>
+
+<header th:replace="~{partials/header.html :: header}"></header>
+
+<main>
+  <section class="container">
+    <h1 th:text="'Are you sure you want to delete your acccount, ' + ${user.firstName} + '?'">Hello, User</h1>
+    <div class="row">
+      <div class="col-12 col-lg">
+        <div class="row mb-4">
+          <article class="card">
+            <div class="card-header d-flex justify-content-center">
+              <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex justify-content-between">
+                <form th:action="@{/delete/profile}" th:method="post">
+                  <input type="hidden" name="userId" th:value="${user.id}">
+                  <button type="submit" class="btn btn-danger">Delete Profile</button>
+                </form>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+</main>
+
+<footer th:replace="~{partials/footer.html :: footer}"></footer>
+
+</body>
+
+</html>

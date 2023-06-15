@@ -7,4 +7,5 @@ public interface HoneydoersRepository extends JpaRepository<Honeydoers, Integer>
 
     Honeydoers findTopByOrderByIdDesc();
     Honeydoers findByUser_Id(int userId);
+
 }

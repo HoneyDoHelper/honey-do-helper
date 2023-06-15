@@ -11,4 +11,6 @@ public interface HoneydoerServicesRepository extends JpaRepository<HoneydoerServ
     List<HoneydoerServices> findAllByServices_Id(int serviceId);
     HoneydoerServices findByServices_IdAndHoneydoers_Id(int serviceId, int honeydoerId);
 
+    void deleteAllByHoneydoers_Id(int honeydoer_Id);
+
 }

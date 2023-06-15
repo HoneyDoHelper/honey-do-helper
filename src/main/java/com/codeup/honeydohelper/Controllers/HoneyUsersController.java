@@ -19,10 +19,12 @@ import java.util.Optional;
 public class HoneyUsersController {
 
     private final CategoriesRepository categoriesDao;
+    private final ClientReviewsRepository clientReviewsDao;
     private final HoneydoerReviewsRepository honeydoerReviewsDao;
     private final HoneydoerServicesRepository honeydoerServicesDao;
     private final HoneydoersRepository honeydoersDao;
     private final ServicesRepository servicesDao;
+    private final TaskCostsRepository taskCostsDao;
     private final TasksRepository tasksDao;
     private final UserProfilesRepository userProfileDao;
     private final HoneyUsersRepository honeyUsersDao;
@@ -30,19 +32,23 @@ public class HoneyUsersController {
 
     public HoneyUsersController(
             CategoriesRepository categoriesDao,
+            ClientReviewsRepository clientReviewsDao,
             HoneydoerReviewsRepository honeydoerReviewsDao,
             HoneydoerServicesRepository honeydoerServicesDao,
             HoneydoersRepository honeydoersDao,
             ServicesRepository servicesDao,
+            TaskCostsRepository taskCostsDao,
             TasksRepository tasksDao,
             UserProfilesRepository userProfileDao,
             HoneyUsersRepository honeyUsersDao
     ) {
         this.categoriesDao = categoriesDao;
+        this.clientReviewsDao = clientReviewsDao;
         this.honeydoerReviewsDao = honeydoerReviewsDao;
         this.honeydoerServicesDao = honeydoerServicesDao;
         this.honeydoersDao = honeydoersDao;
         this.servicesDao = servicesDao;
+        this.taskCostsDao = taskCostsDao;
         this.tasksDao = tasksDao;
         this.userProfileDao = userProfileDao;
         this.honeyUsersDao = honeyUsersDao;
@@ -74,6 +80,7 @@ public class HoneyUsersController {
             List<Tasks> tasks = tasksDao.findAllByUser_Id(currentLoggedInUser.getId());
             model.addAttribute("tasks", tasks);
 
+            setAllClientReviewsHtml(model, currentLoggedInUser.getId());
             return "users/userDashboard";
         }
     }
@@ -87,6 +94,44 @@ public class HoneyUsersController {
 
         setUserProfileHtml(model, currentLoggedInUser.getId());
         return "users/editProfile";
+    }
+
+    @GetMapping("/delete/profile")
+    public String deleteUserProfileForm(Model model){
+        setCategoriesHtml(model);
+
+        HoneyUsers currentLoggedInUser = findLoggedInHoneyUser();
+        setUserHtml(model, currentLoggedInUser);
+
+        setUserProfileHtml(model, currentLoggedInUser.getId());
+        return "users/deleteProfile";
+    }
+
+    @PostMapping("/delete/profile")
+    public String deleteUserProfileSubmit(@RequestParam("userId") int honeyUserId
+
+    ){
+        System.out.println("Deleted ID = " + honeyUserId);
+        Optional<HoneyUsers> honeyUsersOptional = honeyUsersDao.findById(honeyUserId);
+        HoneyUsers honeyUser = honeyUsersOptional.get();
+
+        clientReviewsDao.deleteAllByUser_Id(honeyUserId);
+        userProfileDao.deleteAllByUser_Id(honeyUserId);
+
+        if(honeyUser.getIsHoneydoer()){
+            Honeydoers honeydoer = findHoneydoer(honeyUserId);
+            int honeyDoerId = honeydoer.getId();
+            honeydoerReviewsDao.deleteAllByHoneydoer_Id(honeyDoerId);
+
+            taskCostsDao.deleteAllByTask_HoneydoerService_Honeydoers_Id(honeyDoerId);
+
+            honeydoerServicesDao.deleteAllByHoneydoers_Id(honeyDoerId);
+            honeydoersDao.deleteById(honeyDoerId);
+        }
+
+        tasksDao.deleteAllByHoneydoerService_Honeydoers_User_Id(honeyUserId);
+        honeyUsersDao.deleteById(honeyUserId);
+        return "redirect:/login";
     }
 
     @PostMapping("/edit/profile")
@@ -223,6 +268,11 @@ public class HoneyUsersController {
 
     private void setAllHoneydoerReviewsHtml(Model model, Honeydoers honeydoer){
         List<HoneydoerReviews> allReviews = honeydoerReviewsDao.findAllByHoneydoer_Id(honeydoer.getId());
+        model.addAttribute("reviews", allReviews);
+    }
+
+    private void setAllClientReviewsHtml(Model model, int userId){
+        List<ClientReviews> allReviews = clientReviewsDao.findAllByUser_Id(userId);
         model.addAttribute("reviews", allReviews);
     }
 

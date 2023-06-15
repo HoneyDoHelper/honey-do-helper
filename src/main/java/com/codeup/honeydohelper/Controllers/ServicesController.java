@@ -15,7 +15,6 @@ import java.util.Optional;
 @Controller
 public class ServicesController {
     private final CategoriesRepository categoriesDao;
-    private final HoneydoerImagesRepository honeydoerImagesDao;
     private final HoneydoerReviewsRepository honeydoerReviewsDao;
     private final HoneydoerServicesRepository honeydoerServicesDao;
     private final HoneydoersRepository honeydoersDao;
@@ -27,7 +26,6 @@ public class ServicesController {
 
     public ServicesController(
             CategoriesRepository categoriesDao,
-            HoneydoerImagesRepository honeydoerImagesDao,
             HoneydoerReviewsRepository honeydoerReviewsDao,
             HoneydoerServicesRepository honeydoerServicesDao,
             HoneydoersRepository honeydoersDao,
@@ -38,7 +36,6 @@ public class ServicesController {
             HoneyUsersRepository usersDao
     ) {
         this.categoriesDao = categoriesDao;
-        this.honeydoerImagesDao = honeydoerImagesDao;
         this.honeydoerReviewsDao = honeydoerReviewsDao;
         this.honeydoerServicesDao = honeydoerServicesDao;
         this.honeydoersDao = honeydoersDao;
@@ -227,16 +224,4 @@ public class ServicesController {
         task.setIsCompleted(false);
         tasksDao.save(task);
     }
-
-    private void createHoneydoerImage(String imageUrl, String honeydoerId) {
-        HoneydoerImages honeydoerImage = new HoneydoerImages();
-
-        Optional<Honeydoers> honeydoer = honeydoersDao.findById(Integer.parseInt(honeydoerId));
-        Honeydoers honeydoerObject = honeydoer.get();
-
-        honeydoerImage.setHoneydoer(honeydoerObject);
-        honeydoerImage.setFilePath(imageUrl);
-        honeydoerImagesDao.save(honeydoerImage);
-    }
-
 }
