@@ -12,13 +12,23 @@
         <div class="row">
             <div class="col-12 col-lg">
                 <div class="row mb-4">
-                    <article class="col">
-                        <div class="card p-0">
-                            <div class="card-body position-relative p-0">
-                                <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
-                                <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 start-0">Edit Profile</a>
-                                <a th:href="@{/edit/skills}" class="btn btn-warning position-absolute bottom-50 end-50">Edit Skills</a>
-                                <a th:href="@{/edit/profile}" href="" class="btn btn-warning position-absolute bottom-0 end-0">delete Profile</a>
+                    <article class="card">
+                        <div class="card-header d-flex justify-content-center">
+                            <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row row-cols-2 row-cols-md-3 g-3 d-flex justify-content-center">
+                                <div class="col d-flex justify-content-center">
+                                    <a th:href="@{/edit/profile}" href="" class="btn btn-warning">Edit Profile</a>
+                                </div>
+
+                                <div class="col d-flex justify-content-center order-md-3">
+                                    <a th:href="@{/edit/skills}" class="btn btn-warning">Edit Skills</a>
+                                </div>
+
+                                <div class="col d-flex justify-content-center order-md-2">
+                                    <a th:href="@{/delete/profile}" href="" class="btn btn-danger">Delete Profile</a>
+                                </div>
                             </div>
                         </div>
                     </article>

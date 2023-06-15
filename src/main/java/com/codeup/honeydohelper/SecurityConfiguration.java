@@ -80,6 +80,7 @@ public class SecurityConfiguration {
                         "/tasks/**",
                         "/tasks/update",
                         "/edit/profile/**",
+                        "/delete/profile",
                         "/edit/**",
                         "/edit/skills/**",
                         "/delete/skills/**",

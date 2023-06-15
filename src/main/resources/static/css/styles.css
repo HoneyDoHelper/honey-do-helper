@@ -126,7 +126,7 @@ a:active {
 .register-background {
     background-color: var(--color-primary-main);
     border-radius: 15px;
-    margin: 5px 2px 1px 2px;
+    /*margin: 5px 2px 1px 2px;*/
 }
 
 .register-btn {
@@ -320,11 +320,11 @@ a:active {
     overflow: hidden;
 }
 
-.container .card-header img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
+/*.container .card-header img {*/
+/*    max-width: 100%;*/
+/*    max-height: 100%;*/
+/*    object-fit: contain;*/
+/*}*/
 .container .card-footer img {
     font-size: 60px;
 }
@@ -536,6 +536,11 @@ a:active {
 .author {
     font-weight: bold;
     color: #555;
+}
+
+.tiny-icon {
+    width: 2rem;
+    aspect-ratio: 1;
 }
 
 

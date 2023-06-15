@@ -17,18 +17,27 @@
         </div>
         <form th:action="@{/login}" th:method="post" class="position-relative">
             <h1 class="">Login</h1>
-            <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="floatingEmail" placeholder="Email" name="email">
-                <label for="floatingEmail">Email</label>
-            </div>
-            <div class="form-floating mb-4">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-                <label for="floatingPassword">Password</label>
-            </div>
-            <div class="mb-4 d-flex justify-content-between">
-                <a href="/support" class="link-primary">forgot password?</a>
-                <p>Dont have an account? <a href="/register/user">Sign Up</a></p>
-                <button type="submit" class="btn btn-warning">Log in</button>
+
+            <div class="row row-cols-3 g-3 mb-5">
+                <div class="col-1 col-lg-2"></div>
+                <div class="col-10 col-lg-8">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="floatingEmail" placeholder="Email" name="email">
+                        <label for="floatingEmail">Email</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="mb-4 d-flex justify-content-between">
+                        <a href="/support" class="link-primary">forgot password?</a>
+                        <p class="d-none d-lg-block">Dont have an account? <a href="/register/user">Sign Up</a></p>
+                        <button type="submit" class="btn btn-warning">Log in</button>
+                    </div>
+                    <p class="d-block d-lg-none text-center">Dont have an account? <a href="/register/user">Sign Up</a></p>
+
+                </div>
+                <div class="col-1 col-lg-2"></div>
             </div>
         </form>
     </section>

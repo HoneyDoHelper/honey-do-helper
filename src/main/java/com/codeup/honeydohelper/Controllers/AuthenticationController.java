@@ -50,7 +50,7 @@ public class AuthenticationController {
     public String gotoLogin(Model model){
         setCategoriesHtml(model);
 
-        return "/authentication/login";
+        return "authentication/login";
     }
 
 
@@ -64,7 +64,7 @@ public class AuthenticationController {
         model.addAttribute("user", new HoneyUsers());
         model.addAttribute("userProfile", new UserProfiles());
 
-        return "/authentication/registerUser";
+        return "authentication/registerUser";
     }
 
     @PostMapping("/register/user")
@@ -100,7 +100,7 @@ public class AuthenticationController {
 
         model.addAttribute("honeydoerServices", new HoneydoerServices());
 
-        return "/authentication/registerHoneydoer";
+        return "authentication/registerHoneydoer";
     }
 
     @PostMapping("/register/honeydoer/{newHoneydoerId}")
@@ -123,7 +123,7 @@ public class AuthenticationController {
     public String gotoPasswordReset(Model model){
         setCategoriesHtml(model);
 
-        return "/authentication/passwordReset";
+        return "authentication/passwordReset";
     }
 
 

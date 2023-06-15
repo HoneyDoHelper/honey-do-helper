@@ -11,4 +11,7 @@ public interface TasksRepository extends JpaRepository<Tasks, Integer> {
 
     List<Tasks> findAllByUser_Id(int user_Id);
 
+    void deleteAllByUser_Id(int user_Id);
+    //void deleteAllByHoneydoerService_Honeydoers_Id(int honeydoer_Id);
+    void deleteAllByHoneydoerService_Honeydoers_User_Id(int user_Id);
 }
