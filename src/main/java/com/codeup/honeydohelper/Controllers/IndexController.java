@@ -42,28 +42,28 @@ public class IndexController {
     public String gotoIndex(Model model) {
         displayServiceCategoriesForNav(model);
 
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/contact")
     public String gotoContact(Model model){
         displayServiceCategoriesForNav(model);
 
-        return "/contact";
+        return "contact";
     }
 
     @GetMapping("/about")
     public String gotoAbout(Model model) {
         displayServiceCategoriesForNav(model);
 
-        return "/about";
+        return "about";
     }
 
     @GetMapping("/support")
     public String gotoSupport(Model model){
         displayServiceCategoriesForNav(model);
 
-        return "/support";
+        return "support";
     }
 
 

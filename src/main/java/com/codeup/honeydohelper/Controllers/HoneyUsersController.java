@@ -86,7 +86,7 @@ public class HoneyUsersController {
         setUserHtml(model, currentLoggedInUser);
 
         setUserProfileHtml(model, currentLoggedInUser.getId());
-        return "/users/editProfile";
+        return "users/editProfile";
     }
 
     @PostMapping("/edit/profile")
@@ -120,7 +120,7 @@ public class HoneyUsersController {
 
         setHoneydoerHtml(model, findLoggedInHoneyUser().getId());
 
-        return "/users/addSkill";
+        return "users/addSkill";
     }
 
     @PostMapping("/add/skills")
@@ -142,7 +142,7 @@ public class HoneyUsersController {
 
         setHoneydoerHtml(model, findLoggedInHoneyUser().getId());
 
-        return "/users/editHoneydoer";
+        return "users/editHoneydoer";
     }
 
     @GetMapping("/edit/skills/{skillId}")
@@ -158,7 +158,7 @@ public class HoneyUsersController {
 
         setCategoriesHtml(model);
 
-        return "/users/editSkill";
+        return "users/editSkill";
     }
 
     @PostMapping("/edit/skills/{skillId}")

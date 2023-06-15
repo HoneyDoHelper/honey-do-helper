@@ -126,7 +126,7 @@ a:active {
 .register-background {
     background-color: var(--color-primary-main);
     border-radius: 15px;
-    margin: 5px 2px 1px 2px;
+    /*margin: 5px 2px 1px 2px;*/
 }
 
 .register-btn {

@@ -59,7 +59,7 @@ public class ServicesController {
         setCategoryHtml(model, categoryId);
         setServiceCategoryHtml(model, categoryId);
 
-        return "/services/serviceCategory";
+        return "services/serviceCategory";
     }
 
 
@@ -71,7 +71,7 @@ public class ServicesController {
         setServiceHtml(model, serviceId);
         setAllHoneydoerServicesHtml(model, serviceId);
 
-        return "/services/services";
+        return "services/services";
     }
 
 
@@ -79,7 +79,7 @@ public class ServicesController {
     public String gotoCategories(Model model) {
         setCategoriesHtml(model);
 
-        return "/services/serviceCategories";
+        return "services/serviceCategories";
     }
 
 
@@ -92,7 +92,7 @@ public class ServicesController {
         setHoneydoerServiceHtml(model, serviceId, honeydoerId);
         setReviewsHtml(model, honeydoerId);
 
-        return "/services/honeydoerProfile";
+        return "services/honeydoerProfile";
     }
 
 
@@ -111,7 +111,7 @@ public class ServicesController {
         model.addAttribute("newTask", new Tasks());
         model.addAttribute("filestackKey", filestackKey);
 
-        return "/services/bookService";
+        return "services/bookService";
     }
 
 
