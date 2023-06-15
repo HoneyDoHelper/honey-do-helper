@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -31,66 +33,110 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-
-                // Login configuration
-                .formLogin()
-                .loginPage("/login")
-                .usernameParameter("email")
-                .defaultSuccessUrl("/dashboard") // Redirect to the user's home page after successful login (can be any URL)
-                .permitAll() // Allow anyone to access the login page
-
-                // Logout configuration
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login") // Redirect to the login page after successful logout (with a query string value appended)
-
-                // Pages that require authentication
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers(
-                        "/users/{id}/edit", // Only authenticated users can edit profiles
-                        "/services/honeydoerProfile",
-                        "/dashboard"// Only authenticated honeydoers can view their profiles
+        http.authorizeHttpRequests((requests) -> requests
+                        /* Pages that require authentication
+                         * only authenticated users can create and edit ads */
+                        .requestMatchers("users/{id}/edit", // Only authenticated users can edit profiles
+                      "/services/honeydoerProfile",
+                       "/dashboard")
+                                .authenticated()
+                        .requestMatchers(
+                                "/",
+                                "/index",
+                                "/about",
+                                "/contact",
+                                "/support",
+                                "/authentication/register",
+                                "/authentication/**",
+                                "/register",
+                                "/register/user",
+                                "/register/honeydoer",
+                                "/register/honeydoer/**",
+                                "/add/skills",
+                                "/user/honeydoer/dashboard/**",
+                                "/services",
+                                "/services/**",
+                                "/apis/**",
+                                "/login",
+                                "/categories",
+                                "/categories/**",
+                                "/tasks/**",
+                                "/tasks/update",
+                                "/edit/profile/**",
+                                "/delete/profile",
+                                "/edit/**",
+                                "/edit/skills/**",
+                                "/delete/skills/**",
+                                "/static/**",
+                                "/error").permitAll()
+                        // allow loading of static resources
+                        .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
-                .authenticated()
-
-                // Pages that can be viewed without authentication
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers(
-                        "/",
-                        "/index",
-                        "/about",
-                        "/contact",
-                        "/support",
-                        "/authentication/register",
-                        "/authentication/**",
-                        "/register",
-                        "/register/user",
-                        "/register/honeydoer",
-                        "/register/honeydoer/**",
-                        "/add/skills",
-                        "/user/honeydoer/dashboard/**",
-                        "/services",
-                        "/services/**",
-                        "/apis/**",
-                        "/categories",
-                        "/categories/**",
-                        "/tasks/**",
-                        "/tasks/update",
-                        "/edit/profile/**",
-                        "/delete/profile",
-                        "/edit/**",
-                        "/edit/skills/**",
-                        "/delete/skills/**",
-                        "/static/**",
-                        "/css/**",
-                        "/img/**",
-                        "/error")
-                .permitAll();
-
+                /* Login configuration */
+                .formLogin((login) -> login.loginPage("/login").usernameParameter("email").defaultSuccessUrl("/dashboard"))
+                /* Logout configuration */
+                .logout((logout) -> logout.logoutSuccessUrl("/login"))
+                .httpBasic(withDefaults());
         return http.build();
-    }
-
-}
+    }}
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//
+//                // Login configuration
+//                .formLogin()
+//                .loginPage("/login")
+//                .usernameParameter("email")
+//                .defaultSuccessUrl("/dashboard") // Redirect to the user's home page after successful login (can be any URL)
+//                .permitAll() // Allow anyone to access the login page
+//
+//                // Logout configuration
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/login") // Redirect to the login page after successful logout (with a query string value appended)
+//
+//                // Pages that require authentication
+//                .and()
+//                .authorizeHttpRequests()
+//                .requestMatchers(
+//                        "/users/{id}/edit", // Only authenticated users can edit profiles
+//                        "/services/honeydoerProfile",
+//                        "/dashboard"// Only authenticated honeydoers can view their profiles
+//                )
+//                .authenticated()
+//
+//                // Pages that can be viewed without authentication
+//                .and()
+//                .authorizeHttpRequests()
+//                .requestMatchers(
+//                        "/",
+//                        "/index",
+//                        "/about",
+//                        "/contact",
+//                        "/support",
+//                        "/authentication/register",
+//                        "/authentication/**",
+//                        "/register",
+//                        "/register/user",
+//                        "/register/honeydoer",
+//                        "/register/honeydoer/**",
+//                        "/add/skills",
+//                        "/user/honeydoer/dashboard/**",
+//                        "/services",
+//                        "/services/**",
+//                        "/apis/**",
+//                        "/categories",
+//                        "/categories/**",
+//                        "/tasks/**",
+//                        "/tasks/update",
+//                        "/edit/profile/**",
+//                        "/delete/profile",
+//                        "/edit/**",
+//                        "/edit/skills/**",
+//                        "/delete/skills/**",
+//                        "/static/**",
+//                        "/css/**",
+//                        "/img/**",
+//                        "/error")
+//                .permitAll();
+//
+//        return http.build();
