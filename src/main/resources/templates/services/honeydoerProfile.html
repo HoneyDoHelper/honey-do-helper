@@ -27,7 +27,12 @@
                     </div>
                     <div class="col-sm-8 align-self-center">
                         <p th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
-                        <p th:text="${honeydoer.rating}">Stars</p>
+                        <p>
+                            <span> (</span>
+                            <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
+                            <span th:text="${honeydoer.rating}"></span>
+                            <span>)</span>
+                        </p>
                     </div>
                 </div>
                 <div class="row">
