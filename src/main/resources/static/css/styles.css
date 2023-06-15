@@ -511,5 +511,31 @@ a:active {
 
 }
 
+/*REVIEW STYLING*/
+
+.review-column {
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--color-neutral-dark);
+    border-radius: 5px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.review-column:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-text {
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.author {
+    font-weight: bold;
+    color: #555;
+}
+
 
 

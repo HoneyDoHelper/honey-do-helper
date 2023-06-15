@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{partials/head.html :: head('Profile')}">
+    <link rel="stylesheet" href="/static/css/styles.css">
 
 </head>
 <body>
@@ -115,20 +116,6 @@
                     <input type="hidden" id="totalUserCost"  name="totalUserCost">
                     <input type="hidden" id="sitePay" name="sitePay">
                     <input type="hidden" id="honeydoerPayValue" name="honeydoerPay">
-
-
-
-
-<!--                    <div class="field">-->
-<!--                        <div class="control mb-3">-->
-<!--                            <label for="fileupload">Select a file to upload</label>-->
-<!--                            <input type="hidden" id="fileupload">-->
-<!--                            <button class="btn btn-warning" type="button" id="picker">Pick file</button>-->
-<!--                        </div>-->
-<!--                        <div id="thumbnail-container" class="mb-3"></div>-->
-<!--                        <div class="control" id="nameBox" style="display: none"></div>-->
-<!--                        <div class="control mb-3" id="urlBox" style="display: none"></div>-->
-<!--                    </div>-->
 
                     <button type="submit" class="btn btn-warning ">Submit Proposal</button>
                 </form>
