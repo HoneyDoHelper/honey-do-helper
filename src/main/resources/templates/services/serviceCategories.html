@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4" th:each="item : ${categories}">
                 <div class="card h-100">
-                    <img th:src="@{{serviceImg}(serviceImg=${item.img_file_path})}" class="card-img-top" alt="Service Image">
+                    <img th:src="@{{serviceImg}(serviceImg=${item.img_file_path})}" class="card-img-top index-img" alt="Service Image">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${item.name}">Service Name</h5>
                         <p class="card-text" th:text="${item.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consectetur cupiditate vitae. Assumenda corporis deleniti illo in iusto maiores molestiae nostrum recusandae reprehenderit tenetur!</p>
