@@ -10,10 +10,10 @@
 
 <main>
     <section class="container ">
-        <h1 th:text="${service.name}">Service</h1>
-        <div class="row">
-                <img th:src="@{{serviceImg}(serviceImg=${service.imgFilePath})}" class="img-fluid header-img mb-3" alt="Service Image">
-                <h2 th:text="${service.description}">Lorem ipsum dolor</h2>
+        <h1 th:text="${service.name}" class="text-center">Service</h1>
+        <div class="row d-flex justify-content-center">
+                <img th:src="@{{serviceImg}(serviceImg=${service.imgFilePath})}" class="img-fluid header-img mb-5" alt="Service Image">
+                <h2 th:text="${service.description}" style="width: 65%; text-align: center">Lorem ipsum dolor</h2>
         </div>
     </section>
 
@@ -25,15 +25,15 @@
                     <div class="card">
                         <th:block th:each="profile : ${userProfiles}">
                             <th:block th:if="${profile.id} == ${honeydoerServices[index].honeydoers.user.id}">
-                                <a href="#" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
+                                <a href="#" class="d-flex justify-content-center" th:href="@{/services/honeydoer/{honeydoerId}/{serviceId}
                                 (honeydoerId=${honeydoerServices[index].honeydoers.id},
                                 serviceId=${honeydoerServices[index].services.id})}">
-                                    <img th:src="@{${profile.imgFilePath}}" class="img-fluid rounded-circle" alt="Honeydoer Image">
+                                    <img th:src="@{${profile.imgFilePath}}" class="img-fluid rounded-circle book-img profile-img" alt="Honeydoer Image">
                                 </a>
                             </th:block>
                         </th:block>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h5 class="card-title" th:text="${honeydoerServices[index].services.name}">Service</h5>
                         <p>
                             <span  class="card-text" th:text="${honeydoerServices[index].honeydoers.user.firstName}">Name</span>
@@ -52,8 +52,8 @@
                             </span>
                         </p>
                     </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-warning" th:href="@{/services/bookService/{honeydoerId}/{serviceId}
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-warning " th:href="@{/services/bookService/{honeydoerId}/{serviceId}
                            (honeydoerId=${honeydoerServices[index].honeydoers.id},
                            serviceId=${honeydoerServices[index].services.id})}"
                         >Book Service</a>

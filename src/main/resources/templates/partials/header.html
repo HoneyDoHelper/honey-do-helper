@@ -55,7 +55,7 @@
 
                         <th:block sec:authorize="isAuthenticated()">
                             <li class="nav-item my-3 my-lg-0 mx-lg-3">
-                                <a class="btn btn-outline-secondary" href="/dashboard">Profile</a>
+                                <a class="btn btn-warning btn-outline-secondary" href="/dashboard">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <form th:action="@{/logout}" th:method="post">
@@ -65,7 +65,7 @@
                         </th:block>
                         <th:block sec:authorize="!isAuthenticated()">
                             <li class="nav-item my-3 my-lg-0 mx-lg-3">
-                                <a class="btn btn-outline-secondary" href="/login">Log in</a>
+                                <a class="btn btn-warning btn-outline-secondary" href="/login">Log in</a>
                             </li>
 
                             <li class="nav-item">
