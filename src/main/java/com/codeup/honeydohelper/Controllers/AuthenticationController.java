@@ -74,6 +74,8 @@ public class AuthenticationController {
                            @RequestParam("password") String password,
                            @RequestParam("confirm_password") String confirmPassword,
                            @RequestParam("image_url") String imageUrl,
+                           @RequestParam("phone_number") String phone,
+                           @RequestParam("zip") String zip,
                            @RequestParam("about_self") String aboutSelf){
 
         if(!password.equals(confirmPassword)){
@@ -87,7 +89,7 @@ public class AuthenticationController {
         }
 
         createHoneyUser(honeyUser, password);
-        createUserProfile(userProfile, honeyUser, imageUrl);
+        createUserProfile(userProfile, honeyUser, imageUrl, phone, zip);
 
         if (honeyUser.getIsHoneydoer()){
             createHoneydoer(honeydoer, aboutSelf);
@@ -204,8 +206,11 @@ public class AuthenticationController {
         honeydoerServicesDao.save(honeydoerServices);
     }
 
-    private void createUserProfile(UserProfiles userProfile, HoneyUsers honeyUser, String imageUrl){
+    private void createUserProfile(UserProfiles userProfile, HoneyUsers honeyUser,
+                                   String imageUrl, String phone, String zip){
         userProfile.setUser(honeyUser);
+        userProfile.setZip(Integer.parseInt(zip));
+        userProfile.setPhone(Long.parseLong(phone));
         userProfile.setImgFilePath(imageUrl);
         userProfileDao.save(userProfile);
     }

@@ -64,9 +64,15 @@
                         <label for="last_name">Last Name</label>
                     </div>
 
+<!--                    <div class="form-floating">-->
+<!--                        <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number"-->
+<!--                               name="phone_number" required>-->
+<!--                        <label for="phone_number">Phone Number</label>-->
+<!--                    </div>-->
+
                     <div class="form-floating">
-                        <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number"
-                               name="phone_number" required>
+                        <input type="text" class="form-control" id="phone_number"
+                               name="phone_number" placeholder="Phone Number" required>
                         <label for="phone_number">Phone Number</label>
                     </div>
                 </div>
@@ -108,8 +114,8 @@
 
                         <div class="col-md-3">
                             <div class="form-floating mb-3">
-                                <input th:field="${userProfile.zip}" type="text" class="form-control" id="zip" name="zip"
-                                       placeholder="Zip" required>
+                                <input type="text" class="form-control" id="zip" name="zip"
+                                       placeholder="Zip" minlength="5" maxlength="5" required>
                                 <label for="zip">Zip</label>
                             </div>
                         </div>
@@ -197,6 +203,20 @@
         }
     }
 </script>
+
+<!--<script>-->
+<!--    function formatPhoneNumber(input) {-->
+<!--        var phoneNumber = input.value.replace(/\D/g, '');-->
+
+<!--        var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');-->
+
+<!--        input.value = formattedPhoneNumber;-->
+<!--    }-->
+
+<!--    document.getElementById("phone_number").addEventListener("input", function() {-->
+<!--        formatPhoneNumber(this);-->
+<!--    });-->
+<!--</script>-->
 <script th:replace="~{partials/filestack.html :: filestackScript}"></script>
 </body>
 </html>
