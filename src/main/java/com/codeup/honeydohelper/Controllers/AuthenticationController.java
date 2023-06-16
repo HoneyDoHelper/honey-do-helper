@@ -71,10 +71,22 @@ public class AuthenticationController {
     public String saveUser(@ModelAttribute HoneyUsers honeyUser,
                            @ModelAttribute UserProfiles userProfile,
                            @ModelAttribute Honeydoers honeydoer,
+                           @RequestParam("password") String password,
+                           @RequestParam("confirm_password") String confirmPassword,
                            @RequestParam("image_url") String imageUrl,
                            @RequestParam("about_self") String aboutSelf){
 
-        createHoneyUser(honeyUser);
+        if(!password.equals(confirmPassword)){
+            return "redirect:/register/user?passwordsdontmatch";
+        }
+
+        boolean isStrongPassword = checkPasswordStrength(password);
+
+        if(!isStrongPassword){
+            return "redirect:/register/user?passwordnotstrong";
+        }
+
+        createHoneyUser(honeyUser, password);
         createUserProfile(userProfile, honeyUser, imageUrl);
 
         if (honeyUser.getIsHoneydoer()){
@@ -162,8 +174,8 @@ public class AuthenticationController {
     /*================================================================================
     Controller Methods to Create Honeyusers & Honeydoers
     ================================================================================*/
-    private void createHoneyUser(HoneyUsers honeyUser){
-        String hash = passwordEncoder.encode(honeyUser.getPassword());
+    private void createHoneyUser(HoneyUsers honeyUser, String password){
+        String hash = passwordEncoder.encode(password);
         honeyUser.setPassword(hash);
         honeyUsersDao.save(honeyUser);
     }
@@ -171,7 +183,7 @@ public class AuthenticationController {
     private void createHoneydoer(Honeydoers honeydoer, String aboutSelf){
         honeydoer.setUser(honeyUsersDao.findTopByOrderByIdDesc());
         honeydoer.setAboutSelf(aboutSelf);
-        honeydoer.setRating(5);
+        honeydoer.setRating(0);
         honeydoersDao.save(honeydoer);
     }
 
@@ -200,6 +212,32 @@ public class AuthenticationController {
 
     private Honeydoers findHoneydoer(int honeyUserId){
         return honeydoersDao.findByUser_Id(honeyUserId);
+    }
+
+    private boolean checkPasswordStrength(String password) {
+        boolean hasNumber = false;
+        boolean hasUpperCase = false;
+        boolean hasLowerCase = false;
+        boolean hasSymbol = false;
+        boolean isSixCharsOrMore = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                hasNumber = true;
+            } else if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            } else if (Character.isLowerCase(c)) {
+                hasLowerCase = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                hasSymbol = true;
+            }
+        }
+
+        if (password.length() >= 6){
+            isSixCharsOrMore = true;
+        }
+
+        return hasNumber && hasUpperCase && hasLowerCase && isSixCharsOrMore && hasSymbol;
     }
 
 }
