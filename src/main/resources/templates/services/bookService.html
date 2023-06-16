@@ -32,7 +32,10 @@
                 <h2 th:text="${service.services.name}" class="mb-3"></h2>
                 <p th:text="${honeydoer.user.firstName} + '\'s Experience'">Service Experience</p>
                 <p th:text="${service.aboutService}">Experience Description</p>
-                <p id="rate"  th:text="'$' + ${service.rate} + '/hr'" class="fw-bolder fs-2 color-primary-main">Rate $/hr</p>
+
+                <p class="fw-bolder fs-2 color-primary-main">Rate: <span th:text="${service.rate}" id="rate" class="rate"></span>/hr</p>
+
+<!--                <p id="rate"  th:text="'$' + ${service.rate} + '/hr'" class="fw-bolder fs-2 color-primary-main">Rate $/hr</p>-->
             </div>
         </div>
 
@@ -248,6 +251,18 @@
     document.getElementById('start-date').setAttribute('min', tomorrowFormatted);
     document.getElementById('start-date').setAttribute('max', maxDateFormatted);
 </script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const rateElements = document.querySelectorAll('.rate');
+        rateElements.forEach(element => {
+            const rate = parseFloat(element.textContent);
+            const formattedRate = rate.toFixed(2);
+            element.textContent = '$' + formattedRate;
+        });
+    });
+</script>
+
 <script th:replace="~{partials/filestack.html :: filestackScript}"></script>
 </body>
 </html>

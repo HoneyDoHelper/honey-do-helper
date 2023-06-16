@@ -31,7 +31,7 @@
                     <div class="card-body mb-3">
                         <div class="">
                             <p th:text="${entry.aboutService}">Experience</p>
-                            <p>Rate: $<span th:text="${entry.rate}">Rate</span></p>
+                            <p>Rate: <span th:text="${entry.rate}" class="rate">Rate</span></p>
                         </div>
                     </div>
 
@@ -56,5 +56,16 @@
 </main>
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const rateElements = document.querySelectorAll('.rate');
+        rateElements.forEach(element => {
+            const rate = parseFloat(element.textContent);
+            const formattedRate = rate.toFixed(2);
+            element.textContent = '$' + formattedRate;
+        });
+    });
+</script>
 </body>
 </html>

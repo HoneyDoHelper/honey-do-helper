@@ -34,6 +34,9 @@
                                placeholder="Confirm Password" required>
                         <label for="confirm_password">Confirm Password</label>
                     </div>
+                    <div>
+                        <p class="text-secondary">Passwords: 6+ characters, 1 number, 1 uppercase, 1 lowercase, 1 special character</p>
+                    </div>
                     <div th:if="${param.passwordsdontmatch}">
                         <p class="text-danger">Passwords do not match.</p>
                     </div>

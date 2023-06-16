@@ -597,5 +597,8 @@ a:active {
     border: solid 1px var(--color-primary-light);
 }
 
+.text-secondary {
+    font-size: .75rem;
+}
 
 

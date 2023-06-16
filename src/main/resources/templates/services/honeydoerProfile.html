@@ -28,7 +28,9 @@
                         </th:block>
                     </div>
                     <div class="col-sm-8 align-self-center">
-                        <p th:text="'$' + ${service.rate} + '/hr'" class="color-primary-main fs-5 fw-bolder">Rate $/hr</p>
+                        <p class="color-primary-main fs-5 fw-bolder"><span th:text="${service.rate}" class="rate">Rate</span>/hr</p>
+
+<!--                        <p th:text="'$' + ${service.rate} + '/hr'" class="color-primary-main fs-5 fw-bolder rate">Rate $/hr</p>-->
                         <p>
                             <span> (</span>
                             <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
@@ -64,5 +66,15 @@
 
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
 
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const rateElements = document.querySelectorAll('.rate');
+        rateElements.forEach(element => {
+            const rate = parseFloat(element.textContent);
+            const formattedRate = rate.toFixed(2);
+            element.textContent = '$' + formattedRate;
+        });
+    });
+</script>
 </body>
 </html>

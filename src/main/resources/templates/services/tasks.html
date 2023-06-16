@@ -66,10 +66,10 @@
                 <h2 th:text="'Accepted Project Proposal'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
-                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <p>Honeydoer Pay: <span th:text="${task_cost.honeydoerPay}" class="rate"></span></p>
+                <p>Honeydoer Helper Fee: <span th:text="${task_cost.sitePay}" class="rate"></span></p>
+                <p>Taxes: <span th:text="${task_cost.taxes}" class="rate"></span></p>
+                <h3 class="color-neutral-light">Total Cost: <span th:text="${task_cost.totalUserCost}" class="rate"></span></h3>
                 <th:block th:if="${isHoneydoer}">
                     <form th:action="@{'/tasks/update'}" th:method="post">
                         <input type="hidden" name="todo-status" th:value="${'Completed'}">
@@ -85,10 +85,10 @@
                 <h2 th:text="'Declined Project Proposal'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
-                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <p>Honeydoer Pay: <span th:text="${task_cost.honeydoerPay}" class="rate"></span></p>
+                <p>Honeydoer Helper Fee: <span th:text="${task_cost.sitePay}" class="rate"></span></p>
+                <p>Taxes: <span th:text="${task_cost.taxes}" class="rate"></span></p>
+                <h3 class="color-neutral-light">Total Cost: <span th:text="${task_cost.totalUserCost}" class="rate"></span></h3>
             </div>
         </th:block>
 
@@ -97,10 +97,10 @@
                 <h2 th:text="'Pending Project Proposal'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
-                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <p>Honeydoer Pay: <span th:text="${task_cost.honeydoerPay}" class="rate"></span></p>
+                <p>Honeydoer Helper Fee: <span th:text="${task_cost.sitePay}" class="rate"></span></p>
+                <p>Taxes: <span th:text="${task_cost.taxes}" class="rate"></span></p>
+                <h3 class="color-neutral-light">Total Cost: <span th:text="${task_cost.totalUserCost}" class="rate"></span></h3>
                 <th:block th:if="${isHoneydoer}">
                     <form th:action="@{'/tasks/update'}" th:method="post">
                         <input type="hidden" name="todo-status" th:value="${'Accepted'}">
@@ -129,10 +129,10 @@
                 <h2 th:text="'Completed Project'" class="text-center">Project Status</h2>
                 <p th:text="${task.dateAssigned} + ' at ' + ${task.timeStart} + ' for ' + ${task.budgetedDuration} + ' hours'" class="bg-color-primary-dark color-neutral-light p-2">Task Date Assigned</p>
 
-                <p th:text="'Honeydoer Pay $' + ${task_cost.honeydoerPay}">Honeydoer Pay</p>
-                <p th:text="'Honeydo Helper Fee $' + ${task_cost.sitePay}">Honeydo Helper Fee</p>
-                <p th:text="'Taxes $' + ${task_cost.taxes}">Taxes</p>
-                <h3 th:text="'Total Cost $' + ${task_cost.totalUserCost}" class="color-neutral-light">Total Cost</h3>
+                <p>Honeydoer Pay: <span th:text="${task_cost.honeydoerPay}" class="rate"></span></p>
+                <p>Honeydoer Helper Fee: <span th:text="${task_cost.sitePay}" class="rate"></span></p>
+                <p>Taxes: <span th:text="${task_cost.taxes}" class="rate"></span></p>
+                <h3 class="color-neutral-light">Total Cost: <span th:text="${task_cost.totalUserCost}" class="rate"></span></h3>
 
                 <th:block th:if="${!isHoneydoer && honeydoerReviewed == false}">
                     <form th:action="@{'/tasks/review'}" th:method="post">
@@ -195,5 +195,16 @@
 
 </main>
 <footer th:replace="~{partials/footer.html :: footer}"></footer>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const rateElements = document.querySelectorAll('.rate');
+        rateElements.forEach(element => {
+            const rate = parseFloat(element.textContent);
+            const formattedRate = rate.toFixed(2);
+            element.textContent = '$' + formattedRate;
+        });
+    });
+</script>
 </body>
 </html>
