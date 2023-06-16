@@ -22,6 +22,7 @@ public class TasksController {
     private final TasksRepository tasksDao;
     private final UserProfilesRepository userProfileDao;
     private final HoneyUsersRepository usersDao;
+
     public TasksController (
             CategoriesRepository categoriesDao,
             ClientReviewsRepository clientReviewsDao,
@@ -56,6 +57,19 @@ public class TasksController {
 
         Tasks task = findTask(taskId);
         Honeydoers honeydoer = new Honeydoers();
+
+        if (clientReviewsDao.findByTask_Id(taskId) != null) {
+            model.addAttribute("clientReviewed", true);
+        } else {
+            model.addAttribute("clientReviewed", false);
+        }
+
+        if (honeydoerReviewsDao.findByTask_Id(taskId) != null) {
+            model.addAttribute("honeydoerReviewed", true);
+        } else {
+            model.addAttribute("honeydoerReviewed", false);
+        }
+
         if(currentLoggedInUser.getIsHoneydoer()){
             honeydoer = findHoneydoer(currentLoggedInUser.getId());
         }
@@ -144,6 +158,15 @@ public class TasksController {
             Optional<Honeydoers> honeydoer = honeydoersDao.findById(reviewId);
             Honeydoers honeydoerObject = honeydoer.get();
 
+            float currentRating = honeydoerObject.getRating();
+            float newReviewRating = getRatingValue(starInput);
+
+            if(currentRating <=0){
+                honeydoerObject.setRating(newReviewRating);
+            } else {
+                honeydoerObject.setRating((currentRating + newReviewRating) / 2);
+            }
+
             HoneydoerReviews review = new HoneydoerReviews();
             review.setTask(taskObject);
             review.setHoneydoer(honeydoerObject);
@@ -214,4 +237,16 @@ public class TasksController {
             default -> Stars.FIVE;
         };
     }
+
+    private float getRatingValue (String starInput){
+        return switch (starInput) {
+            case "ONE" -> 1.0f;
+            case "TWO" -> 2.0f;
+            case "THREE" -> 3.0f;
+            case "FOUR" -> 4.0f;
+            default -> 5.0f;
+        };
+    }
+
+
 }

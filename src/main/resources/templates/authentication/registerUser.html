@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input th:field="${user.password}" type="password" class="form-control" id="password" name="password"
+                        <input type="password" class="form-control" id="password" name="password"
                                placeholder="Password" required>
                         <label for="password">Password</label>
                     </div>
@@ -33,6 +33,16 @@
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password"
                                placeholder="Confirm Password" required>
                         <label for="confirm_password">Confirm Password</label>
+                    </div>
+                    <div th:if="${param.passwordsdontmatch}">
+                        <p class="text-danger">Passwords do not match.</p>
+                    </div>
+                    <div th:if="${param.passwordnotstrong}">
+                        <p class="text-danger">Passwords must 6 characters or longer</p>
+                        <p class="text-danger">Passwords must have at least 1 - Number</p>
+                        <p class="text-danger">Passwords must have at least 1 - Uppercase letter</p>
+                        <p class="text-danger">Passwords must have at least 1 - Lowercase letter</p>
+                        <p class="text-danger">Passwords must have at least 1 - Special Character</p>
                     </div>
                 </div>
                 <div class="col-1 col-lg-2"></div>
@@ -56,7 +66,7 @@
 
                     <div class="form-floating mb-3">
                         <input th:field="${userProfile.phone}" type="tel" class="form-control" id="phone_number"
-                               name="phone_number" placeholder="Phone Number" required>
+                               name="phone_number" required>
                         <label for="phone_number">Phone Number</label>
                     </div>
                 </div>
