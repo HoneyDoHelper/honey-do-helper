@@ -1,5 +1,5 @@
 :root {
-    --color-primary-light: #FFE898;
+    --color-primary-light: #fae9c9;
     --color-primary-main: #DBAD43;
     --color-primary-dark: #BD8441;
 
@@ -111,7 +111,7 @@ a:active {
  /* Cards */
 .card {
     background: none;
-    border: 1px solid var(--color-neutral-dark);
+    border: 1px solid var(--color-primary-dark);
 }
 
 .card-header {
@@ -147,10 +147,12 @@ a:active {
 /*REGISTER CSS*/
 
 .register-background {
-    background-color: var(--color-primary-main);
+    background-color: var(--color-primary-light);
     border-radius: 15px;
     /*margin: 5px 2px 1px 2px;*/
+    padding: 1rem;
 }
+
 
 .register-btn {
     background-color: var(--color-primary-main);
@@ -468,11 +470,14 @@ a:active {
     border: solid 1px var(--color-primary-main);
 }
 
-.btn-warning:hover {
-    color: var(--color-neutral-light);
-    background: var(--color-primary-dark);
+.btn-warning:hover,
+.btn-warning:active,
+.btn-warning:focus{
+    color: var(--color-neutral-light) !important;
+    background: var(--color-primary-dark) !important;
     border: solid 1px var(--color-primary-light);
 }
+
 
 .nav-link.active,
 .nav-link.active:focus,
@@ -579,9 +584,17 @@ a:active {
     aspect-ratio: 1;
 }
 
-.container-fluid .btn-warning {
+.bar .btn-warning {
     color: var(--color-neutral-light);
     background: var(--color-primary-dark);
+}
+
+.bar .btn-warning:hover,
+.bar .btn-warning:active,
+.bar .btn-warning:focus{
+    color: var(--color-neutral-light) !important;
+    background: var(--color-primary-main) !important;
+    border: solid 1px var(--color-primary-light);
 }
 
 

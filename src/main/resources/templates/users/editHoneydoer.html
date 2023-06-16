@@ -10,23 +10,26 @@
 
 <main>
     <section class="container">
-        <div class="row">
-            <h1>What would you like to edit, <span th:text="${honeydoer.user.firstName}"></span>!</h1>
+        <h1>What would you like to edit, <span th:text="${honeydoer.user.firstName}"></span>!</h1>
 
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
             <div class="col">
-                <div class="row row-cols-3 g-3">
-                    <div class="col h-100" th:each="entry : ${honeydoerService}">
-                        <div class="mb-0">
-                            <p>
-                                <Strong><span th:text="${entry.services.category.name}">Name</span></Strong>
-                            </p>
+                <div class="card h-100 mb-3" th:each="entry : ${honeydoerService}">
+                    <div class="card-header">
+                        <div>
+                            <img th:src="@{${entry.services.imgFilePath}}" class="img-fluid mb-3"/>
                         </div>
-                        <img th:src="@{${entry.services.imgFilePath}}" class="img-fluid mb-3"/>
+                    </div>
+
+                    <div class="card-body">
                         <div class="mb-3">
                             <p><span th:text="${entry.services.name}">Service Name</span></p>
                             <p th:text="${entry.aboutService}">Experience</p>
                             <p>Rate: $<span th:text="${entry.rate}">Rate</span></p>
                         </div>
+                    </div>
+
+                    <div class="card-footer">
                         <div class="d-flex justify-content-between">
                             <a th:href="@{/edit/skills/{skillId}(skillId = ${entry.id})}"
                                class="btn btn-warning"

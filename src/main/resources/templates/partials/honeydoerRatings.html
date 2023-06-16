@@ -10,12 +10,13 @@
       <div th:with="reviewsSize=${#numbers.sequence(0, reviews.size()-1)}" class="carousel-inner">
         <div th:each="index : ${reviewsSize}"
              th:classappend="${index == 0} ? 'carousel-item active' : 'carousel-item'">
+
           <div class="row row-cols-3 g-3">
 
             <article class="col-3 col-md"></article>
 
-            <article class="col-6 col-md border border-dark-subtle border-1">
-              <div class="card">
+            <article class="col-6 col-md">
+              <div class="card py-3 px-2">
                 <div class="card-header">
                   <div th:switch="${reviews[index].getStars().toString()}">
                     <div th:case="ONE">
@@ -56,24 +57,30 @@
                   </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body px-0">
                   <p th:text="${reviews[index].comment}">Placeholder</p>
                 </div>
 
-                <div class="card-footer px-0">
-                  <div class="row row-cols-2 g-3">
-                    <div class="col-6 col-md-4 col-lg-3 align-self-center">
+                <div class="card-footer px-0 pb-0">
+                  <div class="row row-cols-1 row-cols-md-2 g-3">
+                    <div class="col-6 col-sm-5 col-md-4 d-flex justify-content-center">
                       <th:block th:each="profile : ${userProfiles}">
                         <th:block th:if="${profile.id} == ${reviews[index].task.user.id}">
-                          <img th:src="@{${profile.imgFilePath}}" class="w-100 ratio ratio-1x1 rounded-circle">
+                          <img th:src="@{${profile.imgFilePath}}"
+                               class="w-100 ratio ratio-1x1 rounded-circle align-self-center"
+                          >
                         </th:block>
                       </th:block>
                     </div>
-                    <div class="col align-self-center">
+
+                    <div class="col">
                       <p th:text="${reviews[index].task.honeydoerService.services.name}"
-                         class="text-start">Service Type</p>
-                      <p th:text="${reviews[index].task.user.firstName}" class="text-start">
-                        Client Name</p>
+                         class="text-start lh-sm"
+                      >Service Type</p>
+
+                      <p th:text="${reviews[index].task.user.firstName}"
+                         class="text-start lh-sm"
+                      >Client Name</p>
                     </div>
                   </div>
                 </div>

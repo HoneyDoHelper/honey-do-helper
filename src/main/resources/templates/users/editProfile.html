@@ -14,10 +14,10 @@
 
     <form  th:action="@{/edit/profile}" th:method="post">
 
-      <div class="row row-cols-3 g-3 register-background mb-5">
+      <div class="row row-cols-3 g-3 mb-5">
         <div class="col-1 col-lg-2"></div>
 
-        <div class="col-10 col-lg-8">
+        <div class="col-10 col-lg-8 register-background">
           <div class="form-floating mb-3">
             <input th:value="${userProfile.user.firstName}"
                    type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
@@ -30,7 +30,7 @@
             <label for="last_name">Last Name</label>
           </div>
 
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input th:value="${userProfile.phone}"
                    type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
             <label for="phone_number">Phone Number</label>
@@ -55,7 +55,7 @@
           </div>
 
           <div class="row row-cols-3 g-3">
-            <div class="col-7">
+            <div class="col-5">
               <div class="form-floating mb-3">
                 <input th:value="${userProfile.city}"
                        type="text" class="form-control" id="city" name="city" placeholder="City" required>
@@ -63,7 +63,7 @@
               </div>
             </div>
 
-            <div class="col-2">
+            <div class="col-3">
               <div class="form-floating mb-3">
                 <input th:value="${userProfile.state}"
                        type="text" class="form-control" id="state" name="state" placeholder="State" required>
@@ -71,7 +71,7 @@
               </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-4">
               <div class="form-floating mb-3">
                 <input th:value="${userProfile.zip}"
                        type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
@@ -83,12 +83,17 @@
         <div class="col-1 col-lg-2"></div>
       </div>
 
-      <div>
-        <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">
-        <input type="hidden" th:value="${user.id}" name="honeyUserID">
+      <div class="row row-cols-3 g-3 mb-5">
+        <div class="col-1 col-lg-2"></div>
+        <div class="col-10 col-lg-8">
+          <input type="hidden" th:field="${userProfile.imgFilePath}" value="/img/users/anon.png">
+          <input type="hidden" th:value="${user.id}" name="honeyUserID">
 
-        <button id="submit-btn" type="submit" class="btn btn-warning">Submit Changes</button>
+          <button id="submit-btn" type="submit" class="btn btn-warning">Submit Changes</button>
+        </div>
+        <div class="col-1 col-lg-2"></div>
       </div>
+
     </form>
   </section>
 </main>

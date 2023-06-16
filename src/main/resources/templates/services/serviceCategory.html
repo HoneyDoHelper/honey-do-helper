@@ -18,8 +18,8 @@
             <!-- Thyme logic goes here -->
             <article class="col-lg-4 col-md-6 mb-4" th:each="item : ${services}">
                 <div class="card h-100">
-                    <div class="card mx-3">
-                        <img th:src="@{{serviceImg}(serviceImg=${item.imgFilePath})}" class="card-img-top service-img" alt="Service Image">
+                    <div class="card-header mx-3">
+                        <img th:src="@{{serviceImg}(serviceImg=${item.imgFilePath})}" class="card-img-top service-img img-fluid" alt="Service Image">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${item.name}">Service Name</h5>

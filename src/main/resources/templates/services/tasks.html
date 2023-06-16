@@ -21,7 +21,7 @@
                     class="mb-5">Task Details</p>
                 </div>
                 <div class="mb-3">
-                    <div class="row row-cols-2 g-3 d-flex align-items-center mb-2">
+                    <div class="row row-cols-2 g-3 d-flex align-items-center mb-3">
                         <div class="col-3">
                             <th:block th:each="profile : ${userProfiles}">
                                 <th:block th:if="${profile.id} == ${task.user.id}">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-2 g-3 d-flex align-items-center mb-2">
+                    <div class="row row-cols-2 g-3 d-flex align-items-center mb-3">
                         <div class="col-3">
                             <th:block th:each="profile : ${userProfiles}">
                                 <th:block th:if="${profile.id} == ${task.honeydoerService.honeydoers.user.id}">
@@ -60,7 +60,7 @@
         </div>
     </section>
 
-    <section class="container-fluid">
+    <section class="container-fluid bar">
         <th:block th:if="${task.isAccepted == true && task.isCompleted == false}">
             <div>
                 <h2 th:text="'Accepted Project Proposal'" class="text-center">Project Status</h2>

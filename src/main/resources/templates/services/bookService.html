@@ -11,38 +11,42 @@
 
 <main>
     <section class="container">
-        <div class="row mb-4">
-            <div class="col-lg-6 col-md-12">
-                <h1>
-                    <span th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName}"></span>
-                    <span>(</span>
-                    <span><svg th:replace="~{partials/star.html :: fullStarBig}"></svg></span>
-                    <span th:text="${honeydoer.rating}">Stars</span>
-                    <span>)</span>
-                </h1>
+        <h1>
+            <span th:text="${honeydoer.user.firstName} + ' ' + ${honeydoer.user.lastName}"></span>
+            <span>(</span>
+            <span><svg th:replace="~{partials/star.html :: fullStarBig}"></svg></span>
+            <span th:text="${honeydoer.rating}">Stars</span>
+            <span>)</span>
+        </h1>
 
-                <div class="row mb-5">
-                    <div class="col-lg-4 col-md-4">
-                        <th:block th:each="profile : ${userProfiles}">
-                            <th:block th:if="${profile.id} == ${honeydoer.user.id}">
-                                <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle index-img">
-                            </th:block>
-                        </th:block>
-                    </div>
-                    <div class="col-lg-8 col-md-8">
-                        <h2 th:text="${service.services.name}"></h2>
-                        <p th:text="${honeydoer.user.firstName} + '\'s Experience'">Service Experience</p>
-                        <p th:text="${service.aboutService}">Experience Description</p>
-                        <p id="rate"  th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
-                    </div>
-                </div>
+        <div class="row row-cols-1 row-cols-sm-2 g-3 d-flex justify-content-center mb-3">
+            <div class="col-10 col-sm-4 mb-3">
+                <th:block th:each="profile : ${userProfiles}">
+                    <th:block th:if="${profile.id} == ${honeydoer.user.id}">
+                        <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle index-img">
+                    </th:block>
+                </th:block>
             </div>
-            <div class="col-lg-6 col-md-12">
+
+            <div class="col col-sm-8">
+                <h2 th:text="${service.services.name}" class="mb-3"></h2>
+                <p th:text="${honeydoer.user.firstName} + '\'s Experience'">Service Experience</p>
+                <p th:text="${service.aboutService}">Experience Description</p>
+                <p id="rate"  th:text="'$' + ${service.rate} + '/hr'" class="fw-bolder fs-2 color-primary-main">Rate $/hr</p>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 d-flex justify-content-center">
+            <div class="col-10 col-md">
                 <img th:src="@{{serviceImg}(serviceImg = ${service.services.imgFilePath})}" class="img-fluid"/>
             </div>
         </div>
+
     </section>
     <section class="container">
+        <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">
+            Your X service proposal to X
+        </h2>
         <div class="row">
             <div class="col-lg-4 col-md-12 mb-5">
                 <form
@@ -50,10 +54,6 @@
                         th:object="${newTask}"
                         th:method="post" oninput="updateCard()"
                 >
-
-                    <div class="mb-4">
-                        <h2 th:text="${#dates.format(#dates.createNow(), 'MMMM')}">Current Month</h2>
-                    </div>
                     <div class="row mb-4">
                         <div class="col">
                             <label for="start-date">Start Date:</label>
@@ -123,9 +123,6 @@
             </div>
 
             <div class="col-lg-8 col-md-12 ">
-                <h2 th:text="'Your ' + ${service.services.name} + ' service proposal to ' + ${honeydoer.user.firstName}">
-                    Your X service proposal to X
-                </h2>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Start Date: </h5>
@@ -134,8 +131,10 @@
                     <hr>
                     <div class="card-body">
                         <h5 class="card-title">Start Time:</h5>
-                        <p class="card-text" id="card-start-time">Your start time goes here</p>
-                        <p class="card-text" id="card-start-time-ampm">AM/PM</p>
+                        <p>
+                            <span class="card-text" id="card-start-time">Your start time goes here</span>
+                            <span class="card-text" id="card-start-time-ampm">AM/PM</span>
+                        </p>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Duration: </h5>

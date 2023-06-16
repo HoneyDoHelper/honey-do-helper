@@ -9,10 +9,10 @@
 <main>
     <section class="container">
         <h1 th:text="'Hello, ' + ${user.firstName}">Hello, User</h1>
-        <div class="row">
-            <div class="col-12 col-lg">
+        <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center">
+            <div class="col-8 col-lg-4 mb-3 me-lg-3 mb-lg-0">
                 <div class="row mb-4">
-                    <article class="card">
+                    <article class="card px-0 border-0">
                         <div class="card-header d-flex justify-content-center">
                             <img th:src="@{${userProfile.imgFilePath}}" class="img-fluid"/>
                         </div>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg me-3">
+            <div class="col-12 col-lg me-lg-3">
                 <h2>Upcoming Tasks</h2>
                 <th:block th:if="${tasks.size() <= 0}">
                     <p>No tasks available.</p>
@@ -67,8 +67,8 @@
 
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}">
-                                    <div th:each="index : ${tasksSize}">
+                                <div th:if="${!tasks.isEmpty()}" class="row row-cols-1 g-3">
+                                    <div th:each="index : ${tasksSize}" class="col">
                                         <th:block th:if="${!tasks[index].isAccepted && !tasks[index].isCompleted && !tasks[index].isDeclined}">
                                             <a th:replace="~{partials/task.html :: task}"></a>
                                         </th:block>
@@ -84,8 +84,8 @@
 
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}">
-                                    <div th:each="index : ${tasksSize}">
+                                <div th:if="${!tasks.isEmpty()}" class="row row-cols-1 g-3">
+                                    <div th:each="index : ${tasksSize}" class="col">
                                         <th:block th:if="${tasks[index].isAccepted && !tasks[index].isCompleted && !tasks[index].isDeclined}">
                                             <a th:replace="~{partials/task.html :: task}"></a>
                                         </th:block>
@@ -100,8 +100,8 @@
 
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}">
-                                    <div th:each="index : ${tasksSize}">
+                                <div th:if="${!tasks.isEmpty()}" class="row row-cols-1 g-3">
+                                    <div th:each="index : ${tasksSize}" class="col">
                                         <th:block th:if="${tasks[index].isAccepted && tasks[index].isCompleted && !tasks[index].isDeclined}">
                                             <a th:replace="~{partials/task.html :: task}"></a>
                                         </th:block>
@@ -116,8 +116,8 @@
 
                         <div class="tab-pane fade" id="pills-decline" role="tabpanel" aria-labelledby="pills-decline-tab">
                             <div th:with="tasksSize=${#numbers.sequence(0, tasks.size()-1)}">
-                                <div th:if="${!tasks.isEmpty()}">
-                                    <div th:each="index : ${tasksSize}">
+                                <div th:if="${!tasks.isEmpty()}" class="row row-cols-1 g-3">
+                                    <div th:each="index : ${tasksSize}" class="col">
                                         <th:block th:if="${tasks[index].isAccepted == false && tasks[index].isCompleted == false && tasks[index].isDeclined == true}">
                                             <a th:replace="~{partials/task.html :: task}"></a>
                                         </th:block>

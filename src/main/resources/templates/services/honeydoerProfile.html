@@ -21,12 +21,14 @@
                     <div class="col-sm-4">
                         <th:block th:each="profile : ${userProfiles}">
                             <th:block th:if="${profile.id} == ${honeydoer.user.id}">
-                                <img th:src="@{${profile.imgFilePath}}" class="ratio ratio-1x1 w-100 rounded-circle index-img">
+                                <img th:src="@{${profile.imgFilePath}}"
+                                     class="ratio ratio-1x1 w-100 rounded-circle index-img"
+                                >
                             </th:block>
                         </th:block>
                     </div>
                     <div class="col-sm-8 align-self-center">
-                        <p th:text="'$' + ${service.rate} + '/hr'" class="card-title">Rate $/hr</p>
+                        <p th:text="'$' + ${service.rate} + '/hr'" class="color-primary-main fs-5 fw-bolder">Rate $/hr</p>
                         <p>
                             <span> (</span>
                             <span><svg th:replace="~{partials/star.html :: fullStar}"></svg></span>
@@ -49,7 +51,7 @@
         </div>
     </section>
 
-    <section class="container-fluid">
+    <section class="container-fluid bar">
         <div class="text-center">
             <h2 th:text="'About ' + ${honeydoer.user.firstName}" class="mb-4">About Honeydoer</h2>
             <p th:text="${honeydoer.aboutSelf}" class="mb-4">About Section</p>
